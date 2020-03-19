@@ -64,20 +64,20 @@
     <section class="element-animate worship-time">
     	<div class="container">
 	    	<div class="row" style="margin-top: 50px; padding-bottom:0px;">
-		    	<div class="col-md-8" style="padding-bottom: 0px;  padding-top: 30px;">
+		    	<div class="col-md-8" style="padding-bottom: 0px;  padding-top: 50px;">
 		    		<h4 class="subtitle">기관명</h4>
 			    	<h2 class="title" style="padding-bottom: 0px;">과정명</h2>
 			    </div>
 			    <div class="col-md-4">
 			    	<button type="button" class="btn btn-danger ribbon" style="margin-bottom: 0;">
-			    		<div id="getting-started" class="center" style="font-size:20px; color: white;"></div>
+			    		<div id="getting-started" style="font-size:20px; color: white;"></div>
 			    	</button>	
 			    	<button type="button" class="btn btn-primary btn-block" style="margin-top: 0;"><h4 class="myBtn">홈페이지</h4></button>
 		    	</div>
 		    </div>
 	      	<div class="half d-md-flex d-block">
 	      		<div class="bg campmeeting">
-		       		<div id="map" style="width:500px;height:300px;"></div>
+		       		<div id="map"></div>
 		       	</div>
 		        <div>
 		          <a class="event-list-item first">
@@ -203,66 +203,66 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5899acc3cddfce334c3dd49beff92a37&libraries=services,clusterer,drawing"></script>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-                var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
-
-                for (var i = 0; i < total; i++) {
-                    new MediaElementPlayer(mediaElements[i], {
-                        pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/',
-                        shimScriptAccess: 'always',
-                        success: function () {
-                            var target = document.body.querySelectorAll('.player'), targetTotal = target.length;
-                            for (var j = 0; j < targetTotal; j++) {
-                                target[j].style.visibility = 'visible';
-                            }
-                  }
-                });
-                }
-            });
-      
-      $("#getting-started")
+	    document.addEventListener('DOMContentLoaded', function() {
+	              var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
+	
+	              for (var i = 0; i < total; i++) {
+	                  new MediaElementPlayer(mediaElements[i], {
+	                      pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/',
+	                      shimScriptAccess: 'always',
+	                      success: function () {
+	                          var target = document.body.querySelectorAll('.player'), targetTotal = target.length;
+	                          for (var j = 0; j < targetTotal; j++) {
+	                              target[j].style.visibility = 'visible';
+	                          }
+	                }
+	              });
+	              }
+	          });
+	     
+	     $("#getting-started")
 	      .countdown("2020/03/30", function(event) {
 	        $(this).text(
 	          event.strftime('D-day %D일 %H:%M:%S')
 	        );
-      });
-
-      
-      var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+	     });
+	
+	     
+	    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 		var options = { //지도를 생성할 때 필요한 기본 옵션
 			center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
 			level: 3 //지도의 레벨(확대, 축소 정도)
 		};
-
+	
 		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 		
 		// 주소-좌표 변환 객체를 생성합니다
 		var geocoder = new kakao.maps.services.Geocoder();
-
+	
 		// 주소로 좌표를 검색합니다
-		geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
-
+		geocoder.addressSearch('서울시 금천구 가산디지털1로 186', function(result, status) {
+	
 		    // 정상적으로 검색이 완료됐으면 
 		     if (status === kakao.maps.services.Status.OK) {
-
+	
 		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
+	
 		        // 결과값으로 받은 위치를 마커로 표시합니다
 		        var marker = new kakao.maps.Marker({
 		            map: map,
 		            position: coords
 		        });
-
+	
 		        // 인포윈도우로 장소에 대한 설명을 표시합니다
 		        var infowindow = new kakao.maps.InfoWindow({
 		            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
 		        });
 		        infowindow.open(map, marker);
-
+	
 		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 		        map.setCenter(coords);
 		    } 
-		});    
+		});
     </script>
   </body>
 </html>
