@@ -65,14 +65,14 @@
     	<div class="container">
 	    	<div class="row" style="margin-top: 50px; padding-bottom:0px;">
 		    	<div class="col-md-8" style="padding-bottom: 0px;  padding-top: 50px;">
-		    		<h4 class="subtitle">기관명</h4>
-			    	<h2 class="title" style="padding-bottom: 0px;">과정명</h2>
+		    		<h4 class="subtitle">${vo.inoNm }</h4>
+			    	<h2 class="title" style="padding-bottom: 0px;">${vo.trprNm }</h2>
 			    </div>
 			    <div class="col-md-4">
 			    	<button type="button" class="btn btn-danger ribbon" style="margin-bottom: 0;">
 			    		<div id="getting-started" style="font-size:20px; color: white;"></div>
 			    	</button>	
-			    	<button type="button" class="btn btn-primary btn-block" style="margin-top: 0;"><h4 class="myBtn">홈페이지</h4></button>
+			    	<button type="button" class="btn btn-primary btn-block" style="margin-top: 0;" onclick="javascript: location.href='http://${vo.hpAddr}'"><h4 class="myBtn">홈페이지</h4></button>
 		    	</div>
 		    </div>
 	      	<div class="half d-md-flex d-block">
@@ -82,19 +82,19 @@
 		        <div>
 		          <a class="event-list-item first">
 		            <span class="date center">담당자</span>
-		            <p class="left">아무개</p>
+		            <p class="left">${vo.trprChap }</p>
 		          </a>
 		          <a class="event-list-item">
 		            <span class="date center">연락처</span>
-		            <p class="left">010-010-010</p>
+		            <p class="left">${vo.trprChapTel }</p>
 		          </a>
 		          <a class="event-list-item">
 		            <span class="date center">이메일</span>
-		            <p class="left">google@gmail.com</p>
+		            <p class="left">${vo.trprChapEmail }</p>
 		          </a>
 		          <a class="event-list-item">
 		            <span class="date center">주소</span>
-		            <p class="left">서울시 어쩌고</p>
+		            <p class="left">${vo.addr1 }, ${vo.addr2 }</p>
 		          </a>
 		        </div>
 	       </div>
@@ -111,31 +111,31 @@
 		          <h2 class="title">훈련과정 정보</h2>
 		          <a class="event-list-item first">
 		            <span class="date center">시작일</span>
-		            <p class="p_left">2020-02-02</p>
+		            <p class="p_left">${traStartDate }</p>
 		          </a>
 		          <a class="event-list-item">
 		            <span class="date center">종료일</span>
-		            <p class="p_left">2020-12-31</p>
+		            <p class="p_left">${traEndDate }</p>
 		          </a>
 		          <a class="event-list-item">
 		            <span class="date center">훈련시간</span>
-		            <p class="p_left">100일, 총 800시간</p>
+		            <p class="p_left">${vo.trDcnt }일, 총 ${vo.trtm }시간</p>
 		          </a>
 		          <a class="event-list-item">
 		            <span class="date center">훈련비</span>
-		            <p class="p_left">6,500,100원</p>
+		            <p class="p_left">${vo.perTrco }원</p>
 		          </a>
 		          <a class="event-list-item">
 		            <span class="date center">NCS직무분류</span>
-		            <p class="p_left">건설공사공무관리(14010204)</p>
+		            <p class="p_left">${vo.ncsNm }(${vo.ncsCd })</p>
 		          </a>
 		          <a class="event-list-item">
 		            <span class="date center">훈련유형</span>
-		            <p class="p_left">국가기간전략산업직종</p>
+		            <p class="p_left">${trainTarget }</p>
 		          </a>
 		          <a class="event-list-item">
 		            <span class="date center">주관부처</span>
-		            <p class="p_left">고용노동부</p>
+		            <p class="p_left">${superViser }</p>
 		          </a>
 	        </div>
           </div>
@@ -148,7 +148,7 @@
     <!-- END section -->
     <section class="section element-animate">
 	    <div class="container" style="margin-bottom: 50px;">
-	    	<button type="button" class="btn btn-primary btn-block"><h4 class="myBtn">상세정보 더 보기</h4></button>
+	    	<button type="button" class="btn btn-primary btn-block" onclick="javascript: location.href='https://www.hrd.go.kr/hrdp/co/pcobo/PCOBO0100P.do?tracseId=${vo.trprId}&tracseTme=1&crseTracseSe=${vo.trprGbn }&trainstCstmrId=${ trainstCstId}'"><h4 class="myBtn">상세정보 더 보기</h4></button>
 	    </div>
     </section>
     
@@ -221,7 +221,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	          });
 	     
 	     $("#getting-started")
-	      .countdown("2020/03/30", function(event) {
+	      .countdown("${traStartDate}", function(event) {
 	        $(this).text(
 	          event.strftime('D-day %D일 %H:%M:%S')
 	        );
