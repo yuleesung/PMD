@@ -69,8 +69,10 @@
 			    	<h2 class="title" style="padding-bottom: 0px;">과정명</h2>
 			    </div>
 			    <div class="col-md-4">
-			    	<div id="getting-started" class="center" style="font-size:25px; color: rgba(230, 0, 0, 0.8);"></div>
-			    	<button type="button" class="btn btn-primary btn-block"><h4 class="myBtn">홈페이지</h4></button>
+			    	<button type="button" class="btn btn-danger ribbon" style="margin-bottom: 0;">
+			    		<div id="getting-started" class="center" style="font-size:20px; color: white;"></div>
+			    	</button>	
+			    	<button type="button" class="btn btn-primary btn-block" style="margin-top: 0;"><h4 class="myBtn">홈페이지</h4></button>
 		    	</div>
 		    </div>
 	      	<div class="half d-md-flex d-block">
