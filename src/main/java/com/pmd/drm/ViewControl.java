@@ -17,7 +17,7 @@ public class ViewControl {
 
 	
 	@RequestMapping("/view.inc")
-	public ModelAndView view(String srchTrprId, String srchTrprDegr) throws Exception{
+	public ModelAndView view(String srchTrprId, String srchTrprDegr, String traStartDate, String traEndDate, String trainstCstId, String superViser, String trainTarget) throws Exception{
 		
 		// 훈련과정ID(srchTrprId. main에서는 trprId)
 		// 과정회차(srchTrprDegr. main에서는 trprDegr)
@@ -77,7 +77,14 @@ public class ViewControl {
 		
 		ModelAndView mv = new ModelAndView();
 		
+		
+		mv.addObject("traStartDate", traStartDate);
+		mv.addObject("traEndDate", traEndDate);
+		mv.addObject("trainstCstId", trainstCstId);
+		mv.addObject("superViser", superViser);
+		mv.addObject("trainTarget", trainTarget);	
 		mv.addObject("vo", vo);
+		
 		mv.setViewName("view");
 			
 		return mv;

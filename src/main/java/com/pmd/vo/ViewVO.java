@@ -47,6 +47,8 @@ TOTAL_CRS_AT	string	수강료	<totalCrsAt></totalCrsAt>
 	private String govBusiNm, totTraingDyct, totTraingTime, totalCrsAt;
 
 	
+	
+	
 	public String getAddr1() {
 		return addr1;
 	}
