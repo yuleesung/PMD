@@ -32,8 +32,61 @@ public class MainControl {
 		MainVO[] ar19 =  makeURL("19"); MainVO[] ar20 =  makeURL("20"); MainVO[] ar21 =  makeURL("21");
 		MainVO[] ar22 =  makeURL("22"); MainVO[] ar23 =  makeURL("23"); MainVO[] ar24 =  makeURL("24");
 		
+		
+		int cnt = 24;
+		if(ar1 == null)
+			cnt -= 1;
+		if(ar2 == null)
+			cnt -= 1;
+		if(ar3 == null)
+			cnt -= 1;
+		if(ar4 == null)
+			cnt -= 1;
+		if(ar5 == null)
+			cnt -= 1;
+		if(ar6 == null)
+			cnt -= 1;
+		if(ar7 == null)
+			cnt -= 1;
+		if(ar8 == null)
+			cnt -= 1;
+		if(ar9 == null)
+			cnt -= 1;
+		if(ar10 == null)
+			cnt -= 1;
+		if(ar11 == null)
+			cnt -= 1;
+		if(ar12 == null)
+			cnt -= 1;
+		if(ar13 == null)
+			cnt -= 1;
+		if(ar14 == null)
+			cnt -= 1;
+		if(ar15 == null)
+			cnt -= 1;
+		if(ar16 == null)
+			cnt -= 1;
+		if(ar17 == null)
+			cnt -= 1;
+		if(ar18 == null)
+			cnt -= 1;
+		if(ar19 == null)
+			cnt -= 1;
+		if(ar20 == null)
+			cnt -= 1;
+		if(ar21 == null)
+			cnt -= 1;
+		if(ar22 == null)
+			cnt -= 1;
+		if(ar23 == null)
+			cnt -= 1;
+		if(ar24 == null)
+			cnt -= 1;
+		
+		
+		
 		// 카테고리별(24개)내용을 각각 1개씩 배열에 넣어 줌 
-		MainVO[] total_ar = new MainVO[24];
+		MainVO[] total_ar = new MainVO[cnt];
 		
 		for(int i=0; i<total_ar.length; i++) {
 			int ran = (int) (Math.random() * 9);
