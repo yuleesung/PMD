@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,124 +12,84 @@
       <link rel="stylesheet" href="resources/css/jquery-ui.css">
 
       <!--stylesheets-->
+      <link rel="stylesheet" href="resources/css/style.css">
       <link href="resources/css/main_style.css" rel="stylesheet" type="text/css" media="all">
       <link href="//fonts.googleapis.com/css?family=Cuprum:400,700" rel="stylesheet">
       <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 </head>
 <body>
+<div class="header">
+	<a class="navbar-brand absolute" href="main.inc">
+		<span style="font-size: 30px; color: white;">PMD</span>
+	</a>
+</div>
+
+
 
 	<!-- 배너 추천 훈련과정 -->
 	<div class="container-fluid">
-	<div>
-		<strong><span>구직자</span> 우수훈련과정</strong>
-	</div>
-    <div id="carouselExample" class="carouselPrograms carousel slide" data-ride="carousel" data-interval="false">
-        <div class="carousel-inner row w-100 mx-auto" role="listbox">
-            <div class="carousel-item col-md-4  active">
+      <div id="carouselExample" class="carouselPrograms carousel slide"
+         data-ride="carousel" data-interval="false">
+         <div class="carousel-inner row w-100 mx-auto" role="listbox">
+         <c:forEach var="mvo" items="${ar }">
+            <div class="carousel-item col-md-4  active" style="width: 360px; height: 334px;">
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
-                    <a href="#" title="image 1" class="thumb">
-                      <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=1" alt="slide 1">
-                    </a>
+                     <div class="card h-100 thumb">
+                        <a href="#"> <img class="card-img-top img-fluid mx-auto d-block"
+                           src="//via.placeholder.com/350x150" alt="img">${mvo.subTitle }
+                        </a>
+                        <div class="card-body">
+                           <h4 class="card-title">${mvo.title }</h4>
+                           <p class="card-text" style="text-align: center;">
+                              <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총
+                                 훈련비</span> 6,600,000원 <span
+                                 style="border-radius: 10px; background-color: rgba(0, 150, 150, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                           </p>
+                           <hr />
+                           <p class="card-text" style="text-align: center;">훈련기간<br/>
+                              2020-01-01 ~ 2020-12-31</p>
+                        </div>
+                     </div>
                   </div>
-                </div>
+               </div>
             </div>
-            <div class="carousel-item col-md-4 ">
-               <div class="panel panel-default">
-                  <div class="panel-thumbnail">
-                    <a href="#" title="image 3" class="thumb">
-                     <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=2" alt="slide 2">
-                    </a>
-                  </div>
-                </div>
-            </div>
-            <div class="carousel-item col-md-4 ">
-               <div class="panel panel-default">
-                  <div class="panel-thumbnail">
-                    <a href="#" title="image 4" class="thumb">
-                     <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=3" alt="slide 3">
-                    </a>
-                  </div>
-                </div>
-            </div>
-            <div class="carousel-item col-md-4 ">
-                <div class="panel panel-default">
-                  <div class="panel-thumbnail">
-                    <a href="#" title="image 5" class="thumb">
-                     <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=4" alt="slide 4">
-                    </a>
-                  </div>
-                </div>
-            </div>
-            <div class="carousel-item col-md-4 ">
-              <div class="panel panel-default">
-                  <div class="panel-thumbnail">
-                    <a href="#" title="image 6" class="thumb">
-                      <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=5" alt="slide 5">
-                    </a>
-                  </div>
-                </div>
-            </div>
-            <div class="carousel-item col-md-4 ">
-               <div class="panel panel-default">
-                  <div class="panel-thumbnail">
-                    <a href="#" title="image 7" class="thumb">
-                      <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=6" alt="slide 6">
-                    </a>
-                  </div>
-                </div>
-            </div>
-            <div class="carousel-item col-md-4 ">
-               <div class="panel panel-default">
-                  <div class="panel-thumbnail">
-                    <a href="#" title="image 8" class="thumb">
-                      <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=7" alt="slide 7">
-                    </a>
-                  </div>
-                </div>
-            </div>
-             <div class="carousel-item col-md-4  ">
-                <div class="panel panel-default">
-                  <div class="panel-thumbnail">
-                    <a href="#" title="image 2" class="thumb">
-                     <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=8" alt="slide 8">
-                    </a>
-                  </div>
-                  
-                </div>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-</div>
+            </c:forEach>
+            
+            
+         </div>
+         
+         <a class="carousel-control-prev" href="#carouselExample"
+            role="button" data-slide="prev"> <span
+            class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+            class="sr-only">Previous</span>
+         </a> <a class="carousel-control-next text-faded" href="#carouselExample"
+            role="button" data-slide="next"> <span
+            class="carousel-control-next-icon" aria-hidden="true"></span> <span
+            class="sr-only">Next</span>
+         </a>
+      </div>
+   </div>
 
 
 
 
 	<!-- 훈련과정 검색 영역 -->
-	<h1 class="header-w3ls">
-		훈련과정 검색
-	</h1>
 	<div class="doctor-form">
-		<h2 class="doctor-list-w3l">조건검색</h2>
+		<h2 class="doctor-list-w3l">훈련과정검색</h2>
         <form action="#" method="post" class="srch-area">
         	<div class="main">
         		<div class="form-left-to-w3l">
-        			<input type="text" name="name" placeholder="훈련기관" required="">
-                  <div class="clear"></div>
-                  <input type="text" name="name" placeholder="훈련과정" required="">
-                  <div class="clear"></div>
+        			<input type="text" name="inoNm" placeholder="훈련기관" />
+                    <div class="clear"></div>
         		</div>
-                <div class="form-right-to-w3l">
-               </div>
-               <div class="form-right-to-w3l">
+        		<div class="form-left-to-w3l">
+        			<input type="text" name="trprNm" placeholder="훈련과정" />
+                	<div class="clear"></div>
+        		</div>
+            </div>
+            <div class="main">
+               <div class="form-left-to-w3l">
                   <select class="form-control">
                      <option value="">훈련유형</option>
                      <option>국민내일배움카드(구직자)</option>
@@ -142,10 +103,39 @@
                      <option>지역구직자</option>
                   </select>
                </div>
-            </div>
+               <div class="form-right-to-w3l">
+					 <select class="form-control">
+	                     <option value="">NCS직무</option>
+							<option value="01">사업관리(01)</option>
+							<option value="02">경영·회계·사무(02)</option>
+							<option value="03">금융·보험(03)</option>
+							<option value="04">교육·자연·사회과학(04)</option>
+							<option value="05">법률·경찰·소방·교도·국방(05)</option>
+							<option value="06">보건·의료(06)</option>
+							<option value="07">사회복지·종교(07)</option>
+							<option value="08">문화·예술·디자인·방송(08)</option>
+							<option value="09">운전·운송(09)</option>
+							<option value="10">영업판매(10)</option>
+							<option value="11">경비·청소(11)</option>
+							<option value="12">이용·숙박·여행·오락·스포츠(12)</option>
+							<option value="13">음식서비스(13)</option>
+							<option value="14">건설(14)</option>
+							<option value="15">기계(15)</option>
+							<option value="16">재료(16)</option>
+							<option value="17">화학(17)</option>
+							<option value="18">섬유·의복(18)</option>
+							<option value="19">전기·전자(19)</option>
+							<option value="20">정보통신(20)</option>
+							<option value="21">식품가공(21)</option>
+							<option value="22">인쇄·목재·가구·공예(22)</option>
+							<option value="23">환경·에너지·안전(23)</option>
+							<option value="24">농림어업(24)</option>
+	                  </select>
+               </div>
+            </div>  
             <div class="main">
                <div class="form-left-to-w3l">
-                  <input id="datepicker1" name="text" type="text" placeholder="Select Date" required="" class="hasDatepicker">
+                  <input id="datepicker1" name="text" type="text" placeholder="훈련시작" required="" class="hasDatepicker">
                </div>
                <div class="form-right-to-w3l">
                   <select class="form-control buttom" title="훈련지역 시도" >
@@ -174,151 +164,213 @@
                </div>
             </div>
             <div class="clear"></div>
-            <div class="main">
-               <div class="form-left-to-w3l">
-                  <div class="grid-outs1">
-                     <div class="w3-agile1">
-                        <label class="rating">Best time to call you</label>
-                        <ul>
-                           <li>
-                              <input type="radio" id="a-option" name="selector1">
-                              <label for="a-option">Morning </label>
-                              <div class="check"></div>
-                           </li>
-                           <li>
-                              <input type="radio" id="b-option" name="selector1">
-                              <label for="b-option">Afternoon</label>
-                              <div class="check">
-                                 <div class="inside"></div>
-                              </div>
-                           </li>
-                           <li>
-                              <input type="radio" id="c-option" name="selector1">
-                              <label for="c-option">Evening </label>
-                              <div class="check">
-                                 <div class="inside"></div>
-                              </div>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-                  <div class="clear"></div>
-               </div>
-               <div class="form-right-to-w3l gap-top">
-                  <div class="grid-outs1">
-                     <div class="w3-agile1">
-                        <label class="rating">I would like to (choose one)</label>
-                        <ul>
-                           <li>
-                              <input type="radio" id="d-option" name="selector2">
-                              <label for="d-option">A new patient appointment</label>
-                              <div class="check"></div>
-                           </li>
-                           <li>
-                              <input type="radio" id="e-option" name="selector2">
-                              <label for="e-option">A routine checkup</label>
-                              <div class="check">
-                                 <div class="inside"></div>
-                              </div>
-                           </li>
-                           <li>
-                              <input type="radio" id="f-option" name="selector2">
-                              <label for="f-option">A comprehensive health exam </label>
-                              <div class="check">
-                                 <div class="inside"></div>
-                              </div>
-                           </li>
-                        </ul>
-                     </div>
-                     <div class="clear"></div>
-                  </div>
-                  <div class="clear"></div>
-               </div>
-            </div>
+            
             <div class="btnn">
-               <button type="submit">SEARCH</button><br>
+               <button type="button" onclick="">SEARCH</button><br>
             </div>
          </form>
       </div>
       
       
       
-      <!-- 리스트 -->
+     <!-- 리스트 -->
       <div class="container">
-  <h1 class="my-5">Equal card deck height using Bootstrap 4</h1>
+ <h1 class="my-5" style="font-weight: bold;">검색 결과</h1>
+  <hr/>
    <div class="row">
       <div class="col-lg-4 col-md-6 col-sm-12 p-3">
          <div class="card h-100">
-            <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            <a href="#">
+               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            </a>
             <div class="card-body">
-               <h4 class="card-title">Card title</h4>
-               <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card-footer text-center bg-white">
-               <a class="btn btn-outline-secondary" href="#">View all</a>
+               <h4 class="card-title">과정명</h4>
+               <p class="card-text" style="text-align: center;">
+                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
+                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                  </p>
+               <hr/>
+               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
             </div>
          </div>
       </div>
       <div class="col-lg-4 col-md-6 col-sm-12 p-3">
          <div class="card h-100">
-            <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            <a href="#">
+               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            </a>
             <div class="card-body">
-               <h4 class="card-title">Card title</h4>
-               <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card-footer text-center bg-white">
-               <a class="btn btn-outline-secondary" href="#">View all</a>
+               <h4 class="card-title">과정명</h4>
+               <p class="card-text" style="text-align: center;">
+                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
+                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                  </p>
+               <hr/>
+               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
             </div>
          </div>
       </div>
       <div class="col-lg-4 col-md-6 col-sm-12 p-3">
          <div class="card h-100">
-            <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            <a href="#">
+               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            </a>
             <div class="card-body">
-               <h4 class="card-title">Card title</h4>
-               <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card-footer text-center bg-white">
-               <a class="btn btn-outline-secondary" href="#">View all</a>
+               <h4 class="card-title">과정명</h4>
+               <p class="card-text" style="text-align: center;">
+                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
+                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                  </p>
+               <hr/>
+               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
             </div>
          </div>
       </div>
       <div class="col-lg-4 col-md-6 col-sm-12 p-3">
          <div class="card h-100">
-            <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            <a href="#">
+               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            </a>
             <div class="card-body">
-               <h4 class="card-title">Card title</h4>
-               <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card-footer text-center bg-white">
-               <a class="btn btn-outline-secondary" href="#">View all</a>
+               <h4 class="card-title">과정명</h4>
+               <p class="card-text" style="text-align: center;">
+                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
+                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                  </p>
+               <hr/>
+               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
             </div>
          </div>
       </div>
       <div class="col-lg-4 col-md-6 col-sm-12 p-3">
          <div class="card h-100">
-            <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            <a href="#">
+               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            </a>
             <div class="card-body">
-               <h4 class="card-title">Card title</h4>
-               <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card-footer text-center bg-white">
-               <a class="btn btn-outline-secondary" href="#">View all</a>
+               <h4 class="card-title">과정명</h4>
+               <p class="card-text" style="text-align: center;">
+                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
+                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                  </p>
+               <hr/>
+               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
             </div>
          </div>
       </div>
       <div class="col-lg-4 col-md-6 col-sm-12 p-3">
          <div class="card h-100">
-            <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            <a href="#">
+               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            </a>
             <div class="card-body">
-               <h4 class="card-title">Card title</h4>
-               <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card-footer text-center bg-white">
-               <a class="btn btn-outline-secondary" href="#">View all</a>
+               <h4 class="card-title">과정명</h4>
+               <p class="card-text" style="text-align: center;">
+                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
+                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                  </p>
+               <hr/>
+               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
             </div>
          </div>
       </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
+         <div class="card h-100">
+            <a href="#">
+               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            </a>
+            <div class="card-body">
+               <h4 class="card-title">과정명</h4>
+               <p class="card-text" style="text-align: center;">
+                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
+                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                  </p>
+               <hr/>
+               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
+         <div class="card h-100">
+            <a href="#">
+               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            </a>
+            <div class="card-body">
+               <h4 class="card-title">과정명</h4>
+               <p class="card-text" style="text-align: center;">
+                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
+                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                  </p>
+               <hr/>
+               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
+         <div class="card h-100">
+            <a href="#">
+               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            </a>
+            <div class="card-body">
+               <h4 class="card-title">과정명</h4>
+               <p class="card-text" style="text-align: center;">
+                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
+                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                  </p>
+               <hr/>
+               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
+         <div class="card h-100">
+            <a href="#">
+               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            </a>
+            <div class="card-body">
+               <h4 class="card-title">과정명</h4>
+               <p class="card-text" style="text-align: center;">
+                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
+                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                  </p>
+               <hr/>
+               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
+         <div class="card h-100">
+            <a href="#">
+               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            </a>
+            <div class="card-body">
+               <h4 class="card-title">과정명</h4>
+               <p class="card-text" style="text-align: center;">
+                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
+                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                  </p>
+               <hr/>
+               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
+         <div class="card h-100">
+            <a href="#">
+               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
+            </a>
+            <div class="card-body">
+               <h4 class="card-title">과정명</h4>
+               <p class="card-text" style="text-align: center;">
+                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
+                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                  </p>
+               <hr/>
+               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
+            </div>
+         </div>
+      </div>
+      
    </div>
 </div>
       
@@ -358,9 +410,43 @@
       <script>
          $(function() {
          $( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
+      $('#carouselExample').on('slide.bs.carousel', function (e) {
+
+             
+               var $e = $(e.relatedTarget);
+               var idx = $e.index();
+               var itemsPerSlide = 3;
+               var totalItems = $('.carousel-item').length;
+               
+               if (idx >= totalItems-(itemsPerSlide-1)) {
+                   var it = itemsPerSlide - (totalItems - idx);
+                   for (var i=0; i<it; i++) {
+                       // append slides to end
+                       if (e.direction=="left") {
+                           $('.carousel-item').eq(i).appendTo('.carousel-inner');
+                       }
+                       else {
+                           $('.carousel-item').eq(0).appendTo('.carousel-inner');
+                       }
+                   }
+               }
+           });
+
+             $(document).ready(function() {
+           /* show lightbox when clicking a thumbnail */
+               $('a.thumb').click(function(event){
+                 event.preventDefault();
+                 var content = $('.modal-body');
+                 content.empty();
+                   var title = $(this).attr("title");
+                   $('.modal-title').html(title);        
+                   content.html($(this).html());
+                   $(".modal-profile").modal({show:true});
+               });
+
+             });
          });
       </script>
-      <!-- //Calendar -->
    
 <div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
 

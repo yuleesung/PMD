@@ -7,38 +7,83 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 .srch-area{
 	background: rgba(0, 0, 0, 0.35);
-}
-
-
-
-
-
-
-
-
-
-/* list */
-.list-wrap {
 	margin: 0;
-	padding: 0;
-	border: 0;
-	clear: left;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-	display: none;
+	padding: 30px;
 }
-.list-row1{
-	margin: 0;
-	padding: 0;
-	display: inline-block;
-}
-.list-one{
-	float: left;
-	width: 23%;
-	margin: 1%;
+
+.header{
 	display: block;
+	width: 100%;
+	height: 70px;
+	color: #fff;
+	background: #6a99cb;
+	font: 30px;
+	padding: 0 30px;
+	margin: 0 0 20px 0;
 }
+
+
+
+     /* show 3 items */
+    .carouselPrograms .carousel-inner .active,
+    .carouselPrograms .carousel-inner .active + .carousel-item,
+    .carouselPrograms .carousel-inner .active + .carousel-item + .carousel-item {
+        display: block;
+    }
+
+    .carouselPrograms .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+    .carouselPrograms .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item,
+    .carouselPrograms .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
+        transition: none;
+    }
+
+    .carouselPrograms .carousel-inner .carousel-item-next,
+    .carouselPrograms .carousel-inner .carousel-item-prev {
+        position: relative;
+        transform: translate3d(0, 0, 0);
+    }
+
+    .carouselPrograms .carousel-inner .active.carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: absolute;
+        top: 0;
+        right: -33.333%;
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+
+    /* left or forward direction */
+    .carouselPrograms .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+    .carouselPrograms .carousel-item-next.carousel-item-left + .carousel-item,
+    .carouselPrograms .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
+    .carouselPrograms .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+
+    /* farthest right hidden item must be abso position for animations */
+    .carouselPrograms .carousel-inner .carousel-item-prev.carousel-item-right {
+        position: absolute;
+        top: 0;
+        left: 0%;
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+
+    /* right or prev direction */
+    .carouselPrograms .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+    .carouselPrograms .carousel-item-prev.carousel-item-right + .carousel-item,
+    .carouselPrograms .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
+    .carouselPrograms .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+        display: block;
+        visibility: visible;
+    }
+
 
 
 
@@ -302,6 +347,24 @@ button[type=submit] {
     -moz-transition: 0.5s all;
     -ms-transition: 0.5s all;
 }
+button[type=button] {
+    width: 30%;
+    background: #33ccccd4;
+    outline: none;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 400;
+    border:none;
+    padding: 11px 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+}
 button:hover {
     color: #000;
     background: #fff;
@@ -336,7 +399,8 @@ h1.header-w3ls {
 }
 h2.doctor-list-w3l {
     font-size: 40px;
-}
+    color: #6a99cb;
+
 }
 @media(max-width:1680px){
 h1.header-w3ls {
