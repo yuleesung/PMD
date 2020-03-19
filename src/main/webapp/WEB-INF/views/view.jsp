@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,7 +125,7 @@
 		          </a>
 		          <a class="event-list-item">
 		            <span class="date center">훈련비</span>
-		            <p class="p_left">${vo.perTrco }원</p>
+		            <p class="p_left"><fmt:formatNumber value="${vo.perTrco }" pattern="#,###" />원원</p>
 		          </a>
 		          <a class="event-list-item">
 		            <span class="date center">NCS직무분류</span>
