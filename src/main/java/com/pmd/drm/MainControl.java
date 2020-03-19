@@ -21,7 +21,7 @@ public class MainControl {
 	@RequestMapping("/main.inc")
 	public ModelAndView main() throws Exception{
 		
-		// 지역코드값
+		// 지역코드값dddd
 		int[] area = {11, 26, 27, 28, 29, 30, 31,
 						 41, 42, 43, 44, 45, 46, 47, 48, 50};
 		

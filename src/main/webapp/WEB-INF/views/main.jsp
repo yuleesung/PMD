@@ -11,7 +11,7 @@
       <!-- Calendar -->
       <link rel="stylesheet" href="resources/css/jquery-ui.css">
 
-      <!--stylesheets-->
+      <!--stylesheeddddddts-->
       <link rel="stylesheet" href="resources/css/style.css">
       <link href="resources/css/main_style.css" rel="stylesheet" type="text/css" media="all">
       <link href="//fonts.googleapis.com/css?family=Cuprum:400,700" rel="stylesheet">

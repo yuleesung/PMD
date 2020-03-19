@@ -46,7 +46,7 @@ YARD_MAN	string	정원	<yardMan></yardMan>
 	private ViewVO vvo;
 	
 	
-	
+	 
 	public ViewVO getVvo() {
 		return vvo;
 	}
