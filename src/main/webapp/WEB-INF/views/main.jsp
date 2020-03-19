@@ -31,13 +31,14 @@
       <div id="carouselExample" class="carouselPrograms carousel slide"
          data-ride="carousel" data-interval="false">
          <div class="carousel-inner row w-100 mx-auto" role="listbox">
-         <c:forEach var="mvo" items="${ar }">
-            <div class="carousel-item col-md-4  active" style="width: 360px; height: 334px;">
+         <c:forEach var="mvo" items="${ar }" varStatus="st">
+         	<c:if test="${st.index == 0 }">
+            <div class="carousel-item col-md-4 active" style="width: 360px; height: 334px;">
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
                      <div class="card h-100 thumb">
                         <a href="#"> <img class="card-img-top img-fluid mx-auto d-block"
-                           src="//via.placeholder.com/350x150" alt="img">${mvo.subTitle }
+                           src="http://www.hrd.go.kr/comm/com/fileDownload.do?athfilId=9ASjRQApTKgazXp2gwmS1Aw&athfilSeqNo=1" alt="img">${mvo.subTitle }
                         </a>
                         <div class="card-body">
                            <h4 class="card-title">${mvo.title }</h4>
@@ -54,6 +55,31 @@
                   </div>
                </div>
             </div>
+            </c:if>
+            <c:if test="${st.index > 0 }">
+            <div class="carousel-item col-md-4" style="width: 360px; height: 334px;">
+               <div class="panel panel-default">
+                  <div class="panel-thumbnail">
+                     <div class="card h-100 thumb">
+                        <a href="#"> <img class="card-img-top img-fluid mx-auto d-block"
+                           src="${mvo.vvo.filePath }" alt="img">${mvo.subTitle }
+                        </a>
+                        <div class="card-body">
+                           <h4 class="card-title">${mvo.title }</h4>
+                           <p class="card-text" style="text-align: center;">
+                              <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총
+                                 훈련비</span> 6,600,000원 <span
+                                 style="border-radius: 10px; background-color: rgba(0, 150, 150, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                           </p>
+                           <hr />
+                           <p class="card-text" style="text-align: center;">훈련기간<br/>
+                              2020-01-01 ~ 2020-12-31</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            </c:if>
             </c:forEach>
             
             
