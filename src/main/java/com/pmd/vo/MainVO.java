@@ -43,16 +43,15 @@ YARD_MAN	string	정원	<yardMan></yardMan>
 					traStartDate, trainTarget, trainstCstId, trprDegr,
 					trprId, yardMan;
 
-	private ViewVO vvo;
+	private String category;
+
 	
-	
-	 
-	public ViewVO getVvo() {
-		return vvo;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setVvo(ViewVO vvo) {
-		this.vvo = vvo;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public String getAddress() {
