@@ -18,10 +18,10 @@ import com.pmd.util.Paging;
 import com.pmd.vo.SearchVO;
 
 @Controller
-public class SearchAction {
+public class SearchControl {
 
 	/*!!!!!!!!!!!!!! 
-	 * url의 path값은 임의 값임 => 78Line 바꿔야 함 
+	 * url의 path값은 임의 값임 => 92Line (url_rink로) 바꿔야 함 
 	 * !!!!!!!!!! */
 	
 	// 페이징 기법을 위한 상수
@@ -62,7 +62,7 @@ public class SearchAction {
 		StringBuffer sb = new StringBuffer();
 		
 		// 기본적으로 필요한 url
-		sb.append("http://www.hrd.go.kr/jsp/HRDP/HRDPO00/HRDPOA60/HRDPOA60_1.jsp?returnType=XML&authKey=SLteRyA9SmMtvydD2HhNkBc12HXRheCy"
+		sb.append("http://www.hrd.go.kr/jsp/HRDP/HRDPO00/HRDPOA60/HRDPOA60_1.jsp?returnType=XML&authKey=Aflc7YIke55KR8qliEbmLwJGWIpsH2DL"
 				+"&pageNum="+this.nowPage+"&pageSize=12&srchTraStDt="+srchTraStDt+"&srchTraEndDt="+srchTraEndDt+"&outType=1&sort=ASC&sortCol=TR_STT_DT");
 			
 		// 조건 값이 null이 아닐 때 sb에 추가되는 영역
@@ -89,7 +89,7 @@ public class SearchAction {
 		
 		String url_rink = sb.toString(); // url주소(sb)를 스트링 값으로 변환(url_rink)
 		
-		URL url = new URL("http://www.hrd.go.kr/hrdp/api/apipo/APIPO0101T.do?returnType=XML&pageNum=1&authKey=SLteRyA9SmMtvydD2HhNkBc12HXRheCy&sort=ASC&outType=1&srchTraStDt=20200319&pageSize=12&sortCol=TR_STT_DT&srchTraEndDt=20200619&srchTraPattern=N1&srchPart=-99&apiRequstPageUrlAdres=/jsp/HRDP/HRDPO00/HRDPOA60/HRDPOA60_1.jsp&apiRequstIp=211.118.162.124");
+		URL url = new URL("http://www.hrd.go.kr/hrdp/api/apipo/APIPO0101T.do?returnType=XML&pageNum=1&authKey=Aflc7YIke55KR8qliEbmLwJGWIpsH2DL&sort=ASC&outType=1&srchTraStDt=20200319&pageSize=12&sortCol=TR_STT_DT&srchTraEndDt=20200619&srchTraPattern=N1&srchPart=-99&apiRequstPageUrlAdres=/jsp/HRDP/HRDPO00/HRDPOA60/HRDPOA60_1.jsp&apiRequstIp=211.118.162.124");
 		
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		
@@ -133,8 +133,7 @@ public class SearchAction {
 			vo.setTrainstCstId(e.getChildText("trainstCstId"));
 			vo.setTrprDegr(e.getChildText("trprDegr"));
 			vo.setTrprId(e.getChildText("trprId"));
-			vo.setYardMan(e.getChildText("yardMan"));
-			
+			vo.setYardMan(e.getChildText("yardMan"));			
 			
 			ar[i] = vo;
 			i++;
@@ -152,12 +151,15 @@ public class SearchAction {
 		pageCode = page.getSb().toString();
 	
 		
+		
+		// json에 반환할 map 생성
 		Map<String, Object>map = new HashMap<String, Object>();
-		map.put("ar", ar); // 검색 데이터
-		map.put("pageCode", pageCode);
-		map.put("nowPage", page.getNowPage());
-		map.put("rowTotal", rowTotal);
-		map.put("blockList", BLOCK_LIST);
+		
+		map.put("ar", ar); // 검색 결과값
+		map.put("pageCode", pageCode); // 페이지버튼
+		map.put("nowPage", page.getNowPage()); // 현재페이지
+		map.put("rowTotal", rowTotal); // 검색결과 총 갯수
+		map.put("blockList", BLOCK_LIST); // 한 페이지에 보여질 리스트 갯수
 		
 		return map;
 	}

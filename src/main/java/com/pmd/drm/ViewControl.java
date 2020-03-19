@@ -17,10 +17,13 @@ public class ViewControl {
 
 	
 	@RequestMapping("/view.inc")
-	public ModelAndView view() throws Exception{
+	public ModelAndView view(String srchTrprId, String srchTrprDegr) throws Exception{
 		
-		// url은 임의 값임
-		URL url = new URL("http://www.hrd.go.kr/hrdp/api/apipo/APIPO0102T.do?srchTrprId=AIG20190000266678&outType=2&srchTrprDegr=2&authKey=SLteRyA9SmMtvydD2HhNkBc12HXRheCy&returnType=XML&srchTraPattern=N1&srchPart=1&apiRequstPageUrlAdres=/jsp/HRDP/HRDPO00/HRDPOA60/HRDPOA60_2.jsp&apiRequstIp=211.118.162.124"); // 들어오는 인자들 나중에 추가
+		// 훈련과정ID(srchTrprId. main에서는 trprId)
+		// 과정회차(srchTrprDegr. main에서는 trprDegr)
+		URL url = new URL("http://www.hrd.go.kr/hrdp/api/apipo/APIPO0102T.do?srchTrprId="+srchTrprId+"&outType=2&srchTrprDegr="+srchTrprDegr+"&"
+							+"authKey=Aflc7YIke55KR8qliEbmLwJGWIpsH2DL&returnType=XML&srchTraPattern=N1&srchPart=1&apiRequstPageUrlAdres="
+							+"/jsp/HRDP/HRDPO00/HRDPOA60/HRDPOA60_2.jsp&apiRequstIp=211.118.162.124");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		
 		conn.setRequestProperty("Content-Type", "application/xml");
