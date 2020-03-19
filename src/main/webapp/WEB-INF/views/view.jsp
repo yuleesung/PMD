@@ -74,7 +74,7 @@
 			    	<button type="button" class="btn btn-danger ribbon" style="margin-bottom: 0;">
 			    		<div id="getting-started" style="font-size:20px; color: white;"></div>
 			    	</button>	
-			    	<button type="button" class="btn btn-primary btn-block" style="margin-top: 0;" onclick="javascript: location.href='http://${vo.hpAddr}'"><h4 class="myBtn">홈페이지</h4></button>
+			    	<button type="button" class="btn btn-primary btn-block" style="margin-top: 0;" onclick="javascript: location.href='${vo.hpAddr}'"><h4 class="myBtn">홈페이지</h4></button>
 		    	</div>
 		    </div>
 	      	<div class="half d-md-flex d-block">
@@ -242,7 +242,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		var geocoder = new kakao.maps.services.Geocoder();
 	
 		// 주소로 좌표를 검색합니다
-		geocoder.addressSearch('서울시 금천구 가산디지털1로 186', function(result, status) {
+		geocoder.addressSearch('${vo.addr1}', function(result, status) {
 	
 		    // 정상적으로 검색이 완료됐으면 
 		     if (status === kakao.maps.services.Status.OK) {
@@ -257,7 +257,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	
 		        // 인포윈도우로 장소에 대한 설명을 표시합니다
 		        var infowindow = new kakao.maps.InfoWindow({
-		            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+		            content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.inoNm}</div>'
 		        });
 		        infowindow.open(map, marker);
 	

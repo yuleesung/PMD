@@ -45,7 +45,17 @@ public class ViewControl {
 		vo.setAddr1(base_info.getChildText("addr1"));
 		vo.setAddr2(base_info.getChildText("addr2"));
 		vo.setFilePath(base_info.getChildText("filePath"));
-		vo.setHpAddr(base_info.getChildText("hpAddr"));
+		
+		String web = base_info.getChildText("hpAddr");
+		if(!web.startsWith("http://")) {
+			StringBuffer sb = new StringBuffer();
+			sb.append("http://");
+			sb.append(web);
+			
+			web = sb.toString();
+		}
+		
+		vo.setHpAddr(web);
 		vo.setInoNm(base_info.getChildText("inoNm"));
 		vo.setInstPerTrco(base_info.getChildText("instPerTrco"));
 		vo.setNcsCd(base_info.getChildText("ncsCd"));

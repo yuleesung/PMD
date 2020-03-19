@@ -39,24 +39,26 @@
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
                      <div class="card h-100 thumb">
-                        <a href="#"> <img class="card-img-top img-fluid mx-auto d-block"
-                           src="http://www.hrd.go.kr/comm/com/fileDownload.do?athfilId=Yj9C2W8CAbFCzXp2gwmS1Aw&athfilSeqNo=1" alt="img">${mvo.subTitle }
+                        <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}">
+                        	<img class="card-img-top img-fluid mx-auto d-block" src="resources/images/occupation/${mvo.category}.jpg" alt="${mvo.subTitle }">
                         </a>
                         <div class="card-body">
-                           <h4 class="card-title">${mvo.title }</h4>
+                        <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}">
+                           <h4 class="card-title" style="text-align: center;">${mvo.title }</h4>
+                        </a>
                            <p class="card-text" style="text-align: center;">
                               <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총
-                                 훈련비</span> <fmt:formatNumber value="${mvo.ncsCd }" pattern="#,###" />원 
-                                 <c:if test="${mvo.regCourseMan} &lt;  ${mvo.yardMan }">
+                                 훈련비</span> <fmt:formatNumber value="${mvo.courseMan }" pattern="#,###" />원 
+                                 <c:if test="${mvo.regCourseMan lt mvo.yardMan }">
                                  	<span style="border-radius: 10px; background-color: rgba(0, 150, 150, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
                                  </c:if>
-                                 <c:if test="${mvo.regCourseMan} &gt;  ${mvo.yardMan }">
+                                 <c:if test="${mvo.regCourseMan eq mvo.yardMan }">
                                  	<span style="border-radius: 10px; background-color: rgba(0, 150, 150, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집마감</span>
                                  </c:if>
                            </p>
                            <hr />
                            <p class="card-text" style="text-align: center;">훈련기간<br/>
-                              ${mvo.traStartDate }~${mvo.traEndDate }</p>
+                              ${mvo.traStartDate } ~ ${mvo.traEndDate }</p>
                         </div>
                      </div>
                   </div>
@@ -68,19 +70,26 @@
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
                      <div class="card h-100 thumb">
-                        <a href="#"> <img class="card-img-top img-fluid mx-auto d-block"
-                           src="${mvo.vvo.filePath }" alt="img">${mvo.subTitle }
+                        <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}"> 
+                        	<img class="card-img-top img-fluid mx-auto d-block" src="resources/images/occupation/${mvo.category}.jpg" alt="${mvo.subTitle }">
                         </a>
                         <div class="card-body">
-                           <h4 class="card-title">${mvo.title }</h4>
+                        <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}">
+                           <h4 class="card-title" style="text-align: center;">${mvo.title }</h4>
+                        </a>
                            <p class="card-text" style="text-align: center;">
                               <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총
-                                 훈련비</span> <fmt:formatNumber value="${mvo.ncsCd }" pattern="#,###" />원 <span
-                                 style="border-radius: 10px; background-color: rgba(0, 150, 150, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                                 훈련비</span> <fmt:formatNumber value="${mvo.courseMan }" pattern="#,###" />원 
+                                 <c:if test="${mvo.regCourseMan lt mvo.yardMan }">
+                                 	<span style="border-radius: 10px; background-color: rgba(0, 150, 150, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+                                 </c:if>
+                                 <c:if test="${mvo.regCourseMan eq mvo.yardMan }">
+                                 	<span style="border-radius: 10px; background-color: rgba(0, 150, 150, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집마감</span>
+                                 </c:if>
                            </p>
                            <hr />
                            <p class="card-text" style="text-align: center;">훈련기간<br/>
-                              ${mvo.traStartDate }~${mvo.traEndDate }</p>
+                              ${mvo.traStartDate } ~ ${mvo.traEndDate }</p>
                         </div>
                      </div>
                   </div>
@@ -110,7 +119,7 @@
 	<!-- 훈련과정 검색 영역 -->
 	<div class="doctor-form">
 		<h2 class="doctor-list-w3l">훈련과정검색</h2>
-        <form action="#" method="post" class="srch-area">
+        <form action="view.inc" method="post" class="srch-area">
         	<div class="main">
         		<div class="form-left-to-w3l">
         			<input type="text" name="inoNm" placeholder="훈련기관" />
@@ -406,33 +415,12 @@
       
    </div>
 </div>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
       <div class="copy">
          <p>© 2018 Doctor Search Form. All Rights Reserved | Design by <a href="http://www.W3Layouts.com" target="_blank">W3Layouts</a></p>
       </div>
       
-      
+      <div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
       <!--scripts-->
       <script src="resources/js/jquery-3.4.1.min.js"></script>
       <script src="resources/js/jquery-ui.min.js"></script>
@@ -442,50 +430,47 @@
 	  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
       <script>
          $(function() {
-         $( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
-      $('#carouselExample').on('slide.bs.carousel', function (e) {
+		     $( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
+		   	 $('#carouselExample').on('slide.bs.carousel', function (e) {
+		
+		            
+	              var $e = $(e.relatedTarget);
+	              var idx = $e.index();
+	              var itemsPerSlide = 3;
+	              var totalItems = $('.carousel-item').length;
+	              
+	              if (idx >= totalItems-(itemsPerSlide-1)) {
+	                  var it = itemsPerSlide - (totalItems - idx);
+	                  for (var i=0; i<it; i++) {
+	                      // append slides to end
+	                      if (e.direction=="left") {
+	                          $('.carousel-item').eq(i).appendTo('.carousel-inner');
+	                      }
+	                      else {
+	                          $('.carousel-item').eq(0).appendTo('.carousel-inner');
+	                      }
+	                  }
+	              }
+	          });
+		
+		           
+	          /* show lightbox when clicking a thumbnail */
+	          $('a.thumb').click(function(event){
+	            event.preventDefault();
+	            var content = $('.modal-body');
+	            content.empty();
+	              var title = $(this).attr("title");
+	              $('.modal-title').html(title);        
+	              content.html($(this).html());
+	              $(".modal-profile").modal({show:true});
+	          });
+	          
+	          
 
-             
-               var $e = $(e.relatedTarget);
-               var idx = $e.index();
-               var itemsPerSlide = 3;
-               var totalItems = $('.carousel-item').length;
-               
-               if (idx >= totalItems-(itemsPerSlide-1)) {
-                   var it = itemsPerSlide - (totalItems - idx);
-                   for (var i=0; i<it; i++) {
-                       // append slides to end
-                       if (e.direction=="left") {
-                           $('.carousel-item').eq(i).appendTo('.carousel-inner');
-                       }
-                       else {
-                           $('.carousel-item').eq(0).appendTo('.carousel-inner');
-                       }
-                   }
-               }
-           });
-
-             $(document).ready(function() {
-           /* show lightbox when clicking a thumbnail */
-               $('a.thumb').click(function(event){
-                 event.preventDefault();
-                 var content = $('.modal-body');
-                 content.empty();
-                   var title = $(this).attr("title");
-                   $('.modal-title').html(title);        
-                   content.html($(this).html());
-                   $(".modal-profile").modal({show:true});
-               });
-
-             });
          });
       </script>
    
-<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
 
 
-
-<h1>${ar[0].address }</h1>
-<h1>${ar[0].yardMan }</h1>
 </body>
 </html>
