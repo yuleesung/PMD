@@ -32,16 +32,16 @@ public class SearchAction {
 	int rowTotal; // 전체 게시물 수
 	String pageCode; // 페이징  처리 된 HTML코드값
 	
-	//@RequestMapping("/search.inc") // 테스트용
-	@RequestMapping(value="/search.inc", method=RequestMethod.POST, produces="text/json;charset=utf-8")
-	@ResponseBody
-	public Map<String, Object> list(String crseTracseSe, String srchTraOrganNm, String srchTraProcessNm,
+	@RequestMapping("/search.inc") // 테스트용
+	//@RequestMapping(value="/search.inc", method=RequestMethod.POST, produces="text/json;charset=utf-8")
+	//@ResponseBody
+	public Map<String, Object> list(String[] crseTracseSe, String srchTraOrganNm, String srchTraProcessNm,
 									String srchTraArea1, String srchKeco1, String srchTraStDt, 
 									String srchTraEndDt, String nowPage) throws Exception{
 		
 		/*
 		::: 받는 인자들 :::
-	 	훈련유형(선):crseTracseSe
+	 	훈련유형(선):crseTracseSe -> 배열로 넘어올 듯?.. 전체선택은 null값
 		훈련기관명(선):srchTraOrganNm
 		훈련과정명(선):srchTraProcessNm
 		훈련지역(선): srchTraArea1 -> 코드값 있음 http://www.hrd.go.kr/hrdp/ap/papco/PAPCO0700T.do
@@ -64,10 +64,20 @@ public class SearchAction {
 		// 기본적으로 필요한 url
 		sb.append("http://www.hrd.go.kr/jsp/HRDP/HRDPO00/HRDPOA60/HRDPOA60_1.jsp?returnType=XML&authKey=SLteRyA9SmMtvydD2HhNkBc12HXRheCy"
 				+"&pageNum="+this.nowPage+"&pageSize=12&srchTraStDt="+srchTraStDt+"&srchTraEndDt="+srchTraEndDt+"&outType=1&sort=ASC&sortCol=TR_STT_DT");
+			
+		// 조건 값이 null이 아닐 때 sb에 추가되는 영역
+		if(crseTracseSe != null && crseTracseSe.length > 0) {
+			StringBuffer cts = new StringBuffer();
+			
+			for(int i=0; i<crseTracseSe.length; i++) {
+				cts.append(crseTracseSe[i]);
+				
+				if(i < crseTracseSe.length-1)
+					cts.append(",");
+			}
+			sb.append("&crseTracseSe="+cts.toString());
+		}
 		
-		// 조건 값이 null이 아닐 때 추가 됨
-		if(crseTracseSe != null)
-			sb.append("&crseTracseSe="+crseTracseSe);
 		if(srchTraOrganNm != null)
 			sb.append("&srchTraOrganNm="+srchTraOrganNm);
 		if(srchTraProcessNm != null)
@@ -77,7 +87,7 @@ public class SearchAction {
 		if(srchKeco1 != null)
 			sb.append("&srchKeco1="+srchKeco1);
 		
-		String url_rink = sb.toString();
+		String url_rink = sb.toString(); // url주소(sb)를 스트링 값으로 변환(url_rink)
 		
 		URL url = new URL("http://www.hrd.go.kr/hrdp/api/apipo/APIPO0101T.do?returnType=XML&pageNum=1&authKey=SLteRyA9SmMtvydD2HhNkBc12HXRheCy&sort=ASC&outType=1&srchTraStDt=20200319&pageSize=12&sortCol=TR_STT_DT&srchTraEndDt=20200619&srchTraPattern=N1&srchPart=-99&apiRequstPageUrlAdres=/jsp/HRDP/HRDPO00/HRDPOA60/HRDPOA60_1.jsp&apiRequstIp=211.118.162.124");
 		
