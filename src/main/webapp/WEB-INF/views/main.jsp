@@ -35,7 +35,7 @@
          <div class="carousel-inner row w-100 mx-auto" role="listbox">
          <c:forEach var="mvo" items="${ar }" varStatus="st">
          	<c:if test="${st.index == 0 }">
-            <div class="carousel-item col-md-4 active" style="width: 360px; height: 334px;">
+            <div class="carousel-item col-md-4 active" style="width: 360px; height: 450px;">
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
                      <div class="card h-100 thumb">
@@ -44,7 +44,7 @@
                         </a>
                         <div class="card-body">
                         <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}">
-                           <h4 class="card-title" style="text-align: center;">${mvo.title }</h4>
+                           <h4 class="card-title" style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h4>
                         </a>
                            <p class="card-text" style="text-align: center;">
                               <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총
@@ -66,7 +66,7 @@
             </div>
             </c:if>
             <c:if test="${st.index > 0 }">
-            <div class="carousel-item col-md-4" style="width: 360px; height: 334px;">
+            <div class="carousel-item col-md-4" style="width: 360px; height: 450px;">
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
                      <div class="card h-100 thumb">
@@ -75,7 +75,7 @@
                         </a>
                         <div class="card-body">
                         <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}">
-                           <h4 class="card-title" style="text-align: center;">${mvo.title }</h4>
+                           <h4 class="card-title" style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h4>
                         </a>
                            <p class="card-text" style="text-align: center;">
                               <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총
@@ -122,57 +122,62 @@
         <form action="view.inc" method="post" class="srch-area">
         	<div class="main">
         		<div class="form-left-to-w3l">
-        			<input type="text" name="inoNm" placeholder="훈련기관" />
+        			<input type="text" name="srchTraOrganNm" id="srchTraOrganNm" placeholder="훈련기관" />
                     <div class="clear"></div>
         		</div>
         		<div class="form-left-to-w3l">
-        			<input type="text" name="trprNm" placeholder="훈련과정" />
+        			<input type="text" name="srchTraProcessNm" id="srchTraProcessNm" placeholder="훈련과정" />
                 	<div class="clear"></div>
         		</div>
             </div>
             <div class="main">
                <div class="form-left-to-w3l">
-                  <select class="form-control">
-                     <option value="">훈련유형</option>
-                     <option>국민내일배움카드(구직자)</option>
-                     <option>국가기간전략산업직종</option>
-                     <option>컨소시엄 채용예정자</option>
-                     <option>폴리텍대학훈련</option>
-                     <option>청년취업아카데미</option>
-                     <option>장애인직업능력지원훈련</option>
-                     <option>건설일용근로자기능향상</option>
-                     <option>지역맞춤형일자리창출</option>
-                     <option>지역구직자</option>
+                  <select class="form-control" name="crseTracseSe" id="crseTracseSe">
+                     <option value="none">::훈련유형::</option>
+                     <option value="C0055">내일배움카드(구직자)</option>
+                     <option value="C0054">국가기간전략산업직종</option>
+                     <option value="C0068">컨소시엄 채용예정자</option>
+                     <option value="C0053">지역구직자</option>
+                     <option value="C0059">청년취업아카데미</option>
+                     <option value="Y0054">4차산업혁명인력양성</option>
+                     <option value="Z">중장년특화과정</option>
+                     <option value="C0077">지역맞춤형일자리창출지원</option>
+                     <option value="C0074">장애인직업능력개발훈련</option>
+                     <option value="C0075">건설일용근로자기능향상</option>
+                     <option value="C0071">베이비부머과정(폴리텍대학)</option>
+                     <option value="C0069">기능사과정(폴리텍대학)</option>
+                     <option value="C0070">기능장과정(폴리텍대학)</option>
+                     <option value="C0072">여성재취업과정(폴리텍대학)</option>
                   </select>
                </div>
                <div class="form-right-to-w3l">
-					 <select class="form-control">
-	                     <option value="">NCS직무</option>
-							<option value="01">사업관리(01)</option>
-							<option value="02">경영·회계·사무(02)</option>
-							<option value="03">금융·보험(03)</option>
-							<option value="04">교육·자연·사회과학(04)</option>
-							<option value="05">법률·경찰·소방·교도·국방(05)</option>
-							<option value="06">보건·의료(06)</option>
-							<option value="07">사회복지·종교(07)</option>
-							<option value="08">문화·예술·디자인·방송(08)</option>
-							<option value="09">운전·운송(09)</option>
-							<option value="10">영업판매(10)</option>
-							<option value="11">경비·청소(11)</option>
-							<option value="12">이용·숙박·여행·오락·스포츠(12)</option>
-							<option value="13">음식서비스(13)</option>
-							<option value="14">건설(14)</option>
-							<option value="15">기계(15)</option>
-							<option value="16">재료(16)</option>
-							<option value="17">화학(17)</option>
-							<option value="18">섬유·의복(18)</option>
-							<option value="19">전기·전자(19)</option>
-							<option value="20">정보통신(20)</option>
-							<option value="21">식품가공(21)</option>
-							<option value="22">인쇄·목재·가구·공예(22)</option>
-							<option value="23">환경·에너지·안전(23)</option>
-							<option value="24">농림어업(24)</option>
-	                  </select>
+				 	<select class="form-control">
+                     	<option value="none">::훈련분야::</option>
+						<option value="01">사업관리(01)</option>
+						<option value="02">경영·회계·사무(02)</option>
+						<option value="03">금융·보험(03)</option>
+						<option value="04">교육·자연·사회과학(04)</option>
+						<option value="05">법률·경찰·소방·교도·국방(05)</option>
+						<option value="06">보건·의료(06)</option>
+						<option value="07">사회복지·종교(07)</option>
+						<option value="08">문화·예술·디자인·방송(08)</option>
+						<option value="09">운전·운송(09)</option>
+						<option value="10">영업판매(10)</option>
+						<option value="11">경비·청소(11)</option>
+						<option value="12">이용·숙박·여행·오락·스포츠(12)</option>
+						<option value="13">음식서비스(13)</option>
+						<option value="14">건설(14)</option>
+						<option value="15">기계(15)</option>
+						<option value="16">재료(16)</option>
+						<option value="17">화학(17)</option>
+						<option value="18">섬유·의복(18)</option>
+						<option value="19">전기·전자(19)</option>
+						<option value="20">정보통신(20)</option>
+						<option value="21">식품가공(21)</option>
+						<option value="22">인쇄·목재·가구·공예(22)</option>
+						<option value="23">환경·에너지·안전(23)</option>
+						<option value="24">농림어업(24)</option>
+                  </select>
                </div>
             </div>  
             <div class="main">
@@ -180,10 +185,8 @@
                   <input id="datepicker1" name="text" type="text" placeholder="훈련시작" required="" class="hasDatepicker">
                </div>
                <div class="form-right-to-w3l">
-                  <select class="form-control buttom" title="훈련지역 시도" >
-                     <option value="">
-                     	훈련지역 시도
-                     </option>
+                  <select class="form-control buttom" name="srchTraArea1" id="srchTraArea1">
+                     <option value="none">::훈련지역 시도::</option>
                      <option value="11">서울</option>
 					 <option value="26">부산</option>
 					 <option value="27">대구</option>
@@ -208,7 +211,7 @@
             <div class="clear"></div>
             
             <div class="btnn">
-               <button type="button" onclick="">SEARCH</button><br>
+               <button type="button" id="search_btn">검색</button><br>
             </div>
          </form>
       </div>
