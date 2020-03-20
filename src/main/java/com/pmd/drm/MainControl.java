@@ -2,7 +2,10 @@ package com.pmd.drm;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.jdom2.Document;
@@ -156,11 +159,19 @@ public class MainControl {
 	
 	public MainVO[] makeURL(String category) throws Exception {
 
-		// url은 임의 값임. 지역값을 랜덤값으로 변경
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
+		
+		Calendar cal = Calendar.getInstance(); // 오늘날짜
+		String today = format1.format(cal.getTime());
+		
+		cal.add(Calendar.MONTH, 6); // 6개월 뒤
+		String future = format1.format(cal.getTime());
+		
+		// url은 현재날짜 기준으로 6개월 뒤 까지의 교육과정을 가져옴
 		// 리스트는 최소 10개이상
 		URL url = new URL("http://www.hrd.go.kr/hrdp/api/apipo/APIPO0101T.do?returnType=XML&pageNum=1&"
-				+ "&authKey=Aflc7YIke55KR8qliEbmLwJGWIpsH2DL&sort=ASC&outType=1&srchTraStDt=20200318&"
-				+ "srchKeco1="+category+"&pageSize=10&sortCol=TR_STT_DT&srchTraEndDt=20200618&srchTraPattern=N1&srchPart=-99"
+				+ "&authKey=Aflc7YIke55KR8qliEbmLwJGWIpsH2DL&sort=ASC&outType=1&srchTraStDt="+today+"&"
+				+ "srchKeco1="+category+"&pageSize=10&sortCol=TR_STT_DT&srchTraEndDt="+future+"&srchTraPattern=N1&srchPart=-99"
 				+ "&apiRequstPageUrlAdres=/jsp/HRDP/HRDPO00/HRDPOA60/HRDPOA60_1.jsp&apiRequstIp=211.118.162.124");
 
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
