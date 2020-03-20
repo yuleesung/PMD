@@ -18,6 +18,7 @@
       <link href="resources/css/main_style.css" rel="stylesheet" type="text/css" media="all">
       <link href="//fonts.googleapis.com/css?family=Cuprum:400,700" rel="stylesheet">
       <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+      <link href="resources/text.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="header">
@@ -215,204 +216,7 @@
       
       
      <!-- 리스트 -->
-      <div class="container">
- <h1 class="my-5" style="font-weight: bold;">검색 결과</h1>
-  <hr/>
-   <div class="row">
-      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
-         <div class="card h-100">
-            <a href="#">
-               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
-            </a>
-            <div class="card-body">
-               <h4 class="card-title">과정명</h4>
-               <p class="card-text" style="text-align: center;">
-                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
-                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
-                  </p>
-               <hr/>
-               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
-            </div>
-         </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
-         <div class="card h-100">
-            <a href="#">
-               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
-            </a>
-            <div class="card-body">
-               <h4 class="card-title">과정명</h4>
-               <p class="card-text" style="text-align: center;">
-                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
-                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
-                  </p>
-               <hr/>
-               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
-            </div>
-         </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
-         <div class="card h-100">
-            <a href="#">
-               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
-            </a>
-            <div class="card-body">
-               <h4 class="card-title">과정명</h4>
-               <p class="card-text" style="text-align: center;">
-                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
-                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
-                  </p>
-               <hr/>
-               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
-            </div>
-         </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
-         <div class="card h-100">
-            <a href="#">
-               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
-            </a>
-            <div class="card-body">
-               <h4 class="card-title">과정명</h4>
-               <p class="card-text" style="text-align: center;">
-                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
-                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
-                  </p>
-               <hr/>
-               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
-            </div>
-         </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
-         <div class="card h-100">
-            <a href="#">
-               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
-            </a>
-            <div class="card-body">
-               <h4 class="card-title">과정명</h4>
-               <p class="card-text" style="text-align: center;">
-                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
-                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
-                  </p>
-               <hr/>
-               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
-            </div>
-         </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
-         <div class="card h-100">
-            <a href="#">
-               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
-            </a>
-            <div class="card-body">
-               <h4 class="card-title">과정명</h4>
-               <p class="card-text" style="text-align: center;">
-                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
-                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
-                  </p>
-               <hr/>
-               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
-            </div>
-         </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
-         <div class="card h-100">
-            <a href="#">
-               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
-            </a>
-            <div class="card-body">
-               <h4 class="card-title">과정명</h4>
-               <p class="card-text" style="text-align: center;">
-                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
-                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
-                  </p>
-               <hr/>
-               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
-            </div>
-         </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
-         <div class="card h-100">
-            <a href="#">
-               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
-            </a>
-            <div class="card-body">
-               <h4 class="card-title">과정명</h4>
-               <p class="card-text" style="text-align: center;">
-                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
-                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
-                  </p>
-               <hr/>
-               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
-            </div>
-         </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
-         <div class="card h-100">
-            <a href="#">
-               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
-            </a>
-            <div class="card-body">
-               <h4 class="card-title">과정명</h4>
-               <p class="card-text" style="text-align: center;">
-                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
-                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
-                  </p>
-               <hr/>
-               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
-            </div>
-         </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
-         <div class="card h-100">
-            <a href="#">
-               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
-            </a>
-            <div class="card-body">
-               <h4 class="card-title">과정명</h4>
-               <p class="card-text" style="text-align: center;">
-                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
-                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
-                  </p>
-               <hr/>
-               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
-            </div>
-         </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
-         <div class="card h-100">
-            <a href="#">
-               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
-            </a>
-            <div class="card-body">
-               <h4 class="card-title">과정명</h4>
-               <p class="card-text" style="text-align: center;">
-                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
-                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
-                  </p>
-               <hr/>
-               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
-            </div>
-         </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 p-3">
-         <div class="card h-100">
-            <a href="#">
-               <img class="card-img-top img-fluid" src="//via.placeholder.com/350x150" alt="img">
-            </a>
-            <div class="card-body">
-               <h4 class="card-title">과정명</h4>
-               <p class="card-text" style="text-align: center;">
-                     <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span> 6,600,000원
-                     <span style="border-radius: 10px; background-color: rgba(0, 150, 150,  0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
-                  </p>
-               <hr/>
-               <p class="card-text" style="text-align: center;">훈련기간 2020-01-01 ~ 2020-12-31</p>
-            </div>
-         </div>
-      </div>
-      
-   </div>
+<div class="container" id="result" style="display: none;">
 </div>
 
       <div class="copy">
@@ -523,6 +327,46 @@
 	  				  data: data,
 	  				  dataType: "json"
 	  			  }).done(function(res){
+	  				  $("#result").css("display", "block");
+	  				  // console.log(res.ar[0].trprId);
+	  				  
+	  				  var str = "<h1 class='my-5' style='font-weight: bold;'>검색 결과</h1>";
+	  				  str += "<hr/>";	  				  
+	  				  str += "<div class='row'>";
+	  				  
+	  				  for(var i=0; i<res.ar.length; i++){
+	  					  str += "<div class='col-lg-4 col-md-6 col-sm-12 p-3'>";
+	  					  str += "<div class='card h-100'>";
+	  					  str += "<a href='view.inc?srchTrprId="+res.ar[i].trprId+"&srchTrprDegr="+res.ar[i].trprDegr+"&traStartDate="+res.ar[i].traStartDate+"&traEndDate="+res.ar[i].traEndDate+"&trainstCstId="+res.ar[i].trainstCstId+"&trainTarget="+res.ar[i].trainTarget+"&superViser="+res.ar[i].superViser+"&yardMan="+res.ar[i].yardMan+"&regCourseMan="+res.ar[i].regCourseMan+"'>";
+	  					  str += "<h5 class='card-title' style='text-align: center; color: white; background-color: rgba(0, 0, 255, 0.5); border-radius: 10px; width: 300px; margin: 10px auto;'>"+res.ar[i].subTitle+"</h5>";
+	  					  str += "</a>";
+	  					  str += "<div class='card-body'>";
+	  					  str += "<a href='view.inc?srchTrprId="+res.ar[i].trprId+"&srchTrprDegr="+res.ar[i].trprDegr+"&traStartDate="+res.ar[i].traStartDate+"&traEndDate="+res.ar[i].traEndDate+"&trainstCstId="+res.ar[i].trainstCstId+"&trainTarget="+res.ar[i].trainTarget+"&superViser="+res.ar[i].superViser+"&yardMan="+res.ar[i].yardMan+"&regCourseMan="+res.ar[i].regCourseMan+"'>";
+	  					  str += "<h4 class='card-title' style='text-align: center; height: 90px; vertical-align: middle;'>"+res.ar[i].title+"</h4>";
+	  					  str += "</a>";
+	  					  str += "<p class='card-text' style='text-align: center;'>";
+	  					  str += "<span style='font-weight: bold; color: rgba(250, 0, 0, 0.7);'>총 훈련비</span>";
+	  					  str += res.ar[i].courseMan+"원";
+	  					  
+	  					  if(res.ar[i].regCourseMan < res.ar[i].yardMan){
+	  						  str += "<span style='border-radius: 10px; background-color: rgba(0, 150, 150, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;'>모집중</span>";
+	  					  }else if(res.ar[i].regCourseMan == res.ar[i].yardMan){
+	  						  str += "<span style='border-radius: 10px; background-color: rgba(0, 150, 150, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;'>모집마감</span>";
+	  					  }
+	  					  
+	  					  str += "</p>";
+	  					  str += "<hr/>";
+	  					  str += "<p class='card-text' style='text-align: center;'>훈련기간<br/>"+res.ar[i].traStartDate +"~"+ res.ar[i].traEndDate+"</p>";
+	  					  str += "</div>";
+	  					  str += "</div>";
+	  					  str += "</div>";
+	  				  }
+	  				  str += "</div>";
+	  				  str += "<div>";
+	  				  str += res.pageCode;
+	  				  str += "</div>";
+	  				  console.log(str);
+	  				  $("#result").html(str);
 	  				  
 	  			  }).fail(function(err){
 	  				 console.log(err); 

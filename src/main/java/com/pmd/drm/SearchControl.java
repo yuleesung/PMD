@@ -28,14 +28,14 @@ public class SearchControl {
 	
 	// 페이징 기법을 위한 상수
 	public final int BLOCK_LIST = 12; // 페이지 당 보여질 게시물 수
-	public final int BLOCK_PAGE = 3; // 블럭 당 보여질 페이지 수
+	public final int BLOCK_PAGE = 5; // 블럭 당 보여질 페이지 수
 	
 	int nowPage; // 현재 페이지 값
 	int rowTotal; // 전체 게시물 수
 	String pageCode; // 페이징  처리 된 HTML코드값
 	
 	//@RequestMapping("/search.inc") // 테스트용
-	@RequestMapping(value="/search.inc", method=RequestMethod.POST, produces="text/json;charset=utf-8")
+	@RequestMapping(value="/search.inc", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> list(String crseTracseSe, String srchTraOrganNm, String srchTraProcessNm,
 									String srchTraArea1, String srchKeco1, String srchTraStDt, 
