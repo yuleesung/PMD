@@ -40,7 +40,7 @@
                   <div class="panel-thumbnail">
                      <div class="card h-100 thumb">
                         <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}">
-                        	<img class="card-img-top img-fluid mx-auto d-block" src="resources/images/occupation/${mvo.category}.jpg" alt="${mvo.subTitle }">
+                        	<img class="card-img-top img-fluid mx-auto d-block" src="resources/images/occupation/${mvo.category}.jpg" alt="${mvo.subTitle }" width="350px" height="150px"/>
                         </a>
                         <div class="card-body">
                         <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}">
@@ -71,7 +71,7 @@
                   <div class="panel-thumbnail">
                      <div class="card h-100 thumb">
                         <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}"> 
-                        	<img class="card-img-top img-fluid mx-auto d-block" src="resources/images/occupation/${mvo.category}.jpg" alt="${mvo.subTitle }">
+                        	<img class="card-img-top img-fluid mx-auto d-block" src="resources/images/occupation/${mvo.category}.jpg" alt="${mvo.subTitle }" width="350px" height="150px"/>
                         </a>
                         <div class="card-body">
                         <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}">
