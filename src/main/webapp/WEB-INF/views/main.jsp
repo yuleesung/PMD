@@ -67,7 +67,7 @@
             </div>
             </c:if>
             <c:if test="${st.index > 0 }">
-            <div class="carousel-item col-md-4" style="width: 360px; height: 450px;">
+            <div class="carousel-item col-md-4 " style="width: 360px; height: 550px;">
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
                      <div class="card h-100 thumb">
