@@ -69,9 +69,9 @@ public class Paging {
 		sb = new StringBuffer("<ol class='paging'>");
 		
 		if(isPrePage) { // 이전기능 활성
-			sb.append("<li><a href='list.inc?nowPage=");
+			sb.append("<li><a href='javascript:page(\"");
 			sb.append(nowPage-blockPage);
-			sb.append("'> &lt; </a></li>");
+			sb.append("\")'> &lt; </a></li>");
 		}else { // 이전기능이 비활성화 상태
 			sb.append("<li class='disable'> &lt; </li>");
 		}
@@ -85,9 +85,9 @@ public class Paging {
 				sb.append(i);
 				sb.append("</li>");
 			}else { // 현재페이지가 아닌경우
-				sb.append("<li><a href='list.inc?nowPage=");
+				sb.append("<li><a href='javascript:page(\"");
 				sb.append(i); // 파라미터 값
-				sb.append("'>");
+				sb.append("\")'>");
 				sb.append(i); // 화면에 보이는 값
 				sb.append("</a></li>");
 			}
@@ -95,9 +95,9 @@ public class Paging {
 		
 		
 		if(isNextPage) { // 다음기능 활성
-			sb.append("<li><a href='list.inc?nowPage=");
+			sb.append("<li><a href='javascript:page(\"");
 			sb.append(nowPage+blockPage);
-			sb.append("'> &gt; </a></li>");
+			sb.append("\")'> &gt; </a></li>");
 		}else { // 다음기능이 비활성화 상태
 			sb.append("<li class='disable'> &gt; </li>");
 		}

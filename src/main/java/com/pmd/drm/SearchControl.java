@@ -95,7 +95,7 @@ public class SearchControl {
 		
 		URL url = new URL(url_rink);
 		
-		System.out.println(url_rink);
+		// System.out.println(url_rink);
 		
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		

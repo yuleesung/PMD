@@ -36,7 +36,7 @@
          <div class="carousel-inner row w-100 mx-auto" role="listbox">
          <c:forEach var="mvo" items="${ar }" varStatus="st">
          	<c:if test="${st.index == 0 }">
-            <div class="carousel-item col-md-4 active" style="width: 360px; height: 450px;">
+            <div class="carousel-item col-md-4 active" style="width: 360px; height: 550px;">
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
                      <div class="card h-100 thumb">
@@ -362,7 +362,7 @@
 	  					  str += "</div>";
 	  				  }
 	  				  str += "</div>";
-	  				  str += "<div>";
+	  				  str += "<div style='width: 300px; margin: auto;'>";
 	  				  str += res.pageCode;
 	  				  str += "</div>";
 	  				  console.log(str);
@@ -375,6 +375,106 @@
 	          });
 
          });
+         
+         function page(nowPage) {
+        	  var srchTraOrganNm = $("#srchTraOrganNm").val(); // 훈련기관
+	       	  var srchTraProcessNm = $("#srchTraProcessNm").val(); // 훈련과정
+	       	  var crseTracseSe = $("#crseTracseSe").val(); // 훈련유형
+	       	  var srchKeco1 = $("#srchKeco1").val(); // 훈련분야
+	       	  var date = $("#srchTraStDt").val(); // 훈련시작일
+	       	  var srchTraArea1 = $("#srchTraArea1").val(); // 훈련지역
+	       	  
+	       	  var year = date.substring(0, 4);
+ 			  var month = date.substring(5, 7);
+ 			  var day = date.substring(8, 10);
+       	  
+ 			  var srchTraStDt = year+month+day;
+ 			  
+ 			  var param = "";
+ 			  
+ 			  if(srchTraOrganNm.trim().length > 0){
+ 				  param += "&srchTraOrganNm="+srchTraOrganNm;
+ 			  }
+ 			  
+ 			  if(srchTraProcessNm.trim().length > 0){
+ 				  param += "&srchTraProcessNm="+srchTraProcessNm;
+ 			  }
+ 			  
+ 			  if(crseTracseSe != "none"){
+ 				  param += "&crseTracseSe="+crseTracseSe;
+ 			  }
+ 			  
+ 			  if(srchKeco1 != "none"){
+ 				  param += "&srchKeco1="+srchKeco1;
+ 			  }
+ 			  
+ 			  if(date.trim().length > 0){
+ 				  param += "&srchTraStDt="+srchTraStDt;
+ 			  }
+ 			  
+ 			  if(srchTraArea1 != "none"){
+ 				  param += "&srchTraArea1="+srchTraArea1;
+ 			  }
+ 			  
+ 			  var data = "";
+ 			  
+ 			  if(param.startsWith("&")){
+ 				  data = param.substring(1, param.length);
+ 			  }
+			  
+ 			  data += "&nowPage="+nowPage;
+ 			  
+ 			  $.ajax({
+ 				  url: "search.inc",
+ 				  type: "post",
+ 				  data: data,
+ 				  dataType: "json"
+ 			  }).done(function(res){
+ 				  $("#result").css("display", "block");
+ 				  // console.log(res.ar[0].trprId);
+ 				  
+ 				  var str = "<h1 class='my-5' style='font-weight: bold;'>검색 결과</h1>";
+ 				  str += "<hr/>";	  				  
+ 				  str += "<div class='row'>";
+ 				  
+ 				  for(var i=0; i<res.ar.length; i++){
+ 					  str += "<div class='col-lg-4 col-md-6 col-sm-12 p-3'>";
+ 					  str += "<div class='card h-100'>";
+ 					  str += "<a href='view.inc?srchTrprId="+res.ar[i].trprId+"&srchTrprDegr="+res.ar[i].trprDegr+"&traStartDate="+res.ar[i].traStartDate+"&traEndDate="+res.ar[i].traEndDate+"&trainstCstId="+res.ar[i].trainstCstId+"&trainTarget="+res.ar[i].trainTarget+"&superViser="+res.ar[i].superViser+"&yardMan="+res.ar[i].yardMan+"&regCourseMan="+res.ar[i].regCourseMan+"'>";
+ 					  str += "<h5 class='card-title' style='text-align: center; color: white; background-color: rgba(0, 0, 255, 0.5); border-radius: 10px; width: 100%; margin: 10px auto;'>"+res.ar[i].subTitle+"</h5>";
+ 					  str += "</a>";
+ 					  str += "<div class='card-body'>";
+ 					  str += "<a href='view.inc?srchTrprId="+res.ar[i].trprId+"&srchTrprDegr="+res.ar[i].trprDegr+"&traStartDate="+res.ar[i].traStartDate+"&traEndDate="+res.ar[i].traEndDate+"&trainstCstId="+res.ar[i].trainstCstId+"&trainTarget="+res.ar[i].trainTarget+"&superViser="+res.ar[i].superViser+"&yardMan="+res.ar[i].yardMan+"&regCourseMan="+res.ar[i].regCourseMan+"'>";
+ 					  str += "<h4 class='card-title' style='text-align: center; height: 90px; vertical-align: middle;'>"+res.ar[i].title+"</h4>";
+ 					  str += "</a>";
+ 					  str += "<p class='card-text' style='text-align: center;'>";
+ 					  str += "<span style='font-weight: bold; color: rgba(250, 0, 0, 0.7);'>총 훈련비</span>";
+ 					  str += res.ar[i].courseMan+"원";
+ 					  
+ 					  if(res.ar[i].regCourseMan < res.ar[i].yardMan){
+ 						  str += "<span style='border-radius: 10px; background-color: rgba(0, 150, 150, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;'>모집중</span>";
+ 					  }else if(res.ar[i].regCourseMan == res.ar[i].yardMan){
+ 						  str += "<span style='border-radius: 10px; background-color: rgba(0, 150, 150, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;'>모집마감</span>";
+ 					  }
+ 					  
+ 					  str += "</p>";
+ 					  str += "<hr/>";
+ 					  str += "<p class='card-text' style='text-align: center;'>훈련기간<br/>"+res.ar[i].traStartDate +"~"+ res.ar[i].traEndDate+"</p>";
+ 					  str += "</div>";
+ 					  str += "</div>";
+ 					  str += "</div>";
+ 				  }
+ 				  str += "</div>";
+ 				  str += "<div style='width: 300px; margin: auto;'>";
+ 				  str += res.pageCode;
+ 				  str += "</div>";
+ 				  console.log(str);
+ 				  $("#result").html(str);
+ 				  
+ 			  }).fail(function(err){
+ 				 console.log(err); 
+ 			  });
+		}
       </script>
    
 
