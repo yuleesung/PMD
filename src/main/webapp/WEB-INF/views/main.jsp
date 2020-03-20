@@ -19,6 +19,44 @@
       <link href="//fonts.googleapis.com/css?family=Cuprum:400,700" rel="stylesheet">
       <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
       <link href="resources/css/text.css" rel="stylesheet"/>
+      <style type="text/css">
+      	.search-sec{
+		    padding: 2rem;
+		}
+		.search-slt{
+		    display: block;
+		    width: 100%;
+		    font-size: 0.875rem;
+		    line-height: 1.5;
+		    color: #55595c;
+		    background-color: #fff;
+		    background-image: none;
+		    border: 1px solid #ccc;
+		    height: calc(3rem + 2px) !important;
+		    border-radius:0;
+		}
+		.wrn-btn{
+		    width: 100%;
+		    font-size: 16px;
+		    font-weight: 400;
+		    text-transform: capitalize;
+		    height: calc(3rem + 2px) !important;
+		    border-radius:0;
+		}
+		@media (min-width: 992px){
+		    .search-sec{
+		        position: relative;
+		        top: -114px;
+		        background: rgba(26, 70, 104, 0.51);
+		    }
+		}
+		
+		@media (max-width: 992px){
+		    .search-sec{
+		        background: #1A4668;
+		    }
+		}
+      </style>
 </head>
 <body>
 <div class="header">
@@ -35,8 +73,9 @@
          data-ride="carousel" data-interval="false">
          <div class="carousel-inner row w-100 mx-auto" role="listbox">
          <c:forEach var="mvo" items="${ar }" varStatus="st">
-         	<c:if test="${st.index == 0 }">
-            <div class="carousel-item col-md-4 active" style="width: 360px; height: 550px;">
+         	<c:if test="${st.index == 0 }">         	
+            <div class="carousel-item col-md-4 active" style="width: 360px; height: 600px;">
+            	<h3 style="width: 100%; border: 3px solid rgba(0,20,230,0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h3>
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
                      <div class="card h-100 thumb">
@@ -48,6 +87,8 @@
                            <h5 class="card-title" style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h5>
                         </a>
                            <p class="card-text" style="text-align: center;">
+                           	<span style="font-weight: bold; font-size: 1.2em;">${mvo.subTitle }</span>
+                           	<br/>
                               <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총
                                  훈련비</span> <fmt:formatNumber value="${mvo.courseMan }" pattern="#,###" />원 
                                  <c:if test="${mvo.regCourseMan lt mvo.yardMan }">
@@ -67,7 +108,8 @@
             </div>
             </c:if>
             <c:if test="${st.index > 0 }">
-            <div class="carousel-item col-md-4 " style="width: 360px; height: 550px;">
+            <div class="carousel-item col-md-4 " style="width: 360px; height: 600px;">
+            	<h3 style="width: 100%; border: 3px solid rgba(0,20,230,0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h3>
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
                      <div class="card h-100 thumb">
@@ -79,6 +121,8 @@
                            <h5 class="card-title" style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h5>
                         </a>
                            <p class="card-text" style="text-align: center;">
+	                           <span style="font-weight: bold; font-size: 1.2em;">${mvo.subTitle }</span>
+	                           	<br/>
                               <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총
                                  훈련비</span> <fmt:formatNumber value="${mvo.courseMan }" pattern="#,###" />원 
                                  <c:if test="${mvo.regCourseMan lt mvo.yardMan }">
@@ -113,107 +157,103 @@
 
 
 
-	<!-- 훈련과정 검색 영역 -->
-	<div class="container-fluid">
-		<div class="doctor-form">
-			<h2 class="doctor-list-w3l">훈련과정검색</h2>
-	        <form action="view.inc" method="post" class="srch-area">
-	        	<div class="main">
-	        		<div class="form-left-to-w3l">
-	        			<input type="text" name="srchTraOrganNm" id="srchTraOrganNm" placeholder="훈련기관" />
-	                    <div class="clear"></div>
-	        		</div>
-	        		<div class="form-left-to-w3l">
-	        			<input type="text" name="srchTraProcessNm" id="srchTraProcessNm" placeholder="훈련과정" />
-	                	<div class="clear"></div>
-	        		</div>
-	            </div>
-	            <div class="main">
-	               <div class="form-left-to-w3l">
-	                  <select class="form-control" name="crseTracseSe" id="crseTracseSe" style="height: 48px;">
-	                     <option value="none">::훈련유형::</option>
-	                     <option value="C0055">내일배움카드(구직자)</option>
-	                     <option value="C0054">국가기간전략산업직종</option>
-	                     <option value="C0068">컨소시엄 채용예정자</option>
-	                     <option value="C0053">지역구직자</option>
-	                     <option value="C0059">청년취업아카데미</option>
-	                     <option value="Y0054">4차산업혁명인력양성</option>
-	                     <option value="Z">중장년특화과정</option>
-	                     <option value="C0077">지역맞춤형일자리창출지원</option>
-	                     <option value="C0074">장애인직업능력개발훈련</option>
-	                     <option value="C0075">건설일용근로자기능향상</option>
-	                     <option value="C0071">베이비부머과정(폴리텍대학)</option>
-	                     <option value="C0069">기능사과정(폴리텍대학)</option>
-	                     <option value="C0070">기능장과정(폴리텍대학)</option>
-	                     <option value="C0072">여성재취업과정(폴리텍대학)</option>
-	                  </select>
-	               </div>
-	               <div class="form-right-to-w3l">
-					 	<select class="form-control" name="srchKeco1" id="srchKeco1" style="height: 48px;">
-	                     	<option value="none">::훈련분야::</option>
-							<option value="01">사업관리(01)</option>
-							<option value="02">경영·회계·사무(02)</option>
-							<option value="03">금융·보험(03)</option>
-							<option value="04">교육·자연·사회과학(04)</option>
-							<option value="05">법률·경찰·소방·교도·국방(05)</option>
-							<option value="06">보건·의료(06)</option>
-							<option value="07">사회복지·종교(07)</option>
-							<option value="08">문화·예술·디자인·방송(08)</option>
-							<option value="09">운전·운송(09)</option>
-							<option value="10">영업판매(10)</option>
-							<option value="11">경비·청소(11)</option>
-							<option value="12">이용·숙박·여행·오락·스포츠(12)</option>
-							<option value="13">음식서비스(13)</option>
-							<option value="14">건설(14)</option>
-							<option value="15">기계(15)</option>
-							<option value="16">재료(16)</option>
-							<option value="17">화학(17)</option>
-							<option value="18">섬유·의복(18)</option>
-							<option value="19">전기·전자(19)</option>
-							<option value="20">정보통신(20)</option>
-							<option value="21">식품가공(21)</option>
-							<option value="22">인쇄·목재·가구·공예(22)</option>
-							<option value="23">환경·에너지·안전(23)</option>
-							<option value="24">농림어업(24)</option>
-	                  </select>
-	               </div>
-	            </div>  
-	            <div class="main">
-	               <div class="form-left-to-w3l">
-	                  <input id="srchTraStDt" name="srchTraStDt" type="text" placeholder="훈련시작일"/>
-	               </div>
-	               <div class="form-right-to-w3l">
-	                  <select class="form-control buttom" name="srchTraArea1" id="srchTraArea1" style="height: 48px;">
-	                     <option value="none">::훈련지역 시도::</option>
-	                     <option value="11">서울</option>
-						 <option value="26">부산</option>
-						 <option value="27">대구</option>
-						 <option value="28">인천</option>
-						 <option value="29">광주</option>
-						 <option value="30">대전</option>
-						 <option value="31">울산</option>
-						 <option value="36">세종</option>
-						 <option value="41">경기</option>
-						 <option value="42">강원</option>
-						 <option value="43">충북</option>
-						 <option value="44">충남</option>
-						 <option value="45">전북</option>
-						 <option value="46">전남</option>
-						 <option value="47">경북</option>
-						 <option value="48">경남</option>
-						 <option value="50">제주</option>
-	                  </select>
-	                  <div class="clear"></div>
-	               </div>
-	            </div>
-	            <div class="clear"></div>
-	            
-	            <div class="btnn">
-	               <button type="button" id="search_btn">검색</button><br>
-	            </div>
-	         </form>
-	      </div>
-      </div>
+	
+      
+ <section class="search-sec" style="margin-top: 110px;">
+    <div class="container">
+        <form action="#" method="post" novalidate="novalidate">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <input type="text" class="form-control search-slt" id="srchTraOrganNm" placeholder="훈련기관"/>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <input type="text" class="form-control search-slt" id="srchTraProcessNm" placeholder="훈련과정"/>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <select class="form-control search-slt" id="crseTracseSe">
+                                 <option value="none">::훈련유형::</option>
+			                     <option value="C0055">내일배움카드(구직자)</option>
+			                     <option value="C0054">국가기간전략산업직종</option>
+			                     <option value="C0068">컨소시엄 채용예정자</option>
+			                     <option value="C0053">지역구직자</option>
+			                     <option value="C0059">청년취업아카데미</option>
+			                     <option value="Y0054">4차산업혁명인력양성</option>
+			                     <option value="Z">중장년특화과정</option>
+			                     <option value="C0077">지역맞춤형일자리창출지원</option>
+			                     <option value="C0074">장애인직업능력개발훈련</option>
+			                     <option value="C0075">건설일용근로자기능향상</option>
+			                     <option value="C0071">베이비부머과정(폴리텍대학)</option>
+			                     <option value="C0069">기능사과정(폴리텍대학)</option>
+			                     <option value="C0070">기능장과정(폴리텍대학)</option>
+			                     <option value="C0072">여성재취업과정(폴리텍대학)</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <select class="form-control search-slt" id="srchKeco1">
+                                <option value="none">::훈련분야::</option>
+								<option value="01">사업관리(01)</option>
+								<option value="02">경영·회계·사무(02)</option>
+								<option value="03">금융·보험(03)</option>
+								<option value="04">교육·자연·사회과학(04)</option>
+								<option value="05">법률·경찰·소방·교도·국방(05)</option>
+								<option value="06">보건·의료(06)</option>
+								<option value="07">사회복지·종교(07)</option>
+								<option value="08">문화·예술·디자인·방송(08)</option>
+								<option value="09">운전·운송(09)</option>
+								<option value="10">영업판매(10)</option>
+								<option value="11">경비·청소(11)</option>
+								<option value="12">이용·숙박·여행·오락·스포츠(12)</option>
+								<option value="13">음식서비스(13)</option>
+								<option value="14">건설(14)</option>
+								<option value="15">기계(15)</option>
+								<option value="16">재료(16)</option>
+								<option value="17">화학(17)</option>
+								<option value="18">섬유·의복(18)</option>
+								<option value="19">전기·전자(19)</option>
+								<option value="20">정보통신(20)</option>
+								<option value="21">식품가공(21)</option>
+								<option value="22">인쇄·목재·가구·공예(22)</option>
+								<option value="23">환경·에너지·안전(23)</option>
+								<option value="24">농림어업(24)</option>	
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <input type="text" class="form-control search-slt" id="srchTraStDt" placeholder="훈련시작일">
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <select class="form-control search-slt" id="srchTraArea1">
+                                <option value="none">::훈련지역 시도::</option>
+			                     <option value="11">서울</option>
+								 <option value="26">부산</option>
+								 <option value="27">대구</option>
+								 <option value="28">인천</option>
+								 <option value="29">광주</option>
+								 <option value="30">대전</option>
+								 <option value="31">울산</option>
+								 <option value="36">세종</option>
+								 <option value="41">경기</option>
+								 <option value="42">강원</option>
+								 <option value="43">충북</option>
+								 <option value="44">충남</option>
+								 <option value="45">전북</option>
+								 <option value="46">전남</option>
+								 <option value="47">경북</option>
+								 <option value="48">경남</option>
+								 <option value="50">제주</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <button type="button" class="btn btn-danger wrn-btn" id="search_btn">검색</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+      
       
       
      <!-- 리스트 -->
@@ -234,7 +274,7 @@
 				dayNamesMin: ["일","월","화","수","목","금","토"],
 				monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
 				showMonthAfterYear: true,
-				yearSuffix: "년"
+				
 		     });
 		   	 $('#carouselExample').on('slide.bs.carousel', function (e) {
 		

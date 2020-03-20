@@ -175,6 +175,59 @@ public class MainControl {
 	
 	public MainVO[] makeURL(String category) throws Exception {
 
+		String categoryNm = null;
+		
+		if(category.equals("01")) {
+			categoryNm = "사업관리";
+		} else if(category.equals("02")) {
+			categoryNm = "경영·회계·사무";
+		} else if(category.equals("03")) {
+			categoryNm = "금융·보험";
+		} else if(category.equals("04")) {
+			categoryNm = "교육·자연·사회과학";
+		} else if(category.equals("05")) {
+			categoryNm = "법률·경찰·소방·교도·국방";
+		} else if(category.equals("06")) {
+			categoryNm = "보건·의료";
+		} else if(category.equals("07")) {
+			categoryNm = "사회복지·종교";
+		} else if(category.equals("08")) {
+			categoryNm = "문화·예술·디자인·방송";
+		} else if(category.equals("09")) {
+			categoryNm = "운전·운송";
+		} else if(category.equals("10")) {
+			categoryNm = "영업판매";
+		} else if(category.equals("11")) {
+			categoryNm = "경비·청소";
+		} else if(category.equals("12")) {
+			categoryNm = "이용·숙박·여행·오락·스포츠";
+		} else if(category.equals("13")) {
+			categoryNm = "음식서비스";
+		} else if(category.equals("14")) {
+			categoryNm = "건설";
+		} else if(category.equals("15")) {
+			categoryNm = "기계";
+		} else if(category.equals("16")) {
+			categoryNm = "재료";
+		} else if(category.equals("17")) {
+			categoryNm = "화학";
+		} else if(category.equals("18")) {
+			categoryNm = "섬유·의복";
+		} else if(category.equals("19")) {
+			categoryNm = "전기·전자";
+		} else if(category.equals("20")) {
+			categoryNm = "정보통신";
+		} else if(category.equals("21")) {
+			categoryNm = "식품가공";
+		} else if(category.equals("22")) {
+			categoryNm = "인쇄·목재·가구·공예";
+		} else if(category.equals("23")) {
+			categoryNm = "환경·에너지·안전";
+		} else if(category.equals("24")) {
+			categoryNm = "농림어업";
+		}
+		
+		
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
 		
 		Calendar cal = Calendar.getInstance(); // 오늘날짜
@@ -233,7 +286,7 @@ public class MainControl {
 			vo.setTrprId(e.getChildText("trprId"));
 			vo.setYardMan(e.getChildText("yardMan"));
 			vo.setCategory(category);
-			
+			vo.setCategoryNm(categoryNm);
 			
 			ar[i] = vo;
 			i++;

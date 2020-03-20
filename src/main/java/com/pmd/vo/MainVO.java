@@ -43,9 +43,17 @@ YARD_MAN	string	정원	<yardMan></yardMan>
 					traStartDate, trainTarget, trainstCstId, trprDegr,
 					trprId, yardMan;
 
-	private String category;
+	private String category, categoryNm;
 
 	
+	public String getCategoryNm() {
+		return categoryNm;
+	}
+
+	public void setCategoryNm(String categoryNm) {
+		this.categoryNm = categoryNm;
+	}
+
 	public String getCategory() {
 		return category;
 	}
