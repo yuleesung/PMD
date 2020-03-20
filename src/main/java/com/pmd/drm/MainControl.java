@@ -155,15 +155,11 @@ public class MainControl {
 	
 	
 	public MainVO[] makeURL(String category) throws Exception {
-		// 지역코드값
-		int[] area = {11, 26, 27, 28, 29, 30, 31, 41, 42, 43, 44, 45, 46, 47, 48, 50};
-
-		int ran = (int) (Math.random() * area.length);
 
 		// url은 임의 값임. 지역값을 랜덤값으로 변경
 		// 리스트는 최소 10개이상
 		URL url = new URL("http://www.hrd.go.kr/hrdp/api/apipo/APIPO0101T.do?returnType=XML&pageNum=1&"
-				+ "srchTraArea1="+ area[ran]+"&authKey=Aflc7YIke55KR8qliEbmLwJGWIpsH2DL&sort=ASC&outType=1&srchTraStDt=20200318&"
+				+ "&authKey=Aflc7YIke55KR8qliEbmLwJGWIpsH2DL&sort=ASC&outType=1&srchTraStDt=20200318&"
 				+ "srchKeco1="+category+"&pageSize=10&sortCol=TR_STT_DT&srchTraEndDt=20200618&srchTraPattern=N1&srchPart=-99"
 				+ "&apiRequstPageUrlAdres=/jsp/HRDP/HRDPO00/HRDPOA60/HRDPOA60_1.jsp&apiRequstIp=211.118.162.124");
 
