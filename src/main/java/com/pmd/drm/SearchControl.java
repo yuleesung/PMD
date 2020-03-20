@@ -34,9 +34,9 @@ public class SearchControl {
 	int rowTotal; // 전체 게시물 수
 	String pageCode; // 페이징  처리 된 HTML코드값
 	
-	@RequestMapping("/search.inc") // 테스트용
-	//@RequestMapping(value="/search.inc", method=RequestMethod.POST, produces="text/json;charset=utf-8")
-	//@ResponseBody
+	//@RequestMapping("/search.inc") // 테스트용
+	@RequestMapping(value="/search.inc", method=RequestMethod.POST, produces="text/json;charset=utf-8")
+	@ResponseBody
 	public Map<String, Object> list(String crseTracseSe, String srchTraOrganNm, String srchTraProcessNm,
 									String srchTraArea1, String srchKeco1, String srchTraStDt, 
 									String srchTraEndDt, String nowPage) throws Exception{
