@@ -2,6 +2,8 @@ package com.pmd.drm;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,11 +54,22 @@ public class SearchControl {
 		현재페이지 :  nowPage
 		 */
 	
+		// 현재 페이지값 받기
 		if(nowPage == null)
 			this.nowPage = 1;
 		else
 			this.nowPage = Integer.parseInt(nowPage);
 		
+		// 날짜값을 받지 못 했을 경우
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
+		Calendar cal = Calendar.getInstance();
+		if(srchTraStDt == null) //시작날짜:today
+			srchTraStDt = format1.format(cal.getTime()); 		
+		
+		if(srchTraEndDt == null) { //마지막날짜:today+6month
+			cal.add(Calendar.MONTH, 6);
+			srchTraEndDt = format1.format(cal.getTime()); 
+		}
 		
 		// url 링크주소를 만들기 위한 sb
 		StringBuffer sb = new StringBuffer();
