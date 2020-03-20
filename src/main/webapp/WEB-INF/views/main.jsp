@@ -39,11 +39,11 @@
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
                      <div class="card h-100 thumb">
-                        <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}">
+                        <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}">
                         	<img class="card-img-top img-fluid mx-auto d-block" src="resources/images/occupation/${mvo.category}.jpg" alt="${mvo.subTitle }" width="350px" height="150px"/>
                         </a>
                         <div class="card-body">
-                        <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}">
+                        <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}">
                            <h4 class="card-title" style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h4>
                         </a>
                            <p class="card-text" style="text-align: center;">
@@ -70,11 +70,11 @@
                <div class="panel panel-default">
                   <div class="panel-thumbnail">
                      <div class="card h-100 thumb">
-                        <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}"> 
+                        <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}"> 
                         	<img class="card-img-top img-fluid mx-auto d-block" src="resources/images/occupation/${mvo.category}.jpg" alt="${mvo.subTitle }" width="350px" height="150px"/>
                         </a>
                         <div class="card-body">
-                        <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}">
+                        <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}">
                            <h4 class="card-title" style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h4>
                         </a>
                            <p class="card-text" style="text-align: center;">
@@ -102,13 +102,9 @@
          </div>
          
          <a class="carousel-control-prev" href="#carouselExample"
-            role="button" data-slide="prev"> <span
-            class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-            class="sr-only">Previous</span>
+            role="button" data-slide="prev"> <img alt="right" src="resources/images/left.png" style="width: 50px; height: 50px"/>
          </a> <a class="carousel-control-next text-faded" href="#carouselExample"
-            role="button" data-slide="next"> <span
-            class="carousel-control-next-icon" aria-hidden="true"></span> <span
-            class="sr-only">Next</span>
+            role="button" data-slide="next"> <img alt="right" src="resources/images/right.png" style="width: 50px; height: 50px"/>
          </a>
       </div>
    </div>
@@ -151,7 +147,7 @@
                   </select>
                </div>
                <div class="form-right-to-w3l">
-				 	<select class="form-control">
+				 	<select class="form-control" name="srchKeco1" id="srchKeco1">
                      	<option value="none">::훈련분야::</option>
 						<option value="01">사업관리(01)</option>
 						<option value="02">경영·회계·사무(02)</option>
@@ -182,7 +178,7 @@
             </div>  
             <div class="main">
                <div class="form-left-to-w3l">
-                  <input id="datepicker1" name="text" type="text" placeholder="훈련시작" required="" class="hasDatepicker">
+                  <input id="srchTraStDt" name="srchTraStDt" type="text" placeholder="훈련시작일"/>
                </div>
                <div class="form-right-to-w3l">
                   <select class="form-control buttom" name="srchTraArea1" id="srchTraArea1">
@@ -423,7 +419,6 @@
          <p>© 2018 Doctor Search Form. All Rights Reserved | Design by <a href="http://www.W3Layouts.com" target="_blank">W3Layouts</a></p>
       </div>
       
-      <div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
       <!--scripts-->
       <script src="resources/js/jquery-3.4.1.min.js"></script>
       <script src="resources/js/jquery-ui.min.js"></script>
@@ -433,7 +428,13 @@
 	  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
       <script>
          $(function() {
-		     $( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
+		     $("#srchTraStDt").datepicker({
+    			dateFormat: "yy년mm월dd일",
+				dayNamesMin: ["일","월","화","수","목","금","토"],
+				monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+				showMonthAfterYear: true,
+				yearSuffix: "년"
+		     });
 		   	 $('#carouselExample').on('slide.bs.carousel', function (e) {
 		
 		            
@@ -468,7 +469,66 @@
 	              $(".modal-profile").modal({show:true});
 	          });
 	          
-	          
+	          $("#search_btn").click(function(){
+	        	 
+	        	  var srchTraOrganNm = $("#srchTraOrganNm").val(); // 훈련기관
+	        	  var srchTraProcessNm = $("#srchTraProcessNm").val(); // 훈련과정
+	        	  var crseTracseSe = $("#crseTracseSe").val(); // 훈련유형
+	        	  var srchKeco1 = $("#srchKeco1").val(); // 훈련분야
+	        	  var date = $("#srchTraStDt").val(); // 훈련시작일
+	        	  var srchTraArea1 = $("#srchTraArea1").val(); // 훈련지역
+	        	  
+	        	  var year = date.substring(0, 4);
+	  			  var month = date.substring(5, 7);
+	  			  var day = date.substring(8, 10);
+	        	  
+	  			  var srchTraStDt = year+month+day;
+	  			  
+	  			  var param = "";
+	  			  
+	  			  if(srchTraOrganNm.trim().length > 0){
+	  				  param += "&srchTraOrganNm="+srchTraOrganNm;
+	  			  }
+	  			  
+	  			  if(srchTraProcessNm.trim().length > 0){
+	  				  param += "&srchTraProcessNm="+srchTraProcessNm;
+	  			  }
+	  			  
+	  			  if(crseTracseSe != "none"){
+	  				  param += "&crseTracseSe="+crseTracseSe;
+	  			  }
+	  			  
+	  			  if(srchKeco1 != "none"){
+	  				  param += "&srchKeco1="+srchKeco1;
+	  			  }
+	  			  
+	  			  if(date.trim().length > 0){
+	  				  param += "&srchTraStDt="+srchTraStDt;
+	  			  }
+	  			  
+	  			  if(srchTraArea1 != "none"){
+	  				  param += "&srchTraArea1="+srchTraArea1;
+	  			  }
+	  			  
+	  			  var data = "";
+	  			  
+	  			  if(param.startsWith("&")){
+	  				  data = param.substring(1, param.length);
+	  			  }
+	
+	  			  
+	  			  $.ajax({
+	  				  url: "search.inc",
+	  				  type: "post",
+	  				  data: data,
+	  				  dataType: "json"
+	  			  }).done(function(res){
+	  				  
+	  			  }).fail(function(err){
+	  				 console.log(err); 
+	  			  });
+	  			  
+	          });
 
          });
       </script>
