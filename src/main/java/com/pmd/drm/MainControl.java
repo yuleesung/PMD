@@ -2,6 +2,7 @@ package com.pmd.drm;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom2.Document;
@@ -33,148 +34,115 @@ public class MainControl {
 		MainVO[] ar22 =  makeURL("22"); MainVO[] ar23 =  makeURL("23"); MainVO[] ar24 =  makeURL("24");
 		
 		
-		int cnt = 24;
-		if(ar1 == null)
-			cnt -= 1;
-		if(ar2 == null)
-			cnt -= 1;
-		if(ar3 == null)
-			cnt -= 1;
-		if(ar4 == null)
-			cnt -= 1;
-		if(ar5 == null)
-			cnt -= 1;
-		if(ar6 == null)
-			cnt -= 1;
-		if(ar7 == null)
-			cnt -= 1;
-		if(ar8 == null)
-			cnt -= 1;
-		if(ar9 == null)
-			cnt -= 1;
-		if(ar10 == null)
-			cnt -= 1;
-		if(ar11 == null)
-			cnt -= 1;
-		if(ar12 == null)
-			cnt -= 1;
-		if(ar13 == null)
-			cnt -= 1;
-		if(ar14 == null)
-			cnt -= 1;
-		if(ar15 == null)
-			cnt -= 1;
-		if(ar16 == null)
-			cnt -= 1;
-		if(ar17 == null)
-			cnt -= 1;
-		if(ar18 == null)
-			cnt -= 1;
-		if(ar19 == null)
-			cnt -= 1;
-		if(ar20 == null)
-			cnt -= 1;
-		if(ar21 == null)
-			cnt -= 1;
-		if(ar22 == null)
-			cnt -= 1;
-		if(ar23 == null)
-			cnt -= 1;
-		if(ar24 == null)
-			cnt -= 1;
+		List<MainVO> total_ar = new ArrayList<MainVO>();
 		
-		
-		
-		// 카테고리별(24개)내용을 각각 1개씩 배열에 넣어 줌 
-		MainVO[] total_ar = new MainVO[cnt];
-		
-		for(int i=0; i<total_ar.length; i++) {
-			int ran = (int) (Math.random() * 9);
-			
-			switch (i) {
-			case 0:
-				total_ar[i] = ar1[ran];
-				break;
-			case 1:
-				total_ar[i] = ar2[ran];
-				break;
-			case 2:
-				total_ar[i] = ar3[ran];
-				break;
-			case 3:
-				total_ar[i] = ar4[ran];
-				break;
-			case 4:
-				total_ar[i] = ar5[ran];
-				break;
-			case 5:
-				total_ar[i] = ar6[ran];
-				break;
-			case 6:
-				total_ar[i] = ar7[ran];
-				break;
-			case 7:
-				total_ar[i] = ar8[ran];
-				break;
-			case 8:
-				total_ar[i] = ar9[ran];
-				break;
-			case 9:
-				total_ar[i] = ar10[ran];
-				break;
-			case 10:
-				total_ar[i] = ar11[ran];
-				break;
-			case 11:
-				total_ar[i] = ar12[ran];
-				break;
-			case 12:
-				total_ar[i] = ar13[ran];
-				break;
-			case 13:
-				total_ar[i] = ar14[ran];
-				break;
-			case 14:
-				total_ar[i] = ar15[ran];
-				break;
-			case 15:
-				total_ar[i] = ar16[ran];
-				break;
-			case 16:
-				total_ar[i] = ar17[ran];
-				break;
-			case 17:
-				total_ar[i] = ar18[ran];
-				break;
-			case 18:
-				total_ar[i] = ar19[ran];
-				break;
-			case 19:
-				total_ar[i] = ar20[ran];
-				break;
-			case 20:
-				total_ar[i] = ar21[ran];
-				break;
-			case 21:
-				total_ar[i] = ar22[ran];
-				break;
-			case 22:
-				total_ar[i] = ar23[ran];
-				break;
-			case 23:
-				total_ar[i] = ar24[ran];
-				break;			
-			}
+		if(ar1.length>0) {
+			int ran = (int) (Math.random() * ar1.length-1);
+			total_ar.add(ar1[ran]);
 		}
+		if(ar2.length>0) {
+			int ran = (int) (Math.random() * ar2.length-1);
+			total_ar.add(ar2[ran]);
+		}
+		if(ar3.length>0) {
+			int ran = (int) (Math.random() * ar3.length-1);
+			total_ar.add(ar3[ran]);
+		}
+		if(ar4.length>0) {
+			int ran = (int) (Math.random() * ar4.length-1);
+			total_ar.add(ar4[ran]);
+		}
+		if(ar5.length>0) {
+			int ran = (int) (Math.random() * ar5.length-1);
+			total_ar.add(ar5[ran]);
+		}
+		if(ar6.length>0) {
+			int ran = (int) (Math.random() * ar6.length-1);
+			total_ar.add(ar6[ran]);
+		}
+		if(ar7.length>0) {
+			int ran = (int) (Math.random() * ar7.length-1);
+			total_ar.add(ar7[ran]);
+		}
+		if(ar8.length>0) {
+			int ran = (int) (Math.random() * ar8.length-1);
+			total_ar.add(ar8[ran]);
+		}
+		if(ar9.length>0) {
+			int ran = (int) (Math.random() * ar9.length-1);
+			total_ar.add(ar9[ran]);
+		}
+		if(ar10.length>0) {
+			int ran = (int) (Math.random() * ar10.length-1);
+			total_ar.add(ar10[ran]);
+		}
+		if(ar11.length>0) {
+			int ran = (int) (Math.random() * ar11.length-1);
+			total_ar.add(ar11[ran]);
+		}
+		if(ar12.length>0) {
+			int ran = (int) (Math.random() * ar12.length-1);
+			total_ar.add(ar12[ran]);
+		}
+		if(ar13.length>0) {
+			int ran = (int) (Math.random() * ar13.length-1);
+			total_ar.add(ar13[ran]);
+		}
+		if(ar14.length>0) {
+			int ran = (int) (Math.random() * ar14.length-1);
+			total_ar.add(ar14[ran]);
+		}
+		if(ar15.length>0) {
+			int ran = (int) (Math.random() * ar15.length-1);
+			total_ar.add(ar15[ran]);
+		}
+		if(ar16.length>0) {
+			int ran = (int) (Math.random() * ar16.length-1);
+			total_ar.add(ar16[ran]);
+		}
+		if(ar17.length>0) {
+			int ran = (int) (Math.random() * ar17.length-1);
+			total_ar.add(ar17[ran]);
+		}
+		if(ar18.length>0) {
+			int ran = (int) (Math.random() * ar18.length-1);
+			total_ar.add(ar18[ran]);
+		}
+		if(ar19.length>0) {
+			int ran = (int) (Math.random() * ar19.length-1);
+			total_ar.add(ar19[ran]);
+		}
+		if(ar20.length>0) {
+			int ran = (int) (Math.random() * ar20.length-1);
+			total_ar.add(ar20[ran]);
+		}
+		if(ar21.length>0) {
+			int ran = (int) (Math.random() * ar21.length-1);
+			total_ar.add(ar21[ran]);
+		}
+		if(ar22.length>0) {
+			int ran = (int) (Math.random() * ar22.length-1);
+			total_ar.add(ar22[ran]);
+		}
+		if(ar23.length>0) {
+			int ran = (int) (Math.random() * ar23.length-1);
+			total_ar.add(ar23[ran]);
+		}
+		if(ar24.length>0) {
+			int ran = (int) (Math.random() * ar24.length-1);
+			total_ar.add(ar24[ran]);
+		}
+
 		
 		// jsp에 보내기 위한 ar
-		MainVO[] ar = new MainVO[9];
+		MainVO[] ar =null;
 		
-		for(int i=0; i<ar.length; i++) {
-			int ran = (int) (Math.random() * 23);
+		if(!total_ar.isEmpty() && total_ar != null) {
+			ar = new MainVO[total_ar.size()];
 			
-			ar[i] = total_ar[ran];
+			total_ar.toArray(ar);
 		}
+		
 		
 		
 		ModelAndView mv = new ModelAndView();
@@ -241,6 +209,7 @@ public class MainControl {
 			vo.setTrprId(e.getChildText("trprId"));
 			vo.setYardMan(e.getChildText("yardMan"));
 			vo.setCategory(category);
+			
 			
 			ar[i] = vo;
 			i++;
