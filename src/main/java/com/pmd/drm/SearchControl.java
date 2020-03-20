@@ -35,7 +35,7 @@ public class SearchControl {
 	@RequestMapping("/search.inc") // 테스트용
 	//@RequestMapping(value="/search.inc", method=RequestMethod.POST, produces="text/json;charset=utf-8")
 	//@ResponseBody
-	public Map<String, Object> list(String[] crseTracseSe, String srchTraOrganNm, String srchTraProcessNm,
+	public Map<String, Object> list(String crseTracseSe, String srchTraOrganNm, String srchTraProcessNm,
 									String srchTraArea1, String srchKeco1, String srchTraStDt, 
 									String srchTraEndDt, String nowPage) throws Exception{
 		
@@ -44,8 +44,8 @@ public class SearchControl {
 	 	훈련유형(선):crseTracseSe -> 배열로 넘어올 듯?.. 전체선택은 null값
 		훈련기관명(선):srchTraOrganNm
 		훈련과정명(선):srchTraProcessNm
-		훈련지역(선): srchTraArea1 -> 코드값 있음 http://www.hrd.go.kr/hrdp/ap/papco/PAPCO0700T.do
-		훈련분야(선): srchKeco1 -> 코드값 있음
+		훈련지역(선): srchTraArea1 -> 코드값 있음. 배열 http://www.hrd.go.kr/hrdp/ap/papco/PAPCO0700T.do
+		훈련분야(선): srchKeco1 -> 코드값 있음. 배열
 		시작날짜(필):srchTraStDt
 		마지막날짜(필):srchTraEndDt
 		
@@ -66,18 +66,8 @@ public class SearchControl {
 				+"&pageNum="+this.nowPage+"&pageSize=12&srchTraStDt="+srchTraStDt+"&srchTraEndDt="+srchTraEndDt+"&outType=1&sort=ASC&sortCol=TR_STT_DT");
 			
 		// 조건 값이 null이 아닐 때 sb에 추가되는 영역
-		if(crseTracseSe != null && crseTracseSe.length > 0) {
-			StringBuffer cts = new StringBuffer();
-			
-			for(int i=0; i<crseTracseSe.length; i++) {
-				cts.append(crseTracseSe[i]);
-				
-				if(i < crseTracseSe.length-1)
-					cts.append(",");
-			}
-			sb.append("&crseTracseSe="+cts.toString());
-		}
-		
+		if(crseTracseSe != null) 
+			sb.append("&crseTracseSe="+crseTracseSe);
 		if(srchTraOrganNm != null)
 			sb.append("&srchTraOrganNm="+srchTraOrganNm);
 		if(srchTraProcessNm != null)
@@ -142,7 +132,7 @@ public class SearchControl {
 		
 		/* 페이징 영역 */
 		// 검색결과 총 갯수
-		rowTotal = Integer.parseInt(root.getChildText("scn_cnt")); 
+		rowTotal = Integer.parseInt(root.getChildText("scn_cnt"));
 		
 		// 메서드 호출
 		Paging page = new Paging(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE);
