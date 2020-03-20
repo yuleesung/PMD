@@ -45,7 +45,7 @@
                         </a>
                         <div class="card-body">
                         <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}&yardMan=${mvo.yardMan}&regCourseMan=${mvo.regCourseMan}">
-                           <h4 class="card-title" style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h4>
+                           <h5 class="card-title" style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h5>
                         </a>
                            <p class="card-text" style="text-align: center;">
                               <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총
@@ -76,7 +76,7 @@
                         </a>
                         <div class="card-body">
                         <a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}&yardMan=${mvo.yardMan}&regCourseMan=${mvo.regCourseMan}">
-                           <h4 class="card-title" style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h4>
+                           <h5 class="card-title" style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h5>
                         </a>
                            <p class="card-text" style="text-align: center;">
                               <span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총
@@ -220,10 +220,6 @@
 <div class="container" id="result" style="display: none;">
 </div>
 
-      <div class="copy">
-         <p>© 2018 Doctor Search Form. All Rights Reserved | Design by <a href="http://www.W3Layouts.com" target="_blank">W3Layouts</a></p>
-      </div>
-      
       <!--scripts-->
       <script src="resources/js/jquery-3.4.1.min.js"></script>
       <script src="resources/js/jquery-ui.min.js"></script>

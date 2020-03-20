@@ -66,7 +66,7 @@
     <section class="element-animate worship-time">
     	<div class="container">
 	    	<div class="row" style="margin-top: 50px; padding-bottom:0px;">
-		    	<div class="col-md-8" style="padding-bottom: 0px;  padding-top: 50px;">
+		    	<div class="col-md-8" style="padding-bottom: 0px;  padding-top: 20px;">
 		    		<h4 class="subtitle">${vo.inoNm }</h4>
 			    	<h2 class="title" style="padding-bottom: 0px;">${vo.trprNm }</h2>
 			    </div>
@@ -122,8 +122,16 @@
 		            <p class="p_left">${traEndDate }</p>
 		          </a>
 		          <a class="event-list-item">
-		            <span class="date center">모집정원</span>
-		            <p class="p_left">${param.regCourseMan} / ${param.yardMan } 명</p>
+		            <span class="date center">신청인원</span>
+		            <p class="p_left">${param.regCourseMan} 명</p>
+		          </a>
+		          <a class="event-list-item">
+		            <span class="date center">모집인원</span>
+		            <p class="p_left">${param.yardMan } 명</p> 
+		          </a>
+		          <a class="event-list-item">
+		            <span class="date center">모집률</span>
+		            <p class="p_left">${percent} %</p>
 		          </a>
 		          <a class="event-list-item">
 		            <span class="date center">훈련시간</span>

@@ -86,15 +86,22 @@ public class ViewControl {
 		vo.setTotTraingTime(detail_info.getChildText("totTraingTime"));
 		vo.setTotalCrsAt(detail_info.getChildText("totalCrsAt"));
 		
+		int sin = Integer.parseInt(regCourseMan);
+		int chong = Integer.parseInt(yardMan);
+		String per = String.valueOf((double)sin/chong * 100);
+		
+		if(per.length()>5)
+			per = per.substring(0, per.indexOf('.')+2);
+		//String per = null;
 		
 		ModelAndView mv = new ModelAndView();
-		
 		
 		mv.addObject("traStartDate", traStartDate);
 		mv.addObject("traEndDate", traEndDate);
 		mv.addObject("trainstCstId", trainstCstId);
 		mv.addObject("superViser", superViser);
-		mv.addObject("trainTarget", trainTarget);	
+		mv.addObject("trainTarget", trainTarget);
+		mv.addObject("percent", per);
 		mv.addObject("vo", vo);
 		
 		mv.setViewName("view");

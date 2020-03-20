@@ -27,111 +27,127 @@ public class MainControl {
 		
 	
 		// 카테고리별 목록 10개씩 받아 옴
-		MainVO[] ar1 = makeURL("01"); MainVO[] ar2 =  makeURL("02"); MainVO[] ar3 =  makeURL("03");
-		MainVO[] ar4 = makeURL("04"); MainVO[] ar5 =  makeURL("05"); MainVO[] ar6 =  makeURL("06");
-		MainVO[] ar7 =  makeURL("07"); MainVO[] ar8 =  makeURL("08"); MainVO[] ar9 =  makeURL("09");
-		MainVO[] ar10 =  makeURL("10"); MainVO[] ar11 =  makeURL("11"); MainVO[] ar12 =  makeURL("12");
-		MainVO[] ar13 =  makeURL("13"); MainVO[] ar14 =  makeURL("14"); MainVO[] ar15 =  makeURL("15");
-		MainVO[] ar16 =  makeURL("16"); MainVO[] ar17 =  makeURL("17"); MainVO[] ar18 =  makeURL("18");
-		MainVO[] ar19 =  makeURL("19"); MainVO[] ar20 =  makeURL("20"); MainVO[] ar21 =  makeURL("21");
-		MainVO[] ar22 =  makeURL("22"); MainVO[] ar23 =  makeURL("23"); MainVO[] ar24 =  makeURL("24");
+		MainVO[] ar1 = makeURL("01");
+		MainVO[] ar2 = makeURL("02");
+		MainVO[] ar3 = makeURL("03");
+		MainVO[] ar4 = makeURL("04");
+		MainVO[] ar5 = makeURL("05");
+		MainVO[] ar6 = makeURL("06");
+		MainVO[] ar7 = makeURL("07");
+		MainVO[] ar8 = makeURL("08");
+		MainVO[] ar9 = makeURL("09");
+		MainVO[] ar10 = makeURL("10");
+		MainVO[] ar11 = makeURL("11");
+		MainVO[] ar12 = makeURL("12");
+		MainVO[] ar13 = makeURL("13");
+		MainVO[] ar14 = makeURL("14");
+		MainVO[] ar15 = makeURL("15");
+		MainVO[] ar16 = makeURL("16");
+		MainVO[] ar17 = makeURL("17");
+		MainVO[] ar18 = makeURL("18");
+		MainVO[] ar19 = makeURL("19");
+		MainVO[] ar20 = makeURL("20");
+		MainVO[] ar21 = makeURL("21");
+		MainVO[] ar22 = makeURL("22");
+		MainVO[] ar23 = makeURL("23");
+		MainVO[] ar24 = makeURL("24");
 		
 		
 		List<MainVO> total_ar = new ArrayList<MainVO>();
 		
-		if(ar1.length>0) {
+		if(ar1.length>1 && ar1 != null) {
 			int ran = (int) (Math.random() * ar1.length-1);
 			total_ar.add(ar1[ran]);
 		}
-		if(ar2.length>0) {
+		if(ar2.length>1 && ar2 != null) {
 			int ran = (int) (Math.random() * ar2.length-1);
 			total_ar.add(ar2[ran]);
 		}
-		if(ar3.length>0) {
+		if(ar3.length>1 && ar3 != null) {
 			int ran = (int) (Math.random() * ar3.length-1);
 			total_ar.add(ar3[ran]);
 		}
-		if(ar4.length>0) {
+		if(ar4.length>1 && ar4 != null) {
 			int ran = (int) (Math.random() * ar4.length-1);
 			total_ar.add(ar4[ran]);
 		}
-		if(ar5.length>0) {
+		if(ar5.length>1 && ar5 != null) {
 			int ran = (int) (Math.random() * ar5.length-1);
 			total_ar.add(ar5[ran]);
 		}
-		if(ar6.length>0) {
+		if(ar6.length>1 && ar6 != null) {
 			int ran = (int) (Math.random() * ar6.length-1);
 			total_ar.add(ar6[ran]);
 		}
-		if(ar7.length>0) {
+		if(ar7.length>1 && ar7 != null) {
 			int ran = (int) (Math.random() * ar7.length-1);
 			total_ar.add(ar7[ran]);
 		}
-		if(ar8.length>0) {
+		if(ar8.length>1 && ar8 != null) {
 			int ran = (int) (Math.random() * ar8.length-1);
 			total_ar.add(ar8[ran]);
 		}
-		if(ar9.length>0) {
+		if(ar9.length>1 && ar9 != null) {
 			int ran = (int) (Math.random() * ar9.length-1);
 			total_ar.add(ar9[ran]);
 		}
-		if(ar10.length>0) {
+		if(ar10.length>1 && ar10 != null) {
 			int ran = (int) (Math.random() * ar10.length-1);
 			total_ar.add(ar10[ran]);
 		}
-		if(ar11.length>0) {
+		if(ar11.length>1 && ar11 != null) {
 			int ran = (int) (Math.random() * ar11.length-1);
 			total_ar.add(ar11[ran]);
 		}
-		if(ar12.length>0) {
+		if(ar12.length>1 && ar12 != null) {
 			int ran = (int) (Math.random() * ar12.length-1);
 			total_ar.add(ar12[ran]);
 		}
-		if(ar13.length>0) {
+		if(ar13.length>1 && ar13 != null) {
 			int ran = (int) (Math.random() * ar13.length-1);
 			total_ar.add(ar13[ran]);
 		}
-		if(ar14.length>0) {
+		if(ar14.length>1 && ar14 != null) {
 			int ran = (int) (Math.random() * ar14.length-1);
 			total_ar.add(ar14[ran]);
 		}
-		if(ar15.length>0) {
+		if(ar15.length>1 && ar15 != null) {
 			int ran = (int) (Math.random() * ar15.length-1);
 			total_ar.add(ar15[ran]);
 		}
-		if(ar16.length>0) {
+		if(ar16.length>1 && ar16 != null) {
 			int ran = (int) (Math.random() * ar16.length-1);
 			total_ar.add(ar16[ran]);
 		}
-		if(ar17.length>0) {
+		if(ar17.length>1 && ar17 != null) {
 			int ran = (int) (Math.random() * ar17.length-1);
 			total_ar.add(ar17[ran]);
 		}
-		if(ar18.length>0) {
+		if(ar18.length>1 && ar18 != null) {
 			int ran = (int) (Math.random() * ar18.length-1);
 			total_ar.add(ar18[ran]);
 		}
-		if(ar19.length>0) {
+		if(ar19.length>1 && ar19 != null) {
 			int ran = (int) (Math.random() * ar19.length-1);
 			total_ar.add(ar19[ran]);
 		}
-		if(ar20.length>0) {
+		if(ar20.length>1 && ar20 != null) {
 			int ran = (int) (Math.random() * ar20.length-1);
 			total_ar.add(ar20[ran]);
 		}
-		if(ar21.length>0) {
+		if(ar21.length>1 && ar21 != null) {
 			int ran = (int) (Math.random() * ar21.length-1);
 			total_ar.add(ar21[ran]);
 		}
-		if(ar22.length>0) {
+		if(ar22.length>1 && ar22 != null) {
 			int ran = (int) (Math.random() * ar22.length-1);
 			total_ar.add(ar22[ran]);
 		}
-		if(ar23.length>0) {
+		if(ar23.length>1 && ar23 != null) {
 			int ran = (int) (Math.random() * ar23.length-1);
 			total_ar.add(ar23[ran]);
 		}
-		if(ar24.length>0) {
+		if(ar24.length>1 && ar24 != null) {
 			int ran = (int) (Math.random() * ar24.length-1);
 			total_ar.add(ar24[ran]);
 		}
@@ -186,6 +202,7 @@ public class MainControl {
 
 		Element srchList = root.getChild("srchList");
 
+		if(srchList != null) {
 		List<Element> scn_list = srchList.getChildren("scn_list");
 
 		MainVO[] ar = new MainVO[scn_list.size()];
@@ -223,5 +240,12 @@ public class MainControl {
 		}
 
 		return ar;
+		} else {
+			MainVO[] ar = new MainVO[1];
+
+			
+			return ar;
+		}
+		
 	}
 }
