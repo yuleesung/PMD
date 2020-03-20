@@ -28,7 +28,7 @@
     <header role="banner">
       <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
-          <a class="navbar-brand absolute" href="#"><span style="font-size: 30px; color: white;">PMD</span></a>
+          <a class="navbar-brand absolute" href="main.inc"><span style="font-size: 30px; color: white;">PMD</span></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -47,7 +47,7 @@
     
     <section class="home-slider owl-carousel">
       
-      <div class="slider-item" style="background-image: url('resources/img/slider-1.jpg');">
+      <div class="slider-item" style="background-image: url('resources/img/walk-gif-2.gif'); background-size: 30%;">
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center">
             <div class="col-md-8 text-center col-sm-12 element-animate">
@@ -71,17 +71,19 @@
 			    	<h2 class="title" style="padding-bottom: 0px;">${vo.trprNm }</h2>
 			    </div>
 			    <div class="col-md-4">
-			    	<button type="button" class="btn btn-danger ribbon" style="margin-bottom: 0;">
-			    		<div id="getting-started" style="font-size:20px; color: white;"></div>
+			    	<button type="button" class="btn btn-danger ribbon" style="margin-bottom: 0; padding: 0;">
+			    		<div id="getting-started" style="font-size:15px; color: white;"></div>
 			    	</button>	
-			    	<button type="button" class="btn btn-primary btn-block" style="margin-top: 0;" onclick="javascript: location.href='${vo.hpAddr}'"><h4 class="myBtn">홈페이지</h4></button>
+			    	<button type="button" class="btn btn-primary btn-block" style="margin-top: 0; border-radius: 0 0 10px 10px;" onclick="javascript: location.href='${vo.hpAddr}'">
+			    		<h4 class="myBtn" >홈페이지</h4>
+			    	</button>
 		    	</div>
 		    </div>
 	      	<div class="half d-md-flex d-block">
 	      		<div class="bg campmeeting">
 		       		<div id="map"></div>
 		       	</div>
-		        <div>
+		        <div id="view_table">
 		          <a class="event-list-item first">
 		            <span class="date center">담당자</span>
 		            <p class="left">${vo.trprChap }</p>
@@ -120,12 +122,16 @@
 		            <p class="p_left">${traEndDate }</p>
 		          </a>
 		          <a class="event-list-item">
+		            <span class="date center">모집정원</span>
+		            <p class="p_left">${param.regCourseMan} / ${param.yardMan } 명</p>
+		          </a>
+		          <a class="event-list-item">
 		            <span class="date center">훈련시간</span>
 		            <p class="p_left">${vo.trDcnt }일, 총 ${vo.trtm }시간</p>
 		          </a>
 		          <a class="event-list-item">
 		            <span class="date center">훈련비</span>
-		            <p class="p_left"><fmt:formatNumber value="${vo.perTrco }" pattern="#,###" />원원</p>
+		            <p class="p_left"><fmt:formatNumber value="${vo.perTrco }" pattern="#,###" />원</p>
 		          </a>
 		          <a class="event-list-item">
 		            <span class="date center">NCS직무분류</span>
@@ -150,7 +156,7 @@
     <!-- END section -->
     <section class="section element-animate">
 	    <div class="container" style="margin-bottom: 50px;">
-	    	<button type="button" class="btn btn-primary btn-block" onclick="javascript: location.href='https://www.hrd.go.kr/hrdp/co/pcobo/PCOBO0100P.do?tracseId=${vo.trprId}&tracseTme=1&crseTracseSe=${vo.trprGbn }&trainstCstmrId=${ trainstCstId}'"><h4 class="myBtn">상세정보 더 보기</h4></button>
+	    	<button type="button" class="btn btn-primary btn-block" onclick="detail('https://www.hrd.go.kr/hrdp/co/pcobo/PCOBO0100P.do?tracseId=${vo.trprId}&tracseTme=1&crseTracseSe=${vo.trprGbn }&trainstCstmrId=${ trainstCstId}')"><h4 class="myBtn">상세정보 더 보기</h4></button>
 	    </div>
     </section>
     
@@ -205,6 +211,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5899acc3cddfce334c3dd49beff92a37&libraries=services,clusterer,drawing"></script>
 
     <script>
+    	function detail(url) {
+			console.log(url);
+			 window.open(url, "상세보기", "width = 1022, height = 642, top = 100, left = 200, location = no");
+		}
+    
+    
 	    document.addEventListener('DOMContentLoaded', function() {
 	              var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
 	
@@ -257,7 +269,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	
 		        // 인포윈도우로 장소에 대한 설명을 표시합니다
 		        var infowindow = new kakao.maps.InfoWindow({
-		            content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.inoNm}</div>'
+		            content: '<div style="width:150px;text-align:center;padding:6px 0;color:rgb(15,75,129);">${vo.inoNm}</div>'
 		        });
 		        infowindow.open(map, marker);
 	

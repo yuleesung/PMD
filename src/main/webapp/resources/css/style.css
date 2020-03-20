@@ -1,3 +1,7 @@
+#view_table{
+	padding: 0;
+}
+
 body {
   font-family: "Open Sans", Arial, sans-serif;
   font-weight: 400;
@@ -1219,7 +1223,7 @@ header .navbar .cta-btn a:hover {
 .subtitle{
 	font-weight: bold;
 	font-family: inherit;
-	width: 230px;
+	width: 300px;
 	padding: 0;
 	padding-left: 10px;
 	margin: 0;
@@ -1267,13 +1271,12 @@ button {
   width:100%;
 }
 
-button:active {
 
+button:active {
   outline:none;
 }
 
 button.ribbon {
-  
   outline:none;
   outline-color: transparent;
 }
@@ -1281,7 +1284,7 @@ button.ribbon:before, button.ribbon:after {
   top: 5px;
   z-index: -10;
 }
-button.ribbon:before {
+/* button.ribbon:before {
   border-color: #53dab6 #53dab6 #53dab6 transparent;
   left: -25px;
   border-width: 17px;
@@ -1290,8 +1293,9 @@ button.ribbon:after {
   border-color: #53dab6 transparent #53dab6 #53dab6;
   right: -25px;
   border-width: 17px;
-}
+} */
 
+/* 디데이리본날개 */
 button:before, button:after {
   content: '';
   position: absolute;
@@ -1302,7 +1306,10 @@ button:before, button:after {
   outline:none;
 }
 
-button.btn-default:before {
+button.btn-danger{
+	border-radius: 10px 10px 0 0;
+}}
+/* button.btn-default:before {
   border-color: #757575 #757575 #757575 transparent;
 }
 button.btn-default:after {
@@ -1338,8 +1345,8 @@ button.btn-warning:after {
 }
 
 button.btn-danger:before {
-	border-color: #ac2925 #ac2925 #ac2925 transparent;
+	border-color: #bc5148 #bc5148 #bc5148 transparent;
 }
 button.btn-danger:after {
-	border-color: #ac2925 transparent #ac2925 #ac2925;
-}
+	border-color: #bc5148 transparent #bc5148 #bc5148;
+} */

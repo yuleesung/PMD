@@ -17,8 +17,10 @@ public class ViewControl {
 
 	
 	@RequestMapping("/view.inc")
-	public ModelAndView view(String srchTrprId, String srchTrprDegr, String traStartDate, String traEndDate, String trainstCstId, String superViser, String trainTarget) throws Exception{
+	public ModelAndView view(String srchTrprId, String srchTrprDegr, String traStartDate, String traEndDate, 
+			String trainstCstId, String superViser, String trainTarget, String regCourseMan, String yardMan) throws Exception{
 		
+
 		// 훈련과정ID(srchTrprId. main에서는 trprId)
 		// 과정회차(srchTrprDegr. main에서는 trprDegr)
 		URL url = new URL("http://www.hrd.go.kr/hrdp/api/apipo/APIPO0102T.do?srchTrprId="+srchTrprId+"&outType=2&srchTrprDegr="+srchTrprDegr+"&"

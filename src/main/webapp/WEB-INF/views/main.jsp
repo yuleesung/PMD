@@ -18,7 +18,7 @@
       <link href="resources/css/main_style.css" rel="stylesheet" type="text/css" media="all">
       <link href="//fonts.googleapis.com/css?family=Cuprum:400,700" rel="stylesheet">
       <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-      <link href="resources/text.css" rel="stylesheet"/>
+      <link href="resources/css/text.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="header">
@@ -338,7 +338,7 @@
 	  					  str += "<div class='col-lg-4 col-md-6 col-sm-12 p-3'>";
 	  					  str += "<div class='card h-100'>";
 	  					  str += "<a href='view.inc?srchTrprId="+res.ar[i].trprId+"&srchTrprDegr="+res.ar[i].trprDegr+"&traStartDate="+res.ar[i].traStartDate+"&traEndDate="+res.ar[i].traEndDate+"&trainstCstId="+res.ar[i].trainstCstId+"&trainTarget="+res.ar[i].trainTarget+"&superViser="+res.ar[i].superViser+"&yardMan="+res.ar[i].yardMan+"&regCourseMan="+res.ar[i].regCourseMan+"'>";
-	  					  str += "<h5 class='card-title' style='text-align: center; color: white; background-color: rgba(0, 0, 255, 0.5); border-radius: 10px; width: 300px; margin: 10px auto;'>"+res.ar[i].subTitle+"</h5>";
+	  					  str += "<h5 class='card-title' style='text-align: center; color: white; background-color: rgba(0, 0, 255, 0.5); border-radius: 10px; width: 100%; margin: 10px auto;'>"+res.ar[i].subTitle+"</h5>";
 	  					  str += "</a>";
 	  					  str += "<div class='card-body'>";
 	  					  str += "<a href='view.inc?srchTrprId="+res.ar[i].trprId+"&srchTrprDegr="+res.ar[i].trprDegr+"&traStartDate="+res.ar[i].traStartDate+"&traEndDate="+res.ar[i].traEndDate+"&trainstCstId="+res.ar[i].trainstCstId+"&trainTarget="+res.ar[i].trainTarget+"&superViser="+res.ar[i].superViser+"&yardMan="+res.ar[i].yardMan+"&regCourseMan="+res.ar[i].regCourseMan+"'>";

@@ -90,9 +90,12 @@ public class SearchControl {
 		if(srchKeco1 != null)
 			sb.append("&srchKeco1="+srchKeco1);
 		
+		
 		String url_rink = sb.toString(); // url주소(sb)를 스트링 값으로 변환(url_rink)
 		
-		URL url = new URL("http://www.hrd.go.kr/hrdp/api/apipo/APIPO0101T.do?returnType=XML&pageNum=1&authKey=Aflc7YIke55KR8qliEbmLwJGWIpsH2DL&sort=ASC&outType=1&srchTraStDt=20200319&pageSize=12&sortCol=TR_STT_DT&srchTraEndDt=20200619&srchTraPattern=N1&srchPart=-99&apiRequstPageUrlAdres=/jsp/HRDP/HRDPO00/HRDPOA60/HRDPOA60_1.jsp&apiRequstIp=211.118.162.124");
+		URL url = new URL(url_rink);
+		
+		System.out.println(url_rink);
 		
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		
