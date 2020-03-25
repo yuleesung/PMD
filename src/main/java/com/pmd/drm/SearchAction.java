@@ -20,7 +20,7 @@ import com.pmd.util.Paging;
 import com.pmd.vo.SearchVO;
 
 @Controller
-public class SearchControl {
+public class SearchAction {
 
 	/*!!!!!!!!!!!!!! 
 	 * url의 path값은 임의 값임 => 92Line (url_rink로) 바꿔야 함 

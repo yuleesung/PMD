@@ -19,7 +19,7 @@ import com.pmd.vo.MainVO;
 import com.pmd.vo.ViewVO;
 
 @Controller
-public class MainControl {
+public class MainAction {
 
 	
 	@RequestMapping("/main.inc")

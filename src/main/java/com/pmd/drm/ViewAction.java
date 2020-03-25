@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pmd.vo.ViewVO;
 
 @Controller
-public class ViewControl {
+public class ViewAction {
 
 	
 	@RequestMapping("/view.inc")
