@@ -53,7 +53,7 @@
     
     <section class="home-slider owl-carousel">
       
-      <div class="slider-item" style="background-image: url('resources/img/walk-gif-2.gif'); background-size: 30%;">
+      <div class="slider-item" style="background-image: url('resources/images/mario.gif'); background-size: 30%;">
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center">
             <div class="col-md-8 text-center col-sm-12 element-animate">
