@@ -168,7 +168,7 @@ public class MainControl {
 		
 		mv.addObject("ar", ar);
 		mv.setViewName("main");
-		
+
 		return mv;
 	}
 	
@@ -292,11 +292,12 @@ public class MainControl {
 			i++;
 		}
 
+		
 		return ar;
+		
 		} else {
 			MainVO[] ar = new MainVO[1];
 
-			
 			return ar;
 		}
 		

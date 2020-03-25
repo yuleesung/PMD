@@ -74,18 +74,7 @@ public class SearchControl {
 			srchTraEndDt = format1.format(cal.getTime()); 
 		}
 		
-		
-		System.out.println(crseTracseSe);
-		System.out.println(srchTraOrganNm);
-		System.out.println(srchTraProcessNm);
-		System.out.println(srchTraArea1);
-		System.out.println(srchKeco1);
-		System.out.println(srchTraStDt);
-		System.out.println(srchTraEndDt);
-		System.out.println(nowPage);
-		
-		
-		
+
 		
 		// url 링크주소를 만들기 위한 sb
 		StringBuffer sb = new StringBuffer();
@@ -110,11 +99,8 @@ public class SearchControl {
 		String url_rink = sb.toString(); // url주소(sb)를 스트링 값으로 변환(url_rink)
 		
 		
-		System.out.println(url_rink);
-		
 		URL url = new URL(url_rink);
 		
-		// System.out.println(url_rink);
 		
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		

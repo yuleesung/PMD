@@ -5,6 +5,8 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
 
+
+
 .srch-area{
 	background: rgba(0, 0, 0, 0.35);
 	margin: 0;
@@ -329,7 +331,7 @@ input[type=radio]:checked ~ label{
     text-align: center;
 }
 
-button[type=submit] {
+#search_btn {
     width: 30%;
     background: #33ccccd4;
     outline: none;
@@ -347,24 +349,7 @@ button[type=submit] {
     -moz-transition: 0.5s all;
     -ms-transition: 0.5s all;
 }
-button[type=button] {
-    width: 30%;
-    background: #33ccccd4;
-    outline: none;
-    color: #fff;
-    font-size: 17px;
-    font-weight: 400;
-    border:none;
-    padding: 11px 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-}
+
 button:hover {
     color: #000;
     background: #fff;
