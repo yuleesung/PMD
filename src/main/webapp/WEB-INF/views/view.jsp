@@ -10,22 +10,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800|Playfair+Display:,300, 400, 700" rel="stylesheet">
-
+	
     <link rel="stylesheet" href="resources/css/bootstrap.css">
     <link rel="stylesheet" href="resources/css/animate.css">
     <link rel="stylesheet" href="resources/css/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
-
     <link rel="stylesheet" href="resources/fonts/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="resources/fonts/fontawesome/css/font-awesome.min.css">
 
-
+	<!-- 메뉴바 관련 추가 -->
+	<link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+	<link href="resources/css/fonts.css" rel="stylesheet" type="text/css" media="all">
+	<link href="resources/css/default.css" rel="stylesheet" type="text/css" media="all">
+	
     <!-- Theme Style -->
     <link rel="stylesheet" href="resources/css/style.css">
   </head>
   <body>
     
-    <header role="banner">
+    <jsp:include page="menubar.jsp"/>
+    
+    
+    <!-- <header role="banner">
       <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
           <a class="navbar-brand absolute" href="main.inc"><span style="font-size: 30px; color: white;">PMD</span></a>
@@ -42,7 +48,7 @@
           </div>
         </div>
       </nav>
-    </header>
+    </header> -->
     <!-- END header -->
     
     <section class="home-slider owl-carousel">

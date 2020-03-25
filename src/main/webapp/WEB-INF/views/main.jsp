@@ -5,7 +5,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
-<html>
+<html style="background-color: white;">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -19,11 +19,18 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <link href="resources/css/main_style.css" rel="stylesheet" type="text/css" media="all">
 <link href="//fonts.googleapis.com/css?family=Cuprum:400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="resources/css/text.css" rel="stylesheet" />
 
 <!-- 캐러셀 -->
 <link rel="stylesheet" type="text/css" href="resources/css/carousel.css">
+
+<!-- 메뉴바 관련 추가 -->
+<link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+<link href="resources/css/fonts.css" rel="stylesheet" type="text/css" media="all">
+<link href="resources/css/default.css" rel="stylesheet" type="text/css" media="all">
+
 <style type="text/css">
 .search-sec {
 	padding: 2rem;
@@ -71,51 +78,17 @@ option{
 </style>
 </head>
 <body>
-	<div class="header">
+	<!-- <div class="header"> -->
 		<!-- <a class="navbar-brand absolute" href="main.inc"> <span
 			style="font-size: 30px; color: white;">PMD</span>
 		</a> -->
+		<jsp:include page="menubar.jsp"/>
 		
-		<nav class="navbar navbar-expand navbar-dark">
-			<div class="container-fluid">
-				<a class="navbar-brand absolute" href="main.inc"> <span
-					style="font-size: 30px; color: white;">P M D</span>
-				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-					aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse justify-content-end"
-					id="navbarNavDropdown">
-					<ul class="navbar-nav align-self-end" id="nav">
-						<li class="nav-item" style="margin-right: 30px;"><a
-							class="nav-link" href="#" style="color: white;">item 1</a></li>
-						<li class="nav-item" style="margin-right: 30px;"><a
-							class="nav-link" href="#" style="color: white;">item 2</a></li>
-						<li class="nav-item" style="margin-right: 30px;"><a
-							class="nav-link" href="#" style="color: white;">Item 3</a></li>
-						<li class="nav-item" style="margin-right: 30px;"><a
-							class="nav-link" href="#" style="color: white;">Item 4</a></li>
-						<li class="nav-item dropdown d-none">
-							창 크기에 따라 메뉴바 형태를 바꿔주는 부분 <a
-							class="nav-link dropdown-toggl" href="#" id="navbarDropdownMenu"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> <span class="navbar-toggler-icon"></span>
-						</a>
-							<ul class="dropdown-menu dropdown-menu-right bg-info"
-								aria-labelledby="navbarDropdownMenu">
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
 		
-	</div>
+	<!-- </div> -->
 
-	<!-- 캐러셀 -->
-	<div id="carousel_section">
+	<!-- 캐러셀 이미지 사이즈는 950*300-->
+	<div id="carousel_section"> 
 		<ul>
 			<li> <img src="resources/images/test1.gif"> </li>
 			<li> <img src="resources/images/test2.gif"> </li>
@@ -387,7 +360,7 @@ option{
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script src="resources/js/jquery-ui.min.js"></script>
 	<script src="resources/js/carousel.js"></script>
-	<script src="resources/js/menubar.js"></script>
+
 	<script>
 	
 		addEventListener("load", function() {
@@ -507,7 +480,7 @@ option{
 															"block");
 													// console.log(res.ar[0].trprId);
 
-													var str = "<h1 class='my-5' style='font-weight: bold;'>검색 결과</h1>";
+													var str = "<h1 class='my-5' style='font-weight: bold;'>검색 결과 (총 "+res.rowTotal+"건)</h1>";
 													str += "<hr/>";
 													str += "<div class='row'>";
 
@@ -658,7 +631,7 @@ option{
 								$("#result").css("display", "block");
 								// console.log(res.ar[0].trprId);
 
-								var str = "<h1 class='my-5' style='font-weight: bold;'>검색 결과</h1>";
+								var str = "<h1 class='my-5' style='font-weight: bold;'>검색 결과 (총 "+res.rowTotal+"건)</h1>";
 								str += "<hr/>";
 								str += "<div class='row'>";
 
