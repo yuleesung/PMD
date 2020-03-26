@@ -194,7 +194,7 @@
 	
 	<!-- 네이버로 회원가입 -->
 	<insert id="naverReg" parameterType="java.util.Map">
-		insert into user_t(u_idx, u_name, nickname, email, sns_id, sns_type <if test="sns_profile != null">, sns_profile</if>)
+		insert into users_t(u_idx, u_name, nickname, email, sns_id, sns_type <if test="sns_profile != null">, sns_profile</if>)
 		values(users_t_seq.nextval, #{u_name}, #{nickname}, #{email}, #{sns_id}, #{sns_type} <if test="sns_profile != null">, #{sns_profile}</if>)
 	</insert>
 	
