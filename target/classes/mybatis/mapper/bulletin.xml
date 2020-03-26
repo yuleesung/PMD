@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bulletin">
+
+	<!-- 회원 아이디만 빼오기 -->
+	<select id="getID" resultType="String" parameterType="String">
+		select u_id from users_t where u_idx = #{u_idx}
+	</select>
+	
+	<!-- 회원 로그인 -->
+	<select id="login" resultType="com.pmd.vo.UserVO" parameterType="java.util.Map">
+		select * from users_t where u_id = #{u_id} and u_pw = #{u_pw} and status = 0
+	</select>
+
+	<!-- 회원 가입 -->
+	<insert id="join" parameterType="com.pmd.vo.UserVO">
+		insert into users_t(u_idx, u_id, u_pw, u_name, email, u_phone, reg_date, status, nickname)
+		values(users_t_seq.nextval, #{u_id}, #{u_pw}, #{u_name}, #{email}, #{u_phone}, sysdate, 0, #{nickname})
+	</insert>
+	
+	<!-- 게시물 쓰기 -->
+	<insert id="writePost" parameterType="com.pmd.vo.BulletinVO">
+		insert into bulletin(b_idx, subject, b_content, file_name, write_date, ip, hit, status, b_category, u_idx)
+		values(bulletin_seq.nextval, #{subject}, #{b_content}, #{file_name}, sysdate, #{ip}, 0, 0, #{b_category}, #{u_idx})
+	</insert>
+	
+	<!-- 댓글 쓰기  -->
+	<insert id="writeComment" parameterType="com.pmd.vo.Bulletin_C_VO">
+		insert into bulletin_c_t(c_idx, c_content, write_date, ip, status, b_idx, u_idx) 
+		values(bulletin_c_t_seq.nextval, #{c_content}, sysdate, #{ip}, 0, #{b_idx}, #{u_idx})
+	</insert>
+	
+	<!-- 게시물 수 -->
+	<select id="getCount" resultType="int" parameterType="String">
+		select count(*) from bulletin where status = 0 and b_category = #{b_category}
+	</select>
+	
+	
+	<resultMap type="com.pmd.vo.BulletinVO" id="map1">
+		<id column="b_idx" property="b_idx"/>
+		<result column="u_idx" property="u_idx"/>
+		<association property="bmvo" javaType="com.pmd.vo.UserVO" select="getMember" column="u_idx"/>
+		<collection property="bc_list" ofType="com.pmd.vo.Bulletin_C_VO" select="commList" column="b_idx"/>
+	</resultMap>
+	
+	<resultMap type="com.pmd.vo.UserVO" id="map3">
+		<id column="u_idx" property="u_idx"/>
+		<collection property="b_list" ofType="com.pmd.vo.BulletinVO" select="boardList" column="u_idx"/>
+	</resultMap>
+	
+	<!-- 회원이 작성한 게시물들에 대한 정보 -->
+	<select id="boardList" resultType="com.pmd.vo.BulletinVO" parameterType="String">
+		select * from bulletin where u_idx = #{u_idx}
+	</select>
+	
+	<!-- 게시물을 작성한 회원정보 -->
+	<select id="getMember" resultMap="map3" parameterType="String">
+		select u_idx, u_id, u_name, email, u_phone, reg_date from users_t where u_idx = #{u_idx} 
+	</select>
+	
+	<resultMap type="com.pmd.vo.Bulletin_C_VO" id="map2">
+		<result column="u_idx" property="u_idx"/>
+		<association property="bmvo" javaType="com.pmd.vo.UserVO" select="getMember" column="u_idx"/>
+	</resultMap>
+	
+	<!-- 하나의 게시물에 대한 댓글 모음 -->
+	<select id="commList" resultMap="map2" parameterType="String">
+		select * from bulletin_c_t where b_idx = #{b_idx} and status = 0 order by c_idx asc
+	</select>
+	
+	<!-- 전체보기 -->
+	<select id="getList" resultMap="map1" parameterType="java.util.Map">
+		select * from(	
+			select rownum r_num, a.* from
+				(select * from bulletin where status = 0 and b_category = #{b_category} order by b_idx desc) a
+		)where r_num between #{begin} and #{end}
+	</select>
+	
+	<!-- 게시물 보기 -->
+	<select id="viewPost" parameterType="String" resultMap="map1">
+		select * from bulletin where b_idx = #{b_idx}
+	</select>
+	
+	<!-- 게시물 수정 -->
+	<update id="editPost" parameterType="com.pmd.vo.BulletinVO">
+		update bulletin
+		<set>
+			write_date = sysdate,
+			<trim suffixOverrides=",">
+				<if test="subject != null">
+					subject = #{subject},
+				</if>
+				<if test="file_name != null">
+					file_name = #{file_name},
+				</if>
+				<if test="b_content != null">
+					b_content = #{b_content},
+				</if>
+				<if test="ip != null">
+					ip = #{ip},
+				</if>
+				<if test="b_category != null">
+					b_category = #{b_category},
+				</if>
+			</trim>
+		</set>
+		where b_idx = #{b_idx}
+	</update>
+	
+	<!-- 회원 가입시 아이디 일치 -->
+	<select id="matchMember" resultType="String" parameterType="String">
+		select u_id from users_t where u_id = #{u_id}
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="updateMember" parameterType="com.pmd.vo.UserVO">
+		update users_t
+		<set>
+			<trim suffixOverrides=",">
+				<if test="u_pw != null">
+					u_pw = #{u_pw},
+				</if>
+				<if test="u_name != null">
+					u_name = #{u_name},
+				</if>
+				<if test="email != null">
+					email = #{email},
+				</if>
+				<if test="u_phone != null">
+					u_phone = #{u_phone},
+				</if>
+			</trim>
+		</set>
+		where u_idx = #{u_idx}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<update id="delMember" parameterType="java.util.Map">
+		update users_t set status = 1 where u_idx = #{u_idx} and u_pw = #{u_pw}
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<update id="delPost" parameterType="String">
+		update bulletin set status = 1 where b_idx = #{b_idx}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<update id="delComment" parameterType="String">
+		update bulletin_c_t set status = 1 where c_idx = #{c_idx}
+	</update>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateComment" parameterType="com.pmd.vo.UserVO">
+		update bulletin_c_t 
+		set c_content = #{c_content}, write_date = sysdate, ip = #{ip}
+		where c_idx = #{c_idx} 
+	</update>
+	
+	<!-- 조회수를 올려주는 기능 -->
+	<update id="hit" parameterType="String">
+		update bulletin set hit = hit+1 where b_idx = #{b_idx}
+	</update>
+	
+	<!-- 전체게시판 검색한 후 총 게시물 수 -->
+	<select id="getSearchAllCount" resultType="int" parameterType="String">
+		select count(*) from bulletin where status = 0 and lower(subject) like lower('%'||#{subject}||'%')
+	</select>
+	
+	<!-- 전체게시판 검색기능 -->
+	<select id="searchAll" resultMap="map1" parameterType="java.util.Map">
+		select * from(	
+			select rownum r_num, a.* from
+				(select * from bulletin where status = 0 and lower(subject) like lower('%'||#{subject}||'%') order by b_idx desc) a
+		)where r_num between #{begin} and #{end}
+	</select>
+	
+	<!-- 카테고리별 게시판 검색한 총 게시물 수 -->
+	<select id="getSearchBoardCount" resultType="int" parameterType="java.util.Map">
+		select count(*) from bulletin where subject = #{subject} and b_category = #{b_category}
+	</select>
+	
+	<!-- 카테고리별 게시판 검색기능 -->
+	<select id="searchBoard" resultMap="map1" parameterType="java.util.Map">
+		select * from(	
+			select rownum r_num, a.* from
+				(select * from bulletin where status = 0 and subject = #{subject} and b_category = #{b_category} order by b_idx desc) a
+		)where r_num between #{begin} and #{end}
+	</select>
+	
+</mapper>

@@ -23,6 +23,7 @@ public class CallBackAction {
 	public ModelAndView callBack(String code, String state) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
+		// 로그인을 성공한 이후 access_token을 얻기위한 url문자열
 		String apiUrl = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=YeX1APr9UJODbfW6etcy&client_secret=xQiEEI7UVz&code="+code+"&state="+state;
 		
 		// System.out.println(apiUrl);
@@ -41,6 +42,7 @@ public class CallBackAction {
 		String inputLine = "";
 		StringBuffer sb = new StringBuffer();
 		while((inputLine = br.readLine()) != null) {
+			// JSON형식으로 응답이 옴. {"access_token":" ", "refresh_token":" ", "token_type":" ", "expires_in":" "}
 			sb.append(inputLine);
 		}
 		br.close();
@@ -59,11 +61,13 @@ public class CallBackAction {
 			String token_type = (String) jsonObj.get("token_type");
 			String expires_in = (String) jsonObj.get("expires_in");
 			
+			// 프로필 정보를 얻기 위한 링크 문자열
 			String apiUrl2 = "https://openapi.naver.com/v1/nid/me";
 			String header = "Bearer "+access_token;
 			Map<String, String> requestHeaders = new HashMap<String, String>();
 			requestHeaders.put("Authorization", header);
 			
+			// JSON형식으로 응답이 온 것을 responseBody에 넣음.
 			String responseBody = get(apiUrl2, requestHeaders);
 			
 			// System.out.println(responseBody);
@@ -73,8 +77,11 @@ public class CallBackAction {
 			String resultcode = (String) jsonObj2.get("resultcode");
 			String message = (String) jsonObj2.get("message");
 			
+			// 접근 성공시 아래를 수행
 			if(resultcode.equals("00") && message.equals("success")) {
 				// System.out.println(jsonObj2.get("response"));
+				
+				// JSON으로 넘어온 프로필 정보를 뽑아서 String으로 넣어줌
 				JSONObject jsonObj3 =  (JSONObject) jsonObj2.get("response");
 				String name = (String) jsonObj3.get("name");
 				String nickname = (String) jsonObj3.get("nickname");
@@ -84,7 +91,7 @@ public class CallBackAction {
 			}
 		}
 		
-		
+		 
 		
 		return mv;
 	}
