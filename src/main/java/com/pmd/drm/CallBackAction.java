@@ -10,14 +10,27 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pmd.vo.UserVO;
+
+import mybatis.dao.BulletinDAO;
+
 @Controller
 public class CallBackAction {
+	
+	@Autowired
+	private BulletinDAO b_dao;
+	
+	@Autowired
+	private HttpSession session;
 
 	@RequestMapping("/callback.inc")
 	public ModelAndView callBack(String code, String state) throws Exception {
@@ -83,15 +96,32 @@ public class CallBackAction {
 				
 				// JSON으로 넘어온 프로필 정보를 뽑아서 String으로 넣어줌
 				JSONObject jsonObj3 =  (JSONObject) jsonObj2.get("response");
-				String name = (String) jsonObj3.get("name");
+				String u_name = (String) jsonObj3.get("name");
 				String nickname = (String) jsonObj3.get("nickname");
-				String id = (String) jsonObj3.get("id");
+				String sns_id = (String) jsonObj3.get("id");
 				String email = (String) jsonObj3.get("email");
+				String sns_profile = (String) jsonObj3.get("profile_image");
+				
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("u_name", u_name);
+				map.put("nickname", nickname);
+				map.put("sns_id", sns_id);
+				map.put("email", email);
+				map.put("sns_profile", sns_profile);
+				map.put("sns_type", "naver");
 				// System.out.println(name+"/"+nickname+"/"+id+"/"+email);
+				
+				UserVO vo = b_dao.naverLogin(sns_id);
+				
+				if(vo == null) {
+					boolean chk = b_dao.naverReg(map);
+				}else {
+					session.setAttribute("vo", vo);
+				}
 			}
 		}
 		
-		 
+		mv.setViewName("main");
 		
 		return mv;
 	}

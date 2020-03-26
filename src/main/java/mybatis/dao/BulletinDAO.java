@@ -256,4 +256,20 @@ public class BulletinDAO {
 
 		return ar;
 	}
+	
+	// 네이버 아이디로 회원가입
+	public boolean naverReg(Map<String, String> map) {
+		boolean chk = false;
+		int cnt = ss.insert("bulletin.naverReg", map);
+		if(cnt > 0)
+			chk = true;
+		
+		return chk;
+	}
+	
+	// 네이버 아이디로 로그인
+	public UserVO naverLogin(String sns_id) {
+		UserVO vo = ss.selectOne("bulletin.naverLogin", sns_id);
+		return vo;
+	}
 }
