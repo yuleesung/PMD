@@ -115,6 +115,8 @@ public class CallBackAction {
 				
 				if(vo == null) {
 					boolean chk = b_dao.naverReg(map);
+					vo = b_dao.naverLogin(sns_id);
+					session.setAttribute("userInfo", vo);
 				}else {
 					session.setAttribute("userInfo", vo);
 				}				
