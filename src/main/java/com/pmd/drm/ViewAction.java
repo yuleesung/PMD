@@ -3,9 +3,12 @@ package com.pmd.drm;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.servlet.http.HttpSession;
+
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +18,8 @@ import com.pmd.vo.ViewVO;
 @Controller
 public class ViewAction {
 
+	@Autowired
+	private HttpSession session;
 	
 	@RequestMapping("/view.inc")
 	public ModelAndView view(String srchTrprId, String srchTrprDegr, String traStartDate, String traEndDate, 
@@ -93,6 +98,20 @@ public class ViewAction {
 		if(per.length()>5)
 			per = per.substring(0, per.indexOf('.')+2);
 		//String per = null;
+		
+
+		session.setAttribute("path", "view");
+		
+		session.setAttribute("srchTrprId", srchTrprId);
+		session.setAttribute("srchTrprDegr", srchTrprDegr);
+		session.setAttribute("traStartDate", traStartDate);
+		session.setAttribute("traEndDate", traEndDate);
+		session.setAttribute("trainstCstId", trainstCstId);
+		session.setAttribute("superViser", superViser);
+		session.setAttribute("trainTarget", trainTarget);
+		session.setAttribute("regCourseMan", regCourseMan);
+		session.setAttribute("yardMan", yardMan);
+		
 		
 		ModelAndView mv = new ModelAndView();
 		

@@ -83,8 +83,7 @@ option{
 			style="font-size: 30px; color: white;">PMD</span>
 		</a> -->
 		<jsp:include page="menubar.jsp"/>
-		
-		
+	
 	<!-- </div> -->
 
 	<!-- 캐러셀 이미지 사이즈는 30%*300 높이와 시간조절은 js에서 변경-->

@@ -8,9 +8,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +24,8 @@ import com.pmd.vo.ViewVO;
 @Controller
 public class MainAction {
 
+	@Autowired
+	private HttpSession session;
 	
 	@RequestMapping("/main.inc")
 	public ModelAndView main() throws Exception{
@@ -162,7 +167,7 @@ public class MainAction {
 			total_ar.toArray(ar);
 		}
 		
-		
+		session.setAttribute("path", "main");
 		
 		ModelAndView mv = new ModelAndView();
 		

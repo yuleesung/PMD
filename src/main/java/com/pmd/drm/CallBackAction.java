@@ -120,8 +120,27 @@ public class CallBackAction {
 				}else {
 					session.setAttribute("userInfo", vo);
 				}				
-				mv.setViewName("redirect:/main.inc");
 				
+				/*
+				 * session.setAttribute("srchTrprId", srchTrprId);
+				 * session.setAttribute("srchTrprDegr", srchTrprDegr);
+				 * session.setAttribute("traStartDate", traStartDate);
+				 * session.setAttribute("traEndDate", traEndDate);
+				 * session.setAttribute("trainstCstId", trainstCstId);
+				 * session.setAttribute("superViser", superViser);
+				 * session.setAttribute("trainTarget", trainTarget);
+				 * session.setAttribute("regCourseMan", regCourseMan);
+				 * session.setAttribute("yardMan", yardMan);
+				 */
+				if(session.getAttribute("path").equals("main")) // Main
+					mv.setViewName("redirect:/main.inc");
+				else if(session.getAttribute("path").equals("view")) // View 
+					mv.setViewName("redirect:/view.inc?srchTrprId="+session.getAttribute("srchTrprId")
+							+"&srchTrprDegr="+session.getAttribute("srchTrprDegr")+"&traStartDate="+session.getAttribute("traStartDate")
+							+"&traEndDate="+session.getAttribute("traEndDate")+"&trainstCstId="+session.getAttribute("trainstCstId")
+							+"&superViser="+session.getAttribute("superViser")+"&trainTarget="+session.getAttribute("trainTarget")
+							+"&regCourseMan="+session.getAttribute("regCourseMan")+"&yardMan="+session.getAttribute("yardMan"));
+					
 			} else {
 				mv.setViewName("redirect:/login.inc");
 			}
