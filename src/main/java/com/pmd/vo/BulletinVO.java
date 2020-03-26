@@ -8,6 +8,8 @@ public class BulletinVO {
 	
 	private List<Bulletin_C_VO> c_list;
 
+	private UserVO uvo;
+
 	public String getB_idx() {
 		return b_idx;
 	}
@@ -96,4 +98,13 @@ public class BulletinVO {
 		this.c_list = c_list;
 	}
 
+	public UserVO getUvo() {
+		return uvo;
+	}
+
+	public void setUvo(UserVO uvo) {
+		this.uvo = uvo;
+	}
+	
+	
 }

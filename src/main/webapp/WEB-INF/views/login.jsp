@@ -35,18 +35,18 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<form action="" name="loginForm"> <!-- 액션추가 -->
+				<form action="login.inc" name="loginForm" method="post"> <!-- 액션추가 -->
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="username" id="id" name="id">				
+						<input type="text" class="form-control" placeholder="username" id="id" name="u_id">				
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="password" id="pw" name="pw">
+						<input type="password" class="form-control" placeholder="password" id="pw" name="u_pw">
 					</div>				
 					<div class="form-group">
 						<input type="button" value="Login" class="btn float-right login_btn" id="login_btn">
@@ -87,7 +87,7 @@
 					return;
 				}
 				
-				console.log(id+","+pw);
+				document.loginForm.submit();
 			});
 		});
 	</script>

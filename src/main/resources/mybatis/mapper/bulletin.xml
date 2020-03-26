@@ -41,8 +41,8 @@
 	<resultMap type="com.pmd.vo.BulletinVO" id="map1">
 		<id column="b_idx" property="b_idx"/>
 		<result column="u_idx" property="u_idx"/>
-		<association property="bmvo" javaType="com.pmd.vo.UserVO" select="getMember" column="u_idx"/>
-		<collection property="bc_list" ofType="com.pmd.vo.Bulletin_C_VO" select="commList" column="b_idx"/>
+		<association property="uvo" javaType="com.pmd.vo.UserVO" select="getMember" column="u_idx"/>
+		<collection property="c_list" ofType="com.pmd.vo.Bulletin_C_VO" select="commList" column="b_idx"/>
 	</resultMap>
 	
 	<resultMap type="com.pmd.vo.UserVO" id="map3">
@@ -57,12 +57,12 @@
 	
 	<!-- 게시물을 작성한 회원정보 -->
 	<select id="getMember" resultMap="map3" parameterType="String">
-		select u_idx, u_id, u_name, email, u_phone, reg_date from users_t where u_idx = #{u_idx} 
+		select u_idx, u_id, u_name, email, u_phone, reg_date, nickname from users_t where u_idx = #{u_idx} 
 	</select>
 	
 	<resultMap type="com.pmd.vo.Bulletin_C_VO" id="map2">
 		<result column="u_idx" property="u_idx"/>
-		<association property="bmvo" javaType="com.pmd.vo.UserVO" select="getMember" column="u_idx"/>
+		<association property="uvo" javaType="com.pmd.vo.UserVO" select="getMember" column="u_idx"/>
 	</resultMap>
 	
 	<!-- 하나의 게시물에 대한 댓글 모음 -->
@@ -131,6 +131,9 @@
 				<if test="u_phone != null">
 					u_phone = #{u_phone},
 				</if>
+				<if test="nickname != null">
+					nickname = #{nickname},
+				</if>
 			</trim>
 		</set>
 		where u_idx = #{u_idx}
@@ -152,7 +155,7 @@
 	</update>
 	
 	<!-- 댓글 수정 -->
-	<update id="updateComment" parameterType="com.pmd.vo.UserVO">
+	<update id="updateComment" parameterType="com.pmd.vo.Bulletin_C_VO">
 		update bulletin_c_t 
 		set c_content = #{c_content}, write_date = sysdate, ip = #{ip}
 		where c_idx = #{c_idx} 

@@ -1,10 +1,12 @@
 package com.pmd.vo;
 
+import java.util.List;
+
 public class UserVO {
 	
 	private String u_idx, u_id, u_pw, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status;
 
-	private BulletinVO bvo;
+	private List<BulletinVO> b_list;
 
 	public String getU_idx() {
 		return u_idx;
@@ -102,12 +104,14 @@ public class UserVO {
 		this.status = status;
 	}
 
-	public BulletinVO getBvo() {
-		return bvo;
+	public List<BulletinVO> getB_list() {
+		return b_list;
 	}
 
-	public void setBvo(BulletinVO bvo) {
-		this.bvo = bvo;
+	public void setB_list(List<BulletinVO> b_list) {
+		this.b_list = b_list;
 	}
+
+	
 
 }
