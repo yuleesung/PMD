@@ -17,18 +17,18 @@ public class BulletinDAO {
 	private SqlSessionTemplate ss;
 
 	// 회원 아이디만 빼오기
-	public String getID(String m_idx) {
+	public String getID(String u_idx) {
 
-		String id = ss.selectOne("bulletin.getID", m_idx);
+		String id = ss.selectOne("bulletin.getID", u_idx);
 
 		return id;
 	}
 
 	// 회원 로그인
-	public UserVO login(String m_id, String pw) {
+	public UserVO login(String u_id, String u_pw) {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("m_id", m_id);
-		map.put("pw", pw);
+		map.put("u_id", u_id);
+		map.put("u_pw", u_pw);
 
 		UserVO vo = ss.selectOne("bulletin.login", map);
 
@@ -118,9 +118,9 @@ public class BulletinDAO {
 	}
 
 	// 회원가입시 아이디 일치 검사
-	public String matchMember(String m_id) {
+	public String matchMember(String u_id) {
 
-		String vo_id = ss.selectOne("bulletin.matchMember", m_id);
+		String vo_id = ss.selectOne("bulletin.matchMember", u_id);
 
 		return vo_id;
 	}
@@ -138,12 +138,12 @@ public class BulletinDAO {
 	}
 
 	// 회원 탈퇴
-	public boolean delMember(String m_idx, String pw) {
+	public boolean delMember(String u_idx, String u_pw) {
 		boolean chk = false;
 
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("m_idx", m_idx);
-		map.put("pw", pw);
+		map.put("u_idx", u_idx);
+		map.put("u_pw", u_pw);
 
 		int cnt = ss.update("bulletin.delMember", map);
 		if (cnt > 0) {
