@@ -7,7 +7,7 @@
 		style="display: inline-block; float: right; margin: .2rem .8rem;">
 		<a href="login.inc" title="로그인"
 			style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">로그인</a>&nbsp;&nbsp;
-		<a href="#" title="회원가입"
+		<a href="join.inc" title="회원가입"
 			style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">회원가입</a>
 	</div>
 	<div id="header" class="container">
