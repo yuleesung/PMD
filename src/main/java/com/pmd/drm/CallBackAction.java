@@ -116,13 +116,15 @@ public class CallBackAction {
 				if(vo == null) {
 					boolean chk = b_dao.naverReg(map);
 				}else {
-					session.setAttribute("vo", vo);
-				}
+					session.setAttribute("userInfo", vo);
+				}				
+				mv.setViewName("redirect:/main.inc");
+				
+			} else {
+				mv.setViewName("redirect:/login.inc");
 			}
 		}
-		
-		mv.setViewName("main");
-		
+			
 		return mv;
 	}
 	
