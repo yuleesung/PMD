@@ -7,7 +7,7 @@
 		style="display: inline-block; float: right; margin: .2rem .8rem;">
 		<c:choose>
 			<c:when test="${userInfo != null}">
-				<span>${userInfo.nickname }님 환영합니다.</span>
+				<span>${userInfo.u_name }님 환영합니다.</span>
 				<a href="#" title="내정보"
 					style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">내정보</a>&nbsp;&nbsp;
 				<a href="logout.inc" title="로그아웃"

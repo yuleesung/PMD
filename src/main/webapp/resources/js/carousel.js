@@ -1,8 +1,8 @@
 var time; // 슬라이드 넘어가는 시간
-var $carouselLi;
-var carouselCount; // 캐러셀 사진 갯수
-var currentIndex; // 현재 보여지는 슬라이드 인덱스 값
-var caInterval;
+var $carouselLi, $carouselLi2, $carouselLi3;
+var carouselCount, carouselCount2, carouselCount3; // 캐러셀 사진 갯수
+var currentIndex, currentIndex2, currentIndex3; // 현재 보여지는 슬라이드 인덱스 값
+var caInterval, caInterval2, caInterval3;
 
 //사진 연결
 var imgW; // 사진 한장의 너비	
@@ -24,16 +24,31 @@ function carouselInit( height, t ){
 
 	time = t;
 	$("#carousel_section").height(height); // 캐너셀 높이 설정
+	$("#carousel_section2").height(height);
+	$("#carousel_section3").height(height);
+	
 	$carouselLi = $("#carousel_section > ul >li");
+	$carouselLi2 = $("#carousel_section2 > ul >li");
+	$carouselLi3 = $("#carousel_section3 > ul >li");
+	
 	carouselCount = $carouselLi.length; // 캐러셀 사진 갯수
+	carouselCount2 = $carouselLi2.length;
+	carouselCount3 = $carouselLi3.length;
+	
 	currentIndex = 0; // 현재 보여지는 슬라이드 인덱스 값
+	currentIndex2 = 0;
+	currentIndex3 = 0;
+	
 	carousel_setImgPosition();
 	carousel();
 }
 
 function carousel_setImgPosition(){
 
-	imgW = $carouselLi.width(); // 사진 한장의 너비	
+	imgW = $carouselLi.width(); // 사진 한장의 너비
+	imgW2 = $carouselLi2.width();
+	imgW3 = $carouselLi3.width();
+	
 	// 이미지 위치 조정
 	for(var i = 0; i < carouselCount; i++)
 	{
@@ -44,6 +59,30 @@ function carousel_setImgPosition(){
 		else
 		{
 			$carouselLi.eq(i).css("left", imgW);
+		}
+	}
+	
+	for(var i = 0; i < carouselCount2; i++)
+	{
+		if( i == currentIndex2)
+		{
+			$carouselLi2.eq(i).css("left", 0);
+		}
+		else
+		{
+			$carouselLi2.eq(i).css("left", imgW2);
+		}
+	}
+	
+	for(var i = 0; i < carouselCount3; i++)
+	{
+		if( i == currentIndex3)
+		{
+			$carouselLi3.eq(i).css("left", 0);
+		}
+		else
+		{
+			$carouselLi3.eq(i).css("left", imgW3);
 		}
 	}
 }
@@ -80,6 +119,70 @@ function carousel(){
 		else
 		{
 			$carouselLi.eq(currentIndex + 1).animate( { left: 0 } );
+		}
+	}, time);
+	
+
+
+	caInterval2 = setInterval(function(){
+		var left = "-" + imgW2;
+
+		//현재 슬라이드를 왼쪽으로 이동 ( 마이너스 지점 )
+		$carouselLi2.eq(currentIndex2).animate( { left: left }, function(){
+			// 다시 오른쪽 (제자리)로 이동
+			$carouselLi2.eq(currentIndex2).css("left", imgW2);
+
+			if( currentIndex2 == ( carouselCount2 - 1 ) )
+			{
+				currentIndex2 = 0;
+			}
+			else
+			{
+				currentIndex2 ++;
+			}
+		} );
+
+		// 다음 슬라이드 화면으로
+		if( currentIndex2 == ( carouselCount2 - 1 ) )
+		{
+			// 마지막 슬라이드가 넘어갈땐 처음 슬라이드가 보이도록
+			$carouselLi2.eq(0).animate( { left: 0 } );
+		}
+		else
+		{
+			$carouselLi2.eq(currentIndex2 + 1).animate( { left: 0 } );
+		}
+	}, time);
+	
+	
+	
+	caInterval3 = setInterval(function(){
+		var left = "-" + imgW3;
+
+		//현재 슬라이드를 왼쪽으로 이동 ( 마이너스 지점 )
+		$carouselLi3.eq(currentIndex3).animate( { left: left }, function(){
+			// 다시 오른쪽 (제자리)로 이동
+			$carouselLi3.eq(currentIndex3).css("left", imgW3);
+
+			if( currentIndex3 == ( carouselCount3 - 1 ) )
+			{
+				currentIndex3 = 0;
+			}
+			else
+			{
+				currentIndex3 ++;
+			}
+		} );
+
+		// 다음 슬라이드 화면으로
+		if( currentIndex3 == ( carouselCount3 - 1 ) )
+		{
+			// 마지막 슬라이드가 넘어갈땐 처음 슬라이드가 보이도록
+			$carouselLi3.eq(0).animate( { left: 0 } );
+		}
+		else
+		{
+			$carouselLi3.eq(currentIndex3 + 1).animate( { left: 0 } );
 		}
 	}, time);
 }

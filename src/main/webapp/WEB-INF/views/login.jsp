@@ -73,7 +73,12 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript">
-		$(function(){
+		$(document).ready(function(){		
+			if('${loginFail}' == 'fail')
+				alert("아이디나 비밀번호가 틀렸습니다");
+		});
+	
+		$(function(){		
 			$("#login_btn").click(function(){
 				var id = $("#id").val();
 				var pw = $("#pw").val();

@@ -3,13 +3,30 @@ package com.pmd.drm;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.pmd.vo.UserVO;
+
+import mybatis.dao.BulletinDAO;
 
 @Controller
 public class LoginAction {
 
+	@Autowired
+	private BulletinDAO b_dao;
+	@Autowired
+	private HttpSession session;
+	@Autowired
+	private HttpServletRequest request;
+	
+	
 	@RequestMapping("/login.inc")
 	public ModelAndView naverLogin() {
 		ModelAndView mv =  new ModelAndView();
@@ -26,4 +43,25 @@ public class LoginAction {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/login.inc", method = RequestMethod.POST)
+	public ModelAndView login(UserVO vo) {
+		
+		String path = "login";
+		
+		UserVO uvo = b_dao.login(vo.getU_id(), vo.getU_pw());
+		
+		if(uvo != null) {
+			// 로그인 성공
+			session.setAttribute("userInfo", uvo);
+			path = "redirect:/main.inc";
+		}
+		
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("loginFail", "fail"); // 로그인실패
+		mv.setViewName(path);
+		
+		return mv;
+	}
 }

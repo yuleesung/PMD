@@ -87,12 +87,28 @@ option{
 		
 	<!-- </div> -->
 
-	<!-- 캐러셀 이미지 사이즈는 950*300-->
-	<div id="carousel_section"> 
+	<!-- 캐러셀 이미지 사이즈는 30%*300 높이와 시간조절은 js에서 변경-->
+	<div id="carousel_section" class="carousel_section" style="float: left; width: 30%"> 
 		<ul>
 			<li> <img src="resources/images/test1.gif"> </li>
 			<li> <img src="resources/images/test2.gif"> </li>
 			<li> <img src="resources/images/test3.gif"> </li>
+		</ul>
+	</div>
+	
+	<div id="carousel_section2" class="carousel_section" style="float: left; width: 30%"> 
+		<ul>
+			<li> <img src="resources/images/test2.gif"> </li>
+			<li> <img src="resources/images/test3.gif"> </li>
+			<li> <img src="resources/images/test1.gif"> </li>
+		</ul>
+	</div>
+	
+	<div id="carousel_section3" class="carousel_section" style="float: left; width: 30%"> 
+		<ul>
+			<li> <img src="resources/images/test3.gif"> </li>
+			<li> <img src="resources/images/test1.gif"> </li>
+			<li> <img src="resources/images/test2.gif"> </li>
 		</ul>
 	</div>
 
