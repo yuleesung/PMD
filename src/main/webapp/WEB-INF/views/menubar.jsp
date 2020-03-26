@@ -1,14 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 메뉴 배너 영역 -->
 <div style="background: #6a99cb;">
 	<div id="sign"
 		style="display: inline-block; float: right; margin: .2rem .8rem;">
-		<a href="login.inc" title="로그인"
-			style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">로그인</a>&nbsp;&nbsp;
-		<a href="join.inc" title="회원가입"
-			style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">회원가입</a>
+		<c:choose>
+			<c:when test="${userInfo != null}">
+				<span>${userInfo.nickname }님 환영합니다.</span>
+				<a href="#" title="내정보"
+					style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">내정보</a>&nbsp;&nbsp;
+				<a href="logout.inc" title="로그아웃"
+					style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">로그아웃</a>			
+			</c:when>
+			<c:otherwise>
+				<a href="login.inc" title="로그인"
+					style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">로그인</a>&nbsp;&nbsp;
+				<a href="join.inc" title="회원가입"
+					style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">회원가입</a>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<div id="header" class="container">
 		<div id="logo">
