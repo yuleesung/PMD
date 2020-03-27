@@ -320,12 +320,15 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big,
 						<div class="OnBoardingContent__title">회원가입 방법을 선택하세요</div>
 						<div class="OnBoardingContent__content">
 							<div class="SignUpOauthSelectStep__oauths">
-								<button service="facebook" type="button" style="background-color: rgba(0, 20, 230, 0.8);"
+								<!-- <button service="facebook" type="button" style="background-color: rgba(0, 20, 230, 0.8);"
 									class="ant-btn OauthButton OauthButton__facebook SignUpOauthSelectStep__OauthButton">
 									<img alt="ImgIconFacebook" class="OauthButton__iconImg"
 										src="resources/images/P_icon.png">
 									<div class="OauthButton__content">PMD로 회원가입</div>
-								</button>
+								</button> -->
+								
+								
+								
 								<button service="naver" type="button" style="background: #60d04c;"
 									class="ant-btn OauthButton OauthButton__naver SignUpOauthSelectStep__OauthButton">
 									<img alt="ImgIconNaver" class="OauthButton__iconImg"
