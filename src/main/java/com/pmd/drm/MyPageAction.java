@@ -31,7 +31,7 @@ public class MyPageAction {
 	}
 	
 	@RequestMapping("/mypage_menu.inc")
-	public String mypage_menu(String menu) { // 내정보 메뉴
+	public String mypage_menu(String menu) { // 내정보 카테고리 선택
 		
 		String path = null;
 		
@@ -47,7 +47,7 @@ public class MyPageAction {
 	}
 	
 	@RequestMapping(value = "/mypage_edit.inc", method = RequestMethod.POST)
-	public ModelAndView mypage_edit(UserVO vo) {
+	public ModelAndView mypage_edit(UserVO vo) { // 회원정보 수정
 		
 		UserVO uvo = (UserVO) session.getAttribute("userInfo");
 		
@@ -61,5 +61,23 @@ public class MyPageAction {
 		
 		return mv;
 	}
+
 	
+	@RequestMapping(value = "/mypage_leave.inc", method = RequestMethod.POST)
+	public ModelAndView mypage_leave() { // 회원탈퇴
+		
+		UserVO uvo = (UserVO) session.getAttribute("userInfo");
+		
+		boolean chk = b_dao.delMember(uvo.getU_idx(), uvo.getU_pw()); // 회원정보 탈퇴
+		
+		if(chk)  // 탈퇴성공 시, session을 지움
+			session.removeAttribute("userInfo");
+		
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("redirect:/main.inc"); // 메인으로 이동
+		
+		return mv;
+	}
 }
