@@ -73,6 +73,7 @@ public class ListAction {
 		mv.addObject("rowTotal", rowTotal);
 		mv.addObject("blockList", BLOCK_LIST);
 		mv.addObject("board_name", board_name);
+		mv.addObject("b_category", b_category);
 		mv.setViewName("list");
 		
 		return mv;

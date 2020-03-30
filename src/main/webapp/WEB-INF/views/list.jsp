@@ -140,8 +140,10 @@
 						         ${pageCode }
 						        </div>
 		          			</td>
-		          			<td><%-- --%>
-		          				<input type="button" class="btn btn-primary" value="글쓰기" style="font-size: 15px;" onclick="javascript: location.href='write.inc'"/>
+		          			<td>
+		          				<c:if test="${userInfo ne null }">
+		          					<input type="button" class="btn btn-primary" value="글쓰기" style="font-size: 15px;" onclick="javascript: location.href='write.inc?nowPage=${nowPage}&b_category=${b_category }'"/>
+		          				</c:if>
 		          			</td>
 		          		</tr>
 		          	</tfoot>
