@@ -385,7 +385,8 @@ margin-bottom: 0px !important;
 						<div class="OnBoardingContent__content">
 							<div class="SignUpOauthSelectStep__oauths">
 						       <!--  <h1 class="entry-title"><span>PMD로 가입하기</span> </h1>-->
-						        <hr/> 
+						       <span><small><span class="text-danger">* </span>는 필수 입력 사항입니다.</small></span>
+						        <hr style="margin-top: 0;"/> 
 					            <form class="form-horizontal" method="post" name="join" id="join" >
 									<div class="form-group">
 										<label class="control-label col-sm-3">아이디 <span class="text-danger">*</span></label>
@@ -394,19 +395,20 @@ margin-bottom: 0px !important;
 												<span class="input-group-addon"><i class="glyphicon glyphicon-hand-right"></i></span> 
 												<input type="text" class="form-control" name="u_id" id="u_id" placeholder="ID" value="">
 											</div>
+											<div id="box">
+												<!-- 아이디 중복체크 영역 -->
+											</div>
+											
+											
 										</div>
-									</div>
-									<div id="box">
-										<!-- 아이디 중복체크 영역 -->
 									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-3">비밀&nbsp;번호 <span class="text-danger">*</span> </label>
 										<div class="col-md-5 col-sm-9">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> 
-												<input type="password" class="form-control" name="u_pw"
-													id="u_pw"
-													placeholder="password" value="">
+												<input type="password" class="form-control" name="u_pw" required="required"
+													id="u_pw" placeholder="password" value="">
 											</div>
 										</div>
 									</div>
@@ -417,6 +419,9 @@ margin-bottom: 0px !important;
 												<span class="input-group-addon"><i class="glyphicon glyphicon-check"></i></span> 
 												<input type="password" class="form-control" name="cpw" id="cpw" placeholder="Confirm your password"
 													value="">
+											</div>
+											<div>
+												<!-- 비밀번호 재확인 -->
 											</div>
 										</div>
 									</div>
@@ -459,6 +464,10 @@ margin-bottom: 0px !important;
 												<span class="input-group-addon"><i style="font-size:18px" class="fa">&#xf1fa;</i></span>
 												<input type="text" id="email2" name="email" placeholder="직접입력" class="form-control" />
 											</div>	
+										</div>
+										
+										<div id="e_box">
+										
 										</div>
 									</div>
 									
@@ -547,13 +556,13 @@ margin-bottom: 0px !important;
 		            data: "u_id="+encodeURIComponent(str.trim())
 		            
 		         }).done(function (data) {
-		            if(data.mv == "true"){
+		            if(data.value == true){
 		               //id가 중복일 때,
-		               $("#box").html("<pre style='color:red; font-weight:bold;'>사용 불가능</pre>");
+		               $("#box").html("<pre style='color:red; font-weight:bold; background: #fff; font-size:12px;'>사용 불가능</pre>");
 		               
 		            }else{
 		               //id가 중복이 아닐 때,
-		               $("#box").html("<pre style='color:green; font-weight:bold;'>사용 가능</pre>");
+		               $("#box").html("<pre style='color:green; font-weight:bold; background: #fff;font-size:12px;'>사용 가능</pre>");
 		               console.log(data.value)
 		            }
 		            
@@ -567,12 +576,109 @@ margin-bottom: 0px !important;
 		   
 		});
 		
+		// 이메일 중복 체크
+		$("#email").bind("keyup",function(){
+		      //사용자가 입력한 id값을 얻어낸다.
+		      var str = $(this).val();
+		      
+		      if(str.trim().length>3){
+		     	//email 4자이상 입력시 수행   
+		         
+		         $.ajax({
+		            
+		            url: "emailchk.inc",
+		            type: "post",
+		            data: "email="+encodeURIComponent(str.trim())
+		            
+		         }).done(function (data) {
+		            if(data.value == true){
+		               //id가 중복일 때,
+		               $("#e_box").html("<pre style='color:red; font-weight:bold; background: #fff; font-size:12px;'>사용 불가능</pre>");
+		               
+		            }else{
+		               //id가 중복이 아닐 때,
+		               $("#e_box").html("<pre style='color:green; font-weight:bold; background: #fff;font-size:12px;'>사용 가능</pre>");
+		               console.log(data.value)
+		            }
+		            
+		         }).fail(function (err) {
+		            console.log(err);
+		         });
+	         
+		      }else{
+		         $("#e_box").html("");
+		      }
+		   
+		});
+		
+		
+		
+		
+		
+		/* 유효성 검사 */
+		$("#join_btn").bind("click", function(){
+			
+			var u_id = $("#u_id").val().trim();
+			var u_pw = $("#u_pw").val().trim();
+			var cpw = $("#cpw").val().trim();
+			var u_name = $("#u_name").val().trim();
+			var nickname = $("#nickname").val().trim();
+			var u_phone = $("#u_phone").val().trim();
+			var email = $("#email").val().trim();
+			var email2 = $("#email2").val().trim();
+			
+			if( u_id.length <4){
+				alert("아이디를 4자 이상 입력하세요!");
+				$("#u_id").focus();
+				return;
+			}
+			if( u_pw.length <4){
+				alert("비밀번호를 4자 이상 입력하세요!");
+				$("#u_pw").focus();
+				return;
+			}
+			if( cpw.length <4){
+				alert("비밀번호를 재입력하세요!");
+				$("#cpw").focus();
+				return;
+			}
+			if( u_name.length <1){
+				alert("이름을 입력하세요!");
+				$("#u_name").focus();
+				return;
+			}
+			if( nickname.length <1){
+				alert("닉네임을 입력하세요!");
+				$("#nickname").focus();
+				return;
+			}
+			if( u_phone.length <1){
+				alert("연락처를 입력하세요!");
+				$("#u_name").focus();
+				return;
+			}
+			if( email.length <1){
+				alert("이메일을 입력하세요!");
+				$("#email").focus();
+				return;
+			}
+			if( email2.length <1){
+				alert("이메일을 입력하세요!");
+				$("#email2").focus();
+				return;
+			}
+			
+			
+			
+			
+		});
+		
+		
+		
+		
 		
 		
 	});
-	
-	
-	
 	</script>
 
 
