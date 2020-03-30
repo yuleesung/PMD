@@ -66,7 +66,7 @@ public class Paging {
 		
 		// 이제 현재페이지 값도 알고, 시작페이지와 마지막페이지 값을 알았으니
 		// 페이지 기법에 사용할 코드를 작성하여 StringBuffer에 저장하자!
-		sb = new StringBuffer("<ol class='paging'>");
+		sb = new StringBuffer("<ul class='pagination-v4'>");
 		
 		if(isPrePage) { // 이전기능 활성
 			sb.append("<li><a href='javascript:page(\"");
@@ -81,9 +81,9 @@ public class Paging {
 			// i의 값이 현재페이지 값과 같을 때는
 			// a태그를 지정하지 않고 숫자만 출력
 			if(i == nowPage) {
-				sb.append("<li class='now'>");
+				sb.append("<li><a class='active'>");
 				sb.append(i);
-				sb.append("</li>");
+				sb.append("</a></li>");
 			}else { // 현재페이지가 아닌경우
 				sb.append("<li><a href='javascript:page(\"");
 				sb.append(i); // 파라미터 값
@@ -102,7 +102,7 @@ public class Paging {
 			sb.append("<li class='disable'> &gt; </li>");
 		}
 		
-		sb.append("</ol>");
+		sb.append("</ul>");
 	}
 
 

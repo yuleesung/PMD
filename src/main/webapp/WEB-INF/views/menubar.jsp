@@ -29,9 +29,9 @@
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="#" title="">자유게시판</a></li>
-				<li><a href="#" title="">Q&A</a></li>
-				<li><a href="#" title="">광고문의</a></li>
+				<li><a href="list.inc?b_category=free">자유게시판</a></li>
+				<li><a href="list.inc?b_category=qa">Q&A</a></li>
+				<li><a href="list.inc?b_category=adv">광고문의</a></li>
 			</ul>
 
 		</div>
