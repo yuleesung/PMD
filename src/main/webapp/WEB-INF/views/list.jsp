@@ -117,7 +117,7 @@
 									${rowTotal - ((nowPage-1)*blockList+st.index) }
 								  </td>
 								  <td>
-									<a href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}"> 
+									<a href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}"> 
 										${vo.subject }
 									</a>
 								  </td>
