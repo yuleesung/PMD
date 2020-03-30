@@ -200,7 +200,22 @@
 	
 	<!-- 네이버로 로그인 -->
 	<select id="naverLogin" resultType="com.pmd.vo.UserVO" parameterType="String">
+		select * from users_t where sns_id = #{sns_id} and status = 0
+	</select>
+	
+	<!-- 네이버 회원탈퇴를 했을 때, DB에 저장된 ID값이 있는지 확인 -->
+	<select id="naverCheck" resultType="com.pmd.vo.UserVO" parameterType="String">
 		select * from users_t where sns_id = #{sns_id}
 	</select>
+	
+	<!-- 네이버 회원탈퇴 후 재가입을 할 경우 -->
+	<update id="naverReReg" parameterType="String">
+		update users_t set status = 0, reg_date = sysdate where sns_id = #{sns_id}
+	</update>
+	
+	<!-- 네이버 연동 해제(탈퇴) -->
+	<update id="naverLeave" parameterType="String">
+		update users_t set status = 1 where sns_id = #{sns_id}
+	</update>
 	
 </mapper>
