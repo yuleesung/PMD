@@ -23,8 +23,7 @@ public class LoginAction {
 	private BulletinDAO b_dao;
 	@Autowired
 	private HttpSession session;
-	@Autowired
-	private HttpServletRequest request;
+
 	
 	
 	@RequestMapping("/login.inc")

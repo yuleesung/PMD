@@ -2,13 +2,35 @@ package com.pmd.vo;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+		
+
 public class BulletinVO {
 	
-	private String b_idx, subject, b_content, file_name, write_date, ip, hit, status, b_category, u_idx;
+	private String b_idx, subject, b_content, file_name, write_date, ip, hit, status, b_category, u_idx, nowPage;
 	
 	private List<Bulletin_C_VO> c_list;
 
 	private UserVO uvo;
+	
+	private MultipartFile upload;
+
+	
+	public String getNowPage() {
+		return nowPage;
+	}
+
+	public void setNowPage(String nowPage) {
+		this.nowPage = nowPage;
+	}
+
+	public MultipartFile getUpload() {
+		return upload;
+	}
+
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
 
 	public String getB_idx() {
 		return b_idx;

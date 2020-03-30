@@ -1268,7 +1268,7 @@ button {
   cursor: pointer;
   user-select: none;
   outline:none !important;
-  width:100%;
+  /* width:100%; */
 }
 
 
