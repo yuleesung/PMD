@@ -118,11 +118,13 @@ public class BulletinDAO {
 	}
 
 	// 회원가입시 아이디 일치 검사
-	public String matchMember(String u_id) {
-
+	public boolean matchMember(String u_id) {
+		boolean chk = false;
 		String vo_id = ss.selectOne("bulletin.matchMember", u_id);
+		if(vo_id != null)
+			chk = true;
 
-		return vo_id;
+		return chk;
 	}
 
 	// 회원 정보 수정
@@ -296,6 +298,16 @@ public class BulletinDAO {
 		
 		int cnt = ss.update("bulletin.naverLeave", sns_id);
 		if(cnt > 0)
+			chk = true;
+		
+		return chk;
+	}
+	
+	// 이메일 중복검사
+	public boolean checkEmail(String email) {
+		boolean chk = false;
+		String str = ss.selectOne("bulletin.checkEmail", email);
+		if(str != null)
 			chk = true;
 		
 		return chk;
