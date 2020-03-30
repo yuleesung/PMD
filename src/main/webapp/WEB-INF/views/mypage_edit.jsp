@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,32 +61,63 @@
 	color: #949390;
 	transition: all 0.5s ease 0s;
 }
-.order-content {
-  padding: 20px;
-  min-height: 460px;
-  width: 800px;
-}
 
+.order-content {
+	padding: 20px;
+	min-height: 460px;
+	width: 800px;
+}
 </style>
 </head>
 <body>
 	<div class="col-md-9 order-content">
 		<div class="form_main">
 			<h2 class="heading">
-				<strong>Personal </strong> Contact <span></span>
-			</h2><br/>
-			<div class="form">
-				<form action="" method="" id="contactFrm" name="contactFrm">
-					<input type="text" required="" placeholder="Name" value=""
-						name="name" class="txt"><br/> <input type="text" required=""
-						placeholder="Email" value="" name="email" class="txt"><br/> <input
-						type="password" required="" placeholder="Change Pwd" value=""
-						name="password" class="txt"><br/><br/><br/>
-					<button type="button" class="btn btn-default">Update</button>
-				</form>
-			</div>
+				<strong>Edit </strong> Page <span></span>
+			</h2>
+			<br />
+			<c:choose>
+				<c:when test="${userInfo.u_id ne null }">
+					<div class="form">
+						<form action="mypage_edit.inc" method="post" id="editFrm"
+							name="editFrm">
+							<input type="text" placeholder="Name" value="${userInfo.u_name }"
+								name="u_name" id="u_name" class="txt"><br /> <input
+								type="text" placeholder="Email" value="${userInfo.email }"
+								name="email" id="email" class="txt"><br /> <input
+								type="text" placeholder="Phone" value="${userInfo.u_phone }"
+								name="u_phone" id="u_phone" class="txt"><br /> <input
+								type="text" placeholder="NickName" value="${userInfo.nickname }"
+								name="nickname" id="nickname" class="txt"><br /> <input
+								type="password" placeholder="Change Pwd" name="u_pw" id="u_pw"
+								class="txt"><br /> <br /> <br />
+							<button type="button" class="btn btn-default" id="sub_btn">Update</button>
+						</form>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="form">
+						<h2>
+							<strong>이 계정은 SNS으로 연동되었습니다. </strong>
+						</h2>
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
-
 	</div>
+	<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$("#sub_btn").click(function() {
+				var u_pw = $("#u_pw").val();
+
+				if (u_pw.trim().length > 3) {
+					alert("수정 성공");
+					document.editFrm.submit();
+				} else
+					alert("비밀번호를 4자 이상 입력하세요");
+			});
+		});
+	</script>
 </body>
 </html>
