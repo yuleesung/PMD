@@ -26,6 +26,11 @@ import mybatis.dao.BulletinDAO;
 @Controller
 public class CallBackAction {
 	
+	private final String CLIENT_ID = "YeX1APr9UJODbfW6etcy";
+	private final String CLIENT_SECRET = "xQiEEI7UVz";
+	private String access_token;
+	private String refresh_token;
+	
 	@Autowired
 	private BulletinDAO b_dao;
 	
@@ -37,7 +42,7 @@ public class CallBackAction {
 		ModelAndView mv = new ModelAndView();
 		
 		// 로그인을 성공한 이후 access_token을 얻기위한 url문자열
-		String apiUrl = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=YeX1APr9UJODbfW6etcy&client_secret=xQiEEI7UVz&code="+code+"&state="+state;
+		String apiUrl = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET+"&code="+code+"&state="+state;
 		
 		// System.out.println(apiUrl);
 		
@@ -69,8 +74,8 @@ public class CallBackAction {
 			// System.out.println(jsonObj.get("refresh_token"));
 			// System.out.println(jsonObj.get("token_type"));
 			// System.out.println(jsonObj.get("expires_in"));
-			String access_token = (String) jsonObj.get("access_token");
-			String refresh_token = (String) jsonObj.get("refresh_token");
+			access_token = (String) jsonObj.get("access_token");
+			refresh_token = (String) jsonObj.get("refresh_token");
 			String token_type = (String) jsonObj.get("token_type");
 			String expires_in = (String) jsonObj.get("expires_in");
 			
@@ -113,25 +118,22 @@ public class CallBackAction {
 				
 				UserVO vo = b_dao.naverLogin(sns_id);
 				
-				if(vo == null) {
-					boolean chk = b_dao.naverReg(map);
-					vo = b_dao.naverLogin(sns_id);
-					session.setAttribute("userInfo", vo);
-				}else {
+				if(vo == null) { // 네이버 연동을 한 적이 없거나, 연동해제를 한 경우
+					UserVO check = b_dao.naverCheck(sns_id);
+					
+					if(check == null) { // 네이버 연동을 한 적이 없는 경우
+						boolean chk = b_dao.naverReg(map); // 회원가입하기
+						vo = b_dao.naverLogin(sns_id);
+						session.setAttribute("userInfo", vo);
+					}else { // 네이버 연동해제를 한 경우
+						boolean chk = b_dao.naverReReg(sns_id); // 탈퇴되었던 회원정보 되살리기
+						vo = b_dao.naverLogin(sns_id);
+						session.setAttribute("userInfo", vo);
+					}
+				}else { // 네이버 연동이 되어 있는 경우
 					session.setAttribute("userInfo", vo);
 				}				
 				
-				/*
-				 * session.setAttribute("srchTrprId", srchTrprId);
-				 * session.setAttribute("srchTrprDegr", srchTrprDegr);
-				 * session.setAttribute("traStartDate", traStartDate);
-				 * session.setAttribute("traEndDate", traEndDate);
-				 * session.setAttribute("trainstCstId", trainstCstId);
-				 * session.setAttribute("superViser", superViser);
-				 * session.setAttribute("trainTarget", trainTarget);
-				 * session.setAttribute("regCourseMan", regCourseMan);
-				 * session.setAttribute("yardMan", yardMan);
-				 */
 				if(session.getAttribute("path").equals("main")) // Main
 					mv.setViewName("redirect:/main.inc");
 				else if(session.getAttribute("path").equals("view")) // View 
@@ -144,8 +146,126 @@ public class CallBackAction {
 			} else {
 				mv.setViewName("redirect:/login.inc");
 			}
+		} else {
+			mv.setViewName("redirect:/login.inc");
 		}
 			
+		return mv;
+	}
+	
+	@RequestMapping("/naverLeave.inc") // 네이버 연동 해제시
+	public ModelAndView naverLeave() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		if(access_token == null) {
+			String apiUri = "https://nid.naver.com/oauth2.0/token?grant_type=refresh_token&client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET+"&refresh_token="+refresh_token;
+			URL url = new URL(apiUri);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("GET");
+			int responseCode = con.getResponseCode();
+			BufferedReader br = null;
+			if(responseCode == 200) { // 정상 호출
+				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			}else { // 에러 발생
+				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+			}
+			
+			String inputLine = "";
+			StringBuffer sb = new StringBuffer();
+			while((inputLine = br.readLine()) != null) {
+				// JSON형식으로 응답이 옴. {"access_token":" ", "refresh_token":" ", "token_type":" ", "expires_in":" "}
+				sb.append(inputLine);
+			}
+			br.close();
+			if(responseCode == 200) {
+				JSONParser jsonParse = new JSONParser();
+				
+				JSONObject jsonObj = (JSONObject) jsonParse.parse(sb.toString());
+				String re_access_token = (String) jsonObj.get("access_token"); // 네이버 연동 갱신에 성공했을 때
+				if(re_access_token != null) {
+					String re_apiUri = "https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET+"&access_token="+re_access_token;
+					URL re_url = new URL(re_apiUri);
+					HttpURLConnection re_con = (HttpURLConnection) re_url.openConnection();
+					re_con.setRequestMethod("GET");
+					int re_responseCode = re_con.getResponseCode();
+					BufferedReader re_br = null;
+					if(re_responseCode == 200) { // 정상 호출
+						re_br = new BufferedReader(new InputStreamReader(re_con.getInputStream()));
+					}else { // 에러 발생
+						re_br = new BufferedReader(new InputStreamReader(re_con.getErrorStream()));
+					}
+					
+					String re_inputLine = "";
+					StringBuffer re_sb = new StringBuffer();
+					while((re_inputLine = re_br.readLine()) != null) {
+						re_sb.append(re_inputLine);
+					}
+					re_br.close();
+					if(re_responseCode == 200) {
+						JSONParser re_jsonParse = new JSONParser();
+						
+						JSONObject re_jsonObj = (JSONObject) re_jsonParse.parse(re_sb.toString());
+						String result = (String) re_jsonObj.get("result"); // 네이버 연동해제(탈퇴)를 성공했을 때
+						if(result.equals("success")) {
+							UserVO vo = (UserVO) session.getAttribute("userInfo");
+							String sns_id = vo.getSns_id();
+							boolean chk = b_dao.naverLeave(sns_id); // DB에서 탈퇴로 변경
+							session.removeAttribute("userInfo"); // 세션에서 로그아웃 처리
+							mv.setViewName("redirect:/main.inc");
+						}else {
+							mv.setViewName("redirect:/login.inc");
+						}
+						
+					}else {
+						mv.setViewName("redirect:/login.inc");
+					}
+				}else {
+					mv.setViewName("redirect:/login.inc");
+				}
+				
+			}else {
+				mv.setViewName("redirect:/login.inc");
+			}
+			
+		}else {
+			String apiUri = "https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET+"&access_token="+access_token;
+			URL url = new URL(apiUri);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("GET");
+			int responseCode = con.getResponseCode();
+			BufferedReader br = null;
+			if(responseCode == 200) { // 정상 호출
+				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			}else { // 에러 발생
+				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+			}
+			
+			String inputLine = "";
+			StringBuffer sb = new StringBuffer();
+			while((inputLine = br.readLine()) != null) {
+				sb.append(inputLine);
+			}
+			br.close();
+			if(responseCode == 200) {
+				JSONParser jsonParse = new JSONParser();
+				
+				JSONObject jsonObj = (JSONObject) jsonParse.parse(sb.toString());
+				String result = (String) jsonObj.get("result"); // 네이버 연동해제(탈퇴)를 성공했을 때
+				if(result.equals("success")) {
+					UserVO vo = (UserVO) session.getAttribute("userInfo");
+					String sns_id = vo.getSns_id();
+					boolean chk = b_dao.naverLeave(sns_id); // DB에서 탈퇴로 변경
+					session.removeAttribute("userInfo"); // 세션에서 로그아웃 처리
+					mv.setViewName("redirect:/main.inc");
+				}else {
+					mv.setViewName("redirect:/login.inc");
+				}
+				
+			}else {
+				mv.setViewName("redirect:/login.inc");
+			}
+		}
+		
 		return mv;
 	}
 	

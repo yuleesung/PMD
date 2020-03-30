@@ -272,4 +272,32 @@ public class BulletinDAO {
 		UserVO vo = ss.selectOne("bulletin.naverLogin", sns_id);
 		return vo;
 	}
+	
+	// 네이버 회원탈퇴를 했을 때, DB에 저장된 ID값이 있는지 확인
+	public UserVO naverCheck(String sns_id) {
+		UserVO vo = ss.selectOne("bulletin.naverCheck", sns_id);
+		return vo;
+	}
+	
+	// 네이버 회원탈퇴 후 재가입을 할 경우
+	public boolean naverReReg(String sns_id) {
+		boolean chk = false;
+		
+		int cnt = ss.update("bulletin.naverReReg", sns_id);
+		if(cnt > 0)
+			chk = true;
+		
+		return chk;
+	}
+	
+	// 네이버 연동 해제(탈퇴)
+	public boolean naverLeave(String sns_id) {
+		boolean chk = false;
+		
+		int cnt = ss.update("bulletin.naverLeave", sns_id);
+		if(cnt > 0)
+			chk = true;
+		
+		return chk;
+	}
 }
