@@ -1,5 +1,7 @@
 package com.pmd.drm;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,9 @@ public class ListAction {
 	int nowPage; // 현재 페이지 값
 	int rowTotal; // 전체 게시물 수
 	String pageCode; // 페이징 처리된 HTML코드값
+	
+	@Autowired
+	private HttpSession session;
 
 	@Autowired
 	private BulletinDAO b_dao;
@@ -55,6 +60,11 @@ public class ListAction {
 			board_name = "Q&A";
 		else if(b_category.equals("adv"))
 			board_name = "광고문의";
+		
+		// 네이버 로그인을 한 후 현재 보고 있는 페이지로 돌아오기 위해 필요한 값들을 세션에 저장
+		session.setAttribute("path", "list");
+		session.setAttribute("nowPage", page.getNowPage());
+		session.setAttribute("b_category", b_category);
 		
 		// JSP에서 사용할 모든 값들을 저장할 객체
 		mv.addObject("list", ar);

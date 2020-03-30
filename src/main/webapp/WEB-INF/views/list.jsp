@@ -46,7 +46,7 @@
     		text-align: center;
     	}
     	
-    	#t1 th, #t1, td{
+    	#t1 th, #t1 td{
     		border: 1px solid #ccc;
     		padding: 20px;
     		color: black;
@@ -58,6 +58,10 @@
     	
     	#t1 tbody tr:hover {
 			background-color: #eee;
+		}
+		
+		#t1 tfoot tr, #t1 tfoot td{
+			border: none;
 		}
     </style>
   </head>
@@ -129,10 +133,19 @@
 							</tr>
 			   			</c:if>
 		          	</tbody>
+		          	<tfoot>
+		          		<tr>
+		          			<td colspan="4">
+		          				<div class="pagination-wrap">
+						         ${pageCode }
+						        </div>
+		          			</td>
+		          			<td>
+		          				<input type="button" class="btn btn-primary" value="글쓰기" style="font-size: 15px;" onclick="javascript: location.href='write.inc'"/>
+		          			</td>
+		          		</tr>
+		          	</tfoot>
 		          </table>
-		          <div class="pagination-wrap">
-			        ${pageCode }
-			      </div>
 	        </div>
           </div>
 
