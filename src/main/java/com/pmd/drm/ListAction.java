@@ -48,12 +48,21 @@ public class ListAction {
 		
 		BulletinVO[] ar = b_dao.getList(String.valueOf(begin), String.valueOf(end), b_category);
 		
+		String board_name = null;
+		if(b_category.equals("free"))
+			board_name = "자유게시판";
+		else if(b_category.equals("qa"))
+			board_name = "Q&A";
+		else if(b_category.equals("adv"))
+			board_name = "광고문의";
+		
 		// JSP에서 사용할 모든 값들을 저장할 객체
 		mv.addObject("list", ar);
 		mv.addObject("pageCode", pageCode);
 		mv.addObject("nowPage", page.getNowPage());
 		mv.addObject("rowTotal", rowTotal);
 		mv.addObject("blockList", BLOCK_LIST);
+		mv.addObject("board_name", board_name);
 		mv.setViewName("list");
 		
 		return mv;

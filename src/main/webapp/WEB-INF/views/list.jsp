@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>과정 검색</title>
+    <title>${board_name } 게시물 목록</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -49,6 +49,11 @@
     	#t1 th, #t1, td{
     		border: 1px solid #ccc;
     		padding: 20px;
+    		color: black;
+    	}
+    	
+    	#t1 tbody td a{
+    		color: black;
     	}
     	
     	#t1 tbody tr:hover {
@@ -81,14 +86,15 @@
         <div class="row">
           <div class="col-md-12">
 	          <div>
-		          <h2 class="title" style="margin-bottom: 50px;">게시물 목록</h2>
+		          <h2 class="title" style="margin-bottom: 50px;">${board_name } 게시물 목록</h2>
 		          <table id="t1">
-		          	<caption>게시물 목록</caption>
+		          	<caption>${board_name }게시물 목록</caption>
 		          	<colgroup>
 		          		<col width="50px"/>
 		          		<col width="*"/>
 		          		<col width="250px"/>
 		          		<col width="150px"/>
+		          		<col width="100px"/>
 		          	</colgroup>
 		          	<thead>
 		          		<tr>
@@ -96,6 +102,7 @@
 		          			<th>제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
 		          			<th>글쓴이</th>
 		          			<th>날&nbsp;&nbsp;짜</th>
+		          			<th>조회수</th>
 		          		</tr>
 		          	</thead>
 		          	<tbody>
@@ -110,7 +117,7 @@
 										${vo.subject }
 									</a>
 								  </td>
-								  <td>${vo.writer }</td>
+								  <td>${vo.uvo.u_name }</td>
 								  <td>${fn:substring(vo.write_date, 0, 10) }</td>
 								  <td>${vo.hit }</td>
 								</tr>
