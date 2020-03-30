@@ -185,40 +185,7 @@ public class CallBackAction {
 				if(re_access_token != null) {
 					String re_apiUri = "https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET+"&access_token="+re_access_token;
 					URL re_url = new URL(re_apiUri);
-					HttpURLConnection re_con = (HttpURLConnection) re_url.openConnection();
-					re_con.setRequestMethod("GET");
-					int re_responseCode = re_con.getResponseCode();
-					BufferedReader re_br = null;
-					if(re_responseCode == 200) { // 정상 호출
-						re_br = new BufferedReader(new InputStreamReader(re_con.getInputStream()));
-					}else { // 에러 발생
-						re_br = new BufferedReader(new InputStreamReader(re_con.getErrorStream()));
-					}
-					
-					String re_inputLine = "";
-					StringBuffer re_sb = new StringBuffer();
-					while((re_inputLine = re_br.readLine()) != null) {
-						re_sb.append(re_inputLine);
-					}
-					re_br.close();
-					if(re_responseCode == 200) {
-						JSONParser re_jsonParse = new JSONParser();
-						
-						JSONObject re_jsonObj = (JSONObject) re_jsonParse.parse(re_sb.toString());
-						String result = (String) re_jsonObj.get("result"); // 네이버 연동해제(탈퇴)를 성공했을 때
-						if(result.equals("success")) {
-							UserVO vo = (UserVO) session.getAttribute("userInfo");
-							String sns_id = vo.getSns_id();
-							boolean chk = b_dao.naverLeave(sns_id); // DB에서 탈퇴로 변경
-							session.removeAttribute("userInfo"); // 세션에서 로그아웃 처리
-							mv.setViewName("redirect:/main.inc");
-						}else {
-							mv.setViewName("redirect:/login.inc");
-						}
-						
-					}else {
-						mv.setViewName("redirect:/login.inc");
-					}
+					mv.setViewName(naverLeaveConnection(re_url));
 				}else {
 					mv.setViewName("redirect:/login.inc");
 				}
@@ -230,43 +197,51 @@ public class CallBackAction {
 		}else {
 			String apiUri = "https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET+"&access_token="+access_token;
 			URL url = new URL(apiUri);
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-			con.setRequestMethod("GET");
-			int responseCode = con.getResponseCode();
-			BufferedReader br = null;
-			if(responseCode == 200) { // 정상 호출
-				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-			}else { // 에러 발생
-				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-			}
-			
-			String inputLine = "";
-			StringBuffer sb = new StringBuffer();
-			while((inputLine = br.readLine()) != null) {
-				sb.append(inputLine);
-			}
-			br.close();
-			if(responseCode == 200) {
-				JSONParser jsonParse = new JSONParser();
-				
-				JSONObject jsonObj = (JSONObject) jsonParse.parse(sb.toString());
-				String result = (String) jsonObj.get("result"); // 네이버 연동해제(탈퇴)를 성공했을 때
-				if(result.equals("success")) {
-					UserVO vo = (UserVO) session.getAttribute("userInfo");
-					String sns_id = vo.getSns_id();
-					boolean chk = b_dao.naverLeave(sns_id); // DB에서 탈퇴로 변경
-					session.removeAttribute("userInfo"); // 세션에서 로그아웃 처리
-					mv.setViewName("redirect:/main.inc");
-				}else {
-					mv.setViewName("redirect:/login.inc");
-				}
-				
-			}else {
-				mv.setViewName("redirect:/login.inc");
-			}
+			mv.setViewName(naverLeaveConnection(url));
 		}
 		
 		return mv;
+	}
+	
+	private String naverLeaveConnection(URL url) throws Exception {
+		String returnPage = null;
+		
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setRequestMethod("GET");
+		int responseCode = con.getResponseCode();
+		BufferedReader br = null;
+		if(responseCode == 200) { // 정상 호출
+			br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		}else { // 에러 발생
+			br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+		}
+		
+		String inputLine = "";
+		StringBuffer sb = new StringBuffer();
+		while((inputLine = br.readLine()) != null) {
+			sb.append(inputLine);
+		}
+		br.close();
+		if(responseCode == 200) {
+			JSONParser jsonParse = new JSONParser();
+			
+			JSONObject jsonObj = (JSONObject) jsonParse.parse(sb.toString());
+			String result = (String) jsonObj.get("result"); // 네이버 연동해제(탈퇴)를 성공했을 때
+			if(result.equals("success")) {
+				UserVO vo = (UserVO) session.getAttribute("userInfo");
+				String sns_id = vo.getSns_id();
+				boolean chk = b_dao.naverLeave(sns_id); // DB에서 탈퇴로 변경
+				session.removeAttribute("userInfo"); // 세션에서 로그아웃 처리
+				returnPage = "redirect:/main.inc";
+			}else {
+				returnPage = "redirect:/login.inc";
+			}
+			
+		}else {
+			returnPage = "redirect:/login.inc";
+		}
+		
+		return returnPage;
 	}
 	
 	private static String get(String apiUrl, Map<String, String> requestHeaders){
