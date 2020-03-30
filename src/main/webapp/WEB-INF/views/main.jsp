@@ -572,10 +572,10 @@ option{
 														str += "</div>";
 													}
 													str += "</div>";
-													str += "<div style='width: 300px; margin: auto;'>";
+													str += "<div class='pagination-wrap'>";
 													str += res.pageCode;
 													str += "</div>";
-													console.log(str);
+													// console.log(str);
 													$("#result").html(str);
 
 												}).fail(function(err) {
@@ -716,10 +716,10 @@ option{
 									str += "</div>";
 								}
 								str += "</div>";
-								str += "<div style='width: 300px; margin: auto;'>";
+								str += "<div class='pagination-wrap'>";
 								str += res.pageCode;
 								str += "</div>";
-								console.log(str);
+								//console.log(str);
 								$("#result").html(str);
 
 							}).fail(function(err) {
