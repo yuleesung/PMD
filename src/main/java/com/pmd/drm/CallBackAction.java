@@ -142,7 +142,7 @@ public class CallBackAction {
 							+"&traEndDate="+session.getAttribute("traEndDate")+"&trainstCstId="+session.getAttribute("trainstCstId")
 							+"&superViser="+session.getAttribute("superViser")+"&trainTarget="+session.getAttribute("trainTarget")
 							+"&regCourseMan="+session.getAttribute("regCourseMan")+"&yardMan="+session.getAttribute("yardMan"));
-				else if(session.getAttribute("path").equals("list")) {
+				else if(session.getAttribute("path").equals("list")) { // list
 					mv.setViewName("redirect:/list.inc?nowPage="+session.getAttribute("nowPage")+"&b_category="+session.getAttribute("b_category"));
 				}
 					

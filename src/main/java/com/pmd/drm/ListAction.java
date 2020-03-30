@@ -61,7 +61,7 @@ public class ListAction {
 		else if(b_category.equals("adv"))
 			board_name = "광고문의";
 		
-		// 네이버 로그인을 한 후 현재 보고 있는 페이지로 돌아오기 위해 필요한 값들을 세션에 저장
+		// 네이버 로그인을 한 후 현재 보고 있는 페이지로 돌아오기 위해 필요한 값들을 세션에 저장 //
 		session.setAttribute("path", "list");
 		session.setAttribute("nowPage", page.getNowPage());
 		session.setAttribute("b_category", b_category);
