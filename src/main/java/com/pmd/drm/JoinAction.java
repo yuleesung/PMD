@@ -21,6 +21,8 @@ public class JoinAction {
 	public ModelAndView join(UserVO vo) {
 		ModelAndView mv = new ModelAndView();
 		
+		
+		
 		return mv;
 	}
 }
