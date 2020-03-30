@@ -79,8 +79,7 @@
 			<c:choose>
 				<c:when test="${userInfo.u_id ne null }">
 					<div class="form">
-						<form action="mypage_leave.inc" method="post" id="leaveFrm"
-							name="editFrm">
+						<form action="mypage_leave.inc" method="post" id="leaveFrm" name="leaveFrm">
 							<input type="password" placeholder="Input Your Pwd" name="u_pw"
 								id="u_pw" class="txt" style="width: 400px;">
 							<button type="button" class="btn btn-default" id="sub_btn"
@@ -102,18 +101,24 @@
 	<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			$("#sub_btn").click(function() {
+			$("#sub_btn").click(function() { // 일반회원 탈퇴
 				var u_pw = $("#u_pw").val();
 				var ss_pw = $("#ss_pw").val();
 
 				if (u_pw == ss_pw) {
-					alert("삭제");
+					var con = confirm("정말 탈퇴하시겠습니까?");
+					
+					if(con){
+						alert("탈퇴완료")
+						document.leaveFrm.submit();
+					}
+					
 				} else {
-					alert("실패");
+					alert("비밀번호를 확인해주세요");
 				}
 			});
 			
-			$("#sub_btn2").click(function(){
+			$("#sub_btn2").click(function(){ // 네이버 연동해제
 				var con = confirm("연동을 해제하시겠습니까?");
 				
 				if(con){

@@ -60,7 +60,7 @@
 								href="javascript:changePage('2')"><i class="fa fa-trash"></i>
 									탈퇴 페이지 </a></li>
 							<li class="nav-item"><a class="nav-link" href="#"><i
-									class="fa fa-flag"></i> Help </a></li>
+									class="fa fa-flag"></i> Help (예비메뉴) </a></li>
 						</ul>
 					</div>
 					<!-- END MENU -->
