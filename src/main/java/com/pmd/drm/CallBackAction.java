@@ -195,7 +195,7 @@ public class CallBackAction {
 			}
 			
 		}else {
-			String apiUri = "https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET+"&access_token="+access_token;
+			String apiUri = "https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET+"&access_token="+access_token+"&service_provider=NAVER";
 			URL url = new URL(apiUri);
 			mv.setViewName(naverLeaveConnection(url));
 		}
