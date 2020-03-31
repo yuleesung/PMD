@@ -29,6 +29,8 @@ public class ViewBoardAction {
 		session.setAttribute("nowPage", nowPage);
 		session.setAttribute("b_category", b_category);
 		
+		
+		
 		BulletinVO vo = b_dao.viewPost(b_idx);
 		mv.addObject("vo", vo);
 		mv.addObject("nowPage", nowPage);

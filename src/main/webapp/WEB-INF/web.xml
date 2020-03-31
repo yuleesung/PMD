@@ -48,7 +48,7 @@
 	<!-- 파일 다운로드 서블릿 등록 -->
 	<servlet>
 		<servlet-name>fileDown</servlet-name>
-		<servlet-class>spring.util.FileDownload</servlet-class>
+		<servlet-class>com.pmd.util.FileDownload</servlet-class>
 	</servlet>
 		
 	<servlet-mapping>

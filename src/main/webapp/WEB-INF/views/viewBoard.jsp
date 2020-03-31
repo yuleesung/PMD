@@ -30,36 +30,53 @@
     <link rel="stylesheet" href="resources/css/style.css">
     
     <style type="text/css">
-    	#t1{
+    	table#t1, table#t2{
     		width: 100%;
     		border-collapse: collapse;
     		font-size: 18px;
     		color: #000;
     	}
     	
-    	#t1 caption{
+    	table caption{
     		text-indent: -9999px;
     		height: 0;
     	}
     	
-    	#t1 th, #t1 td{
+    	table#t1 th, table#t1 td{
     		border: 1px solid #ccc;
     		padding: 20px;
     		color: black;
     	}
     	
-    	#t1 tbody td a{
+    	table#t1 tbody td a{
     		color: black;
     	}
 		
-		#t1 thead tr, #t1 thead td{
+		table#t1 thead tr, table#t1 thead td{
 			border: none;
 		}
 		
-		#t1 th{
+		table#t1 th{
 			background-color: #d6ecfa;
 			text-align: center;
 		}
+		
+		div#b_content{
+			 height: 600px;
+			 white-space: pre-line;
+			 overflow: hidden;
+		}
+		
+		div#b_content:hover{
+			overflow: scroll;
+		}
+		
+		textarea#comment{
+			width: 100%;
+			resize: none;
+		}
+		
+		
     </style>
   </head>
   <body>
@@ -90,14 +107,16 @@
 		          <table id="t1">
 		          	<caption>게시물 보기</caption>
 		          	<colgroup>
-		          		<col width="200px"/>
+		          		<col width="120px"/>
 		          		<col width="*"/>
-		          		<col width="200px"/>
-		          		<col width="300px"/>
+		          		<col width="120px"/>
+		          		<col width="140px"/>
+		          		<col width="120px"/>
+		          		<col width="80px"/>
 		          	</colgroup>
 		          	<thead>
 		          		<tr>
-		          			<td colspan="4" style="text-align: right;">
+		          			<td colspan="6" style="text-align: right;">
 		          				<c:if test="${vo.uvo.u_idx eq sessionScope.userInfo.u_idx }">
 			          				<input type="button" class="btn btn-primary" value="수정"  style="font-size: 15px;" onclick="javascript: location.href='updateBoard.inc?b_idx=${vo.b_idx}&b_category=${b_category }&nowPage=${nowPage }'"/>
 			          				<input type="button" class="btn btn-danger" value="삭제"  style="font-size: 15px;" onclick="javascript: location.href='delBoard.inc?b_idx=${vo.b_idx}&b_category=${b_category }&nowPage=${nowPage }'"/>
@@ -110,34 +129,60 @@
 		          		<c:if test="${vo ne null }">
 			          		<tr>
 			          			<th>제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
-			          			<td colspan="3">${vo.subject }</td>
+			          			<td colspan="5">${vo.subject }</td>
 			          		</tr>
 			          		<tr>
 			          			<th>파일 이름</th>
 			          			<c:if test="${vo.file_name ne null }">
-			          				<td>${vo.file_name }</td>
+			          				<td><a href="FileDownload?f_name=${vo.file_name }&dir=upload">${vo.file_name }</a></td>
 			          			</c:if>
 			          			<c:if test="${vo.file_name eq null }">
 			          				<td></td>
 			          			</c:if>
 			          			<th>날&nbsp;&nbsp;&nbsp;&nbsp;짜</th>
-			          			<td>${vo.write_date }</td>
+			          			<td>${fn:substring(vo.write_date, 0, 10) }</td>
+			          			<th>조회수</th>
+			          			<td style="text-align: center;">${vo.hit }</td>
 			          		</tr>
 			          		<tr>
-			          			<th colspan="4">내&nbsp;&nbsp;&nbsp;&nbsp;용</th>
+			          			<th colspan="6">내&nbsp;&nbsp;&nbsp;&nbsp;용</th>
 			          		</tr>
 			          		<tr>
-			          			<td colspan="4" style="height: 600px; white-space: pre-line; overflow-y: scroll;">${vo.b_content }</td>
+			          			<td colspan="6"><div id="b_content">${vo.b_content }</div></td>
 			          		</tr>
 		          		</c:if>
 		          		<c:if test="${vo eq null }">
 		          			<tr>
-		          				<td colspan="4" style="height: 300px;">내용이 없습니다.</td>
+		          				<td colspan="6" style="height: 300px;">내용이 없습니다.</td>
 		          			</tr>
 		          		</c:if>
 		          	</tbody>
-		          	
 		          </table>
+		          
+	       		<div class="col-md-12">
+		          	<table id="t2">
+		          		<caption>댓글 테이블</caption>
+		          		<colgroup>
+		          			<col width="100px"/>
+		          			<col width="*"/>
+		          			<col width="100px"/>
+		          		</colgroup>
+		          		<thead>
+		          			<tr>
+		          				<td colspan="3">
+			          				<div id="comment_div">
+			          					<div id="comment_div1">
+			          						<textarea id="comment"></textarea>
+			          					</div>
+			          					<div id="comment_div2">
+			          						<input type="button" class="btn btn-primary" value="댓글등록" onclick="comment()" style="padding: 5px; border-radius: 5px;"/>
+			          					</div>
+			          				</div>
+		          				</td>
+		          			</tr>
+		          		</thead>
+		          	</table>
+		         </div>
 	        </div>
           </div>
 

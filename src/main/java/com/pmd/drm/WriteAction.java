@@ -50,7 +50,7 @@ public class WriteAction {
 		mv.addObject("nowPage", nowPage);
 		
 		
-		mv.setViewName("writeBoard.jsp");
+		mv.setViewName("writeBoard");
 		
 		return mv;
 	}
