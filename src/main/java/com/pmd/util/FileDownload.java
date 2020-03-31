@@ -46,14 +46,17 @@ public class FileDownload extends HttpServlet {
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String filename = request.getParameter("f_name");
-		String dir = request.getParameter("dir");
+		String dir = "resources/"+request.getParameter("dir");
 		
 		String path = getServletContext().getRealPath(dir);
 		
 		// 다시 위의 절대경로를 파일명과 연결시키기
 		String fullPath = path+System.getProperty("file.separator")+filename; 
 			//System.getProperty("file.separatoer") <<< 운영채제에 따라서 /냐 \냐 알아서 들어감
-		
+		System.out.println(filename);
+		System.out.println(dir);
+		System.out.println(path);
+		System.out.println(fullPath);
 		// 파일을 보내기 위한 File객체
 		File f = new File(fullPath);
 		
