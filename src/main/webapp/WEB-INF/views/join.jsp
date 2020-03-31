@@ -17,7 +17,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="resources/css/main.071c1ad7.css" rel="stylesheet">
+<!-- <link href="resources/css/main.071c1ad7.css" rel="stylesheet"> -->
 <link rel="shortcut icon" href="favicon.ico?v=2" type="image/x-icon"/>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script>
@@ -146,7 +146,7 @@
 												}catch(n){}}
 											return t||(t=o),n.inPlace=f,n.flag=a,n}},{}]},{},["loader",2,16,5,3,4]);
 </script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
   // 미지원 브라우저 IE10
@@ -177,7 +177,7 @@
 #root {
   height: 100%
 }
-	
+
 	
 .OutsideNavigation {
     height: 50px;
@@ -386,14 +386,18 @@ margin-bottom: 0px !important;
 							<div class="SignUpOauthSelectStep__oauths">
 						       <!--  <h1 class="entry-title"><span>PMD로 가입하기</span> </h1>-->
 						       <span><small><span class="text-danger">* </span>는 필수 입력 사항입니다.</small></span>
+						       
 						        <hr style="margin-top: 0;"/> 
-					            <form class="form-horizontal" method="post" name="join" id="join" >
+						        
+					            <form class="form-horizontal" method="post" name="join" id="join"  >
+					            
 									<div class="form-group">
 										<label class="control-label col-sm-3">아이디 <span class="text-danger">*</span></label>
 										<div class="col-md-8 col-sm-9">
-											<div class="input-group">
+											<div class="input-group" >
 												<span class="input-group-addon"><i class="glyphicon glyphicon-hand-right"></i></span> 
-												<input type="text" class="form-control" name="u_id" id="u_id" placeholder="ID" value="">
+												<input type="text" class="form-control" name="u_id" id="u_id" 
+													placeholder="4자 이상 입력하세요" value=""  required="required" autofocus>
 											</div>
 											<div id="box">
 												<!-- 아이디 중복체크 영역 -->
@@ -403,55 +407,55 @@ margin-bottom: 0px !important;
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label col-sm-3">비밀&nbsp;번호 <span class="text-danger">*</span> </label>
-										<div class="col-md-5 col-sm-9">
+										<label class="control-label col-sm-3">비밀번호<span class="text-danger">*</span> </label>
+										<div class="col-md-8 col-sm-9">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> 
 												<input type="password" class="form-control" name="u_pw" required="required"
-													id="u_pw" placeholder="password" value="">
+													id="u_pw" placeholder="4자 이상 입력하세요" value="">
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
-										<label class="control-label col-sm-3">비밀번호 재입력<span class="text-danger">*</span> </label>
-										<div class="col-md-5 col-sm-9">
+									<!-- <div class="form-group">
+										<label class="control-label col-sm-3">비밀번호 재확인<span class="text-danger">*</span> </label>
+										<div class="col-md-8 col-sm-9">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-check"></i></span> 
-												<input type="password" class="form-control" name="cpw" id="cpw" placeholder="Confirm your password"
-													value="">
+												<input type="password" class="form-control" name="cpw" id="cpw" placeholder="비밀번호를 재확인하세요"
+													required="required" />
 											</div>
 											<div>
-												<!-- 비밀번호 재확인 -->
+												비밀번호 재확인
 											</div>
 										</div>
-									</div>
+									</div> -->
 									<div class="form-group">
 										<label class="control-label col-sm-3">이름 <span class="text-danger">*</span></label>
 										<div class="col-md-8 col-sm-9">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-												<input type="text" class="form-control" name="u_name" id="u_name" placeholder="Enter your Name here"
-													value="">
+												<input type="text" class="form-control" name="u_name" id="u_name" placeholder="이름을 입력하세요"
+													value="" required="required" />
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-3">닉네임 <span class="text-danger">*</span> </label>
-										<div class="col-md-5 col-sm-9">
+										<div class="col-md-8 col-sm-9">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-star"></i></span> 
 												<input type="text" class="form-control" name="nickname" id="nickname"
-													placeholder="nickname" value="">
+													placeholder="닉네임을 입력하세요" value="" required="required" />
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-3">연락처 <span class="text-danger">*</span> </label>
-										<div class="col-md-5 col-sm-9">
+										<div class="col-md-8 col-sm-9">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span> 
 												<input type="text" class="form-control" name="u_phone" id="u_phone"
-													placeholder="phone" value="">
+													placeholder="ex. 010-1234-1234" pattern="(010)-\d{3,4}-\d{4}">
 											</div>
 										</div>
 									</div>
@@ -459,24 +463,45 @@ margin-bottom: 0px !important;
 									<div class="form-group">
 										<label class="control-label col-sm-3">이메일<span class="text-danger">*</span></label>
 										<div class="col-md-8 col-sm-9">
-												<input type="text" id="email" name="email" class="form-control" style="margin-bottom: 3px;"/>
+											<input type="text" id="email" name="email" class="form-control" style="margin-bottom: 3px;" 
+													placeholder="이메일을 입력하세요" required="required" />
 											<div class="input-group">
 												<span class="input-group-addon"><i style="font-size:18px" class="fa">&#xf1fa;</i></span>
-												<input type="text" id="email2" name="email" placeholder="직접입력" class="form-control" />
-											</div>	
+												<input type="text" name="email" id="input_email" class="form-control" placeholder="@은 빼고 입력하세요" >
+												<select id="email2" name="email" class="form-control" >
+													<option value="1" selected>::직접입력::</option>
+													<option value="naver.com">naver.com</option>
+													<option value="hanmail.net">hanmail.net</option>
+													<option value="hotmail.com">hotmail.com</option>
+													<option value="nate.com">nate.com</option>
+													<option value="yahoo.co.kr">yahoo.co.kr</option>
+													<option value="empas.com">empas.com</option>
+													<option value="dreamwiz.com">dreamwiz.com</option>
+													<option value="freechal.com">freechal.com</option>
+													<option value="lycos.co.kr">lycos.co.kr</option>
+													<option value="korea.com">korea.com</option>
+													<option value="gmail.com">gmail.com</option>
+												</select>
+											</div>
+											<button type="button" id="cfm_btn">중복체크</button>
+											
+											<div id="e_box"> </div>
 										</div>
 										
-										<div id="e_box">
 										
-										</div>
 									</div>
-									
-									<button service="facebook" type="button" style=" background-color: rgba(0, 20, 240, 0.7); margin-left: 0;"
-											class="ant-btn OauthButton OauthButton__facebook SignUpOauthSelectStep__OauthButton" id="join_btn">
-										<img alt="ImgIconFacebook" class="OauthButton__iconImg" src="resources/images/P_icon.png">
-										<div class="OauthButton__content">PMD로 회원가입</div>
-									</button>
+									<div>
+										<button type="button" style=" background-color: rgba(0, 20, 245, 0.7); margin-left: 0;"
+												class="ant-btn OauthButton OauthButton__facebook SignUpOauthSelectStep__OauthButton" id="join_btn"
+												onclick="sendData()">
+											<img alt="ImgIconFacebook" class="OauthButton__iconImg" src="resources/images/P_icon.png">
+											<div class="OauthButton__content">PMD로 회원가입</div>
+										</button>
+									</div>	
 								</form>
+							</div>
+							<div class="confirm_area">
+							
 							</div>
 							<!-- ----------- OR ----------- -->
 							<div class="col-md-12 ">
@@ -485,7 +510,7 @@ margin-bottom: 0px !important;
 								</div>
 							</div>
 							<!-- 소셜 회원가입 버튼 영역 -->
-							<button service="naver" type="button" style="background: #60d04c;" id="sns_btn"
+							<button service="naver" type="button" style="background: #60d04c;" onclick="location.href='naverReg.inc?type=naver'" 
 								class="ant-btn OauthButton OauthButton__naver SignUpOauthSelectStep__OauthButton">
 								<img alt="ImgIconNaver" class="OauthButton__iconImg"
 									src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3JpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDE0IDc5LjE1Njc5NywgMjAxNC8wOC8yMC0wOTo1MzowMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpmNWVmZjVlMy0zYTU4LWMzNGUtYTMxNS0xYTVkYTE5YTBjMjAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDNGQzYwNUFDODVEMTFFNDk0NkRCQzQ1MzJEMkZBRDYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDNGQzYwNTlDODVEMTFFNDk0NkRCQzQ1MzJEMkZBRDYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ODAxYjhhMzItZjA4My1kZTQxLTkwMzgtZTIyNzY4ZDZjMWRiIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkUwQTE1MTEzODEzMTExRTRBMkQ2RTFBQUFFMDlENUU0Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+DvnoVAAAASJJREFUeNpi/P//PwMtARMDjcHwtOAOEH8C4jdA/AGIPwJxIhZ1AkB8H0ntJ6heFMCIJZL/gcTRxP4CsSIQP0YSEwLit2jq/qM7GpsP3mERYwbijVgc8oGQXlLiwBCIm5F9T4tIrgFic1qnovVQ+j006KhugSQQ90HZ3wkpZiHCQFBK4UdTWwjEl4D4HhCLUeqD20Ach0V8HhCrUSOIlIF4ORB3ouchaF6g2AIOqGEVaBmNaqnoL7RYAAF/WhV2sPLkPBDX0joftADxSWIVYyvsfqMlSZACEbRyBpQXHgAxG5reP0DMSsgHr6EF2Xco/QopiGDgORAnQx3zB0nta2IyWgYQ8wLxL6gLv0AxOlgCtYAJaglI7Wdigmi0TkYBAAEGAElhSK5ZcYQXAAAAAElFTkSuQmCC">
@@ -517,12 +542,11 @@ margin-bottom: 0px !important;
 			<div></div>
 			<div></div>
 		</div>
-	</div>
 	
 	
 	
 	<!--[if (!IE) | (gte IE 10) ]><!-->
-	<script src="resources/js/main.3f19178e.js"></script>
+	<!-- <script src="resources/js/main.3f19178e.js"></script> -->
 	<input type="hidden" id="naver_state" val="325e33b1163936439c34fb65ab18fe36" />
 	<input type="hidden" id="line_state" val="8a58e540af5e4314d022e48e7b2234cf" />
 	
@@ -533,15 +557,58 @@ margin-bottom: 0px !important;
 		</div>
 	</div>
 	
+	<div id="msg"></div>
+	
 	
 	<!-- ----------------- script ----------------- -->
-	<script src="resources/js/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script src="resources/js/jquery-3.2.1.min.js"></script>
 	<script>
+	
+	
+	// PMD회원가입 버튼 눌렀을 때
+	function sendData(){
+		
+		
+		var u_id = $("#u_id").val().trim();
+		var u_pw = $("#u_pw").val().trim();
+		var u_name = $("#u_name").val().trim();
+		var nickname = $("#nickname").val().trim();
+		var u_phone = $("#u_phone").val().trim();
+		var email = $("#email").val().trim() + "@"+$("#input_email").val().trim();
+		
+		var param = "u_id="+encodeURIComponent(u_id)+
+				"&u_pw="+encodeURIComponent(u_pw)+
+				"&u_name="+encodeURIComponent(u_name)+
+				"&nickname="+encodeURIComponent(nickname)+
+				"&u_phone="+encodeURIComponent(u_phone)+
+				"&email="+encodeURIComponent(email);
+		
+		$.ajax({
+			url: "join.inc",
+			type: "POST",
+			data: param
+			
+		}).done(function(data){
+				//window.alert("${data.msg}");
+				window.location.href ="login.inc";
+		}).fail(function(err){
+			console.log(err);
+			
+		});
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	$(function(){
 		
 		
-		//아이디 중복 체크
+		//아이디 중복 체크	ChkAction
 		$("#u_id").bind("keyup",function(){
 		      //사용자가 입력한 id값을 얻어낸다.
 		      var str = $(this).val();
@@ -559,11 +626,12 @@ margin-bottom: 0px !important;
 		            if(data.value == true){
 		               //id가 중복일 때,
 		               $("#box").html("<pre style='color:red; font-weight:bold; background: #fff; font-size:12px;'>사용 불가능</pre>");
+		               $("#u_id").focus();
 		               
 		            }else{
 		               //id가 중복이 아닐 때,
 		               $("#box").html("<pre style='color:green; font-weight:bold; background: #fff;font-size:12px;'>사용 가능</pre>");
-		               console.log(data.value)
+		               
 		            }
 		            
 		         }).fail(function (err) {
@@ -576,19 +644,20 @@ margin-bottom: 0px !important;
 		   
 		});
 		
-		// 이메일 중복 체크
-		$("#email").bind("keyup",function(){
-		      //사용자가 입력한 id값을 얻어낸다.
-		      var str = $(this).val();
+		// 이메일 중복 체크 ChkAction
+		$("#cfm_btn").bind("click",function(){
 		      
-		      if(str.trim().length>3){
+			var email = $("#email").val().trim() + "@"+$("#input_email").val().trim();
+		    
+			if(email.length > 3 ){
 		     	//email 4자이상 입력시 수행   
+		     	
 		         
 		         $.ajax({
 		            
 		            url: "emailchk.inc",
 		            type: "post",
-		            data: "email="+encodeURIComponent(str.trim())
+		            data: "email="+encodeURIComponent(email)
 		            
 		         }).done(function (data) {
 		            if(data.value == true){
@@ -598,7 +667,6 @@ margin-bottom: 0px !important;
 		            }else{
 		               //id가 중복이 아닐 때,
 		               $("#e_box").html("<pre style='color:green; font-weight:bold; background: #fff;font-size:12px;'>사용 가능</pre>");
-		               console.log(data.value)
 		            }
 		            
 		         }).fail(function (err) {
@@ -611,8 +679,19 @@ margin-bottom: 0px !important;
 		   
 		});
 		
-		
-		
+		// 이메일 입력방식 선택
+		$("#email2").change(function(){
+			$("#email2 option:selected").each(function(){
+				
+				if($(this).val() == '1'){	 //직접입력 일 경우
+					$("#input_email").val(''); // 값 초기화
+					$("#input_email").focus();
+				} else{	//직접 입력이 아닐 경우
+					$("#input_email").val($(this).text());	//선택값 입력
+				}
+			});
+			
+		});
 		
 		
 		/* 유효성 검사 */
@@ -620,7 +699,7 @@ margin-bottom: 0px !important;
 			
 			var u_id = $("#u_id").val().trim();
 			var u_pw = $("#u_pw").val().trim();
-			var cpw = $("#cpw").val().trim();
+			//var cpw = $("#cpw").val().trim();
 			var u_name = $("#u_name").val().trim();
 			var nickname = $("#nickname").val().trim();
 			var u_phone = $("#u_phone").val().trim();
@@ -637,11 +716,11 @@ margin-bottom: 0px !important;
 				$("#u_pw").focus();
 				return;
 			}
-			if( cpw.length <4){
-				alert("비밀번호를 재입력하세요!");
+		/* 	if( cpw.length <4){
+				alert("비밀번호를 재확인하세요!");
 				$("#cpw").focus();
 				return;
-			}
+			} */
 			if( u_name.length <1){
 				alert("이름을 입력하세요!");
 				$("#u_name").focus();
@@ -654,7 +733,7 @@ margin-bottom: 0px !important;
 			}
 			if( u_phone.length <1){
 				alert("연락처를 입력하세요!");
-				$("#u_name").focus();
+				$("#u_phone").focus();
 				return;
 			}
 			if( email.length <1){
@@ -668,10 +747,9 @@ margin-bottom: 0px !important;
 				return;
 			}
 			
-			
-			
-			
 		});
+		
+		
 		
 		
 		

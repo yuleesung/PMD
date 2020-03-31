@@ -30,12 +30,18 @@ public class ChkAction {
 		return map;
 		
 	}
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/emailchk.inc", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Boolean> emailchk(String email) {
 		
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
-		boolean value = b_dao.matchMember(email);
+		
+		boolean value = b_dao.checkEmail(email);
 		map.put("value", value);
 		
 		return map;
