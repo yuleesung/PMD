@@ -1,8 +1,9 @@
 package com.pmd.vo;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class UserVO {
+public class UserVO implements Serializable{
 	
 	private String u_idx, u_id, u_pw, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status;
 

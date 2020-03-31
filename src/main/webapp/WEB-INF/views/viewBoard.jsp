@@ -73,9 +73,37 @@
 		
 		textarea#comment{
 			width: 100%;
+			height: 100px;
 			resize: none;
+			border-color: #999;
+			border-top-left-radius: 3px;
+			border-top-right-radius: 3px;
+			margin-bottom: 0;
+			border-bottom: none;
+		}
+		div#comment_div1{
+			margin: 0;
+			padding: 0;
+			height: 100px;
 		}
 		
+		div#comment_div2{
+			width: 100%;
+			height: 100%;
+			border: 1px solid #999;
+			border-top: 1px solid #ccc;
+			margin: 0;
+			padding: 5px;
+			text-align: right;
+			border-bottom-left-radius: 3px;
+			border-bottom-right-radius: 3px;
+		}
+		
+		table#t2 tbody td{
+			border-bottom: 1px solid #ccc;
+			padding: 5px;
+			padding-top: 12px;
+		}
 		
     </style>
   </head>
@@ -119,7 +147,7 @@
 		          			<td colspan="6" style="text-align: right;">
 		          				<c:if test="${vo.uvo.u_idx eq sessionScope.userInfo.u_idx }">
 			          				<input type="button" class="btn btn-primary" value="수정"  style="font-size: 15px;" onclick="javascript: location.href='updateBoard.inc?b_idx=${vo.b_idx}&b_category=${b_category }&nowPage=${nowPage }'"/>
-			          				<input type="button" class="btn btn-danger" value="삭제"  style="font-size: 15px;" onclick="javascript: location.href='delBoard.inc?b_idx=${vo.b_idx}&b_category=${b_category }&nowPage=${nowPage }'"/>
+			          				<input type="button" class="btn btn-danger" value="삭제"  style="font-size: 15px;" onclick="delPost('${vo.b_idx}', '${nowPage }', '${b_category }')"/>
 		          				</c:if>
 		          				<input type="button" class="btn btn-primary" value="목록" style="font-size: 15px;" onclick="javascript: location.href='list.inc?nowPage=${nowPage}&b_category=${b_category }'"/>
 		          			</td>
@@ -160,27 +188,42 @@
 		          </table>
 		          
 	       		<div class="col-md-12">
+	       			<div id="comment_div">
+       					<div id="comment_div1">
+       						<textarea id="comment" placeholder="여기서 댓글 작성하세요!!"></textarea>
+       					</div>
+       					<div id="comment_div2">
+       						<input type="button" class="btn btn-primary" value="댓글등록" id="comment_btn" style="padding: 5px; border-radius: 5px;"/>
+       					</div>
+       				</div>
 		          	<table id="t2">
 		          		<caption>댓글 테이블</caption>
 		          		<colgroup>
-		          			<col width="100px"/>
+		          			<col width="160px"/>
 		          			<col width="*"/>
-		          			<col width="100px"/>
+		          			<col width="120px"/>
+		          			<col width="120px"/>
 		          		</colgroup>
-		          		<thead>
+		          		<tbody id="t2_tbody">
 		          			<tr>
-		          				<td colspan="3">
-			          				<div id="comment_div">
-			          					<div id="comment_div1">
-			          						<textarea id="comment"></textarea>
-			          					</div>
-			          					<div id="comment_div2">
-			          						<input type="button" class="btn btn-primary" value="댓글등록" onclick="comment()" style="padding: 5px; border-radius: 5px;"/>
-			          					</div>
-			          				</div>
-		          				</td>
+		          				<td colspan="4" style="padding-top: 20px; font-weight: bold;">댓글 ${fn:length(vo.c_list) }</td>
 		          			</tr>
-		          		</thead>
+		          			<c:if test="${fn:length(vo.c_list) > 0}">
+			          			<c:forEach var="cvo" items="${vo.c_list }" varStatus="st">
+				          			<tr>
+				          				<td>${cvo.uvo.u_name }</td>
+				          				<td>${cvo.c_content }</td>
+				          				<td>${fn:substring(cvo.write_date, 0, 10) }</td>
+				          				<td>
+					          				<c:if test="${cvo.u_idx eq sessionScope.userInfo.u_idx }">
+					          					<input type="button" value="수정" onclick="updateComment(${st.index+1}, ${fn:length(vo.c_list)+1}, ${cvo.c_idx })"/>
+					          					<input type="button" value="삭제" onclick="delComment(${cvo.c_idx })"/>
+				          					</c:if>
+				          				</td>
+				          			</tr>
+			          			</c:forEach>
+		          			</c:if>
+		          		</tbody>
 		          	</table>
 		         </div>
 	        </div>
@@ -259,6 +302,126 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             });
             }
         });
+	    
+	    $(function(){
+	    	$("#comment_btn").click(function(){
+	    		var comment = $("#comment").val();
+	    		var c_url = "comment.inc";
+	    		var param = "c_content="+comment+"&b_idx=${vo.b_idx}&u_idx=${sessionScope.userInfo.u_idx}";
+	    		
+	    		if(comment.trim().length < 1){
+	    			alert("댓글 내용을 입력하세요!");
+	    			$("#comment").focus();
+	    			return;
+	    		}
+	    		
+	    		ajax_m(c_url, param);
+	    	});
+	    });
+	    
+	    function updateComment(cnt, len, c_idx) {
+			var second_td = document.getElementById("t2_tbody").children[cnt].children[1];
+			var third_td = document.getElementById("t2_tbody").children[cnt].children[3];
+			var second_tdContent = second_td.innerHTML;
+			
+			for(var i=1; i<len; i++){
+				document.getElementById("t2_tbody").children[i].children[3].innerHTML = "";
+			}
+			
+			second_td.innerHTML = "<textarea id='revision"+cnt+"' style='width: 100%; height: 60px; resize: none;'>"+second_tdContent+"</textarea>";
+			document.getElementById("revision"+cnt).select();
+			third_td.innerHTML = "<input type='button' value='저장' onclick='c_save("+cnt+", \""+c_idx+"\")'/>&nbsp;<input type='button' value='취소' onclick='c_cancel()'/>";
+		}
+	    
+	    function delComment(c_idx) {
+			var c_url = "delComment.inc";
+			var param = "c_idx="+c_idx+"&b_idx=${vo.b_idx}";
+			
+			var chk = confirm("삭제 하시겠습니까?");
+			
+			if(chk){
+				ajax_m(c_url, param);
+			}
+		}
+	    
+	    function c_save(cnt, c_idx) {
+			var ta = $("#revision"+cnt).val();
+			var c_url = "updateComment.inc";
+			var param = "c_content="+ta+"&b_idx=${vo.b_idx}&u_idx=${sessionScope.userInfo.u_idx}&c_idx="+c_idx;
+			
+			if(ta.trim().length < 1){
+    			alert("댓글 내용을 입력하세요!");
+    			$("#revision"+cnt).focus();
+    			return;
+    		}
+			
+			ajax_m(c_url, param);
+		}
+	    
+	    function c_cancel() {
+			var c_url = "viewComment.inc";
+			var param = "b_idx=${vo.b_idx}";
+			
+			ajax_m(c_url, param);
+		}
+	    
+	    function ajax_m(c_url, param) {
+	    	$.ajax({
+    			url: c_url,
+    			type: "post",
+    			data: param,
+    			dataType: "json"
+    		}).done(function(data){
+    			// console.log(data.c_ar);
+    			var str = "<tr><td colspan='4' style='padding-top: 20px; font-weight: bold;'>댓글 "+data.c_ar.length+"</td></tr>";
+    			
+    			for(var i=0; i<data.c_ar.length; i++){
+    				str += "<tr>";
+    				str += "<td>"+data.c_ar[i].uvo.u_name+"</td>";
+      				str += "<td>"+data.c_ar[i].c_content+"</td>";
+      				str += "<td>"+data.c_ar[i].write_date.substring(0, 10)+"</td>";
+      				
+      				if(data.c_ar[i].uvo.u_idx == "${sessionScope.userInfo.u_idx}"){
+          				str += "<td>";
+	          			str += "<input type='button' value='수정' onclick='updateComment("+(i+1)+", "+(data.c_ar.length+1)+", "+data.c_ar[i].c_idx+")'/>&nbsp;";
+	          			str += "<input type='button' value='삭제' onclick='delComment("+data.c_ar[i].c_idx+")'/>";
+          				str += "</td>";
+      				}else{
+      					str += "<td>";
+      					str += "</td>";
+      				}
+      				
+      				str += "</tr>";
+    			}
+    			
+    			$("#t2 tbody").html(str);
+    		}).fail(function(err){
+    			console.log(err);
+    		});
+		}
+	    
+	    function delPost(b_idx, nowPage, b_category) {
+	    	
+	    	var chk = confirm("정말 삭제 하시겠습니까?");
+	    	var param = "b_idx="+encodeURIComponent(b_idx);
+	    	
+	    	if(chk){
+				$.ajax({
+					url: "delBoard.inc",
+					type: "post",
+					data: param,
+					dataType: "json"
+				}).done(function(data){
+					if(data.chk){
+						location.href = "list.inc?nowPage="+nowPage+"&b_category="+b_category;
+					}else{
+						alert("삭제를 실패하였습니다!");
+					}
+				}).fail(function(err){
+					console.log(err);
+				});
+	    	}
+		}
     </script>
   </body>
 </html>

@@ -1,6 +1,8 @@
 package com.pmd.vo;
 
-public class Bulletin_C_VO {
+import java.io.Serializable;
+
+public class Bulletin_C_VO implements Serializable{
 	
 	private String c_idx, c_content, write_date, ip, status, b_idx, u_idx;
 

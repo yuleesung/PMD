@@ -1,11 +1,12 @@
 package com.pmd.vo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 		
 
-public class BulletinVO {
+public class BulletinVO implements Serializable{
 	
 	private String b_idx, subject, b_content, file_name, write_date, ip, hit, status, b_category, u_idx, nowPage, secret_content;
 	
