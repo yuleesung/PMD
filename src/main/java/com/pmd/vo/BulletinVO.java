@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class BulletinVO {
 	
-	private String b_idx, subject, b_content, file_name, write_date, ip, hit, status, b_category, u_idx, nowPage;
+	private String b_idx, subject, b_content, file_name, write_date, ip, hit, status, b_category, u_idx, nowPage, secret_content;
 	
 	private List<Bulletin_C_VO> c_list;
 
@@ -16,6 +16,15 @@ public class BulletinVO {
 	private MultipartFile upload;
 
 	
+	
+	public String getSecret_content() {
+		return secret_content;
+	}
+
+	public void setSecret_content(String secret_content) {
+		this.secret_content = secret_content;
+	}
+
 	public String getNowPage() {
 		return nowPage;
 	}
