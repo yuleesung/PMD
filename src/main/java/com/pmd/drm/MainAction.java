@@ -238,10 +238,10 @@ public class MainAction {
 		Calendar cal = Calendar.getInstance(); // 오늘날짜
 		String today = format1.format(cal.getTime());
 		
-		cal.add(Calendar.MONTH, 6); // 6개월 뒤
+		cal.add(Calendar.YEAR, 1); // 1년 뒤
 		String future = format1.format(cal.getTime());
 		
-		// url은 현재날짜 기준으로 6개월 뒤 까지의 교육과정을 가져옴
+		// url은 현재날짜 기준으로 1년 뒤 까지의 교육과정을 가져옴
 		// 리스트는 최소 10개이상
 		URL url = new URL("http://www.hrd.go.kr/hrdp/api/apipo/APIPO0101T.do?returnType=XML&pageNum=1&"
 				+ "&authKey=Aflc7YIke55KR8qliEbmLwJGWIpsH2DL&sort=ASC&outType=1&srchTraStDt="+today+"&"

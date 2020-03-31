@@ -4,6 +4,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,9 +41,7 @@ public class SearchAction {
 	public Map<String, Object> list(String crseTracseSe, String srchTraOrganNm, String srchTraProcessNm,
 									String srchTraArea1, String srchKeco1, String srchTraStDt, 
 									String srchTraEndDt, String nowPage) throws Exception{
-		
-		
-		
+
 		
 		/*
 		::: 받는 인자들 :::
@@ -66,14 +65,28 @@ public class SearchAction {
 		// 날짜값을 받지 못 했을 경우
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
 		Calendar cal = Calendar.getInstance();
-		if(srchTraStDt == null) //시작날짜:today
-			srchTraStDt = format1.format(cal.getTime()); 		
 		
-		if(srchTraEndDt == null) { //마지막날짜:today+6month
-			cal.add(Calendar.MONTH, 6);
-			srchTraEndDt = format1.format(cal.getTime()); 
+		if(srchTraStDt == null) { 
+			// 둘 다 미선택
+			srchTraStDt = format1.format(cal.getTime()); // today
+			
+			cal.add(Calendar.YEAR, 1);
+			srchTraEndDt = format1.format(cal.getTime()); //마지막날짜:today+1년
+			
+		} else if(srchTraStDt != null) {
+			// 시작날짜만 선택
+			Date date = null;
+	        
+	        try {
+	            date = format1.parse(srchTraStDt);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+			
+	        cal.setTime(date);
+	        cal.add(Calendar.YEAR, 1);
+	        srchTraEndDt = format1.format(cal.getTime()); // 마지막날짜	        
 		}
-		
 
 		
 		// url 링크주소를 만들기 위한 sb

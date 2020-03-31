@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>글쓰기</title>
+<title>수정하기</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -72,21 +72,25 @@ input[type=text]{
 		</div>
 	</section>
 
-
+<c:choose>
+<c:when test="${userInfo.u_idx ne null }">
 	<section class="section element-animate">
 		<div class="container">
-		<form class="form-horizontal" method="post" action="write.inc" name="writeFrm" enctype="multipart/form-data">
+		<form class="form-horizontal" method="post" action="edit.inc" name="editFrm" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="title" class="col-sm-2 control-label">Title</label>
 				<div class="col-sm-10">
 					<select id="category" name="b_category" class="col-sm-10" style="width: 150px;">
 						<option value="none">:: Category ::</option>
-						<option value="free">자유게시판</option>
-						<option value="qa">Q&A</option>
-						<option value="adv">광고문의</option>
+						<option value="free"
+						<c:if test="${vo.b_category == 'free' }">selected</c:if>>자유게시판</option>
+						<option value="qa"
+						<c:if test="${vo.b_category == 'qa' }">selected</c:if>>Q&A</option>
+						<option value="adv"
+						<c:if test="${vo.b_category == 'adv' }">selected</c:if>>광고문의</option>
 					</select>
 					<input type="text" class="form-control" id="title" name="subject"
-						placeholder="제목" style="width: 100%;">
+						placeholder="제목" style="width: 100%;" value="${vo.subject }"/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -95,30 +99,27 @@ input[type=text]{
 					<input type="file" name="upload" id="upload"/>
 				</div>
 			</div>
-			
+			<input type="hidden" name="b_idx" id="b_idx" value="${vo.b_idx }"/>
 			<input type="hidden" name="u_idx" value="${userInfo.u_idx }"/>
 			<input type="hidden" name="b_content" id="str"/>
-			<input type="hidden" id="ran_val" value="${ran_val }">
 		</form>
 
 		<table>
 			<tbody>
 				<tr>
-					<td style="padding-bottom: 15px; padding-left: 15px;">
-					<textarea name="content" cols="50" rows="8" id="content"></textarea>
+					<td style="padding-bottom: 15px; padding-left: 15px; width: 900px;">
+					<textarea name="content" cols="50" rows="8" id="content">${vo.b_content }</textarea>
 					</td>
 				</tr>
-
 				<tr>
 					<td>
-					<label for="human" class="col-sm-2 control-label" style="font-size: 16px;">${ran1 } + ${ran2 } = ? </label>
-					<input type="text" class="form-control" id="input_val" placeholder="매크로방지" style="width: 150px; margin-left: 15px;">
 					<div style="float: right;">
 					<label style="font-size: 16px; color: black; font-weight: bold;">작성자 : ${userInfo.u_name }</label><br/>
 					<input id="submit_btn" type="button"
 						value="Submit" class="btn btn-primary">&nbsp;&nbsp;
 						<input id="cancel_btn" type="button"
-							value="Cancel" class="btn btn-primary" onclick="location.href='list.inc?b_category=${b_category}'">
+							value="Cancel" class="btn btn-primary" onclick="location.href='viewBoard.inc?
+							b_idx=${vo.b_idx}&nowPage=${vo.nowPage }&b_category=${vo.b_category }'"> <!-- 해당게시물로 돌아가기 -->
 					</div>
 					</td>
 				</tr>
@@ -126,7 +127,13 @@ input[type=text]{
 		</table>
 		</div>
 	</section>
-
+	</c:when>
+	<c:otherwise>
+		<div class="container">
+			<h1 style="height: 300px; text-align: center; padding-top: 30px; font-style: inherit;">로그인 후 이용해주세요</h1>
+		</div>
+	</c:otherwise>
+</c:choose>
 
 	<footer class="site-footer" role="contentinfo">
 		<div class="container">
@@ -198,24 +205,19 @@ input[type=text]{
 $(function(){
 
 	$("#submit_btn").click(function(){
-		var ran_val = $("#ran_val").val();
-		var input_val = $("#input_val").val();
-		
+
 		var category = $("#category").val();
 		var title = $("#title").val();
 		var str = $("#content").val();
 		$("#str").val(str);
-		
-		if(input_val == ran_val){			
-			if(category != "none" && title.trim().length > 0 && str.trim().length > 0){
-				//console.log(category);
-				document.writeFrm.submit();
-			} else{
-				alert("다시 확인하세요");
-			}
+					
+		if(category != "none" && title.trim().length > 0 && str.trim().length > 0){
+			//console.log(category+","+title);
+			document.editFrm.submit();
 		} else{
 			alert("다시 확인하세요");
 		}
+
 	});
 	
 	
