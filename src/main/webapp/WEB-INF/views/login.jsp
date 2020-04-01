@@ -40,13 +40,13 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="username" id="id" name="u_id">				
+						<input type="text" class="form-control" placeholder="username" id="id" name="u_id" onkeypress="enterkey(this.form)">				
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="password" id="pw" name="u_pw">
+						<input type="password" class="form-control" placeholder="password" id="pw" name="u_pw" onkeypress="enterkey(this.form)">
 					</div>				
 					<div class="form-group">
 						<input type="button" value="Login" class="btn float-right login_btn" id="login_btn">
@@ -73,28 +73,39 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			if('${loginFail}' == 'fail')
-				alert("아이디나 비밀번호가 틀렸습니다");
-		});
-	
-		$(function(){		
-			$("#login_btn").click(function(){
-				var id = $("#id").val();
-				var pw = $("#pw").val();
-				
-				if(id.trim().length < 1){
-					alert("아이디 미입력");
-					return;
-				}
-				if(pw.trim().length < 1){
-					alert("패스워드 미입력");
-					return;
-				}
-				
-				document.loginForm.submit();
+
+		$(function() {
+			$("#login_btn").click(function() { /* 로그인 버튼클릭 시 */
+				login_submit(); // 기능호출
 			});
 		});
+
+		$(document).ready(function() {
+			if ('${loginFail}' == 'fail')
+				alert("아이디나 비밀번호가 틀렸습니다");
+		});
+
+		function enterkey(frm) { /* 엔터버튼 눌렀을 때 진입 */
+			if (window.event.keyCode == 13) {
+				login_submit(); // 기능호출
+			}
+		}
+
+		function login_submit() { // 로그인 이벤트 실행
+			var id = $("#id").val();
+			var pw = $("#pw").val();
+
+			if (id.trim().length < 1) {
+				alert("아이디 미입력");
+				return;
+			}
+			if (pw.trim().length < 1) {
+				alert("패스워드 미입력");
+				return;
+			}
+
+			document.loginForm.submit();
+		}
 	</script>
 </body>
 </html>
