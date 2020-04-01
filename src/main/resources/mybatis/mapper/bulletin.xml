@@ -192,15 +192,15 @@
 		)where r_num between #{begin} and #{end}
 	</select>
 	
-	<!-- 네이버로 회원가입 -->
-	<insert id="naverReg" parameterType="java.util.Map">
-		insert into users_t(u_idx, u_name, nickname, email, sns_id, sns_type, reg_date, status <if test="sns_profile != null">, sns_profile</if>)
-		values(users_t_seq.nextval, #{u_name}, #{nickname}, #{email}, #{sns_id}, #{sns_type}, sysdate, 0 <if test="sns_profile != null">, #{sns_profile}</if>)
+	<!-- 소셜 회원가입 -->
+	<insert id="socialReg" parameterType="java.util.Map">
+		insert into users_t(u_idx<if test="u_name != null">, u_name</if>, nickname, email, sns_id, sns_type, reg_date, status <if test="sns_profile != null">, sns_profile</if>)
+		values(users_t_seq.nextval<if test="u_name != null">, #{u_name}</if>, #{nickname}, #{email}, #{sns_id}, #{sns_type}, sysdate, 0 <if test="sns_profile != null">, #{sns_profile}</if>)
 	</insert>
 	
-	<!-- 네이버로 로그인 -->
-	<select id="naverLogin" resultType="com.pmd.vo.UserVO" parameterType="String">
-		select * from users_t where sns_id = #{sns_id} and status = 0
+	<!-- 소셜 로그인 -->
+	<select id="socialLogin" resultType="com.pmd.vo.UserVO" parameterType="java.util.Map">
+		select * from users_t where sns_id = #{sns_id} and status = 0 and sns_type = #{sns_type}
 	</select>
 	
 	<!-- 네이버 회원탈퇴를 했을 때, DB에 저장된 ID값이 있는지 확인 -->

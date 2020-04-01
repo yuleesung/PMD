@@ -32,6 +32,7 @@
 				<h3>Sign In</h3>
 				<div class="d-flex justify-content-end social_icon">
 					<span><a href="${url }"><img alt="naver" src="resources/images/naverLogin.PNG"/></a></span>
+					<span><a href="javascript:loginWithKakao()"><img alt="kakao" src="resources/images/kakao_login_btn.png"/></a></span>
 				</div>
 			</div>
 			<div class="card-body">
@@ -67,13 +68,50 @@
 		</div>
 	</div>
 </div>
+
+	<div>
+		<form action="kakaoLogin.inc" method="post" name="kakaoFrm">
+			<input type="hidden" name="sns_id"/>
+			<input type="hidden" name="nickname"/>
+			<input type="hidden" name="email"/>
+		</form>
+	</div>
 	
 	<!-- 스크립트 영역 -->
 	<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script type="text/javascript">
-
+		// 카카오 인증키 등록
+	    Kakao.init('5899acc3cddfce334c3dd49beff92a37');
+	
+	    // SDK 초기화 여부를 판단합니다. true면 정상등록
+	    // console.log(Kakao.isInitialized());
+	    function loginWithKakao() {
+		    Kakao.Auth.login({
+		      success: function(authObj) {
+		    	  Kakao.API.request({
+	    	        url: '/v2/user/me',
+	    	        success: function(res) {
+	    	          // alert(JSON.stringify(res))
+	    	          // console.log(JSON.stringify(res))
+	    	          sendData(res)
+	    	        },
+	    	        fail: function(error) {
+	    	          alert(
+	    	            'login success, but failed to request user information: ' +
+	    	              JSON.stringify(error)
+	    	          )
+	    	        },
+	    	      })
+		      },
+		      fail: function(err) {
+		        alert(JSON.stringify(err))
+		      },
+		    })
+		  }
+    
 		$(function() {
 			$("#login_btn").click(function() { /* 로그인 버튼클릭 시 */
 				login_submit(); // 기능호출
@@ -105,6 +143,23 @@
 			}
 
 			document.loginForm.submit();
+		}
+		
+		function sendData(res) {
+			var id = res["id"];
+			var kakao_account = res["kakao_account"];
+			var profile = kakao_account["profile"];
+			var nickname = profile["nickname"];
+			var email = kakao_account["email"];
+			
+			document.kakaoFrm.sns_id.value = id;
+			document.kakaoFrm.nickname.value = nickname;
+			
+			if(email != undefined){
+				document.kakaoFrm.email.value = email;
+			}
+			
+			document.kakaoFrm.submit();
 		}
 	</script>
 </body>

@@ -14,11 +14,13 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pmd.util.MakePath;
 import com.pmd.vo.UserVO;
 
 import mybatis.dao.BulletinDAO;
@@ -116,36 +118,31 @@ public class CallBackAction {
 				map.put("sns_type", "naver");
 				// System.out.println(name+"/"+nickname+"/"+id+"/"+email);
 				
-				UserVO vo = b_dao.naverLogin(sns_id);
+				Map<String, String> social = new HashMap<String, String>();
+				social.put("sns_id", sns_id);
+				social.put("sns_type", "naver");
+				
+				UserVO vo = b_dao.socialLogin(social);
 				
 				if(vo == null) { // 네이버 연동을 한 적이 없거나, 연동해제를 한 경우
 					UserVO check = b_dao.naverCheck(sns_id);
 					
 					if(check == null) { // 네이버 연동을 한 적이 없는 경우
-						boolean chk = b_dao.naverReg(map); // 회원가입하기
-						vo = b_dao.naverLogin(sns_id);
+						boolean chk = b_dao.socialReg(map); // 회원가입하기
+						vo = b_dao.socialLogin(social);
 						session.setAttribute("userInfo", vo);
 					}else { // 네이버 연동해제를 한 경우
 						boolean chk = b_dao.naverReReg(sns_id); // 탈퇴되었던 회원정보 되살리기
-						vo = b_dao.naverLogin(sns_id);
+						vo = b_dao.socialLogin(social);
 						session.setAttribute("userInfo", vo);
 					}
 				}else { // 네이버 연동이 되어 있는 경우
 					session.setAttribute("userInfo", vo);
 				}				
 				
-				if(session.getAttribute("path").equals("main")) // Main
-					mv.setViewName("redirect:/main.inc");
-				else if(session.getAttribute("path").equals("view")) // View 
-					mv.setViewName("redirect:/view.inc?srchTrprId="+session.getAttribute("srchTrprId")
-							+"&srchTrprDegr="+session.getAttribute("srchTrprDegr")+"&traStartDate="+session.getAttribute("traStartDate")
-							+"&traEndDate="+session.getAttribute("traEndDate")+"&trainstCstId="+session.getAttribute("trainstCstId")
-							+"&superViser="+session.getAttribute("superViser")+"&trainTarget="+session.getAttribute("trainTarget")
-							+"&regCourseMan="+session.getAttribute("regCourseMan")+"&yardMan="+session.getAttribute("yardMan"));
-				else if(session.getAttribute("path").equals("list")) // list
-					mv.setViewName("redirect:/list.inc?nowPage="+session.getAttribute("nowPage")+"&b_category="+session.getAttribute("b_category"));
-				else if(session.getAttribute("path").equals("viewBoard"))
-					mv.setViewName("redirect:/viewBoard.inc?nowPage="+session.getAttribute("nowPage")+"&b_category="+session.getAttribute("b_category")+"&b_idx="+session.getAttribute("b_idx"));
+				MakePath mp = new MakePath();
+				
+				mv.setViewName(mp.decidePath(session));
 					
 			} else {
 				mv.setViewName("redirect:/login.inc");
@@ -203,6 +200,36 @@ public class CallBackAction {
 			URL url = new URL(apiUri);
 			mv.setViewName(naverLeaveConnection(url));
 		}
+		
+		return mv;
+	}
+	
+	@RequestMapping("/kakaoLogin.inc")
+	public ModelAndView kakaoLogin(String sns_id, String nickname, String email) {
+		ModelAndView mv = new ModelAndView();
+		
+		Map<String, String> kakaoLogin = new HashMap<String, String>();
+		kakaoLogin.put("sns_id", sns_id);
+		kakaoLogin.put("sns_type", "kakao");
+		
+		UserVO vo = b_dao.socialLogin(kakaoLogin);
+		
+		if(vo == null) { // 카카오 연동이 안 되어 있을 경우
+			Map<String, String> kakaoReg = new HashMap<String, String>();
+			kakaoReg.put("sns_id", sns_id);
+			kakaoReg.put("nickname", nickname);
+			kakaoReg.put("email", email);
+			kakaoReg.put("sns_type", "kakao");
+			
+			b_dao.socialReg(kakaoReg);
+			vo = b_dao.socialLogin(kakaoLogin);
+			session.setAttribute("userInfo", vo);
+		}else { // 카카오 연동이 되어 있는경우
+			session.setAttribute("userInfo", vo);
+		}
+		
+		MakePath mp = new MakePath();
+		mv.setViewName(mp.decidePath(session));
 		
 		return mv;
 	}
