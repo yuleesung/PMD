@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pmd.util.MakePath;
 import com.pmd.vo.UserVO;
 
 import mybatis.dao.BulletinDAO;
@@ -44,35 +45,21 @@ public class LoginAction {
 	
 	@RequestMapping(value = "/login.inc", method = RequestMethod.POST)
 	public ModelAndView login(UserVO vo) {
-		
-		String path = "login";
+		ModelAndView mv = new ModelAndView();
 		
 		UserVO uvo = b_dao.login(vo.getU_id(), vo.getU_pw());
 		
 		if(uvo != null) {
 			// 로그인 성공
-			session.setAttribute("userInfo", uvo);			
+			session.setAttribute("userInfo", uvo);
 			
-			if(session.getAttribute("path").equals("main")) // Main
-				path = "redirect:/main.inc";
-			else if(session.getAttribute("path").equals("view")) // View 
-				path = "redirect:/view.inc?srchTrprId="+session.getAttribute("srchTrprId")
-						+"&srchTrprDegr="+session.getAttribute("srchTrprDegr")+"&traStartDate="+session.getAttribute("traStartDate")
-						+"&traEndDate="+session.getAttribute("traEndDate")+"&trainstCstId="+session.getAttribute("trainstCstId")
-						+"&superViser="+session.getAttribute("superViser")+"&trainTarget="+session.getAttribute("trainTarget")
-						+"&regCourseMan="+session.getAttribute("regCourseMan")+"&yardMan="+session.getAttribute("yardMan");
-			else if(session.getAttribute("path").equals("list")) // list
-				path = "redirect:/list.inc?nowPage="+session.getAttribute("nowPage")+"&b_category="+session.getAttribute("b_category");
-			else if(session.getAttribute("path").equals("viewBoard"))
-				path = "redirect:/viewBoard.inc?nowPage="+session.getAttribute("nowPage")+"&b_category="+session.getAttribute("b_category")+"&b_idx="+session.getAttribute("b_idx");
-			
+			MakePath mp = new MakePath();
+			mv.setViewName(mp.decidePath(session));
+		} else {
+			mv.setViewName("redirect:/login.inc");
 		}
 		
-		
-		ModelAndView mv = new ModelAndView();
-		
 		mv.addObject("loginFail", "fail"); // 로그인실패
-		mv.setViewName(path);
 		
 		return mv;
 	}
