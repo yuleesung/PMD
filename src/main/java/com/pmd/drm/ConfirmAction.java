@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import mybatis.dao.BulletinDAO;
 
 @Controller
-public class ChkAction {
+public class ConfirmAction {
 
 	@Autowired
 	private BulletinDAO b_dao;
@@ -32,9 +32,6 @@ public class ChkAction {
 	}
 	
 	
-	
-	
-	
 	@RequestMapping(value = "/emailchk.inc", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Boolean> emailchk(String email) {
@@ -45,6 +42,19 @@ public class ChkAction {
 		map.put("value", value);
 		
 		return map;
+	}
+	
+	
+	
+	@RequestMapping(value = "/phonechk.inc", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Boolean> phonechk(String u_phone) {
 		
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		
+		boolean value = b_dao.checkEmail(u_phone);
+		map.put("value", value);
+		
+		return map;
 	}
 }

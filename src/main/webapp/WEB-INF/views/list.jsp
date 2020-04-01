@@ -11,14 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800|Playfair+Display:,300, 400, 700" rel="stylesheet">
-	
     <link rel="stylesheet" href="resources/css/bootstrap.css">
     <link rel="stylesheet" href="resources/css/animate.css">
     <link rel="stylesheet" href="resources/css/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
     <link rel="stylesheet" href="resources/fonts/ionicons/css/ionicons.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="resources/fonts/fontawesome/css/font-awesome.min.css">
-
+	
 	<!-- 메뉴바 관련 추가 -->
 	<link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
 	<link href="resources/css/fonts.css" rel="stylesheet" type="text/css" media="all">
@@ -109,6 +109,7 @@
 		          			<th>조회수</th>
 		          		</tr>
 		          	</thead>
+		          	
 		          	<tbody>
 		          		<c:if test="${fn:length(list) > 0 }">
 			   				<c:forEach var="vo" items="${list }" varStatus="st">
@@ -117,9 +118,17 @@
 									${rowTotal - ((nowPage-1)*blockList+st.index) }
 								  </td>
 								  <td>
-									<a href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}"> 
+								  <c:if test="${vo.secret_content ne null }">
+									 <a href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}"> 
 										${vo.subject }
-									</a>
+									 </a>
+									 <i class="fas fa-lock"></i>
+								  </c:if>
+								  <c:if test="${vo.secret_content eq null}">
+									 <a href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}"> 
+										${vo.subject }
+									 </a>
+								  </c:if>
 								  </td>
 								  <td>${vo.uvo.u_name }</td>
 								  <td>${fn:substring(vo.write_date, 0, 10) }</td>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -237,10 +239,10 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big,
     height: calc(100% - 50px);
 }
 
-/* 회원가입 버튼 영역 */
+/* 회원가입 메인 영역 */
 .OnBoardingContent__content {
     margin-top: 42px;
-    width: 350px;
+    width: 650px;
 }
 
 
@@ -364,7 +366,20 @@ margin-top: 0px !important;
 margin-bottom: 0px !important;
 }
 
-    
+/* 이메일 중복체크 버튼 */
+#cfm_btn, #phone_btn {
+	display: inline-block;
+	float: left;
+	margin-right: 3px;
+	background-color: #fff;
+	border: 1px solid  #428bca;
+	color: #428bca;
+	border-radius: 3px;
+	padding: 3px;
+}
+.suss{
+	color: rgba(0, 20, 245, 0.7);
+}    
 </style>
 
 </head>
@@ -374,8 +389,12 @@ margin-bottom: 0px !important;
 	<div id="root">
 		<div class="App">
 			<div class="OnBoardingLayout">
-				<div class="OutsideNavigation" style="background-color: #6a99cb;" id="logo" >
-					<h1 style="margin-top: 0; padding: auto; "><a href="main.inc" style="color: #fff; text-decoration: none;">PMD</a></h1>
+				<div class="OutsideNavigation" style="background-color: #6a99cb;  height: 100px; padding-top: 20px;  " id="logo" >
+					<h1 style="margin: 0; padding: auto; ">
+						<a href="main.inc" style="color: #fff; text-decoration: none; font-family: 'Open Sans', Arial,sans-serif; font-weight: 400; font-size: 50px;  ">
+							PMD
+						</a>
+					</h1>
 				</div>
 
 				<!-- 회원가입 영역 -->
@@ -392,22 +411,20 @@ margin-bottom: 0px !important;
 					            <form class="form-horizontal" method="post" name="join" id="join"  >
 					            
 									<div class="form-group">
-										<label class="control-label col-sm-3">아이디 <span class="text-danger">*</span></label>
-										<div class="col-md-8 col-sm-9">
-											<div class="input-group" >
-												<span class="input-group-addon"><i class="glyphicon glyphicon-hand-right"></i></span> 
+										<label class="control-label col-sm-2">아이디 <span class="text-danger">*</span></label>
+										<div class="col-md-8 col-sm-9" style="margin-right: 0;">
+											<div class="input-group"  style="margin-right: 0; padding-right: 0;">
+												<span class="input-group-addon" id="idS" ><i class="glyphicon glyphicon-hand-right"></i></span> 
 												<input type="text" class="form-control" name="u_id" id="u_id" 
 													placeholder="4자 이상 입력하세요" value=""  required="required" autofocus>
 											</div>
-											<div id="box">
-												<!-- 아이디 중복체크 영역 -->
-											</div>
-											
-											
+										</div>
+										<div id="box" style="display: inline-block; position: relative; margin-top: 5px; padding-right:0;">
+											<!-- -------아이디 중복체크 영역--------- -->
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label col-sm-3">비밀번호<span class="text-danger">*</span> </label>
+										<label class="control-label col-sm-2">비밀번호<span class="text-danger">*</span> </label>
 										<div class="col-md-8 col-sm-9">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> 
@@ -416,21 +433,18 @@ margin-bottom: 0px !important;
 											</div>
 										</div>
 									</div>
-									<!-- <div class="form-group">
-										<label class="control-label col-sm-3">비밀번호 재확인<span class="text-danger">*</span> </label>
-										<div class="col-md-8 col-sm-9">
-											<div class="input-group">
-												<span class="input-group-addon"><i class="glyphicon glyphicon-check"></i></span> 
+									<div class="form-group">
+										<label class="control-label col-sm-2">비밀번호<br/>재확인<span class="text-danger">*</span> </label>
+										<div class="col-md-8 col-sm-9" style="margin-right: 0;">
+											<div class="input-group"  style="margin-right: 0; padding-right: 0;">
+												<span class="input-group-addon" id="pwConf"><i class='glyphicon glyphicon-check'></i> </span> 
 												<input type="password" class="form-control" name="cpw" id="cpw" placeholder="비밀번호를 재확인하세요"
 													required="required" />
 											</div>
-											<div>
-												비밀번호 재확인
-											</div>
 										</div>
-									</div> -->
+									</div>
 									<div class="form-group">
-										<label class="control-label col-sm-3">이름 <span class="text-danger">*</span></label>
+										<label class="control-label col-sm-2">이름 <span class="text-danger">*</span></label>
 										<div class="col-md-8 col-sm-9">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -440,7 +454,7 @@ margin-bottom: 0px !important;
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label col-sm-3">닉네임 <span class="text-danger">*</span> </label>
+										<label class="control-label col-sm-2">닉네임 <span class="text-danger">*</span> </label>
 										<div class="col-md-8 col-sm-9">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-star"></i></span> 
@@ -450,22 +464,26 @@ margin-bottom: 0px !important;
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label col-sm-3">연락처 <span class="text-danger">*</span> </label>
+										<label class="control-label col-sm-2">연락처 <span class="text-danger">*</span> </label>
 										<div class="col-md-8 col-sm-9">
-											<div class="input-group">
+											<div class="input-group" style="margin-bottom: 5px;">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span> 
-												<input type="text" class="form-control" name="u_phone" id="u_phone"
+												<input type="tel" class="form-control" name="u_phone" id="u_phone"
 													placeholder="ex. 010-1234-1234" pattern="(010)-\d{3,4}-\d{4}">
+											</div>
+											<div>
+												<input type="button" value="연락처 중복체크" id="phone_btn" />
+												<div id="p_box"></div>
 											</div>
 										</div>
 									</div>
 									
 									<div class="form-group">
-										<label class="control-label col-sm-3">이메일<span class="text-danger">*</span></label>
+										<label class="control-label col-sm-2">이메일<span class="text-danger">*</span></label>
 										<div class="col-md-8 col-sm-9">
-											<input type="text" id="email" name="email" class="form-control" style="margin-bottom: 3px;" 
+											<input type="text" id="email" name="email" class="form-control" style="margin-bottom: 4px;" 
 													placeholder="이메일을 입력하세요" required="required" />
-											<div class="input-group">
+											<div class="input-group" style="margin-bottom: 5px;">
 												<span class="input-group-addon"><i style="font-size:18px" class="fa">&#xf1fa;</i></span>
 												<input type="text" name="email" id="input_email" class="form-control" placeholder="@은 빼고 입력하세요" >
 												<select id="email2" name="email" class="form-control" >
@@ -483,14 +501,13 @@ margin-bottom: 0px !important;
 													<option value="gmail.com">gmail.com</option>
 												</select>
 											</div>
-											<button type="button" id="cfm_btn">중복체크</button>
-											
+											<button type="button" id="cfm_btn" >이메일 중복체크</button>
 											<div id="e_box"> </div>
 										</div>
 										
 										
 									</div>
-									<div>
+									<div style="width: 330px; margin: 0 auto;">
 										<button type="button" style=" background-color: rgba(0, 20, 245, 0.7); margin-left: 0;"
 												class="ant-btn OauthButton OauthButton__facebook SignUpOauthSelectStep__OauthButton" id="join_btn"
 												onclick="sendData()">
@@ -500,9 +517,7 @@ margin-bottom: 0px !important;
 									</div>	
 								</form>
 							</div>
-							<div class="confirm_area">
-							
-							</div>
+
 							<!-- ----------- OR ----------- -->
 							<div class="col-md-12 ">
 								<div class="login-or">
@@ -510,24 +525,26 @@ margin-bottom: 0px !important;
 								</div>
 							</div>
 							<!-- 소셜 회원가입 버튼 영역 -->
-							<button service="naver" type="button" style="background: #60d04c;" onclick="location.href='naverReg.inc?type=naver'" 
-								class="ant-btn OauthButton OauthButton__naver SignUpOauthSelectStep__OauthButton">
-								<img alt="ImgIconNaver" class="OauthButton__iconImg"
-									src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3JpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDE0IDc5LjE1Njc5NywgMjAxNC8wOC8yMC0wOTo1MzowMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpmNWVmZjVlMy0zYTU4LWMzNGUtYTMxNS0xYTVkYTE5YTBjMjAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDNGQzYwNUFDODVEMTFFNDk0NkRCQzQ1MzJEMkZBRDYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDNGQzYwNTlDODVEMTFFNDk0NkRCQzQ1MzJEMkZBRDYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ODAxYjhhMzItZjA4My1kZTQxLTkwMzgtZTIyNzY4ZDZjMWRiIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkUwQTE1MTEzODEzMTExRTRBMkQ2RTFBQUFFMDlENUU0Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+DvnoVAAAASJJREFUeNpi/P//PwMtARMDjcHwtOAOEH8C4jdA/AGIPwJxIhZ1AkB8H0ntJ6heFMCIJZL/gcTRxP4CsSIQP0YSEwLit2jq/qM7GpsP3mERYwbijVgc8oGQXlLiwBCIm5F9T4tIrgFic1qnovVQ+j006KhugSQQ90HZ3wkpZiHCQFBK4UdTWwjEl4D4HhCLUeqD20Ach0V8HhCrUSOIlIF4ORB3ouchaF6g2AIOqGEVaBmNaqnoL7RYAAF/WhV2sPLkPBDX0joftADxSWIVYyvsfqMlSZACEbRyBpQXHgAxG5reP0DMSsgHr6EF2Xco/QopiGDgORAnQx3zB0nta2IyWgYQ8wLxL6gLv0AxOlgCtYAJaglI7Wdigmi0TkYBAAEGAElhSK5ZcYQXAAAAAElFTkSuQmCC">
-								<div class="OauthButton__content">네이버로 회원가입</div>
-							</button>
-							<button service="google_plus" type="button"  style="color: #333333; border-color: #ccc;" id="sns_btn"
-								class="ant-btn OauthButton OauthButton__google_plus SignUpOauthSelectStep__OauthButton">
-								<img alt="ImgIconGoogle" class="OauthButton__iconImg"
-									src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAr1JREFUSA3tVU1ME1EQnllaEFoIwbbG6MVgJJrUxIg0IAiKLV40GosxsTHx4Nl4UQOXXjQmmmg8mXgw/sRA4SQ3aJF/QwsHgyd/8IKY0IJG8I/u7jivZtmfLqCJR97lvffNN9/szJv3FmBjrFMBXMcO88FASCE6x7w6INjOs4xAHwGlIUS109OXSqylsWqAdHPNLgJ6mBNeQwERBgmli76+8bd2NNsA6WBtI6hKDwcotXOyYoj42SnB/vLe5AerzWEF0scOVoGcfW4VZ5EFAJoC/lye/QRQvuJL8MBOXNiZbBny8n0iKtNQIcxpRjz1JVu88VSTN5E85GlweSVJOg+I82y/xdhVjW+dTSXKJopCyrTr9mKs0kMqbGVyxoGOIxXxl1NWR7FfDNX5SnvH5uxstpgcL3yUjTsp21OSyZzYN5EJBiK2xH8ATRnIicJ3XJ5K4Y8E8wWj7T6MRlWjXvONpVdsdRsx45r9Z/rb3Y0aZj5kItHnuUESvLaKCwMf7g6g1bsLAVc0BD//kAX6H4c5A8QZ/jqtRLs5XW4SLpZp4BvOQy8RYgH77NQp9F5fA5gDEIyysVIm6dPlxdrvk7GweCKeGh3621zVxn3z9R8RAuWJjuG4vraUiCR8lobiyeNfWtwTy5tFJncD3af3Gh2M66M3f/GFU+4YMZZ8bNybukgYqjvDw5xyvUYSF41Lcsnl83cMHI7KAm96EXV8m5s6W7RwKlK4cLJF4/I8ZOwggecHiLVWoUpJfipWbnOOmAsE2oXz8/lUCLzg554B9+yVBpZa4orXJNo28RnpIy+AMB2ItTYCqT1E8FePnSRXDJfN3GuLXyse0aX/rGzbNHWmaxCdjmru6TGrQ94eccTh+nrBTlxwbTMwigS6wiFFhdwPh8nbuGcVJJrlh26Ib1FHqrV7zR+OUWtjbVuB3wfJ7N0eK6i5AAAAAElFTkSuQmCC">
-								<div class="OauthButton__content">구글로 회원가입</div>
-							</button>
-							<button service="email" type="button" style="background-color: #FBBC05;" id="sns_btn"
-								class="ant-btn OauthButton OauthButton__email SignUpOauthSelectStep__OauthButton">
-								<img alt="ImgIconEmail" class="OauthButton__iconImg" style="width: 24px;"
-									src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAAEgBckRAAAAAXNSR0IArs4c6QAAA8ZJREFUaAXtWT2MDVEUfm8ti0QkEokNkhGNQiMhCtU2CqIRiUQjGipRiUKi0rENlWioaGhoSISCgoJCgoSEhCg2kQgRsiy+c/d+Z8/cuXfezHtv7L71bnL3nPOd75xzf97M3JlttRKtLfgftIR/Dgbn8pzlNYBTBTAEqtdgZDs1ohFltGcbbZ2DREoTh8hRMoRPXWSyhiVV16WWtFQEXEccgRwxSPaOlWJDfxL6HM+CNpA6pfB0nQhShqtAfAHKWhsk89KtxmR+wF4Rm5RdRa7SJhBHrIOBHpug7X5RADMBIN/bINHR1nuf21w7pBaGtBGE+8ISEtoYsOlZ1f8VJ1pmQdjnrC26kBwmClrmjJI/QhI3J11Czbtq70M+fCFY9e9ANUaNLcz99Bj6BcoeGjXlTvAnCzGyhb5lkL+9PlMgJgDwz/gYEQepK50AZEYQ+meDLyFuJfy3DWcrfcRo8/oRPFPQK8CeMwByrcCQbwy2OhLj3IobcqZgoIBzzfBEzT0ZLJ08xQhAZgr2oDCfpKh9adat2/h1UHdAQ/4ArkDjv6LGr4PcY9nvwFHIF13uxj3EjRVieWkbua9A6gAg9peJd6qGGMdxox9TQgfFxExDl2eKaxpmAej7aUOeVVJEgd+dpzxfnoRyKy8v4Em7fJCIq5Hckmi54XwkB1jnAr7IFpPgLhN43xrjexn4qhXwidaZRM88pgnge2iTh371MYkCRoFvFf2Q74x+w9BUhV8HYEEXp0CgwDlqEot6IaCoCV/9Aoz2RU7SjsmwQOxKjsU5TE5qSWfC0fi9aPAL5PZANjGxlF3DjS9R1yMbBg5XYLgCFVdA771N3CMqjqErGp8bi+c+JDtQ0r7CN9HVUnURhFoH0OUEmmyFtBHm+Qj2E9ihQnCfAOQ+gc7PMCw/A+UUDcpCSTqMzIQE+zB64dAPrPRgVChQAiDXJHrYvgPY68egpziSCunoMDKzJOC70b8ZP9WLUPRmYGPKdMQsRb/OJEZ+gr7DxsLufQJMiGTb0KfQw3YTwDLyUhIcOaQ/CINhv0XfHIsD3r8JsIBP+hoybI8AxD6ujQO3H+UY9xSK+0DH3KGEv/8TYBEkl5e0x+hhewVgA7q84H0InbDvoLt/szBXSoLX3ARYFEXkVfYWeqd2BYTot1fmCiX4zU+ARVFMXvgvoYet9EMB42MSif7dBOwAUPg0euXPKDbW6vM2ATuIXvSyCQz8WWjgJ5B77Q62eTu2zv0jMsDnwxxPFdUjAAbb928GqaL9wBff+0A/VmWY439cgb9cnoCBnDFMLgAAAABJRU5ErkJggg==">
-								<div class="OauthButton__content">카카오톡으로 회원가입</div>
-							</button>
+							<div style="width: 330px; margin: 0 auto;">
+								<button service="naver" type="button" style="background: #60d04c;" onclick="location.href='${url }'" 
+									class="ant-btn OauthButton OauthButton__naver SignUpOauthSelectStep__OauthButton">
+									<img alt="ImgIconNaver" class="OauthButton__iconImg"
+										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3JpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDE0IDc5LjE1Njc5NywgMjAxNC8wOC8yMC0wOTo1MzowMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpmNWVmZjVlMy0zYTU4LWMzNGUtYTMxNS0xYTVkYTE5YTBjMjAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDNGQzYwNUFDODVEMTFFNDk0NkRCQzQ1MzJEMkZBRDYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDNGQzYwNTlDODVEMTFFNDk0NkRCQzQ1MzJEMkZBRDYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ODAxYjhhMzItZjA4My1kZTQxLTkwMzgtZTIyNzY4ZDZjMWRiIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkUwQTE1MTEzODEzMTExRTRBMkQ2RTFBQUFFMDlENUU0Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+DvnoVAAAASJJREFUeNpi/P//PwMtARMDjcHwtOAOEH8C4jdA/AGIPwJxIhZ1AkB8H0ntJ6heFMCIJZL/gcTRxP4CsSIQP0YSEwLit2jq/qM7GpsP3mERYwbijVgc8oGQXlLiwBCIm5F9T4tIrgFic1qnovVQ+j006KhugSQQ90HZ3wkpZiHCQFBK4UdTWwjEl4D4HhCLUeqD20Ach0V8HhCrUSOIlIF4ORB3ouchaF6g2AIOqGEVaBmNaqnoL7RYAAF/WhV2sPLkPBDX0joftADxSWIVYyvsfqMlSZACEbRyBpQXHgAxG5reP0DMSsgHr6EF2Xco/QopiGDgORAnQx3zB0nta2IyWgYQ8wLxL6gLv0AxOlgCtYAJaglI7Wdigmi0TkYBAAEGAElhSK5ZcYQXAAAAAElFTkSuQmCC">
+									<div class="OauthButton__content">네이버로 회원가입</div>
+								</button>
+								<button service="google_plus" type="button"  style="color: #333333; border-color: #ccc;" id="sns_btn"
+									class="ant-btn OauthButton OauthButton__google_plus SignUpOauthSelectStep__OauthButton">
+									<img alt="ImgIconGoogle" class="OauthButton__iconImg"
+										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAr1JREFUSA3tVU1ME1EQnllaEFoIwbbG6MVgJJrUxIg0IAiKLV40GosxsTHx4Nl4UQOXXjQmmmg8mXgw/sRA4SQ3aJF/QwsHgyd/8IKY0IJG8I/u7jivZtmfLqCJR97lvffNN9/szJv3FmBjrFMBXMcO88FASCE6x7w6INjOs4xAHwGlIUS109OXSqylsWqAdHPNLgJ6mBNeQwERBgmli76+8bd2NNsA6WBtI6hKDwcotXOyYoj42SnB/vLe5AerzWEF0scOVoGcfW4VZ5EFAJoC/lye/QRQvuJL8MBOXNiZbBny8n0iKtNQIcxpRjz1JVu88VSTN5E85GlweSVJOg+I82y/xdhVjW+dTSXKJopCyrTr9mKs0kMqbGVyxoGOIxXxl1NWR7FfDNX5SnvH5uxstpgcL3yUjTsp21OSyZzYN5EJBiK2xH8ATRnIicJ3XJ5K4Y8E8wWj7T6MRlWjXvONpVdsdRsx45r9Z/rb3Y0aZj5kItHnuUESvLaKCwMf7g6g1bsLAVc0BD//kAX6H4c5A8QZ/jqtRLs5XW4SLpZp4BvOQy8RYgH77NQp9F5fA5gDEIyysVIm6dPlxdrvk7GweCKeGh3621zVxn3z9R8RAuWJjuG4vraUiCR8lobiyeNfWtwTy5tFJncD3af3Gh2M66M3f/GFU+4YMZZ8bNybukgYqjvDw5xyvUYSF41Lcsnl83cMHI7KAm96EXV8m5s6W7RwKlK4cLJF4/I8ZOwggecHiLVWoUpJfipWbnOOmAsE2oXz8/lUCLzg554B9+yVBpZa4orXJNo28RnpIy+AMB2ItTYCqT1E8FePnSRXDJfN3GuLXyse0aX/rGzbNHWmaxCdjmru6TGrQ94eccTh+nrBTlxwbTMwigS6wiFFhdwPh8nbuGcVJJrlh26Ib1FHqrV7zR+OUWtjbVuB3wfJ7N0eK6i5AAAAAElFTkSuQmCC">
+									<div class="OauthButton__content">구글로 회원가입</div>
+								</button>
+								<button service="email" type="button" style="background-color: #FBBC05;" id="sns_btn"
+									class="ant-btn OauthButton OauthButton__email SignUpOauthSelectStep__OauthButton">
+									<img alt="ImgIconEmail" class="OauthButton__iconImg" style="width: 24px;"
+										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAAEgBckRAAAAAXNSR0IArs4c6QAAA8ZJREFUaAXtWT2MDVEUfm8ti0QkEokNkhGNQiMhCtU2CqIRiUQjGipRiUKi0rENlWioaGhoSISCgoJCgoSEhCg2kQgRsiy+c/d+Z8/cuXfezHtv7L71bnL3nPOd75xzf97M3JlttRKtLfgftIR/Dgbn8pzlNYBTBTAEqtdgZDs1ohFltGcbbZ2DREoTh8hRMoRPXWSyhiVV16WWtFQEXEccgRwxSPaOlWJDfxL6HM+CNpA6pfB0nQhShqtAfAHKWhsk89KtxmR+wF4Rm5RdRa7SJhBHrIOBHpug7X5RADMBIN/bINHR1nuf21w7pBaGtBGE+8ISEtoYsOlZ1f8VJ1pmQdjnrC26kBwmClrmjJI/QhI3J11Czbtq70M+fCFY9e9ANUaNLcz99Bj6BcoeGjXlTvAnCzGyhb5lkL+9PlMgJgDwz/gYEQepK50AZEYQ+meDLyFuJfy3DWcrfcRo8/oRPFPQK8CeMwByrcCQbwy2OhLj3IobcqZgoIBzzfBEzT0ZLJ08xQhAZgr2oDCfpKh9adat2/h1UHdAQ/4ArkDjv6LGr4PcY9nvwFHIF13uxj3EjRVieWkbua9A6gAg9peJd6qGGMdxox9TQgfFxExDl2eKaxpmAej7aUOeVVJEgd+dpzxfnoRyKy8v4Em7fJCIq5Hckmi54XwkB1jnAr7IFpPgLhN43xrjexn4qhXwidaZRM88pgnge2iTh371MYkCRoFvFf2Q74x+w9BUhV8HYEEXp0CgwDlqEot6IaCoCV/9Aoz2RU7SjsmwQOxKjsU5TE5qSWfC0fi9aPAL5PZANjGxlF3DjS9R1yMbBg5XYLgCFVdA771N3CMqjqErGp8bi+c+JDtQ0r7CN9HVUnURhFoH0OUEmmyFtBHm+Qj2E9ihQnCfAOQ+gc7PMCw/A+UUDcpCSTqMzIQE+zB64dAPrPRgVChQAiDXJHrYvgPY68egpziSCunoMDKzJOC70b8ZP9WLUPRmYGPKdMQsRb/OJEZ+gr7DxsLufQJMiGTb0KfQw3YTwDLyUhIcOaQ/CINhv0XfHIsD3r8JsIBP+hoybI8AxD6ujQO3H+UY9xSK+0DH3KGEv/8TYBEkl5e0x+hhewVgA7q84H0InbDvoLt/szBXSoLX3ARYFEXkVfYWeqd2BYTot1fmCiX4zU+ARVFMXvgvoYet9EMB42MSif7dBOwAUPg0euXPKDbW6vM2ATuIXvSyCQz8WWjgJ5B77Q62eTu2zv0jMsDnwxxPFdUjAAbb928GqaL9wBff+0A/VmWY439cgb9cnoCBnDFMLgAAAABJRU5ErkJggg==">
+									<div class="OauthButton__content">카카오톡으로 회원가입</div>
+								</button>
+							</div>
 						</div>
 							
 							<div class="OnBoardingContent__footer">
@@ -565,16 +582,54 @@ margin-bottom: 0px !important;
 	<script>
 	
 	
-	// PMD회원가입 버튼 눌렀을 때
+	// 'PMD로 회원가입' 버튼 눌렀을 때
 	function sendData(){
-		
 		
 		var u_id = $("#u_id").val().trim();
 		var u_pw = $("#u_pw").val().trim();
+		var cpw = $("#cpw").val().trim();
 		var u_name = $("#u_name").val().trim();
 		var nickname = $("#nickname").val().trim();
 		var u_phone = $("#u_phone").val().trim();
 		var email = $("#email").val().trim() + "@"+$("#input_email").val().trim();
+		
+		
+		if( u_id.length <4){
+			alert("아이디를 4자 이상 입력하세요!");
+			$("#u_id").focus();
+			return;
+		}
+		if( u_pw.length <4){
+			alert("비밀번호를 4자 이상 입력하세요!");
+			$("#u_pw").focus();
+			return;
+		}
+	 	if( cpw.length <4){
+			alert("비밀번호를 재확인하세요!");
+			$("#cpw").focus();
+			return;
+		} 
+		if( u_name.length <1){
+			alert("이름을 입력하세요!");
+			$("#u_name").focus();
+			return;
+		}
+		if( nickname.length <1){
+			alert("닉네임을 입력하세요!");
+			$("#nickname").focus();
+			return;
+		}
+		if( u_phone.length <1){
+			alert("연락처를 입력하세요!");
+			$("#u_phone").focus();
+			return;
+		}
+		if( email.length <12){
+			alert("이메일을 입력하세요!");
+			$("#email").focus();
+			return;
+		}
+		
 		
 		var param = "u_id="+encodeURIComponent(u_id)+
 				"&u_pw="+encodeURIComponent(u_pw)+
@@ -589,8 +644,10 @@ margin-bottom: 0px !important;
 			data: param
 			
 		}).done(function(data){
-				//window.alert("${data.msg}");
+			if(data.res == true){
+				window.alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.");
 				window.location.href ="login.inc";
+			}
 		}).fail(function(err){
 			console.log(err);
 			
@@ -602,13 +659,23 @@ margin-bottom: 0px !important;
 	
 	
 	
-	
-	
-	
 	$(function(){
 		
+		/* 비밀번호 재확인 */
+		$("#cpw, #u_pw").on("keyup", function(){
+			
+			var u_pw = $("#u_pw").val().trim();
+			var cpw = $("#cpw").val().trim();
+			
+			if(u_pw == cpw){ // 비밀번호가 같으면
+				$("#pwConf").html("<i class='glyphicon glyphicon-check suss'></i>");
+			} else {
+				$("#pwConf").html("<i class='glyphicon glyphicon-check'></i>");
+			}
+			
+		});
 		
-		//아이디 중복 체크	ChkAction
+		//아이디 중복 체크	ConfirmAction
 		$("#u_id").bind("keyup",function(){
 		      //사용자가 입력한 id값을 얻어낸다.
 		      var str = $(this).val();
@@ -625,13 +692,13 @@ margin-bottom: 0px !important;
 		         }).done(function (data) {
 		            if(data.value == true){
 		               //id가 중복일 때,
-		               $("#box").html("<pre style='color:red; font-weight:bold; background: #fff; font-size:12px;'>사용 불가능</pre>");
+		               $("#box").html("<small style='color:red; font-weight:bold; background: #fff; font-size: 75%;'>사용 불가능</small>");
 		               $("#u_id").focus();
 		               
 		            }else{
 		               //id가 중복이 아닐 때,
-		               $("#box").html("<pre style='color:green; font-weight:bold; background: #fff;font-size:12px;'>사용 가능</pre>");
-		               
+		               $("#box").html("<small style='color:green; font-weight:bold; background: #fff;font-size: 75%;'>사용 가능</small>");
+		               //$("#idS").html("<i class='glyphicon glyphicon-hand-right suss'></i>");
 		            }
 		            
 		         }).fail(function (err) {
@@ -644,7 +711,7 @@ margin-bottom: 0px !important;
 		   
 		});
 		
-		// 이메일 중복 체크 ChkAction
+		// 이메일 중복 체크 ConfirmAction
 		$("#cfm_btn").bind("click",function(){
 		      
 			var email = $("#email").val().trim() + "@"+$("#input_email").val().trim();
@@ -661,20 +728,20 @@ margin-bottom: 0px !important;
 		            
 		         }).done(function (data) {
 		            if(data.value == true){
-		               //id가 중복일 때,
-		               $("#e_box").html("<pre style='color:red; font-weight:bold; background: #fff; font-size:12px;'>사용 불가능</pre>");
+		               // 이메일이 중복일 때,
+		               $("#e_box").html("<small style='color:red; font-weight:bold; background: #fff;font-size: 75%;'>사용 불가능</small>");
 		               
 		            }else{
-		               //id가 중복이 아닐 때,
-		               $("#e_box").html("<pre style='color:green; font-weight:bold; background: #fff;font-size:12px;'>사용 가능</pre>");
+		               // 이메일이 중복이 아닐 때,
+		               $("#e_box").html("<small style='color:green; font-weight:bold; background: #fff;font-size: 75%;'>사용 가능</small>");
 		            }
 		            
 		         }).fail(function (err) {
 		            console.log(err);
 		         });
 	         
-		      }else{
-		         $("#e_box").html("");
+		      } else{
+		         $("#e_box").html("&nbsp;<small style='color:#666f77; font-weight:bold; background: #fff;font-size: 75%;'>이메일을 정확히 입력해주세요!</small>");
 		      }
 		   
 		});
@@ -693,65 +760,38 @@ margin-bottom: 0px !important;
 			
 		});
 		
-		
-		/* 유효성 검사 */
-		$("#join_btn").bind("click", function(){
-			
-			var u_id = $("#u_id").val().trim();
-			var u_pw = $("#u_pw").val().trim();
-			//var cpw = $("#cpw").val().trim();
-			var u_name = $("#u_name").val().trim();
-			var nickname = $("#nickname").val().trim();
+		// 연락처 중복 체크 ConfirmAction
+		$("#phone_btn").bind("click",function(){
+		      
 			var u_phone = $("#u_phone").val().trim();
-			var email = $("#email").val().trim();
-			var email2 = $("#email2").val().trim();
-			
-			if( u_id.length <4){
-				alert("아이디를 4자 이상 입력하세요!");
-				$("#u_id").focus();
-				return;
-			}
-			if( u_pw.length <4){
-				alert("비밀번호를 4자 이상 입력하세요!");
-				$("#u_pw").focus();
-				return;
-			}
-		/* 	if( cpw.length <4){
-				alert("비밀번호를 재확인하세요!");
-				$("#cpw").focus();
-				return;
-			} */
-			if( u_name.length <1){
-				alert("이름을 입력하세요!");
-				$("#u_name").focus();
-				return;
-			}
-			if( nickname.length <1){
-				alert("닉네임을 입력하세요!");
-				$("#nickname").focus();
-				return;
-			}
-			if( u_phone.length <1){
-				alert("연락처를 입력하세요!");
-				$("#u_phone").focus();
-				return;
-			}
-			if( email.length <1){
-				alert("이메일을 입력하세요!");
-				$("#email").focus();
-				return;
-			}
-			if( email2.length <1){
-				alert("이메일을 입력하세요!");
-				$("#email2").focus();
-				return;
-			}
-			
+		    
+			if(u_phone.length > 2 ){
+		     	// 연락처를 3자이상 입력시 수행   
+		         $.ajax({
+		            
+		            url: "phonechk.inc",
+		            type: "post",
+		            data: "u_phone="+encodeURIComponent(u_phone)
+		            
+		         }).done(function (data) {
+		            if(data.value == true){
+		               // 연락처가 중복일 때,
+		               $("#p_box").html("<small style='color:red; font-weight:bold; background: #fff;font-size: 75%;'>사용 불가능</small>");
+		               
+		            }else{
+		               // 연락처가 중복이 아닐 때,
+		               $("#p_box").html("<small style='color:green; font-weight:bold; background: #fff;font-size: 75%;'>사용 가능</small>");
+		            }
+		            
+		         }).fail(function (err) {
+		            console.log(err);
+		         });
+	         
+		      } else{
+		         $("#p_box").html("&nbsp;<small style='color:#666f77; font-weight:bold; background: #fff;font-size: 75%;'>연락처를 정확히 입력해주세요!</small>");
+		      }
+		   
 		});
-		
-		
-		
-		
 		
 		
 		

@@ -32,7 +32,7 @@
 	media="all">
 <link href="resources/css/default.css" rel="stylesheet" type="text/css"
 	media="all">
-
+<link rel="stylesheet" href="resources/fonts/fontawesome/css/font-awesome.min.css" />
 
 <!-- Theme Style -->
 <link rel="stylesheet" href="resources/css/style.css">
@@ -75,7 +75,7 @@ input[type=text]{
 <c:choose>
 <c:when test="${userInfo.u_idx ne null }">
 	<section class="section element-animate">
-		<div class="container">
+	  <div class="container">
 		<form class="form-horizontal" method="post" action="edit.inc" name="editFrm" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="title" class="col-sm-2 control-label">Title</label>
@@ -89,6 +89,14 @@ input[type=text]{
 						<option value="adv"
 						<c:if test="${vo.b_category == 'adv' }">selected</c:if>>광고문의</option>
 					</select>
+					
+					<c:if test="${vo.secret_content eq null }">
+						<label><input type="checkbox" name="secret_w" id="secret_w" />비밀글</label>
+					</c:if>
+					<c:if test="${vo.secret_content ne null }">
+						<label><input type="checkbox" name="secret_w" id="secret_w"  checked="checked"/>비밀글</label>
+					</c:if>
+
 					<input type="text" class="form-control" id="title" name="subject"
 						placeholder="제목" style="width: 100%;" value="${vo.subject }"/>
 				</div>
@@ -108,15 +116,14 @@ input[type=text]{
 			<tbody>
 				<tr>
 					<td style="padding-bottom: 15px; padding-left: 15px; width: 900px;">
-					<textarea name="content" cols="50" rows="8" id="content">${vo.b_content }</textarea>
+						<textarea name="content" cols="50" rows="8" id="content">${vo.b_content }</textarea>
 					</td>
 				</tr>
 				<tr>
 					<td>
 					<div style="float: right;">
 					<label style="font-size: 16px; color: black; font-weight: bold;">작성자 : ${userInfo.u_name }</label><br/>
-					<input id="submit_btn" type="button"
-						value="Submit" class="btn btn-primary">&nbsp;&nbsp;
+					<input id="submit_btn" type="button" value="Submit" class="btn btn-primary">&nbsp;&nbsp;
 						<input id="cancel_btn" type="button"
 							value="Cancel" class="btn btn-primary" onclick="location.href='viewBoard.inc?
 							b_idx=${vo.b_idx}&nowPage=${vo.nowPage }&b_category=${vo.b_category }'"> <!-- 해당게시물로 돌아가기 -->
@@ -125,7 +132,7 @@ input[type=text]{
 				</tr>
 			</tbody>
 		</table>
-		</div>
+	  </div>
 	</section>
 	</c:when>
 	<c:otherwise>

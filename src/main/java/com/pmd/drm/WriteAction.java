@@ -63,7 +63,6 @@ public class WriteAction {
 		
 		vo.setIp(ip); // IP
 		
-		
 		MultipartFile mf = vo.getUpload();
 		
 		
@@ -85,6 +84,7 @@ public class WriteAction {
 		
 		mv.setViewName("redirect:/list.inc?b_category="+vo.getB_category()); // 최근 게시물 리스트로 돌아가야 함
 					
+		System.out.println(vo.getSecret_content());
 		return mv;
 	}
 }

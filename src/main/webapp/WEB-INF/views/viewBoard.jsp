@@ -157,7 +157,15 @@
 		          		<c:if test="${vo ne null }">
 			          		<tr>
 			          			<th>제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
-			          			<td colspan="5">${vo.subject }</td>
+			          			<td colspan="5">
+			          				<c:if test="${vo.secret_content ne null  }">
+			          					${vo.subject }
+			          					<i class="fas fa-lock"></i>
+			          				</c:if>
+			          				<c:if test="${vo.secret_content eq null }">
+			          					${vo.subject }
+			          				</c:if>
+			          			</td>
 			          		</tr>
 			          		<tr>
 			          			<th>파일 이름</th>
@@ -286,6 +294,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     
 
     <script>
+
+	/* 비밀글 체크여부  secret_w  */
+	if($("#secret_w").prop("checked")){
+		$("#secret_w").val(1);
+	}else{
+		$("#secret_w").val("");
+	}
+	
+    
+    
 	    document.addEventListener('DOMContentLoaded', function() {
             var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
 
