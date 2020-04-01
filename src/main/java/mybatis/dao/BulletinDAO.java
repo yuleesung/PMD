@@ -312,4 +312,15 @@ public class BulletinDAO {
 		
 		return chk;
 	}
+	
+	// 전화번호 중복검사
+	public boolean checkPhone(String u_phone) {
+		boolean chk = false;
+		
+		String str = ss.selectOne("bulletin.checkPhone", u_phone);
+		if(str != null)
+			chk = true;
+		
+		return chk;
+	}
 }
