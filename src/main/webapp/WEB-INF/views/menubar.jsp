@@ -46,16 +46,20 @@
 	    Kakao.init('5899acc3cddfce334c3dd49beff92a37');
 		
 		if(sns_type == "kakao"){ // 카카오 로그인을 했을 때
-			if (!Kakao.Auth.getAccessToken()) {
-			      alert('Not logged in.')
-			      return
-			    }
-			    Kakao.Auth.logout(function() {
-			      alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
-			    })
+			kakaoLogout();
 		}else{ //
 			location.href = "logout.inc";
 		}
 		
 	}
+	
+	function kakaoLogout() {
+	    if (!Kakao.Auth.getAccessToken()) {
+	      alert('카카오 로그인이 되어있지 않습니다.')
+	      return
+	    }
+	    Kakao.Auth.logout(function() {
+	      location.href = "logout.inc";
+	    })
+	  }
 </script>
