@@ -197,12 +197,22 @@
 		          
 	       		<div class="col-md-12">
 	       			<div id="comment_div">
-       					<div id="comment_div1">
-       						<textarea id="comment" placeholder="여기서 댓글 작성하세요!!"></textarea>
-       					</div>
-       					<div id="comment_div2">
-       						<input type="button" class="btn btn-primary" value="댓글등록" id="comment_btn" style="padding: 5px; border-radius: 5px;"/>
-       					</div>
+	       				<c:if test="${userInfo ne null }">
+	       					<div id="comment_div1">
+	       						<textarea id="comment" placeholder="여기서 댓글 작성하세요!!"></textarea>
+	       					</div>
+	       					<div id="comment_div2">
+	       						<input type="button" class="btn btn-primary" value="댓글등록" id="comment_btn" style="padding: 5px; border-radius: 5px;"/>
+	       					</div>
+       					</c:if>
+       					<c:if test="${userInfo eq null }">
+	       					<div id="comment_div1">
+	       						<textarea id="comment" placeholder="댓글은 로그인 후 작성 가능합니다." readonly="readonly" style="background-color: #dedede; cursor: pointer;" onclick="javascript: location.href='login.inc'"></textarea>
+	       					</div>
+	       					<div id="comment_div2">
+	       						<input type="button" class="btn btn-primary" value="댓글등록" id="comment_btn" style="padding: 5px; border-radius: 5px;" disabled="disabled"/>
+	       					</div>
+       					</c:if>
        				</div>
 		          	<table id="t2">
 		          		<caption>댓글 테이블</caption>
