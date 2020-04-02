@@ -130,7 +130,7 @@
 									 </a>
 								  </c:if>
 								  </td>
-								  <td>${vo.uvo.u_name }</td>
+								  <td>${vo.uvo.nickname }</td>
 								  <td>${fn:substring(vo.write_date, 0, 10) }</td>
 								  <td>${vo.hit }</td>
 								</tr>

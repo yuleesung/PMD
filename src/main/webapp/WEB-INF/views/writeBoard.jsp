@@ -109,7 +109,7 @@ input[type=text]{
 					<label for="human" class="col-sm-2 control-label" style="font-size: 16px;">${ran1 } + ${ran2 } = ? </label>
 					<input type="text" class="form-control" id="input_val" placeholder="매크로방지" style="width: 150px; margin-left: 15px;">
 					<div style="float: right;">
-					<label style="font-size: 16px; color: black; font-weight: bold;">작성자 : ${userInfo.u_name }</label><br/>
+					<label style="font-size: 16px; color: black; font-weight: bold;">작성자 : ${userInfo.nickname }</label><br/>
 					<input id="submit_btn" type="button"
 						value="Submit" class="btn btn-primary">&nbsp;&nbsp;
 						<input id="cancel_btn" type="button"

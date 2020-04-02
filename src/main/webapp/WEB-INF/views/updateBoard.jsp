@@ -122,7 +122,7 @@ input[type=text]{
 				<tr>
 					<td>
 					<div style="float: right;">
-					<label style="font-size: 16px; color: black; font-weight: bold;">작성자 : ${userInfo.u_name }</label><br/>
+					<label style="font-size: 16px; color: black; font-weight: bold;">작성자 : ${userInfo.nickname }</label><br/>
 					<input id="submit_btn" type="button" value="Submit" class="btn btn-primary">&nbsp;&nbsp;
 						<input id="cancel_btn" type="button"
 							value="Cancel" class="btn btn-primary" onclick="location.href='viewBoard.inc?

@@ -229,7 +229,7 @@
 		          			<c:if test="${fn:length(vo.c_list) > 0}">
 			          			<c:forEach var="cvo" items="${vo.c_list }" varStatus="st">
 				          			<tr>
-				          				<td>${cvo.uvo.u_name }</td>
+				          				<td>${cvo.uvo.nickname }</td>
 				          				<td>${cvo.c_content }</td>
 				          				<td>${fn:substring(cvo.write_date, 0, 10) }</td>
 				          				<td>
@@ -405,7 +405,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     			
     			for(var i=0; i<data.c_ar.length; i++){
     				str += "<tr>";
-    				str += "<td>"+data.c_ar[i].uvo.u_name+"</td>";
+    				str += "<td>"+data.c_ar[i].uvo.nickname+"</td>";
       				str += "<td>"+data.c_ar[i].c_content+"</td>";
       				str += "<td>"+data.c_ar[i].write_date.substring(0, 10)+"</td>";
       				

@@ -7,10 +7,10 @@
 		style="display: inline-block; float: right; margin: .2rem .8rem;">
 		<c:choose>
 			<c:when test="${userInfo != null}">
-				<span>${userInfo.u_name }님 환영합니다.</span>
+				<span>${userInfo.nickname }님 환영합니다.</span>
 				<a href="info.inc" title="내정보"
 					style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">내정보</a>&nbsp;&nbsp;
-				<a href="logout.inc" title="로그아웃"
+				<a href="javascript: logout('${sessionScope.userInfo.sns_type }')" title="로그아웃"
 					style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">로그아웃</a>			
 			</c:when>
 			<c:otherwise>
@@ -29,6 +29,7 @@
 		</div>
 		<div id="menu">
 			<ul>
+				<li><a href="chart.inc">지역별 과정현황</a></li>
 				<li><a href="list.inc?b_category=free">자유게시판</a></li>
 				<li><a href="list.inc?b_category=qa">Q&A</a></li>
 				<li><a href="list.inc?b_category=adv">광고문의</a></li>
@@ -37,3 +38,24 @@
 		</div>
 	</div>
 </div>
+
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+	function logout(sns_type) {
+		// 카카오 인증키 등록
+	    Kakao.init('5899acc3cddfce334c3dd49beff92a37');
+		
+		if(sns_type == "kakao"){ // 카카오 로그인을 했을 때
+			if (!Kakao.Auth.getAccessToken()) {
+			      alert('Not logged in.')
+			      return
+			    }
+			    Kakao.Auth.logout(function() {
+			      alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
+			    })
+		}else{ //
+			location.href = "logout.inc";
+		}
+		
+	}
+</script>
