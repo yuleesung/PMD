@@ -82,15 +82,14 @@
 						<form action="mypage_leave.inc" method="post" id="leaveFrm" name="leaveFrm">
 							<input type="password" placeholder="Input Your Pwd" name="u_pw"
 								id="u_pw" class="txt" style="width: 400px;">
-							<button type="button" class="btn btn-default" id="sub_btn"
+							<button type="button" class="btn btn-default" onclick="leave('${sessionScope.userInfo.u_idx}')"
 								style="margin-left: 20px;">Leave Now</button>
-							<input type="hidden" id="ss_pw" value="${userInfo.u_pw }" />
 						</form>
 					</div>
 				</c:when>
 				<c:otherwise>
 					<div class="form">
-						<button type="button" class="btn btn-default" id="sub_btn2" 
+						<button type="button" class="btn btn-default" onclick="discon('${sessionScope.userInfo.sns_type}')" 
 						style="width: 150px; height: 50px; font-size: 16px;">연동해제</button>
 					</div>
 				</c:otherwise>
@@ -100,33 +99,77 @@
 
 	<script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript">
-		$(function() {
-			$("#sub_btn").click(function() { // 일반회원 탈퇴
-				var u_pw = $("#u_pw").val();
-				var ss_pw = $("#ss_pw").val();
-
-				if (u_pw == ss_pw) {
-					var con = confirm("정말 탈퇴하시겠습니까?");
-					
-					if(con){
-						alert("탈퇴완료")
-						document.leaveFrm.submit();
-					}
-					
-				} else {
-					alert("비밀번호를 확인해주세요");
-				}
-			});
+		// 카카오 인증키 등록
+	    Kakao.init('5899acc3cddfce334c3dd49beff92a37');
+		
+		function leave(u_idx) { // 일반회원 탈퇴
+			var u_pw = $("#u_pw").val();
+			var param = "u_idx="+encodeURIComponent(u_idx)+"&u_pw="+encodeURIComponent(u_pw);
 			
-			$("#sub_btn2").click(function(){ // 네이버 연동해제
-				var con = confirm("연동을 해제하시겠습니까?");
-				
-				if(con){
+			var con = confirm("정말 탈퇴하시겠습니까?");
+			
+			if(con){
+				$.ajax({
+					url: "mypage_leave.inc",
+					type: "post",
+					data: param,
+					dataType: "json"
+				}).done(function(data){
+					if(data.chk){
+						alert("성공적으로 탈퇴하였습니다!");
+						location.href = "main.inc";
+					}else{
+						alert("비밀번호가 다릅니다!");
+					}
+				}).fail(function(err){
+					console.log(err);
+				});
+			}
+		}
+		
+		function discon(sns_type) { // 소셜연동 탈퇴
+			var con = confirm("연동을 해제하시겠습니까?");
+			
+			if(con){
+				if(sns_type == "kakao"){ // 카카오 로그인 탈퇴
+					unlinkApp();
+				}else{
 					alert("연동이 해제되었습니다");
 					location.href = "naverLeave.inc";
 				}
-			});
-		});
+			}
+		}
+		
+		function unlinkApp() {
+		    Kakao.API.request({
+		      url: '/v1/user/unlink',
+		      success: function(res) {
+		        var id = res["id"];
+		        ajax_k(id);
+		      },
+		      fail: function(err) {
+		        alert("카카오 연동해제를 실패하였습니다!")
+		      },
+		    })
+		  }
+		
+		function ajax_k(id) {
+			$.ajax({
+	        	url: "disconnectKakao.inc",
+	        	type: "post",
+	        	data: "sns_id="+encodeURIComponent(id),
+	        	dataType: "json"
+	        }).done(function(data){
+	        	if(data.chk){
+	        		alert("카카오 연동이 해제되었습니다!");
+	        		location.href = "main.inc";
+	        	}else{
+	        		alert("카카오 연동해제를 실패하였습니다!");
+	        	}
+	        }).fail(function(err){
+	        	console.log(err);
+	        });
+		}
 	</script>
 </body>
 </html>

@@ -1,11 +1,15 @@
 package com.pmd.drm;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pmd.vo.UserVO;
@@ -64,20 +68,18 @@ public class MyPageAction {
 
 	
 	@RequestMapping(value = "/mypage_leave.inc", method = RequestMethod.POST)
-	public ModelAndView mypage_leave() { // 회원탈퇴
+	@ResponseBody
+	public Map<String, Object> mypage_leave(String u_idx, String u_pw) { // 회원탈퇴
 		
-		UserVO uvo = (UserVO) session.getAttribute("userInfo");
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		boolean chk = b_dao.delMember(uvo.getU_idx(), uvo.getU_pw()); // 회원정보 탈퇴
+		boolean chk = b_dao.delMember(u_idx, u_pw); // 회원정보 탈퇴
 		
 		if(chk)  // 탈퇴성공 시, session을 지움
 			session.removeAttribute("userInfo");
 		
+		map.put("chk", chk);
 		
-		ModelAndView mv = new ModelAndView();
-		
-		mv.setViewName("redirect:/main.inc"); // 메인으로 이동
-		
-		return mv;
+		return map;
 	}
 }

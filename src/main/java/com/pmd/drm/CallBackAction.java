@@ -18,6 +18,8 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pmd.util.MakePath;
@@ -125,14 +127,14 @@ public class CallBackAction {
 				UserVO vo = b_dao.socialLogin(social);
 				
 				if(vo == null) { // 네이버 연동을 한 적이 없거나, 연동해제를 한 경우
-					UserVO check = b_dao.naverCheck(sns_id);
+					UserVO check = b_dao.socialCheck(social);
 					
 					if(check == null) { // 네이버 연동을 한 적이 없는 경우
 						boolean chk = b_dao.socialReg(map); // 회원가입하기
 						vo = b_dao.socialLogin(social);
 						session.setAttribute("userInfo", vo);
 					}else { // 네이버 연동해제를 한 경우
-						boolean chk = b_dao.naverReReg(sns_id); // 탈퇴되었던 회원정보 되살리기
+						boolean chk = b_dao.socialReReg(social); // 탈퇴되었던 회원정보 되살리기
 						vo = b_dao.socialLogin(social);
 						session.setAttribute("userInfo", vo);
 					}
@@ -214,16 +216,25 @@ public class CallBackAction {
 		
 		UserVO vo = b_dao.socialLogin(kakaoLogin);
 		
-		if(vo == null) { // 카카오 연동이 안 되어 있을 경우
-			Map<String, String> kakaoReg = new HashMap<String, String>();
-			kakaoReg.put("sns_id", sns_id);
-			kakaoReg.put("nickname", nickname);
-			kakaoReg.put("email", email);
-			kakaoReg.put("sns_type", "kakao");
+		if(vo == null) { // 카카오 연동이 안 되어있거나, 연동해제되어 있을 경우
+			UserVO check = b_dao.socialCheck(kakaoLogin);
 			
-			b_dao.socialReg(kakaoReg);
-			vo = b_dao.socialLogin(kakaoLogin);
-			session.setAttribute("userInfo", vo);
+			if(check != null) { // DB에 정보가 남아있는 경우
+				b_dao.socialReReg(kakaoLogin);
+				vo = b_dao.socialLogin(kakaoLogin);
+				session.setAttribute("userInfo", vo);
+			}else { // 카카오 연동이 되어있지 않은 경우
+				Map<String, String> kakaoReg = new HashMap<String, String>();
+				kakaoReg.put("sns_id", sns_id);
+				kakaoReg.put("nickname", nickname);
+				kakaoReg.put("email", email);
+				kakaoReg.put("sns_type", "kakao");
+				
+				b_dao.socialReg(kakaoReg);
+				
+				vo = b_dao.socialLogin(kakaoLogin);
+				session.setAttribute("userInfo", vo);
+			}
 		}else { // 카카오 연동이 되어 있는경우
 			session.setAttribute("userInfo", vo);
 		}
@@ -232,6 +243,23 @@ public class CallBackAction {
 		mv.setViewName(mp.decidePath(session));
 		
 		return mv;
+	}
+	
+	@RequestMapping(value = "/disconnectKakao.inc", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> disconnectKakao(String sns_id){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Map<String, String> discon = new HashMap<String, String>();
+		discon.put("sns_id", sns_id);
+		discon.put("sns_type", "kakao");
+		
+		boolean chk = b_dao.socialLeave(discon);
+		session.removeAttribute("userInfo");
+		
+		map.put("chk", chk);
+		
+		return map;
 	}
 	
 	private String naverLeaveConnection(URL url) throws Exception {
@@ -261,7 +289,12 @@ public class CallBackAction {
 			if(result.equals("success")) {
 				UserVO vo = (UserVO) session.getAttribute("userInfo");
 				String sns_id = vo.getSns_id();
-				boolean chk = b_dao.naverLeave(sns_id); // DB에서 탈퇴로 변경
+				
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("sns_id", sns_id);
+				map.put("sns_type", "naver");
+				
+				boolean chk = b_dao.socialLeave(map); // DB에서 탈퇴로 변경
 				session.removeAttribute("userInfo"); // 세션에서 로그아웃 처리
 				returnPage = "redirect:/main.inc";
 			}else {
