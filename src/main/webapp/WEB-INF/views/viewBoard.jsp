@@ -157,7 +157,7 @@
 		          		<c:if test="${vo ne null }">
 			          		<tr>
 			          			<th>제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
-			          			<td colspan="5">
+			          			<td>
 			          				<c:if test="${vo.secret_content ne null  }">
 			          					${vo.subject }
 			          					<i class="fas fa-lock"></i>
@@ -166,6 +166,8 @@
 			          					${vo.subject }
 			          				</c:if>
 			          			</td>
+			          			<th>작성자</th>
+			          			<td colspan="4" style="text-align: center;">${vo.uvo.nickname }</td>
 			          		</tr>
 			          		<tr>
 			          			<th>파일 이름</th>
