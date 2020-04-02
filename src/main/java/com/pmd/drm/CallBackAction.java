@@ -262,6 +262,45 @@ public class CallBackAction {
 		return map;
 	}
 	
+	@RequestMapping(value = "/googleLogin.inc", method = RequestMethod.POST)
+	public ModelAndView googleLogin(String sns_id, String nickname, String email) {
+		ModelAndView mv = new ModelAndView();
+		
+		Map<String, String> googleLogin = new HashMap<String, String>();
+		googleLogin.put("sns_id", sns_id);
+		googleLogin.put("sns_type", "google");
+		
+		UserVO vo = b_dao.socialLogin(googleLogin);
+		
+		if(vo == null) { // 구글 연동이 안 되어있거나, 연동해제되어 있을 경우
+			UserVO check = b_dao.socialCheck(googleLogin);
+			
+			if(check != null) { // DB에 정보가 남아있는 경우
+				b_dao.socialReReg(googleLogin);
+				vo = b_dao.socialLogin(googleLogin);
+				session.setAttribute("userInfo", vo);
+			}else { // 구글 연동이 되어있지 않은 경우
+				Map<String, String> googleReg = new HashMap<String, String>();
+				googleReg.put("sns_id", sns_id);
+				googleReg.put("nickname", nickname);
+				googleReg.put("email", email);
+				googleReg.put("sns_type", "google");
+				
+				b_dao.socialReg(googleReg);
+				
+				vo = b_dao.socialLogin(googleLogin);
+				session.setAttribute("userInfo", vo);
+			}
+		}else { // 구글 연동이 되어 있는경우
+			session.setAttribute("userInfo", vo);
+		}
+		
+		MakePath mp = new MakePath();
+		mv.setViewName(mp.decidePath(session));
+		
+		return mv;
+	}
+	
 	private String naverLeaveConnection(URL url) throws Exception {
 		String returnPage = null;
 		

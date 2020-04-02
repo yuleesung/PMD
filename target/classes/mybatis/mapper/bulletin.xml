@@ -204,7 +204,7 @@
 	</select>
 	
 	<!-- 소셜 회원탈퇴를 했을 때, DB에 저장된 ID값이 있는지 확인 -->
-	<select id="socailCheck" resultType="com.pmd.vo.UserVO" parameterType="java.util.Map">
+	<select id="socialCheck" resultType="com.pmd.vo.UserVO" parameterType="java.util.Map">
 		select * from users_t where sns_id = #{sns_id} and sns_type = #{sns_type}
 	</select>
 	

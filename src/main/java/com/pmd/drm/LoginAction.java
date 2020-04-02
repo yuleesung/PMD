@@ -27,7 +27,7 @@ public class LoginAction {
 
 	
 	
-	@RequestMapping("/login.inc")
+	@RequestMapping(value = "/login.inc", method = RequestMethod.GET)
 	public ModelAndView naverLogin() {
 		ModelAndView mv =  new ModelAndView();
 		

@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id" content="1048979766914-cjmet6566e6qmc0tnc1tv8jm9doenhk2.apps.googleusercontent.com">
 <!-- 메뉴 배너 영역 -->
 <div style="background: #6a99cb;">
 	<div id="sign"
@@ -40,13 +45,24 @@
 </div>
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 <script>
+
+	function init() {
+	  gapi.load('auth2', function() {
+	    /* Ready. Make a call to gapi.auth2.init or some other API */
+		  gapi.auth2.init();
+	  });
+	}
 	function logout(sns_type) {
 		// 카카오 인증키 등록
 	    Kakao.init('5899acc3cddfce334c3dd49beff92a37');
 		
 		if(sns_type == "kakao"){ // 카카오 로그인을 했을 때
 			kakaoLogout();
+		}else if(sns_type == "google"){
+			signOut();
 		}else{ //
 			location.href = "logout.inc";
 		}
@@ -61,5 +77,14 @@
 	    Kakao.Auth.logout(function() {
 	      location.href = "logout.inc";
 	    })
+	  }
+	
+	function signOut() {
+	    var auth2 = gapi.auth2.getAuthInstance();
+	    auth2.signOut().then(function () {
+	    	location.href = "logout.inc";
+	    });
+	    
+	    auth2.disconnect();
 	  }
 </script>

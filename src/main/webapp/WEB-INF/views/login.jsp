@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id" content="1048979766914-cjmet6566e6qmc0tnc1tv8jm9doenhk2.apps.googleusercontent.com">
 <title>Login Page</title>
 	<!--Made with love by Mutiullah Samim -->
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -32,7 +34,8 @@
 				<h3>Sign In</h3>
 				<div class="d-flex justify-content-end social_icon">
 					<span><a href="${url }"><img alt="naver" src="resources/images/naverLogin.PNG"/></a></span>
-					<span><a href="javascript:loginWithKakao()"><img alt="kakao" src="resources/images/kakao_login_btn.png"/></a></span>
+					<span><a href="javascript: loginWithKakao()"><img alt="kakao" src="resources/images/kakao_login_btn.png"/></a></span>
+					<span><a><div class="g-signin2" style="width: 48px; height: 48px; margin-top: 23px;" data-onsuccess="onSignIn"></div></a></span>
 				</div>
 			</div>
 			<div class="card-body">
@@ -70,7 +73,7 @@
 </div>
 
 	<div>
-		<form action="kakaoLogin.inc" method="post" name="kakaoFrm">
+		<form method="post" name="socialFrm">
 			<input type="hidden" name="sns_id"/>
 			<input type="hidden" name="nickname"/>
 			<input type="hidden" name="email"/>
@@ -82,6 +85,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script type="text/javascript">
 		// 카카오 인증키 등록
 	    Kakao.init('5899acc3cddfce334c3dd49beff92a37');
@@ -152,15 +156,35 @@
 			var nickname = profile["nickname"];
 			var email = kakao_account["email"];
 			
-			document.kakaoFrm.sns_id.value = id;
-			document.kakaoFrm.nickname.value = nickname;
+			document.socialFrm.action = "kakaoLogin.inc";
+			document.socialFrm.sns_id.value = id;
+			document.socialFrm.nickname.value = nickname;
 			
 			if(email != undefined){
-				document.kakaoFrm.email.value = email;
+				document.socialFrm.email.value = email;
 			}
 			
-			document.kakaoFrm.submit();
+			document.socialFrm.submit();
 		}
+		
+		function onSignIn(googleUser) {
+	        // Useful data for your client-side scripts:
+	        var profile = googleUser.getBasicProfile();
+	        
+	        var id = profile.getId(); // Don't send this directly to your server!
+	        var name = profile.getName();
+	        var email = profile.getEmail();
+	        
+			
+	        document.socialFrm.action = "googleLogin.inc";
+			document.socialFrm.sns_id.value = id;
+			document.socialFrm.nickname.value = name;
+			document.socialFrm.email.value = email;
+			
+			document.socialFrm.submit();
+	        
+	      }
+		
 	</script>
 </body>
 </html>
