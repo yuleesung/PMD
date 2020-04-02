@@ -7,9 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <title>My Page</title>
-<link rel="stylesheet" href="resources/css/mypage.css">
+
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="http://fonts.googleapis.com/css?family=Didact+Gothic"
+	rel="stylesheet">
+<link href="resources/css/fonts.css" rel="stylesheet" type="text/css"
+	media="all">
+<link href="resources/css/default.css" rel="stylesheet" type="text/css"
+	media="all">
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="resources/css/mypage.css">
+<link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>
 	<!-- 메뉴바 -->
@@ -18,7 +29,7 @@
 	<div class="container content">
 		<div class="row profile" style="width: 1600px;">
 			<div class="col-md-3">
-				<div class="profile-sidebar position-fixed">
+				<div class="profile-sidebar position-fixed" style="position: absolute!important;">
 					<!-- SIDEBAR USERPIC -->
 					<div class="profile-userpic">
 						<img
@@ -28,15 +39,8 @@
 					<!-- END SIDEBAR USERPIC -->
 					<!-- SIDEBAR USER TITLE -->
 					<div class="profile-usertitle">
-						<div class="profile-usertitle-name">${userInfo.u_name }</div>
-						<c:choose>
-							<c:when test="${userInfo.sns_id ne null }">
-								<div class="profile-usertitle-job">( ${userInfo.sns_id } )</div>
-							</c:when>
-							<c:otherwise>
-								<div class="profile-usertitle-job">( ${userInfo.u_id } )</div>
-							</c:otherwise>
-						</c:choose>
+						<div class="profile-usertitle-name">${userInfo.nickname }</div>
+
 						<div class="profile-usertitle-job">${userInfo.email }</div>
 					</div>
 					<!-- END SIDEBAR USER TITLE -->
@@ -66,42 +70,58 @@
 					<!-- END MENU -->
 				</div>
 			</div>
-			<div class="col-md-9">
+			<div>
 				<div class="profile-content" id="profile-content"></div>
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3"></div>
-			<div class="col-md-9 ft">
-				<footer class="footer">
-					<div class="row">
-						<div class="col-md-4">
-							<span class="copyright">Copyright &copy; Your Website 2018</span>
-						</div>
-						<div class="col-md-4">
-							<ul class="list-inline social-buttons">
-								<li class="list-inline-item"><a
-									href="https://github.com/ELMORABITYounes"> <i
-										class="fa fa-github"></i>
-								</a></li>
-								<li class="list-inline-item"><a
-									href="https://www.facebook.com/younes.elmorabit.92"> <i
-										class="fa fa-facebook"></i>
-								</a></li>
-								<li class="list-inline-item"><a
-									href="https://www.linkedin.com/in/younes-elmorabit-2a162310b/">
-										<i class="fa fa-linkedin"></i>
-								</a></li>
-							</ul>
-						</div>
 
-					</div>
-				</footer>
+
+	<footer class="site-footer" role="contentinfo">
+		<div class="container">
+			<div class="row mb-5">
+				<div class="col-md-4 mb-5">
+					<h3>PMD</h3>
+					<p class="mb-5">People who Make a Dream.</p>
+					<ul class="list-unstyled footer-link d-flex footer-social">
+						<li><a href="#" class="p-2"><span class="fa fa-twitter"></span></a></li>
+						<li><a href="#" class="p-2"><span class="fa fa-facebook"></span></a></li>
+						<li><a href="#" class="p-2"><span class="fa fa-linkedin"></span></a></li>
+						<li><a href="#" class="p-2"><span class="fa fa-instagram"></span></a></li>
+					</ul>
+				</div>
+				<div class="col-md-4 mb-5">
+					<h3>Visit or Talk to Us</h3>
+					<ul class="list-unstyled footer-link">
+						<li class="d-block"><span class="d-block">Address:</span> <span
+							class="text-white">34 Street Name, City Name Here, United
+								States</span></li>
+						<li class="d-block"><span class="d-block">Telephone:</span><span
+							class="text-white">+1 242 4942 290</span></li>
+						<li class="d-block"><span class="d-block">Email:</span><span
+							class="text-white">info@yourdomain.com</span></li>
+					</ul>
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="col-12 text-md-left text-left">
+					<p>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;
+						<script>document.write(new Date().getFullYear());</script>
+						All rights reserved | This template is made with <i
+							class="fa fa-heart-o" aria-hidden="true"></i> by <a
+							href="https://colorlib.com" target="_blank">Colorlib</a>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						<br> Demo Images Unsplash
+					</p>
+				</div>
 			</div>
 		</div>
-	</div>
+	</footer>
+	<!-- END footer -->
+
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript">
 		$(function() {

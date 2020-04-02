@@ -88,10 +88,17 @@
 					</div>
 				</c:when>
 				<c:otherwise>
+				<c:if test="${sessionScope.userInfo.sns_type ne 'google' }">
 					<div class="form">
 						<button type="button" class="btn btn-default" onclick="discon('${sessionScope.userInfo.sns_type}')" 
 						style="width: 150px; height: 50px; font-size: 16px;">연동해제</button>
 					</div>
+				</c:if>
+				<c:if test="${sessionScope.userInfo.sns_type eq 'google' }">
+					<div class="form">
+						<p>Google에서 직접 연동해제 하시길 바랍니다.</p>
+					</div>
+				</c:if>
 				</c:otherwise>
 			</c:choose>
 		</div>

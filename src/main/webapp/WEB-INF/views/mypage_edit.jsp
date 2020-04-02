@@ -97,9 +97,7 @@
 				</c:when>
 				<c:otherwise>
 					<div class="form">
-						<h2>
-							<strong>이 계정은 SNS으로 연동되었습니다. </strong>
-						</h2>
+						<p>이 계정은 SNS으로 연동되었습니다.</p>
 					</div>
 				</c:otherwise>
 			</c:choose>

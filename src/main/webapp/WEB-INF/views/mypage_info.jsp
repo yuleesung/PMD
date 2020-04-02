@@ -64,11 +64,12 @@ p {
 						<label>SNS id</label>
 					</div>
 					<div class="col-md-6">
-						<p>${userInfo.sns_id } (${userInfo.sns_type } 연동)</p>
+						<p>${userInfo.sns_type } 연동</p>
 					</div>
 				</div>
 			</c:otherwise>
 			</c:choose>
+			<c:if test="${userInfo.u_name ne null}">
 			<div class="row">
 				<div class="col-md-6">
 					<label>Name</label>
@@ -77,6 +78,7 @@ p {
 					<p>${userInfo.u_name }</p>
 				</div>
 			</div>
+			</c:if>
 			<div class="row">
 				<div class="col-md-6">
 					<label>Nick Name</label>
@@ -90,7 +92,14 @@ p {
 					<label>Email</label>
 				</div>
 				<div class="col-md-6">
-					<p>${userInfo.email }</p>
+					<c:choose>
+					<c:when test="${userInfo.email ne null}">
+						<p>${userInfo.email }</p>
+					</c:when>
+					<c:otherwise>
+						<p> - </p>
+					</c:otherwise>
+				</c:choose>
 				</div>
 			</div>
 			<div class="row">
