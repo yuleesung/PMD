@@ -66,7 +66,7 @@ public class ListAction {
 		session.setAttribute("nowPage", page.getNowPage());
 		session.setAttribute("b_category", b_category);
 		
-		// JSP에서 사용할 모든 값들을 저장할 객체
+		// JSP에서 사용할 모든 값들을 저장할 객체 
 		mv.addObject("list", ar);
 		mv.addObject("pageCode", pageCode);
 		mv.addObject("nowPage", page.getNowPage());

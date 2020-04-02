@@ -51,7 +51,7 @@ public class ViewBoardAction {
 						chk = true;
 						break;
 					}
-				}
+				} 
 			}
 			
 			if(!chk){

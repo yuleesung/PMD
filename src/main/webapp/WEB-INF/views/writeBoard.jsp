@@ -75,7 +75,7 @@ input[type=text]{
 						<option value="none">:: Category ::</option>
 						<option value="free">자유게시판</option>
 						<option value="qa">Q&A</option>
-						<option value="adv">광고문의</option>
+						<option value="adv">광고문의</option> 
 					</select>
 					
 					<label><input type="checkbox" name="secret_w" id="secret_w" />비밀글</label>

@@ -25,7 +25,7 @@
 <script>
 	window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","applicationID":"19731324","transactionName":"c11ZQxdbVQpUF0oWWldcQkdKR1ABXxAV","queueTime":0,"applicationTime":51,"agent":""}</script>
 <script>
-	(window.NREUM||(NREUM={})).loader_config={
+	(window.NREUM||(NREUM={})).loader_config={//
 			xpid:"VQcEVV9XCRABXVZRBgIFUg==",
 			licenseKey:"21e497a9fb",
 			applicationID:"19731324"};

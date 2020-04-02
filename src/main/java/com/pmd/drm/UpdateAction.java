@@ -41,7 +41,7 @@ public class UpdateAction {
 		
 		mv.addObject("vo", vo);
 		mv.setViewName("updateBoard");
-		
+		 
 		return mv;
 	}
 	

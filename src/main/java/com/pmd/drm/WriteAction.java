@@ -33,7 +33,7 @@ public class WriteAction {
 	
 	
 	
-	
+	 
 	@RequestMapping("/write.inc")
 	public ModelAndView writeForm(String nowPage, String b_category) {
 		ModelAndView mv = new ModelAndView();

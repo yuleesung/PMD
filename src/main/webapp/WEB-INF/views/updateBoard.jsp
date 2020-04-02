@@ -74,7 +74,7 @@ input[type=text]{
 
 <c:choose>
 <c:when test="${userInfo.u_idx ne null }">
-	<section class="section element-animate">
+	<section class="section element-animate">  
 	  <div class="container">
 		<form class="form-horizontal" method="post" action="edit.inc" name="editFrm" enctype="multipart/form-data">
 			<div class="form-group">

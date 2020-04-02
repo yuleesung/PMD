@@ -26,7 +26,7 @@ public class ConfirmAction {
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		boolean value = b_dao.matchMember(u_id);
 		map.put("value", value);
-		
+		 
 		return map;
 		
 	}

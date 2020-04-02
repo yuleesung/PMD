@@ -217,7 +217,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     
 
     <script>
-	    document.addEventListener('DOMContentLoaded', function() {
+	    document.addEventListener('DOMContentLoaded', function() {//
             var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
 
             for (var i = 0; i < total; i++) {

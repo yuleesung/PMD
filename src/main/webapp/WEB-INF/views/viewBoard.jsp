@@ -99,7 +99,7 @@
 			border-bottom-right-radius: 3px;
 		}
 		
-		table#t2 tbody td{
+		table#t2 tbody td{ 
 			border-bottom: 1px solid #ccc;
 			padding: 5px;
 			padding-top: 12px;

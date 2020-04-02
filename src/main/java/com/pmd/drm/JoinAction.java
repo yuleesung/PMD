@@ -35,7 +35,7 @@ public class JoinAction {
 		mv.addObject("url", url);
 		mv.setViewName("join");
 
-		return mv;
+		return mv; 
 	}
 
 	@RequestMapping(value = "/join.inc", method = RequestMethod.POST)
