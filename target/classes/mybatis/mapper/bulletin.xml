@@ -22,8 +22,8 @@
 	
 	<!-- 게시물 쓰기 -->
 	<insert id="writePost" parameterType="com.pmd.vo.BulletinVO">
-		insert into bulletin(b_idx, subject, b_content, file_name, write_date, ip, hit, status, b_category, u_idx)
-		values(bulletin_seq.nextval, #{subject}, #{b_content}, #{file_name}, sysdate, #{ip}, 0, 0, #{b_category}, #{u_idx})
+		insert into bulletin(b_idx, subject, b_content, file_name, write_date, ip, hit, status, b_category, u_idx <if test="secret_content != null">, secret_content</if>)
+		values(bulletin_seq.nextval, #{subject}, #{b_content}, #{file_name}, sysdate, #{ip}, 0, 0, #{b_category}, #{u_idx} <if test="secret_content != null">, #{secret_content}</if>)
 	</insert>
 	
 	<!-- 댓글 쓰기  -->
