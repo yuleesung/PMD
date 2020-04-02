@@ -380,6 +380,18 @@ margin-bottom: 0px !important;
 .suss{
 	color: rgba(0, 20, 245, 0.7);
 }    
+
+#kakako_btn{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+    height: 48px;
+    background: url("resources/images/kakao_login_btn_medium_wide.png") no-repeat;
+    border: none;
+    background-size: 100%;
+}
+
+
 </style>
 
 </head>
@@ -508,9 +520,8 @@ margin-bottom: 0px !important;
 										
 									</div>
 									<div style="width: 330px; margin: 0 auto;">
-										<button type="button" style=" background-color: rgba(0, 20, 245, 0.7); margin-left: 0;"
-												class="ant-btn OauthButton OauthButton__facebook SignUpOauthSelectStep__OauthButton" id="join_btn"
-												onclick="sendData()">
+										<button type="button" onclick="location.href='javascript:join()'" style=" background-color: rgba(0, 20, 245, 0.7); margin-left: 0; border-radius:8px;"
+												class="ant-btn OauthButton OauthButton__facebook SignUpOauthSelectStep__OauthButton" id="join_btn" >
 											<img alt="ImgIconFacebook" class="OauthButton__iconImg" src="resources/images/P_icon.png">
 											<div class="OauthButton__content">PMD로 회원가입</div>
 										</button>
@@ -526,31 +537,31 @@ margin-bottom: 0px !important;
 							</div>
 							<!-- 소셜 회원가입 버튼 영역 -->
 							<div style="width: 330px; margin: 0 auto;">
-								<button service="naver" type="button" style="background: #60d04c;" onclick="location.href='${url }'" 
+								<button service="naver" type="button" style="background: #1EC800; border-radius: 8px; font-family: '나눔바른고딕 Bold' " onclick="location.href='${url }'" 
 									class="ant-btn OauthButton OauthButton__naver SignUpOauthSelectStep__OauthButton">
 									<img alt="ImgIconNaver" class="OauthButton__iconImg"
 										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3JpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDE0IDc5LjE1Njc5NywgMjAxNC8wOC8yMC0wOTo1MzowMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpmNWVmZjVlMy0zYTU4LWMzNGUtYTMxNS0xYTVkYTE5YTBjMjAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDNGQzYwNUFDODVEMTFFNDk0NkRCQzQ1MzJEMkZBRDYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDNGQzYwNTlDODVEMTFFNDk0NkRCQzQ1MzJEMkZBRDYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ODAxYjhhMzItZjA4My1kZTQxLTkwMzgtZTIyNzY4ZDZjMWRiIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkUwQTE1MTEzODEzMTExRTRBMkQ2RTFBQUFFMDlENUU0Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+DvnoVAAAASJJREFUeNpi/P//PwMtARMDjcHwtOAOEH8C4jdA/AGIPwJxIhZ1AkB8H0ntJ6heFMCIJZL/gcTRxP4CsSIQP0YSEwLit2jq/qM7GpsP3mERYwbijVgc8oGQXlLiwBCIm5F9T4tIrgFic1qnovVQ+j006KhugSQQ90HZ3wkpZiHCQFBK4UdTWwjEl4D4HhCLUeqD20Ach0V8HhCrUSOIlIF4ORB3ouchaF6g2AIOqGEVaBmNaqnoL7RYAAF/WhV2sPLkPBDX0joftADxSWIVYyvsfqMlSZACEbRyBpQXHgAxG5reP0DMSsgHr6EF2Xco/QopiGDgORAnQx3zB0nta2IyWgYQ8wLxL6gLv0AxOlgCtYAJaglI7Wdigmi0TkYBAAEGAElhSK5ZcYQXAAAAAElFTkSuQmCC">
 									<div class="OauthButton__content">네이버로 회원가입</div>
 								</button>
-								<button service="google_plus" type="button"  style="color: #333333; border-color: #ccc;" id="sns_btn"
+								<button service="google_plus" type="button"  style="color: #333333; border-color: #ccc;  border-radius:8px;" id="sns_btn"
 									class="ant-btn OauthButton OauthButton__google_plus SignUpOauthSelectStep__OauthButton">
 									<img alt="ImgIconGoogle" class="OauthButton__iconImg"
 										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAr1JREFUSA3tVU1ME1EQnllaEFoIwbbG6MVgJJrUxIg0IAiKLV40GosxsTHx4Nl4UQOXXjQmmmg8mXgw/sRA4SQ3aJF/QwsHgyd/8IKY0IJG8I/u7jivZtmfLqCJR97lvffNN9/szJv3FmBjrFMBXMcO88FASCE6x7w6INjOs4xAHwGlIUS109OXSqylsWqAdHPNLgJ6mBNeQwERBgmli76+8bd2NNsA6WBtI6hKDwcotXOyYoj42SnB/vLe5AerzWEF0scOVoGcfW4VZ5EFAJoC/lye/QRQvuJL8MBOXNiZbBny8n0iKtNQIcxpRjz1JVu88VSTN5E85GlweSVJOg+I82y/xdhVjW+dTSXKJopCyrTr9mKs0kMqbGVyxoGOIxXxl1NWR7FfDNX5SnvH5uxstpgcL3yUjTsp21OSyZzYN5EJBiK2xH8ATRnIicJ3XJ5K4Y8E8wWj7T6MRlWjXvONpVdsdRsx45r9Z/rb3Y0aZj5kItHnuUESvLaKCwMf7g6g1bsLAVc0BD//kAX6H4c5A8QZ/jqtRLs5XW4SLpZp4BvOQy8RYgH77NQp9F5fA5gDEIyysVIm6dPlxdrvk7GweCKeGh3621zVxn3z9R8RAuWJjuG4vraUiCR8lobiyeNfWtwTy5tFJncD3af3Gh2M66M3f/GFU+4YMZZ8bNybukgYqjvDw5xyvUYSF41Lcsnl83cMHI7KAm96EXV8m5s6W7RwKlK4cLJF4/I8ZOwggecHiLVWoUpJfipWbnOOmAsE2oXz8/lUCLzg554B9+yVBpZa4orXJNo28RnpIy+AMB2ItTYCqT1E8FePnSRXDJfN3GuLXyse0aX/rGzbNHWmaxCdjmru6TGrQ94eccTh+nrBTlxwbTMwigS6wiFFhdwPh8nbuGcVJJrlh26Ib1FHqrV7zR+OUWtjbVuB3wfJ7N0eK6i5AAAAAElFTkSuQmCC">
 									<div class="OauthButton__content">구글로 회원가입</div>
 								</button>
-								<button service="email" type="button" style="background-color: #FBBC05;" id="sns_btn"
-									class="ant-btn OauthButton OauthButton__email SignUpOauthSelectStep__OauthButton">
-									<img alt="ImgIconEmail" class="OauthButton__iconImg" style="width: 24px;"
-										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAAEgBckRAAAAAXNSR0IArs4c6QAAA8ZJREFUaAXtWT2MDVEUfm8ti0QkEokNkhGNQiMhCtU2CqIRiUQjGipRiUKi0rENlWioaGhoSISCgoJCgoSEhCg2kQgRsiy+c/d+Z8/cuXfezHtv7L71bnL3nPOd75xzf97M3JlttRKtLfgftIR/Dgbn8pzlNYBTBTAEqtdgZDs1ohFltGcbbZ2DREoTh8hRMoRPXWSyhiVV16WWtFQEXEccgRwxSPaOlWJDfxL6HM+CNpA6pfB0nQhShqtAfAHKWhsk89KtxmR+wF4Rm5RdRa7SJhBHrIOBHpug7X5RADMBIN/bINHR1nuf21w7pBaGtBGE+8ISEtoYsOlZ1f8VJ1pmQdjnrC26kBwmClrmjJI/QhI3J11Czbtq70M+fCFY9e9ANUaNLcz99Bj6BcoeGjXlTvAnCzGyhb5lkL+9PlMgJgDwz/gYEQepK50AZEYQ+meDLyFuJfy3DWcrfcRo8/oRPFPQK8CeMwByrcCQbwy2OhLj3IobcqZgoIBzzfBEzT0ZLJ08xQhAZgr2oDCfpKh9adat2/h1UHdAQ/4ArkDjv6LGr4PcY9nvwFHIF13uxj3EjRVieWkbua9A6gAg9peJd6qGGMdxox9TQgfFxExDl2eKaxpmAej7aUOeVVJEgd+dpzxfnoRyKy8v4Em7fJCIq5Hckmi54XwkB1jnAr7IFpPgLhN43xrjexn4qhXwidaZRM88pgnge2iTh371MYkCRoFvFf2Q74x+w9BUhV8HYEEXp0CgwDlqEot6IaCoCV/9Aoz2RU7SjsmwQOxKjsU5TE5qSWfC0fi9aPAL5PZANjGxlF3DjS9R1yMbBg5XYLgCFVdA771N3CMqjqErGp8bi+c+JDtQ0r7CN9HVUnURhFoH0OUEmmyFtBHm+Qj2E9ihQnCfAOQ+gc7PMCw/A+UUDcpCSTqMzIQE+zB64dAPrPRgVChQAiDXJHrYvgPY68egpziSCunoMDKzJOC70b8ZP9WLUPRmYGPKdMQsRb/OJEZ+gr7DxsLufQJMiGTb0KfQw3YTwDLyUhIcOaQ/CINhv0XfHIsD3r8JsIBP+hoybI8AxD6ujQO3H+UY9xSK+0DH3KGEv/8TYBEkl5e0x+hhewVgA7q84H0InbDvoLt/szBXSoLX3ARYFEXkVfYWeqd2BYTot1fmCiX4zU+ARVFMXvgvoYet9EMB42MSif7dBOwAUPg0euXPKDbW6vM2ATuIXvSyCQz8WWjgJ5B77Q62eTu2zv0jMsDnwxxPFdUjAAbb928GqaL9wBff+0A/VmWY439cgb9cnoCBnDFMLgAAAABJRU5ErkJggg==">
-									<div class="OauthButton__content">카카오톡으로 회원가입</div>
+								<button onclick="javascript:loginWithKakao()" service="email" type="button" id="kakako_btn"  
+								 class="OauthButton ">
+								 	<!-- <img alt="카카오 로그인" src="resources/images/kakao_login_btn_medium_wide.png" style="margin: 0; padding: 0; background-size: 329px; "> -->
 								</button>
 							</div>
 						</div>
 							
-							<div class="OnBoardingContent__footer">
-								<span>기존에 PMD를 사용하셨나요? <a href="login.inc"><b style="text-decoration: underline;">로그인</b></a></span>
-							</div>
+						<div class="OnBoardingContent__footer">
+							<span>
+								기존에 PMD를 사용하셨나요? <a href="login.inc"><b style="text-decoration: underline;">로그인</b></a>
+							</span>
 						</div>
+					  </div>
 					</div>
 				</div>
 				
@@ -574,16 +585,72 @@ margin-bottom: 0px !important;
 		</div>
 	</div>
 	
-	<div id="msg"></div>
+	
+	
+	<div>
+		<form action="kakaoLogin.inc" method="post" name="kakaoFrm">
+			<input type="hidden" name="sns_id"/>
+			<input type="hidden" name="nickname"/>
+			<input type="hidden" name="email"/>
+		</form>
+	</div>
+	
 	
 	
 	<!-- ----------------- script ----------------- -->
 	<script src="resources/js/jquery-3.2.1.min.js"></script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script>
+	
+	// 카카오 인증키 등록
+    Kakao.init('5899acc3cddfce334c3dd49beff92a37');
+
+    // SDK 초기화 여부를 판단합니다. true면 정상등록
+    // console.log(Kakao.isInitialized());
+    function loginWithKakao() {
+	    Kakao.Auth.login({
+	      success: function(authObj) {
+	    	  Kakao.API.request({
+    	        url: '/v2/user/me',
+    	        success: function(res) {
+    	          // alert(JSON.stringify(res))
+    	          // console.log(JSON.stringify(res))
+    	          sendData(res)
+    	        },
+    	        fail: function(error) {
+    	          alert(
+    	            'login success, but failed to request user information: ' +
+    	              JSON.stringify(error)
+    	          )
+    	        },
+    	      })
+	      },
+	      fail: function(err) {
+	        alert(JSON.stringify(err))
+	      },
+	    })
+	  }
+    
+    function sendData(res) {
+		var id = res["id"];
+		var kakao_account = res["kakao_account"];
+		var profile = kakao_account["profile"];
+		var nickname = profile["nickname"];
+		var email = kakao_account["email"];
+		
+		document.kakaoFrm.sns_id.value = id;
+		document.kakaoFrm.nickname.value = nickname;
+		
+		if(email != undefined){
+			document.kakaoFrm.email.value = email;
+		}
+		
+		document.kakaoFrm.submit();
+	}
 	
 	
 	// 'PMD로 회원가입' 버튼 눌렀을 때
-	function sendData(){
+	function join(){
 		
 		var u_id = $("#u_id").val().trim();
 		var u_pw = $("#u_pw").val().trim();
@@ -661,6 +728,7 @@ margin-bottom: 0px !important;
 	
 	$(function(){
 		
+		
 		/* 비밀번호 재확인 */
 		$("#cpw, #u_pw").on("keyup", function(){
 			
@@ -716,7 +784,7 @@ margin-bottom: 0px !important;
 		      
 			var email = $("#email").val().trim() + "@"+$("#input_email").val().trim();
 		    
-			if(email.length > 3 ){
+			if(email.length > 12 ){
 		     	//email 4자이상 입력시 수행   
 		     	
 		         

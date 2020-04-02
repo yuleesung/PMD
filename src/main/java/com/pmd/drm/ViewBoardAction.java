@@ -74,6 +74,8 @@ public class ViewBoardAction {
 		mv.addObject("b_category", b_category);
 		mv.setViewName("viewBoard");
 		
+		
+		
 		return mv;
 	}
 

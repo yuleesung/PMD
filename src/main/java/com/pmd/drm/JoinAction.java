@@ -45,12 +45,8 @@ public class JoinAction {
 		
 		Boolean res = b_dao.join(vo);
 		
-		System.out.println(res);
-		
 		map.put("res", res);
 		
-		
-
 		return map;
 	}
 

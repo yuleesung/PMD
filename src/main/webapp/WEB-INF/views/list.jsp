@@ -17,8 +17,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
     <link rel="stylesheet" href="resources/fonts/ionicons/css/ionicons.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <link rel="stylesheet" href="resources/fonts/fontawesome/css/font-awesome.min.css">
-	
+	<link rel="stylesheet" href="resources/css/jquery-ui.css"/>
 	<!-- 메뉴바 관련 추가 -->
 	<link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
 	<link href="resources/css/fonts.css" rel="stylesheet" type="text/css" media="all">
@@ -118,13 +119,24 @@
 									${rowTotal - ((nowPage-1)*blockList+st.index) }
 								  </td>
 								  <td>
-								  <c:if test="${vo.secret_content ne null }">
-									 <a href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}"> 
-										${vo.subject }
-									 </a>
-									 <i class="fas fa-lock"></i>
+								  <c:if test='${vo.secret_content eq 1 && board_name eq "광고문의"}'>
+									 <c:set value="${sessionScope.userInfo }" var="uvo" />
+									 <c:if test="${vo.u_idx eq uvo.u_idx  }">
+										 <a href="#"
+										 	onclick="javascript:secretView()"> 
+											${vo.subject }
+										 </a>
+									 </c:if>
+									 <c:if test="${vo.u_idx ne uvo.u_idx  }">
+										 <a href="javascript:alert('권한이 없습니다.')"> 
+											${vo.subject }
+										 </a>
+									 </c:if>
+									 
+									<i class="fas fa-lock fa-lg" style="color: #2651a8"></i>
 								  </c:if>
-								  <c:if test="${vo.secret_content eq null}">
+								  
+								   <c:if test="${'광고문의' ne board_name || vo.secret_content ne 1}">
 									 <a href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}"> 
 										${vo.subject }
 									 </a>
@@ -206,6 +218,26 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- loader -->
     <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/></svg></div>
 
+
+
+	<!-- 본인의 비밀글 보기 위한 비번확인 팝업 -->
+	<div id="pwPopup" >
+		<form method="post" action="viewBoard.inc" > 
+			<input type="hidden" name="b_idx" id="b_idx" value="${vo.b_idx }"/>
+			<input type="hidden" name="nowPage" id="nowPage" value="${nowPage}"/>
+			<input type="hidden" name="b_category" value="${b_category }"/>
+			<label for="u_pw"><input type="password" id="u_pw" name="u_pw"/>비밀번호:</label>
+			<br/>
+			<button type="button" id="conf_bt">확인</button>
+			<button type="button" onclick="window.close();">닫기</button>
+		</form>
+	</div>
+
+
+
+
+
+
     <script src="resources/js/jquery-3.2.1.min.js"></script>
     <script src="resources/js/popper.min.js"></script>
     <script src="resources/js/bootstrap.min.js"></script>
@@ -214,10 +246,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="resources/js/jquery.waypoints.min.js"></script>
     <script src="resources/js/jquery.countdown.min.js"></script>
     <script src="resources/js/main.js"></script>
-    
-
+    <script src="resources/js/jquery-ui.min.js"></script>
     <script>
-	    document.addEventListener('DOMContentLoaded', function() {//
+	    document.addEventListener('DOMContentLoaded', function() {
             var mediaElements = document.querySelectorAll('video, audio'), total = mediaElements.length;
 
             for (var i = 0; i < total; i++) {
@@ -233,6 +264,32 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             });
             }
         });
+	    
+	    
+	    function secretView(){
+	    	var popup = document.getElementById("pwPopup");
+	    	popup.css("display", "block");
+	    	popup.dialog();
+	    	var chk_pw = document.getElementById("u_pw");
+	    	
+			if(u_pw.value.replace(/\s/g, '')=="") {
+				prompt("비밀번호를 입력하세요");
+			} else {
+				document.getElementById("pwPopup").submit();
+			}
+	    	
+	    }
+	    $(function secretView(){
+	    	$("#pwPopup").css("display", "block");
+	    	$("#pwPopup").dialog();
+	    });
+	    
+	    $(function(){
+	    	$("#conf_bt").bind("click", function(){
+	    		document.forms[0].submit();
+	    	});
+	    });
+	    
     </script>
   </body>
 </html>

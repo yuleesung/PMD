@@ -158,11 +158,11 @@
 			          		<tr>
 			          			<th>제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
 			          			<td>
-			          				<c:if test="${vo.secret_content ne null  }">
+			          				<c:if test="${vo.secret_content eq 1 && board_name eq '광고문의'}">
 			          					${vo.subject }
-			          					<i class="fas fa-lock"></i>
+			          					<i class="fas fa-lock fa-lg"></i>
 			          				</c:if>
-			          				<c:if test="${vo.secret_content eq null }">
+			          				<c:if test="${vo.secret_content ne 1 || board_name ne '광고문의'}">
 			          					${vo.subject }
 			          				</c:if>
 			          			</td>

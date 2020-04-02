@@ -77,14 +77,11 @@ public class WriteAction {
 			vo.setFile_name("");
 		}
 		
-		Boolean chk = b_dao.writePost(vo);
+		b_dao.writePost(vo);
 
-		
 		ModelAndView mv = new ModelAndView();
-		
 		mv.setViewName("redirect:/list.inc?b_category="+vo.getB_category()); // 최근 게시물 리스트로 돌아가야 함
 					
-		System.out.println(vo.getSecret_content());
 		return mv;
 	}
 }

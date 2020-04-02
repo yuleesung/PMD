@@ -78,7 +78,7 @@ input[type=text]{
 						<option value="adv">광고문의</option> 
 					</select>
 					
-					<label><input type="checkbox" name="secret_w" id="secret_w" />비밀글</label>
+					<label><input type="checkbox" name="secret_content" id="secret_content" />비밀글</label>
 					
 					<input type="text" class="form-control" id="title" name="subject"
 						placeholder="제목" style="width: 100%;">
@@ -180,15 +180,15 @@ input[type=text]{
 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
 				stroke-width="4" stroke="#eeeeee" />
 			<circle class="path" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke-miterlimit="10" stroke="#f4b214" /></svg>
+				stroke-width="4" stroke-miterlimit="10" stroke="#f4b214" />
+		</svg>
 	</div>
 
 	<script src="resources/js/jquery-3.2.1.min.js"></script>
 	<script src="resources/js/popper.min.js"></script>
 	<script src="resources/js/bootstrap.min.js"></script>
 	<script src="resources/js/owl.carousel.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelement-and-player.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelement-and-player.min.js"></script>
 	<script src="resources/js/jquery.waypoints.min.js"></script>
 	<script src="resources/js/jquery.countdown.min.js"></script>
 	<script src="resources/js/main.js"></script>
@@ -207,16 +207,26 @@ $(function(){
 		var str = $("#content").val();
 		$("#str").val(str);
 		
-		if(input_val == ran_val){			
+		if(input_val == ran_val){
 			if(category != "none" && title.trim().length > 0 && str.trim().length > 0){
 				//console.log(category);
+				
+				/* 비밀글 체크여부  secret_content  */
+				if($("#secret_content").prop("checked")){
+					$("#secret_content").val(1);
+				}else{
+					$("#secret_content").val();
+				}
 				document.writeFrm.submit();
+				
 			} else{
 				alert("다시 확인하세요");
 			}
 		} else{
 			alert("다시 확인하세요");
 		}
+
+		
 	});
 	
 	
@@ -237,19 +247,8 @@ $(function(){
 		
 		$("#content").summernote("lineHeight", 1.0);
 		
-		
-		
-		
-		/* 비밀글 체크여부  secret_w  */
-		if($("#secret_w").prop("checked")){
-			$("#secret_w").val(1);
-		}else{
-			$("#secret_w").val("");
-		}
-		
-		
-		
 	}); //jquery함수 끝
+	
 	
 	function sendFile(file, editor){	
 		//파라미터를 전달하기 위해 폼객체 준비!

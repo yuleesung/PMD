@@ -31,6 +31,7 @@ public class ListAction {
 	
 	@RequestMapping("/list.inc")
 	public ModelAndView list(String nowPage, String b_category) {
+		
 		ModelAndView mv = new ModelAndView();
 		
 		if(nowPage == null)
@@ -75,6 +76,7 @@ public class ListAction {
 		mv.addObject("board_name", board_name);
 		mv.addObject("b_category", b_category);
 		mv.setViewName("list");
+		
 		
 		return mv;
 	}
