@@ -8,7 +8,7 @@
 		<c:choose>
 			<c:when test="${userInfo != null}">
 				<span>${userInfo.nickname }님 환영합니다.</span>
-				<a href="info.inc" title="내정보"
+				<a href="mypage.inc" title="내정보"
 					style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">내정보</a>&nbsp;&nbsp;
 				<a href="javascript: logout('${sessionScope.userInfo.sns_type }')" title="로그아웃"
 					style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">로그아웃</a>			
