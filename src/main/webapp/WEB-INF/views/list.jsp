@@ -126,6 +126,9 @@
 										 	onclick="javascript:secretView()"> 
 											${vo.subject }
 										 </a>
+										 <c:if test="${fn:length(vo.c_list) > 0 }">
+										 	&nbsp;<span style="font-weight: bold; color: #6a99cb">(${fn:length(vo.c_list) })</span>
+										 </c:if>
 									 </c:if>
 									 <c:if test="${vo.u_idx ne uvo.u_idx  }">
 										 <a href="javascript:alert('권한이 없습니다.')"> 
@@ -140,6 +143,9 @@
 									 <a href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}"> 
 										${vo.subject }
 									 </a>
+									 <c:if test="${fn:length(vo.c_list) > 0 }">
+									 	&nbsp;<span style="font-weight: bold; color: #6a99cb">(${fn:length(vo.c_list) })</span>
+									 </c:if>
 								  </c:if>
 								  </td>
 								  <td>${vo.uvo.nickname }</td>
