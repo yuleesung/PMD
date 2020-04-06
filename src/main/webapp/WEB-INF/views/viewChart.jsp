@@ -7,30 +7,81 @@
 <title>Insert title here</title>
 <style>
 #mapchart {
-  width: 100%;
+  width: 80%;
   height: 500px;
+  margin: auto;
 }
+
 #stackchart{
-width: 100%;
+	width: 100%;
 	height: 800px;
 }
+
+    .full_box{
+      background: #eee;
+    }
+
+}
 </style>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800|Playfair+Display:,300, 400, 700" rel="stylesheet">
+
+<link rel="stylesheet" href="resources/css/bootstrap.css">
+<link rel="stylesheet" href="resources/css/animate.css">
+<link rel="stylesheet" href="resources/css/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
+<link rel="stylesheet" href="resources/fonts/ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="resources/fonts/fontawesome/css/font-awesome.min.css">
+
+<!-- 메뉴바 관련 추가 -->
+<link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+<link href="resources/css/fonts.css" rel="stylesheet" type="text/css" media="all">
+<link href="resources/css/default.css" rel="stylesheet" type="text/css" media="all">
+
+<!-- Theme Style -->
+<link rel="stylesheet" href="resources/css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
 
+
+	<jsp:include page="menubar.jsp" />
+
+	<section class="home-slider owl-carousel">
+
+		<div class="slider-item"
+			style="background-image: url('resources/images/mario.gif'); background-size: 30%;">
+			<div class="container">
+				<div
+					class="row slider-text align-items-center justify-content-center">
+					<div class="col-md-8 text-center col-sm-12 element-animate">
+						<h1 style="font-family: inherit;"></h1>
+						<p class="mb-5"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
 <!-- HTML -->
-<h1>지역별 오픈 된 교육갯수</h1>
+<section class="section element-animate">             
+
+<h2 class="title" style="margin-bottom: 30px; padding-left: 10%;">지역 별 교육현황</h2>
+<div style="background-color: #dedcee; height: 550px; padding-top: 20px;">
 <div id="mapchart"></div>
+</div>
 
 
-
-<h1>훈련분야 검색</h1>
+<h2 class="title" style="margin-top: 100px; margin-bottom: 30px; padding-left: 10%;">분야검색</h2>
+<!-- 
 <section class="search-sec" style="margin-top: 120px;">
 		<div class="container">
 			<form action="#" method="post" novalidate="novalidate">
 					<div class="col-lg-12">
 							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-								<select class="form-control search-slt" id="srchKeco1">
+								<select class="form-control search-slt" id="srchKeco1"z>
 									<option value="none">::훈련분야::</option>
 									<option value="01">사업관리(01)</option>
 									<option value="02">경영·회계·사무(02)</option>
@@ -67,9 +118,45 @@ width: 100%;
 			</form>
 		</div>
 	</section>
-
-<h1>검색결과</h1>
+ -->
+<div class="container" style="padding: 0;">
+  <div class="full_box">
+    <div class="form_controls">
+      <div class="row">
+    <div class="form-group col-md-3">
+  <select class="form-control" id="srchKeco1">
+									<option value="none">::훈련분야::</option>
+									<option value="01">사업관리(01)</option>
+									<option value="02">경영·회계·사무(02)</option>
+									<option value="03">금융·보험(03)</option>
+									<option value="04">교육·자연·사회과학(04)</option>
+									<option value="05">법률·경찰·소방·교도·국방(05)</option>
+									<option value="06">보건·의료(06)</option>
+									<option value="07">사회복지·종교(07)</option>
+									<option value="08">문화·예술·디자인·방송(08)</option>
+									<option value="09">운전·운송(09)</option>
+									<option value="10">영업판매(10)</option>
+									<option value="11">경비·청소(11)</option>
+									<option value="12">이용·숙박·여행·오락·스포츠(12)</option>
+									<option value="13">음식서비스(13)</option>
+									<option value="14">건설(14)</option>
+									<option value="15">기계(15)</option>
+									<option value="16">재료(16)</option>
+									<option value="17">화학(17)</option>
+									<option value="18">섬유·의복(18)</option>
+									<option value="19">전기·전자(19)</option>
+									<option value="20">정보통신(20)</option>
+									<option value="21">식품가공(21)</option>
+									<option value="22">인쇄·목재·가구·공예(22)</option>
+									<option value="23">환경·에너지·안전(23)</option>
+									<option value="24">농림어업(24)</option>
+								</select>
+</div></div></div></div>
+</div>
+<div class="container" style="display: none; background-color: #EEEEEE;" id="viewStack">
 <div id="stackchart"></div>
+</div>
+</section>
 
 
 <!-- 차트 -->
@@ -80,6 +167,15 @@ width: 100%;
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
 <!-- jquery -->
 <script src="resources/js/jquery-3.4.1.min.js"></script>
+
+	<script src="resources/js/jquery-3.2.1.min.js"></script>
+	<script src="resources/js/popper.min.js"></script>
+	<script src="resources/js/bootstrap.min.js"></script>
+	<script src="resources/js/owl.carousel.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelement-and-player.min.js"></script>
+	<script src="resources/js/jquery.waypoints.min.js"></script>
+	<script src="resources/js/jquery.countdown.min.js"></script>
+	<script src="resources/js/main.js"></script>
 
 <script type="text/javascript">
 var loc_seoul = new Array();
@@ -132,14 +228,19 @@ $(function(){
 		console.log(err);
 	});
 	
+	
 	//스택차트 영역
-	$("#search_btn").click(function(){
+	 $("#srchKeco1").change(function(){
 		srchKeco1 = $("#srchKeco1").val();
 		
 		if(srchKeco1=="none"){
-			alert("유형을 선택하세요");
+			$('#viewStack').hide();
 			return;
+		} else{
+			$('#viewStack').show();
 		}
+		
+		console.log(srchKeco1);
 		
 		param = "srchKeco1="+srchKeco1;
 		
@@ -149,8 +250,8 @@ $(function(){
 			dataType:"json",
 			data: param
 		}).done(function(data){
-			//stackChart(data);
-			//$("#stackchart").show();
+		
+			console.log(data);
 			
 			var c_seoul = 0;
 			var c_busan = 0;
@@ -269,6 +370,9 @@ $(function(){
 	
 });
 
+
+
+
 function mapChart(data_json) { // 맵차트 영역
 
    // Themes begin
@@ -283,7 +387,9 @@ function mapChart(data_json) { // 맵차트 영역
 
    // Create map polygon series
    var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
-
+   polygonSeries.name = "지역명";
+   polygonSeries.value = "과정수";
+   
    //Set min/max fill color for each area
    polygonSeries.heatRules.push({
      property: "fill",
@@ -301,20 +407,20 @@ function mapChart(data_json) { // 맵차트 영역
    // Set up heat legend
    let heatLegend = chart.createChild(am4maps.HeatLegend);
    heatLegend.series = polygonSeries;
-   heatLegend.align = "right";
+   heatLegend.align = "center";
    heatLegend.valign = "bottom";
-   heatLegend.width = am4core.percent(20);
+   heatLegend.width = am4core.percent(15);
    heatLegend.marginRight = am4core.percent(4);
    heatLegend.minValue = 0;
-   heatLegend.maxValue = 40000000;
+   heatLegend.maxValue = 4000;
 
    // Set up custom heat map legend labels using axis ranges
    var minRange = heatLegend.valueAxis.axisRanges.create();
    minRange.value = heatLegend.minValue;
-   minRange.label.text = "Little";
+   minRange.label.text = "0";
    var maxRange = heatLegend.valueAxis.axisRanges.create();
    maxRange.value = heatLegend.maxValue;
-   maxRange.label.text = "A lot!";
+   maxRange.label.text = "4000";
 
    // Blank out internal heat legend value axis labels
    heatLegend.valueAxis.renderer.labels.template.adapter.add("text", function(labelText) {
@@ -331,6 +437,26 @@ function mapChart(data_json) { // 맵차트 영역
    var hs = polygonTemplate.states.create("hover");
    hs.properties.fill = am4core.color("#3c5bdc");
 
+   var series = [];
+   for(var i=0; i<data_json.length; i++){
+	   series[i] = chart.series.push(new am4maps.MapPolygonSeries());
+	   series[i].name = data_json[i].name;
+	   series[i].value = data_json[i].value;
+   }
+
+  
+   
+   chart.legend = new am4maps.Legend();
+   chart.legend.labels.template.text = "[bold {color}]{name} : {value}[/]";
+   chart.legend.position = "right";
+   chart.legend.align = "right";
+   
+   chart.legend.itemContainers.template.paddingTop = 1;
+   chart.legend.itemContainers.template.paddingBottom = 1;
+   
+   chart.legend.itemContainers.template.clickable = false;
+   chart.legend.itemContainers.template.focusable = false;
+   
    } // 맵차트 끝
    
    
@@ -591,18 +717,18 @@ function mapChart(data_json) { // 맵차트 영역
 		
 	
 		str += ']';
-		console.log(str);
-		var str1 = JSON.parse(str);
-		console.log(str1);
-		//var data_val = [{str}];
 		
-		// console.log(data_val);
+		var str1 = JSON.parse(str); // 문자열 str을 JSON화 시켜줌
+		console.log(str1);
+
+		
 		// Add data
-		chart.data = str1;
+		chart.data = str1; // 결과값을 차트에 전달
 
 		var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
 		categoryAxis.dataFields.category = "지역";
 		categoryAxis.renderer.grid.template.location = 0;
+		categoryAxis.renderer.minGridDistance = 10;
 
 
 		var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
@@ -618,7 +744,7 @@ function mapChart(data_json) { // 맵차트 영역
 		  series.name = name;
 		  series.dataFields.valueY = field;
 		  series.dataFields.categoryX = "지역";
-		  series.sequencedInterpolation = true;
+		  series.sequencedInterpolation = false;
 		  
 		  // Make it stacked
 		  series.stacked = true;
@@ -629,7 +755,7 @@ function mapChart(data_json) { // 맵차트 영역
 		  
 		  // Add label
 		  var labelBullet = series.bullets.push(new am4charts.LabelBullet());
-		  labelBullet.label.text = "{valueY}";
+		  labelBullet.label.text = "[bold][font-size:10px]{name} [font-size:10px]{valueY}";
 		  labelBullet.locationY = 0.5;
 		  labelBullet.label.hideOversized = true;
 		  
@@ -690,7 +816,7 @@ function mapChart(data_json) { // 맵차트 영역
 		}
 		
 		// Legend
-		chart.legend = new am4charts.Legend();
+		//chart.legend = new am4charts.Legend();
 
 		}
    
