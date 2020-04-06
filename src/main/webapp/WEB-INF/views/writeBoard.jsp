@@ -77,9 +77,9 @@ input[type=text]{
 						<option value="qa">Q&A</option>
 						<option value="adv">광고문의</option> 
 					</select>
-					
-					<label><input type="checkbox" name="secret_content" id="secret_content" />비밀글</label>
-					
+					<c:if test="${board_name eq '광고문의' }">
+						<label><input type="checkbox" name="secret_content" id="secret_content" />비밀글</label>
+					</c:if>
 					<input type="text" class="form-control" id="title" name="subject"
 						placeholder="제목" style="width: 100%;">
 				</div>
