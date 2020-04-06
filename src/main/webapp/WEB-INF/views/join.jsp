@@ -3,9 +3,10 @@
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
   <title>PMD - 회원가입</title>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Chrome, Firefox OS and Opera -->
@@ -22,12 +23,13 @@
 <meta name="google-signin-client_id" content="1048979766914-cjmet6566e6qmc0tnc1tv8jm9doenhk2.apps.googleusercontent.com">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- <link href="resources/css/main.071c1ad7.css" rel="stylesheet"> -->
+
 <link rel="shortcut icon" href="favicon.ico?v=2" type="image/x-icon"/>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="resources/fonts/fontawesome/css/all.min.css">
 
 <!-- 구글 로그인 용 -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 
 <script>
 	window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","applicationID":"19731324","transactionName":"c11ZQxdbVQpUF0oWWldcQkdKR1ABXxAV","queueTime":0,"applicationTime":51,"agent":""}</script>
@@ -50,11 +52,8 @@
 </script>
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script>
-  // 미지원 브라우저 IE10
-  if (Function('/*@cc_on return document.documentMode===10@*/')()) {
-    window.location = '/browser';
-  }
+<script>// 미지원 브라우저 IE10
+  if (Function('/*@cc_on return document.documentMode===10@*/')()) { window.location = '/browser'; }
 </script>
 <script charset="utf-8">
   // for electron
@@ -326,7 +325,7 @@ margin-bottom: 0px !important;
 					            
 									<div class="form-group">
 										<label class="control-label col-sm-2">아이디 <span class="text-danger">*</span></label>
-										<div class="col-md-8 col-sm-9" style="margin-right: 0;">
+										<div class="col-md-8 col-sm-9" style="margin: 0;">
 											<div class="input-group"  style="margin-right: 0; padding-right: 0;">
 												<span class="input-group-addon" id="idS" ><i class="glyphicon glyphicon-hand-right"></i></span> 
 												<input type="text" class="form-control" name="u_id" id="u_id" 
@@ -379,18 +378,15 @@ margin-bottom: 0px !important;
 									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-2">연락처 <span class="text-danger">*</span> </label>
-										<div class="col-md-8 col-sm-9">
-											<div class="input-group" style="margin-bottom: 5px;">
+										<div class="col-md-8 col-sm-9" style="margin-right: 0;">
+											<div class="input-group" style="margin-right: 0; padding-right: 0;">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span> 
-												<input type="tel" class="form-control" name="u_phone" id="u_phone"
-													placeholder="ex. 010-1234-1234" pattern="(010)-\d{3,4}-\d{4}">
+												<input type="text" class="form-control" name="u_phone" id="u_phone"
+													placeholder="ex. 010-1234-1234" pattern="(010)-\d{3,4}-\d{4}" maxlength="13">
 											</div>
-											<div>
-												<!-- <input type="button" value="연락처 중복체크" id="phone_btn" /> -->
-												<div id="p_box" style="display: inline-block; position: relative; margin-top: 5px; padding-right: 0;">
-													<!-- 연락처 중복 확인 영역 -->
-												</div>
-											</div>
+										</div>
+										<div id="p_box" style="display: inline-block; position: relative; margin-top: 5px; padding-right: 0;">
+											<!-- 연락처 중복 확인 영역 -->
 										</div>
 									</div>
 									
@@ -417,10 +413,10 @@ margin-bottom: 0px !important;
 													<option value="gmail.com">gmail.com</option>
 												</select>
 											</div>
-											<!-- <button type="button" id="cfm_btn" >이메일 중복체크</button> -->
-											<div id="e_box" style="display: inline-block; position: relative; margin-top: 5px; padding-right: 0;">
-												<!-- 이메일 중복 확인 영역 -->
-											</div>
+										</div>
+										<!-- <button type="button" id="cfm_btn" >이메일 중복체크</button> -->
+										<div id="e_box" style="display: inline-block; position: relative; margin-top: 5px; padding-right: 0;">
+											<!-- 이메일 중복 확인 영역 -->
 										</div>
 										
 										
@@ -689,7 +685,7 @@ margin-bottom: 0px !important;
 		            }else{
 		               //id가 중복이 아닐 때,
 		               $("#box").html("<small style='color:green; font-weight:bold; background: #fff;font-size: 75%;'>사용 가능</small>");
-		               //$("#idS").html("<i class='glyphicon glyphicon-hand-right suss'></i>");
+		               $("#idS").html("<i class='far fa-thumbs-up succ'></i>");
 		               chk = true;
 		            }
 		            
@@ -703,13 +699,51 @@ margin-bottom: 0px !important;
 		   
 		});
 		
+		
+		// 연락처 중복 체크 ConfirmAction
+		$("#u_phone").bind("keyup",function(){
+			
+			//사용자가 입력한 값을 얻어낸다.
+		    var u_phone = $(this).val().trim();
+		    
+			if(u_phone.length > 4 ){
+		     	// 연락처를 5자이상 입력시 수행   
+		         $.ajax({
+		            
+		            url: "phonechk.inc",
+		            type: "post",
+		            data: "u_phone="+encodeURIComponent(u_phone)
+		            
+		         }).done(function (data) {
+		            if(data.value == true){
+		               // 연락처가 중복일 때,
+		               chk = false;
+		               $("#p_box").html("<small style='color:red; font-weight:bold; background: #fff;font-size: 75%;' class='fail'>사용 불가능</small>");
+		               $("#u_phone").focus();
+		            }else{
+		               // 연락처가 중복이 아닐 때,
+		               $("#p_box").html("<small style='color:green; font-weight:bold; background: #fff;font-size: 75%;'>사용 가능</small>");
+		               chk = true;
+		            }
+		            
+		         }).fail(function (err) {
+		            console.log(err);
+		         });
+	         
+		      } else{
+		         $("#p_box").html("");
+		      }
+		   
+		});
+		
+		
 		// 이메일 중복 체크 ConfirmAction
-		$("#cfm_btn").bind("keyup",function(){
+		$("#email").bind("keyup",function(){
 		      
 			var email = $("#email").val().trim() + "@"+$("#input_email").val().trim();
 		    
 			if(email.length > 12 ){
-		     	//email 4자이상 입력시 수행   
+		     	//email 13자이상 입력시 수행   
 		         
 		         $.ajax({
 		            url: "emailchk.inc",
@@ -719,8 +753,8 @@ margin-bottom: 0px !important;
 		         }).done(function (data) {
 		            if(data.value == true){
 		               // 이메일이 중복일 때,
-		               chk = false;
 		               $("#e_box").html("<small style='color:red; font-weight:bold; background: #fff;font-size: 75%;'>사용 불가능</small>");
+		               chk = false;
 		            }else{
 		               // 이메일이 중복이 아닐 때,
 		               $("#e_box").html("<small style='color:green; font-weight:bold; background: #fff;font-size: 75%;'>사용 가능</small>");
@@ -732,7 +766,7 @@ margin-bottom: 0px !important;
 		         });
 	         
 		      } else{
-		         $("#e_box").html("&nbsp;<small style='color:#4A4E66; font-weight:bold; background: #fff;font-size: 75%;'>이메일을 정확히 입력해주세요!</small>");
+		         $("#e_box").html("");
 		      }
 		   
 		});
@@ -751,39 +785,7 @@ margin-bottom: 0px !important;
 			
 		});
 		
-		// 연락처 중복 체크 ConfirmAction
-		$("#u_phone").bind("keyup",function(){
-		      
-			var u_phone = $("#u_phone").val().trim();
-		    
-			if(u_phone.length > 2 ){
-		     	// 연락처를 3자이상 입력시 수행   
-		         $.ajax({
-		            
-		            url: "phonechk.inc",
-		            type: "post",
-		            data: "u_phone="+encodeURIComponent(u_phone)
-		            
-		         }).done(function (data) {
-		            if(data.value == true){
-		               // 연락처가 중복일 때,
-		               chk = false;
-		               $("#p_box").html("<small style='color:red; font-weight:bold; background: #fff;font-size: 75%;' class='fail'>사용 불가능</small>");
-		            }else{
-		               // 연락처가 중복이 아닐 때,
-		               $("#p_box").html("<small style='color:green; font-weight:bold; background: #fff;font-size: 75%;'>사용 가능</small>");
-		               chk = true;
-		            }
-		            
-		         }).fail(function (err) {
-		            console.log(err);
-		         });
-	         
-		      } else{
-		         $("#p_box").html("&nbsp;<small style='color:#4A4E66; font-weight:bold; background: #fff;font-size: 75%;'>연락처를 정확히 입력해주세요!</small>");
-		      }
-		   
-		});
+		
 		
 		
 		
