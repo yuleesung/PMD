@@ -3,10 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="google-signin-scope" content="profile email">
-<meta name="google-signin-client_id" content="1048979766914-cjmet6566e6qmc0tnc1tv8jm9doenhk2.apps.googleusercontent.com">
-<title>Login Page</title>
+	<meta charset="UTF-8">
+	<title>Login Page</title>
 	<!--Made with love by Mutiullah Samim -->
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<!--Bootsrap 4 CDN-->
@@ -17,6 +15,10 @@
 	
 	<!--Custom styles-->
 	<link rel="stylesheet" href="resources/css/login.css">
+	
+	<!-- 구글 로그인 용 -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="resources/css/google.css"/>
 </head>
 <body>
 	<%-- <form action="">
@@ -35,7 +37,13 @@
 				<div class="d-flex justify-content-end social_icon">
 					<span><a href="${url }"><img alt="naver" src="resources/images/naverLogin.PNG"/></a></span>
 					<span><a href="javascript: loginWithKakao()"><img alt="kakao" src="resources/images/kakao_login_btn.png"/></a></span>
-					<span><a><div class="g-signin2" style="width: 48px; height: 48px; margin-top: 23px;" data-onsuccess="onSignIn"></div></a></span>
+					<span>
+						<a>
+						    <div id="customBtn" class="customGPlusSignIn" style="margin-top: 23px;">
+						      <img alt="구글" src="resources/images/google.png">
+						    </div>
+						</a>
+					</span>
 				</div>
 			</div>
 			<div class="card-body">
@@ -85,7 +93,10 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	
+	<!-- 구글 로그인용 -->
+	<script src="https://apis.google.com/js/api:client.js"></script>
+	
 	<script type="text/javascript">
 		// 카카오 인증키 등록
 	    Kakao.init('5899acc3cddfce334c3dd49beff92a37');
@@ -125,6 +136,8 @@
 		$(document).ready(function() {
 			if ('${loginFail}' == 'fail')
 				alert("아이디나 비밀번호가 틀렸습니다");
+			
+			startApp();
 		});
 
 		function enterkey(frm) { /* 엔터버튼 눌렀을 때 진입 */
@@ -184,6 +197,41 @@
 			document.socialFrm.submit();
 	        
 	      }
+		
+		var googleUser = {};
+		  var startApp = function() {
+		    gapi.load('auth2', function(){
+		      // Retrieve the singleton for the GoogleAuth library and set up the client.
+		      auth2 = gapi.auth2.init({
+		        client_id: '1048979766914-cjmet6566e6qmc0tnc1tv8jm9doenhk2.apps.googleusercontent.com',
+		        cookiepolicy: 'single_host_origin',
+		        // Request scopes in addition to 'profile' and 'email'
+		        //scope: 'additional_scope'
+		      });
+		      attachSignin(document.getElementById('customBtn'));
+		    });
+		  };
+
+		  function attachSignin(element) {
+		    // console.log(element.id);
+		    auth2.attachClickHandler(element, {},
+		        function(googleUser) {
+			    	// Useful data for your client-side scripts:
+			        var profile = googleUser.getBasicProfile();
+			        
+			        var id = profile.getId(); // Don't send this directly to your server!
+			        var name = profile.getName();
+			        var email = profile.getEmail();
+			        
+					
+			        document.socialFrm.action = "googleLogin.inc";
+					document.socialFrm.sns_id.value = id;
+					document.socialFrm.nickname.value = name;
+					document.socialFrm.email.value = email;
+					
+					document.socialFrm.submit();
+		        });
+		  }
 		
 	</script>
 </body>
