@@ -25,6 +25,8 @@
 	<link href="resources/css/fonts.css" rel="stylesheet" type="text/css" media="all">
 	<link href="resources/css/default.css" rel="stylesheet" type="text/css" media="all">
 	
+	<link rel="stylesheet" href="resources/fonts/fontawesome/css/all.min.css">
+	
 	<!-- 페이징 css적용 -->
 	<link rel="stylesheet" href="resources/css/text.css"/>
     <!-- Theme Style -->
@@ -119,11 +121,10 @@
 									${rowTotal - ((nowPage-1)*blockList+st.index) }
 								  </td>
 								  <td>
-								  <c:if test='${vo.secret_content eq 1 && board_name eq "광고문의"}'>
+								  <c:if test='${vo.secret_content eq 1 && b_category eq "adv"}'>
 									 <c:set value="${sessionScope.userInfo }" var="uvo" />
 									 <c:if test="${vo.u_idx eq uvo.u_idx  }">
-										 <a href="#"
-										 	onclick="javascript:secretView()"> 
+										 <a href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}" > 
 											${vo.subject }
 										 </a>
 										 <c:if test="${fn:length(vo.c_list) > 0 }">
@@ -131,12 +132,10 @@
 										 </c:if>
 									 </c:if>
 									 <c:if test="${vo.u_idx ne uvo.u_idx  }">
-										 <a href="javascript:alert('권한이 없습니다.')"> 
-											${vo.subject }
-										 </a>
+										${vo.subject }
 									 </c:if>
 									 
-									<i class="fas fa-lock fa-lg" style="color: #2651a8"></i>
+									<i class="fas fa-lock fa-lg" style="color: rgba(38,81,168, 0.8)"></i>
 								  </c:if>
 								  
 								   <c:if test="${'광고문의' ne board_name || vo.secret_content ne 1}">
@@ -226,22 +225,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
 
-	<!-- 본인의 비밀글 보기 위한 비번확인 팝업 -->
-	<div id="pwPopup" >
-		<form method="post" action="viewBoard.inc" > 
-			<input type="hidden" name="b_idx" id="b_idx" value="${vo.b_idx }"/>
-			<input type="hidden" name="nowPage" id="nowPage" value="${nowPage}"/>
-			<input type="hidden" name="b_category" value="${b_category }"/>
-			<label for="u_pw"><input type="password" id="u_pw" name="u_pw"/>비밀번호:</label>
-			<br/>
-			<button type="button" id="conf_bt">확인</button>
-			<button type="button" onclick="window.close();">닫기</button>
-		</form>
-	</div>
-
-
-
-
 
 
     <script src="resources/js/jquery-3.2.1.min.js"></script>
@@ -272,29 +255,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         });
 	    
 	    
-	    function secretView(){
-	    	var popup = document.getElementById("pwPopup");
-	    	popup.css("display", "block");
-	    	popup.dialog();
-	    	var chk_pw = document.getElementById("u_pw");
-	    	
-			if(u_pw.value.replace(/\s/g, '')=="") {
-				prompt("비밀번호를 입력하세요");
-			} else {
-				document.getElementById("pwPopup").submit();
-			}
-	    	
-	    }
-	    $(function secretView(){
-	    	$("#pwPopup").css("display", "block");
-	    	$("#pwPopup").dialog();
-	    });
-	    
-	    $(function(){
-	    	$("#conf_bt").bind("click", function(){
-	    		document.forms[0].submit();
-	    	});
-	    });
+	  
 	    
     </script>
   </body>

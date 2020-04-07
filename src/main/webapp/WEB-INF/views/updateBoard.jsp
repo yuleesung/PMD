@@ -89,13 +89,20 @@ input[type=text]{
 						<option value="adv"
 						<c:if test="${vo.b_category == 'adv' }">selected</c:if>>광고문의</option>
 					</select>
+				
+					<c:if test="${vo.b_category eq 'adv' && vo.secret_content ne 1 }">
+						<label id="label" style="margin-bottom: 0;">
+							<input type="checkbox" id="secret_content"/>비밀글
+							<input type="hidden" name="secret_content" id="secret_content2"/>
+						</label>
+					</c:if>
+					<c:if test="${vo.b_category eq 'adv' && vo.secret_content eq 1 }">
+						<label id="label" style="margin-bottom: 0;">
+							<input type="checkbox" id="secret_content" checked="checked"/>비밀글
+							<input type="hidden" name="secret_content" id="secret_content2"/>
+						</label>
+					</c:if>
 					
-					<c:if test="${vo.secret_content eq null }">
-						<label><input type="checkbox" name="secret_w" id="secret_w" />비밀글</label>
-					</c:if>
-					<c:if test="${vo.secret_content ne null }">
-						<label><input type="checkbox" name="secret_w" id="secret_w"  checked="checked"/>비밀글</label>
-					</c:if>
 
 					<input type="text" class="form-control" id="title" name="subject"
 						placeholder="제목" style="width: 100%;" value="${vo.subject }"/>
@@ -104,7 +111,7 @@ input[type=text]{
 			<div class="form-group">
 				<label for="upload" class="col-sm-2 control-label">Upload File</label>
 				<div class="col-sm-10">
-					<input type="file" name="upload" id="upload"/>
+					<input type="file" name="upload" id="upload" style="cursor: pointer;"/>
 				</div>
 			</div>
 			<input type="hidden" name="b_idx" id="b_idx" value="${vo.b_idx }"/>
@@ -124,9 +131,9 @@ input[type=text]{
 					<div style="float: right;">
 					<label style="font-size: 16px; color: black; font-weight: bold;">작성자 : ${userInfo.nickname }</label><br/>
 					<input id="submit_btn" type="button" value="Submit" class="btn btn-primary">&nbsp;&nbsp;
-						<input id="cancel_btn" type="button"
-							value="Cancel" class="btn btn-primary" onclick="location.href='viewBoard.inc?
-							b_idx=${vo.b_idx}&nowPage=${vo.nowPage }&b_category=${vo.b_category }'"> <!-- 해당게시물로 돌아가기 -->
+						<input id="cancel_btn" type="button" value="Cancel" class="btn btn-primary" 
+						onclick="location.href='viewBoard.inc?b_idx=${vo.b_idx}&nowPage=${vo.nowPage }&b_category=${vo.b_category }'"> 
+						<!-- 해당게시물로 돌아가기 -->
 					</div>
 					</td>
 				</tr>
@@ -190,18 +197,16 @@ input[type=text]{
 	<!-- loader -->
 	<div id="loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke-miterlimit="10" stroke="#f4b214" /></svg>
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214" />
+		</svg>
 	</div>
 
 	<script src="resources/js/jquery-3.2.1.min.js"></script>
 	<script src="resources/js/popper.min.js"></script>
 	<script src="resources/js/bootstrap.min.js"></script>
 	<script src="resources/js/owl.carousel.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelement-and-player.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelement-and-player.min.js"></script>
 	<script src="resources/js/jquery.waypoints.min.js"></script>
 	<script src="resources/js/jquery.countdown.min.js"></script>
 	<script src="resources/js/main.js"></script>
@@ -209,23 +214,31 @@ input[type=text]{
 	<script src="resources/js/summernote-lite.js"></script>
 	<script src="resources/js/lang/summernote-ko-KR.min.js"></script>
 	<script>
-$(function(){
-
-	$("#submit_btn").click(function(){
-
-		var category = $("#category").val();
-		var title = $("#title").val();
-		var str = $("#content").val();
-		$("#str").val(str);
-					
-		if(category != "none" && title.trim().length > 0 && str.trim().length > 0){
-			//console.log(category+","+title);
-			document.editFrm.submit();
-		} else{
-			alert("다시 확인하세요");
-		}
-
-	});
+	$(function(){
+	
+		$("#submit_btn").click(function(){
+	
+			var category = $("#category").val();
+			var title = $("#title").val();
+			var str = $("#content").val();
+			$("#str").val(str);
+						
+			if(category != "none" && title.trim().length > 0 && str.trim().length > 0){
+				//console.log(category+","+title);
+				
+				//비밀글 체크여부  secret_content 
+				if($("#secret_content").prop("checked")){
+					$("#secret_content2").val(1);
+				}else{
+					$("#secret_content2").val(0);
+				}
+				//console.log($("#secret_content").val());
+				document.editFrm.submit();
+			} else{
+				alert("다시 확인하세요");
+			}
+	
+		});
 	
 	
 		$("#content").summernote({
@@ -244,7 +257,23 @@ $(function(){
 		});
 		
 		$("#content").summernote("lineHeight", 1.0);
+		
+		
+		
+		// 카테고리 선택에 따른 비밀글 기능
+		$("#category").change(function(){
+			if($("#category option:selected").val() == 'adv' ){
+				$("#label").html('<input type="checkbox" name="secret_content" id="secret_content"/>비밀글');
+			}else{
+				$("#label").html('');
+			}
+		});
+		
+		
+		
 	});
+	
+	
 	
 	function sendFile(file, editor){	
 		//파라미터를 전달하기 위해 폼객체 준비!

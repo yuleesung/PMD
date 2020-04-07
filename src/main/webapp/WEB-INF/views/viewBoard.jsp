@@ -158,11 +158,10 @@
 			          		<tr>
 			          			<th>제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
 			          			<td>
-			          				<c:if test="${vo.secret_content eq 1 && board_name eq '광고문의'}">
-			          					${vo.subject }
-			          					<i class="fas fa-lock fa-lg"></i>
+			          				<c:if test="${vo.secret_content eq 1 && b_category eq 'adv'}">
+			          					${vo.subject } <i class="fa fa-lock fa-lg" style="color: rgba(38,81,168, 0.8); padding-top: 10px;"></i>
 			          				</c:if>
-			          				<c:if test="${vo.secret_content ne 1 || board_name ne '광고문의'}">
+			          				<c:if test="${vo.secret_content ne 1 || b_category ne 'adv'}">
 			          					${vo.subject }
 			          				</c:if>
 			          			</td>
@@ -307,13 +306,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <script>
 
-	/* 비밀글 체크여부  secret_w  */
+	/* 비밀글 체크여부  secret_w  
 	if($("#secret_w").prop("checked")){
 		$("#secret_w").val(1);
 	}else{
 		$("#secret_w").val("");
 	}
-	
+	*/
     
     
 	    document.addEventListener('DOMContentLoaded', function() {

@@ -77,9 +77,10 @@ input[type=text]{
 						<option value="qa">Q&A</option>
 						<option value="adv">광고문의</option> 
 					</select>
-					<c:if test="${board_name eq '광고문의' }">
-						<label><input type="checkbox" name="secret_content" id="secret_content" />비밀글</label>
-					</c:if>
+					<span id="sel_area" >
+					<!-- <label><input type="checkbox" name="secret_content" id="secret_content" />비밀글</label> -->
+					</span>
+						
 					<input type="text" class="form-control" id="title" name="subject"
 						placeholder="제목" style="width: 100%;">
 				</div>
@@ -177,13 +178,12 @@ input[type=text]{
 	<!-- loader -->
 	<div id="loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke-miterlimit="10" stroke="#f4b214" />
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214" />
 		</svg>
 	</div>
 
+	<!-- Script 영역 -->
 	<script src="resources/js/jquery-3.2.1.min.js"></script>
 	<script src="resources/js/popper.min.js"></script>
 	<script src="resources/js/bootstrap.min.js"></script>
@@ -192,42 +192,41 @@ input[type=text]{
 	<script src="resources/js/jquery.waypoints.min.js"></script>
 	<script src="resources/js/jquery.countdown.min.js"></script>
 	<script src="resources/js/main.js"></script>
-
 	<script src="resources/js/summernote-lite.js"></script>
 	<script src="resources/js/lang/summernote-ko-KR.min.js"></script>
 	<script>
-$(function(){
+	$(function(){
 
-	$("#submit_btn").click(function(){
-		var ran_val = $("#ran_val").val();
-		var input_val = $("#input_val").val();
-		
-		var category = $("#category").val();
-		var title = $("#title").val();
-		var str = $("#content").val();
-		$("#str").val(str);
-		
-		if(input_val == ran_val){
-			if(category != "none" && title.trim().length > 0 && str.trim().length > 0){
-				//console.log(category);
-				
-				/* 비밀글 체크여부  secret_content  */
-				if($("#secret_content").prop("checked")){
-					$("#secret_content").val(1);
-				}else{
-					$("#secret_content").val();
+		$("#submit_btn").click(function(){
+			var ran_val = $("#ran_val").val();
+			var input_val = $("#input_val").val();
+			
+			var category = $("#category").val();
+			var title = $("#title").val();
+			var str = $("#content").val();
+			$("#str").val(str);
+			
+			if(input_val == ran_val){
+				if(category != "none" && title.trim().length > 0 && str.trim().length > 0){
+					//console.log(category);
+					
+					/* 비밀글 체크여부  secret_content  */
+					if($("#secret_content").prop("checked")){
+						$("#secret_content").val(1);
+					}else{
+						$("#secret_content").val(0);
+					}
+					document.writeFrm.submit();
+					
+				} else{
+					alert("다시 확인하세요");
 				}
-				document.writeFrm.submit();
-				
 			} else{
 				alert("다시 확인하세요");
 			}
-		} else{
-			alert("다시 확인하세요");
-		}
-
-		
-	});
+	
+			
+		});
 	
 	
 		$("#content").summernote({
@@ -247,7 +246,25 @@ $(function(){
 		
 		$("#content").summernote("lineHeight", 1.0);
 		
+		
+		$("#category").on("click", function(){
+			
+			var select = $("#category option:selected").val();
+			if(select == 'adv'){
+				$("#sel_area").html('<label style="margin-bottom: 0;"><input type="checkbox" name="secret_content" id="secret_content" value=0 />비밀글</label>');
+			}else{
+				$("#sel_area").html("");
+			}
+			
+			
+		});
+		
+		
+		
+		
 	}); //jquery함수 끝
+	
+	
 	
 	
 	function sendFile(file, editor){	

@@ -52,7 +52,7 @@ public class ConfirmAction {
 		
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		
-		boolean value = b_dao.checkEmail(u_phone);
+		boolean value = b_dao.checkPhone(u_phone);
 		map.put("value", value);
 		
 		return map;
