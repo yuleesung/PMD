@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<title>Login Page</title>
 	<!--Made with love by Mutiullah Samim -->
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 	<!--Bootsrap 4 CDN-->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	   
@@ -18,17 +18,12 @@
 	
 	<!-- 구글 로그인 용 -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="resources/css/google.css"/>
+	<link rel="stylesheet" href="resources/css/google.css"/>	
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
+
+
 </head>
 <body>
-	<%-- <form action="">
-		<input type="text" id="id" name="id" placeholder="아이디"/><br/>
-		<input type="password" id="pw" name="pw" placeholder="비밀번호"/><br/>
-		<a href="${url }">
-			<img alt="네이버" src="resources/images/naver.PNG" >
-		</a>
-	</form> --%>
-	
 	<div class="container">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
@@ -52,32 +47,40 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="username" id="id" name="u_id" onkeypress="enterkey(this.form)">				
+						<input type="text" class="form-control" placeholder="아이디" id="id" name="u_id" onkeypress="enterkey(this.form)">				
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="password" id="pw" name="u_pw" onkeypress="enterkey(this.form)">
+						<input type="password" class="form-control" placeholder="비밀번호" id="pw" name="u_pw" onkeypress="enterkey(this.form)">
 					</div>				
 					<div class="form-group">
-						<input type="button" value="Login" class="btn float-right login_btn" id="login_btn">
+						<input type="button" value="로그인" class="btn float-right login_btn" id="login_btn">
 					</div>
 				</form>
 			</div>
-			<div class="card-footer">
-				<div class="d-flex justify-content-center links">
-					Don't have an account?<a href="#">Sign Up</a>
-				</div>
-				<div class="d-flex justify-content-center">
-					<a href="forgot.inc">Forgot your password?</a>
-				</div>		
+			<div class="card-footer" style="text-align: center; border-top: 2px dotted gray;">
+					<input type="button" value="회원가입" class="btn float-left login_btn" onclick="location.href='join.inc'" style="margin-left: 40px;">
+					<input type="button" value="메인으로" class="btn float-right login_btn" onclick="location.href='main.inc'" style="margin-right: 30px;">	
 			</div>
-			<div class="card-footer" style="text-align: center;">
-					<a href="main.inc">Back to main page</a>
-				</div>
+			<div class="card-footer" style="text-align: center; border-top: 0;">
+					<a href="javascript:dialog();"><span>관리자 로그인</span></a>
+			</div>
 		</div>
 	</div>
+</div>
+
+<div id="adminFrm" title="관리자 로그인">
+  <form name="adFrm" method="post" action=""> <!-- 관리자 로그인 액션추가 -->
+    <fieldset>
+      <input type="text" class="form-control" placeholder="아이디" id="ad_id" name="ad_id" onkeypress="enterkey(this.form)">
+      <br/>
+      <input type="password" class="form-control" placeholder="비밀번호" id="ad_pw" name="ad_pw" onkeypress="enterkey(this.form)">
+ 		<br/>
+      <input type="button" value="로그인" class="btn float-right login_btn" id="ad_btn">
+    </fieldset>
+  </form>
 </div>
 
 	<div>
@@ -88,14 +91,21 @@
 		</form>
 	</div>
 	
+	
+	 <jsp:include page="footer.jsp"/>
+	
 	<!-- 스크립트 영역 -->
 	<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
+  
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	
 	<!-- 구글 로그인용 -->
 	<script src="https://apis.google.com/js/api:client.js"></script>
+	
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 	
 	<script type="text/javascript">
 		// 카카오 인증키 등록
@@ -127,17 +137,38 @@
 		    })
 		  }
     
+	    function dialog(){
+	    	 $("#adminFrm").dialog("open");
+		}
+	    
 		$(function() {
-			$("#login_btn").click(function() { /* 로그인 버튼클릭 시 */
-				login_submit(); // 기능호출
-			});
-		});
-
-		$(document).ready(function() {
 			if ('${loginFail}' == 'fail')
 				alert("아이디나 비밀번호가 틀렸습니다");
 			
 			startApp();
+			
+			
+			$("#login_btn").click(function() { /* 로그인 버튼클릭 시 */
+				login_submit(); // 기능호출
+			});
+
+			
+			$("#adminFrm").dialog({ // 다이얼로그 세팅
+                autoOpen:false, //자동으로 열리지않게
+                position:["center"], //x,y  값을 지정
+                //"center", "left", "right", "top", "bottom"
+                modal:true, //모달대화상자
+                resizable:false, //크기 조절 못하게
+            });
+			
+			$("#ad_btn").click(function(){ // 관리자 로그인 제출
+				var ad_id = $("#ad_id").val();
+				var ad_pw = $("#ad_pw").val();
+				
+				console.log(ad_id+","+ad_pw);
+				
+				//document.adFrm.submit();
+			});
 		});
 
 		function enterkey(frm) { /* 엔터버튼 눌렀을 때 진입 */
@@ -180,23 +211,6 @@
 			document.socialFrm.submit();
 		}
 		
-		function onSignIn(googleUser) {
-	        // Useful data for your client-side scripts:
-	        var profile = googleUser.getBasicProfile();
-	        
-	        var id = profile.getId(); // Don't send this directly to your server!
-	        var name = profile.getName();
-	        var email = profile.getEmail();
-	        
-			
-	        document.socialFrm.action = "googleLogin.inc";
-			document.socialFrm.sns_id.value = id;
-			document.socialFrm.nickname.value = name;
-			document.socialFrm.email.value = email;
-			
-			document.socialFrm.submit();
-	        
-	      }
 		
 		var googleUser = {};
 		  var startApp = function() {

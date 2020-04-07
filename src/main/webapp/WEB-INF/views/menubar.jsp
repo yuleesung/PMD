@@ -1,13 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
 <meta charset="UTF-8">
+<title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="google-signin-scope" content="profile email">
 <meta name="google-signin-client_id" content="1048979766914-cjmet6566e6qmc0tnc1tv8jm9doenhk2.apps.googleusercontent.com">
-<!-- 메뉴 배너 영역 -->
-<div style="background: #6a99cb;">
+<style type="text/css">
+#logo a {
+    text-decoration: none;
+    color: rgba(255,255,255,1);
+    font-size: 1.2em;
+    font-family: Cuprum; 
+}
+</style>
+</head>
+<body>
+<div style="background: #6a99cb;" class="container">
 	<div id="sign"
 		style="display: inline-block; float: right; margin: .2rem .8rem;">
 		<c:choose>
@@ -26,9 +39,9 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-	<div id="header" class="container">
+		<div id="header">
 		<div id="logo">
-			<h1>
+			<h1 class="home">
 				<a href="main.inc">P M D</a>
 			</h1>
 		</div>
@@ -88,3 +101,5 @@
 	    auth2.disconnect();
 	  }
 </script>
+</body>
+</html>

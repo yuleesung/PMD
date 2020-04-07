@@ -47,14 +47,14 @@
 
 
 	<jsp:include page="menubar.jsp" />
-
+	
+	
+	
+<div class="container" style="padding: 0;">
 	<section class="home-slider owl-carousel">
-
-		<div class="slider-item"
-			style="background-image: url('resources/images/mario.gif'); background-size: 30%;">
+		<div class="slider-item" style="background-image: url('resources/images/mario.gif'); background-size: 30%;">
 			<div class="container">
-				<div
-					class="row slider-text align-items-center justify-content-center">
+				<div class="row slider-text align-items-center justify-content-center">
 					<div class="col-md-8 text-center col-sm-12 element-animate">
 						<h1 style="font-family: inherit;"></h1>
 						<p class="mb-5"></p>
@@ -63,10 +63,9 @@
 			</div>
 		</div>
 	</section>
-
-
+</div>
 <!-- HTML -->
-<section class="section element-animate">             
+<section class="section element-animate container" style="padding: 0;">             
 
 <h2 class="title" style="margin-bottom: 30px; padding-left: 10%;">지역 별 교육현황</h2>
 <div style="background-color: #dedcee; height: 550px; padding-top: 20px;">
@@ -158,6 +157,7 @@
 </div>
 </section>
 
+<jsp:include page="footer.jsp" />
 
 <!-- 차트 -->
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
@@ -240,7 +240,6 @@ $(function(){
 			$('#viewStack').show();
 		}
 		
-		console.log(srchKeco1);
 		
 		param = "srchKeco1="+srchKeco1;
 		
@@ -250,8 +249,44 @@ $(function(){
 			dataType:"json",
 			data: param
 		}).done(function(data){
-		
+			
 			console.log(data);
+			
+			loc_seoul = new Array();
+			loc_busan = new Array();
+			loc_daagu = new Array();
+			loc_incheon = new Array();
+			loc_gwangju = new Array();
+			loc_daejoen = new Array();
+			loc_ulsan = new Array();
+			loc_saejong = new Array();
+			loc_gyounggi = new Array();
+			loc_gangwon = new Array();
+			loc_choongbook = new Array();
+			loc_choongnam = new Array();
+			loc_jeonbook = new Array();
+			loc_jeonnam = new Array();
+			loc_gyoungbook = new Array();
+			loc_gyoungnam = new Array();
+			loc_jeju = new Array();
+
+			cnt_seoul = new Array();
+			cnt_busan = new Array();
+			cnt_daagu = new Array();
+			cnt_incheon = new Array();
+			cnt_gwangju = new Array();
+			cnt_daejoen = new Array();
+			cnt_ulsan = new Array();
+			cnt_saejong = new Array();
+			cnt_gyounggi = new Array();
+			cnt_gangwon = new Array();
+			cnt_choongbook = new Array();
+			cnt_choongnam = new Array();
+			cnt_jeonbook = new Array();
+			cnt_jeonnam = new Array();
+			cnt_gyoungbook = new Array();
+			cnt_gyoungnam = new Array();
+			cnt_jeju = new Array();
 			
 			var c_seoul = 0;
 			var c_busan = 0;
@@ -273,94 +308,59 @@ $(function(){
 			
 			for(var i=0; i<data.length; i++){
 				if(data[i].city == "서울"){
-					loc_seoul[c_seoul] = data[i].location;
-					cnt_seoul[c_seoul] = data[i].counts;
-
-					c_seoul++;	
-				} else if(data[i].city == "부산"){
-					loc_busan[c_busan] = data[i].location;
-					cnt_busan[c_busan] = data[i].counts;
-
-					c_busan++;	
-				} else if(data[i].city == "대구"){
-					loc_daagu[c_daagu] = data[i].location;
-					cnt_daagu[c_daagu] = data[i].counts;
-
-					c_daagu++;	
-				} else if(data[i].city == "인천"){
-					loc_incheon[c_incheon] = data[i].location;
-					cnt_incheon[c_daagu] = data[i].counts;
-
-					c_incheon++;	
-				} else if(data[i].city == "광주"){
-					loc_gwangju[c_gwangju] = data[i].location;
-					cnt_gwangju[c_gwangju] = data[i].counts;
-
-					c_gwangju++;	
-				} else if(data[i].city == "대전"){
-					loc_daejoen[c_daejoen] = data[i].location;
-					cnt_daejoen[c_daejoen] = data[i].counts;
-
-					c_daejoen++;	
-				} else if(data[i].city == "울산"){
-					loc_ulsan[c_ulsan] = data[i].location;
-					cnt_ulsan[c_ulsan] = data[i].counts;
-
-					c_ulsan++;	
-				} else if(data[i].city == "세종"){
-					loc_saejong[c_saejong] = data[i].location;
-					cnt_saejong[c_saejong] = data[i].counts;
-
-					c_saejong++;	
-				} else if(data[i].city == "경기"){
-					loc_gyounggi[c_gyounggi] = data[i].location;
-					cnt_gyounggi[c_gyounggi] = data[i].counts;
-
-					c_gyounggi++;	
-				} else if(data[i].city == "강원"){
-					loc_gangwon[c_gangwon] = data[i].location;
-					cnt_gangwon[c_gangwon] = data[i].counts;
-
-					c_gangwon++;	
-				} else if(data[i].city == "충북"){
-					loc_choongbook[c_choongbook] = data[i].location;
-					cnt_choongbook[c_choongbook] = data[i].counts;
-
-					c_choongbook++;	
-				} else if(data[i].city == "충남"){
-					loc_choongnam[c_choongnam] = data[i].location;
-					cnt_choongnam[c_choongnam] = data[i].counts;
-
-					c_choongnam++;	
-				} else if(data[i].city == "전북"){
-					loc_jeonbook[c_jeonbook] = data[i].location;
-					cnt_jeonbook[c_jeonbook] = data[i].counts;
-
-					c_jeonbook++;	
-				} else if(data[i].city == "전남"){
-					loc_jeonnam[c_jeonnam] = data[i].location;
-					cnt_jeonnam[c_jeonnam] = data[i].counts;
-
-					c_jeonnam++;	
-				} else if(data[i].city == "경북"){
-					loc_gyoungbook[c_gyoungbook] = data[i].location;
-					cnt_gyoungbook[c_gyoungbook] = data[i].counts;
-
-					c_gyoungbook++;	
-				} else if(data[i].city == "경남"){
-					loc_gyoungnam[c_gyoungnam] = data[i].location;
-					cnt_gyoungnam[c_gyoungnam] = data[i].counts;
-
-					c_gyoungnam++;	
-				} else if(data[i].city == "제주"){
-					loc_jeju[c_jeju] = data[i].location;
-					cnt_jeju[c_jeju] = data[i].counts;
-
-					c_jeju++;	
-				}				
+					c_seoul = dataa(c_seoul, loc_seoul, cnt_seoul, data[i].location, data[i].counts);
+				} 
+				if(data[i].city == "부산"){	
+					c_busan = dataa(c_busan, loc_busan, cnt_busan, data[i].location, data[i].counts);
+				} 
+				if(data[i].city == "대구"){
+					c_daagu = dataa(c_daagu, loc_daagu, cnt_daagu, data[i].location, data[i].counts);
+				}
+				if(data[i].city == "인천"){			
+					c_incheon = dataa(c_incheon, loc_incheon, cnt_incheon, data[i].location, data[i].counts);
+				}
+				if(data[i].city == "광주"){
+					c_gwangju = dataa(c_gwangju, loc_gwangju, cnt_gwangju, data[i].location, data[i].counts);
+				}
+				if(data[i].city == "대전"){
+					c_daejoen = dataa(c_daejoen, loc_daejoen, cnt_daejoen, data[i].location, data[i].counts);
+				}
+				if(data[i].city == "울산"){
+					c_ulsan = dataa(c_ulsan, loc_ulsan, cnt_ulsan, data[i].location, data[i].counts);
+				}
+				if(data[i].city == "세종"){
+					c_saejong = dataa(c_saejong, loc_saejong, cnt_saejong, data[i].location, data[i].counts);
+				}  
+				if(data[i].city == "경기"){
+					c_gyounggi = dataa(c_gyounggi, loc_gyounggi, cnt_gyounggi, data[i].location, data[i].counts);
+				} 
+				if(data[i].city == "강원"){
+					c_gangwon = dataa(c_gangwon, loc_gangwon, cnt_gangwon, data[i].location, data[i].counts);
+				} 
+				if(data[i].city == "충북"){
+					c_choongbook = dataa(c_choongbook, loc_choongbook, cnt_choongbook, data[i].location, data[i].counts);
+				} 
+				if(data[i].city == "충남"){
+					c_choongnam = dataa(c_choongnam, loc_choongnam, cnt_choongnam, data[i].location, data[i].counts);
+				} 
+				if(data[i].city == "전북"){
+					c_jeonbook = dataa(c_jeonbook, loc_jeonbook, cnt_jeonbook, data[i].location, data[i].counts);
+				} 
+				if(data[i].city == "전남"){
+					c_jeonnam = dataa(c_jeonnam, loc_jeonnam, cnt_jeonnam, data[i].location, data[i].counts);
+				} 
+				if(data[i].city == "경북"){
+					c_gyoungbook = dataa(c_gyoungbook, loc_gyoungbook, cnt_gyoungbook, data[i].location, data[i].counts);
+				} 
+				if(data[i].city == "경남"){			
+					c_gyoungnam = dataa(c_gyoungnam, loc_gyoungnam, cnt_gyoungnam, data[i].location, data[i].counts);
+				}
+				if(data[i].city == "제주"){
+					c_jeju = dataa(c_jeju, loc_jeju, cnt_jeju, data[i].location, data[i].counts);
+				}			
 			} // for 끝
 
-			 stackChart();
+			 stackChart(); // 스택차트 함수호출
 			
 		}).fail(function(err){
 			console.log(err);
@@ -370,7 +370,34 @@ $(function(){
 	
 });
 
+function dataa(num, loc, loc_cnt, data_loc, data_cnt){
+	if(num < 1){ // 처음에만 진입.
+		loc[num] = data_loc;
+		loc_cnt[num] = data_cnt;
 
+		num++;
+	}else if(num > 0){
+		for(var k=0; k<num; k++){
+			if(loc[k] != data_loc){ // 동일한 지역이 아닐 때 진입.
+				if(k == num-1){ 
+					// 만약, 끝까지 동일한 지역이 없었다면,
+					// 배열에 넣어주기
+					loc[num] = data_loc;
+					loc_cnt[num] = data_cnt;
+
+					num++;
+					break;
+				}
+			}else{ // 동일한 지역일 때 진입.
+				loc_cnt[num] += data_cnt; // 그 지역에 값만 누적
+
+				break;
+			}
+		}
+	}
+	
+	return num;
+}
 
 
 function mapChart(data_json) { // 맵차트 영역
@@ -476,7 +503,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_seoul.length > 0) {		
 			str += '{"지역":"서울",';
 			for(var i=0; i<loc_seoul.length; i++){
-				str += '"';
+				str += '"서울';
 				str += loc_seoul[i];
 				str += '":"';
 				str += cnt_seoul[i]+'"';
@@ -493,7 +520,7 @@ function mapChart(data_json) { // 맵차트 영역
 			
 			str += '{"지역":"부산",';
 			for(var i=0; i<loc_busan.length; i++){
-				str += '"';
+				str += '"부산';
 				str += loc_busan[i];
 				str += '":"';
 				str += cnt_busan[i]+'"';
@@ -508,7 +535,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_daagu.length > 0) {		
 			str += ',{"지역":"대구",';
 			for(var i=0; i<loc_daagu.length; i++){
-				str += '"';
+				str += '"대구';
 				str += loc_daagu[i];
 				str += '":"';
 				str += cnt_daagu[i]+'"';
@@ -522,7 +549,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_incheon.length > 0) {		
 			str += ',{"지역":"인천",';
 			for(var i=0; i<loc_incheon.length; i++){
-				str += '"';
+				str += '"인천';
 				str += loc_incheon[i];
 				str += '":"';
 				str += cnt_incheon[i]+'"';
@@ -536,7 +563,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_gwangju.length > 0) {		
 			str += ',{"지역":"광주",';
 			for(var i=0; i<loc_gwangju.length; i++){
-				str += '"';
+				str += '"광주';
 				str += loc_gwangju[i];
 				str += '":"';
 				str += cnt_gwangju[i]+'"';
@@ -550,7 +577,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_daejoen.length > 0) {		
 			str += ',{"지역":"대전",';
 			for(var i=0; i<loc_daejoen.length; i++){
-				str += '"';
+				str += '"대전';
 				str += loc_daejoen[i];
 				str += '":"';
 				str += cnt_daejoen[i]+'"';
@@ -564,7 +591,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_ulsan.length > 0) {		
 			str += ',{"지역":"울산",';
 			for(var i=0; i<loc_ulsan.length; i++){
-				str += '"';
+				str += '"울산';
 				str += loc_ulsan[i];
 				str += '":"';
 				str += cnt_ulsan[i]+'"';
@@ -578,7 +605,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_saejong.length > 0) {		
 			str += ',{"지역":"세종",';
 			for(var i=0; i<loc_saejong.length; i++){
-				str += '"';
+				str += '"세종';
 				str += loc_saejong[i];
 				str += '":"';
 				str += cnt_saejong[i]+'"';
@@ -592,7 +619,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_gyounggi.length > 0) {		
 			str += ',{"지역":"경기",';
 			for(var i=0; i<loc_gyounggi.length; i++){
-				str += '"';
+				str += '"경기';
 				str += loc_gyounggi[i];
 				str += '":"';
 				str += cnt_gyounggi[i]+'"';
@@ -606,7 +633,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_gangwon.length > 0) {		
 			str += ',{"지역":"강원",';
 			for(var i=0; i<loc_gangwon.length; i++){
-				str += '"';
+				str += '"강원';
 				str += loc_gangwon[i];
 				str += '":"';
 				str += cnt_gangwon[i]+'"';
@@ -620,7 +647,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_choongbook.length > 0) {		
 			str += ',{"지역":"충북",';
 			for(var i=0; i<loc_choongbook.length; i++){
-				str += '"';
+				str += '"충북';
 				str += loc_choongbook[i];
 				str += '":"';
 				str += cnt_choongbook[i]+'"';
@@ -634,7 +661,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_choongnam.length > 0) {		
 			str += ',{"지역":"충남",';
 			for(var i=0; i<loc_choongnam.length; i++){
-				str += '"';
+				str += '"충남';
 				str += loc_choongnam[i];
 				str += '":"';
 				str += cnt_choongnam[i]+'"';
@@ -648,7 +675,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_jeonbook.length > 0) {		
 			str += ',{"지역":"전북",';
 			for(var i=0; i<loc_jeonbook.length; i++){
-				str += '"';
+				str += '"전북';
 				str += loc_jeonbook[i];
 				str += '":"';
 				str += cnt_jeonbook[i]+'"';
@@ -662,7 +689,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_jeonnam.length > 0) {		
 			str += ',{"지역":"전남",';
 			for(var i=0; i<loc_jeonnam.length; i++){
-				str += '"';
+				str += '"전남';
 				str += loc_jeonnam[i];
 				str += '":"';
 				str += cnt_jeonnam[i]+'"';
@@ -676,7 +703,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_gyoungbook.length > 0) {		
 			str += ',{"지역":"경북",';
 			for(var i=0; i<loc_gyoungbook.length; i++){
-				str += '"';
+				str += '"경북';
 				str += loc_gyoungbook[i];
 				str += '":"';
 				str += cnt_gyoungbook[i]+'"';
@@ -690,7 +717,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_gyoungnam.length > 0) {		
 			str += ',{"지역":"경남",';
 			for(var i=0; i<loc_gyoungnam.length; i++){
-				str += '"';
+				str += '"경남';
 				str += loc_gyoungnam[i];
 				str += '":"';
 				str += cnt_gyoungnam[i]+'"';
@@ -704,7 +731,7 @@ function mapChart(data_json) { // 맵차트 영역
 		if(loc_jeju.length > 0) {		
 			str += ',{"지역":"제주",';
 			for(var i=0; i<loc_jeju.length; i++){
-				str += '"';
+				str += '"제주';
 				str += loc_jeju[i];
 				str += '":"';
 				str += cnt_jeju[i]+'"';
@@ -714,12 +741,11 @@ function mapChart(data_json) { // 맵차트 영역
 			}
 			str += '}';
 		}
-		
-	
 		str += ']';
 		
 		var str1 = JSON.parse(str); // 문자열 str을 JSON화 시켜줌
-		console.log(str1);
+		
+		//console.log(str1);
 
 		
 		// Add data
@@ -764,57 +790,57 @@ function mapChart(data_json) { // 맵차트 영역
 
 		
 		for(var i=0; i<loc_seoul.length; i++){
-			createSeries(loc_seoul[i], loc_seoul[i]);
+			createSeries("서울"+loc_seoul[i], loc_seoul[i]);
 		}
 		for(var i=0; i<loc_busan.length; i++){
-			createSeries(loc_busan[i], loc_busan[i]);
+			createSeries("부산"+loc_busan[i], loc_busan[i]);
 		}
 		for(var i=0; i<loc_daagu.length; i++){
-			createSeries(loc_daagu[i], loc_daagu[i]);
+			createSeries("대구"+loc_daagu[i], loc_daagu[i]);
 		}
 		for(var i=0; i<loc_incheon.length; i++){
-			createSeries(loc_incheon[i], loc_incheon[i]);
+			createSeries("인천"+loc_incheon[i], loc_incheon[i]);
 		}
 		for(var i=0; i<loc_gwangju.length; i++){
-			createSeries(loc_gwangju[i], loc_gwangju[i]);
+			createSeries("광주"+loc_gwangju[i], loc_gwangju[i]);
 		}
 		for(var i=0; i<loc_daejoen.length; i++){
-			createSeries(loc_daejoen[i], loc_daejoen[i]);
+			createSeries("대전"+loc_daejoen[i], loc_daejoen[i]);
 		}
 		for(var i=0; i<loc_ulsan.length; i++){
-			createSeries(loc_ulsan[i], loc_ulsan[i]);
+			createSeries("울산"+loc_ulsan[i], loc_ulsan[i]);
 		}
 		for(var i=0; i<loc_saejong.length; i++){
-			createSeries(loc_saejong[i], loc_saejong[i]);
+			createSeries("세종"+loc_saejong[i], loc_saejong[i]);
 		}
 		for(var i=0; i<loc_gyounggi.length; i++){
-			createSeries(loc_gyounggi[i], loc_gyounggi[i]);
+			createSeries("경기"+loc_gyounggi[i], loc_gyounggi[i]);
 		}
 		for(var i=0; i<loc_gangwon.length; i++){
-			createSeries(loc_gangwon[i], loc_gangwon[i]);
+			createSeries("강원"+loc_gangwon[i], loc_gangwon[i]);
 		}
 		for(var i=0; i<loc_choongbook.length; i++){
-			createSeries(loc_choongbook[i], loc_choongbook[i]);
+			createSeries("충북"+loc_choongbook[i], loc_choongbook[i]);
 		}
 		for(var i=0; i<loc_choongnam.length; i++){
-			createSeries(loc_choongnam[i], loc_choongnam[i]);
+			createSeries("충남"+loc_choongnam[i], loc_choongnam[i]);
 		}
 		for(var i=0; i<loc_jeonbook.length; i++){
-			createSeries(loc_jeonbook[i], loc_jeonbook[i]);
+			createSeries("전북"+loc_jeonbook[i], loc_jeonbook[i]);
 		}
 		for(var i=0; i<loc_jeonnam.length; i++){
-			createSeries(loc_jeonnam[i], loc_jeonnam[i]);
+			createSeries("전남"+loc_jeonnam[i], loc_jeonnam[i]);
 		}
 		for(var i=0; i<loc_gyoungbook.length; i++){
-			createSeries(loc_gyoungbook[i], loc_gyoungbook[i]);
+			createSeries("경북"+loc_gyoungbook[i], loc_gyoungbook[i]);
 		}
 		for(var i=0; i<loc_gyoungnam.length; i++){
-			createSeries(loc_gyoungnam[i], loc_gyoungnam[i]);
+			createSeries("경남"+loc_gyoungnam[i], loc_gyoungnam[i]);
 		}
 		for(var i=0; i<loc_jeju.length; i++){
-			createSeries(loc_jeju[i], loc_jeju[i]);
+			createSeries("제주"+loc_jeju[i], loc_jeju[i]);
 		}
-		
+
 		// Legend
 		//chart.legend = new am4charts.Legend();
 

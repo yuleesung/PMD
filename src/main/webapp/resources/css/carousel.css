@@ -2,8 +2,9 @@
 
 .carousel_section{
 	background-color: white;
-	margin:30px;
-	margin-right: 0px;
+	margin: 15px 0;
+	float: left;
+	width: 25%;
 }
 
 .carousel_section > ul{

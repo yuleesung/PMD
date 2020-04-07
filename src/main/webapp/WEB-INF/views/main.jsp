@@ -17,28 +17,38 @@
 
 <!--stylesheets-->
 <link rel="stylesheet" href="resources/css/style.css">
-<link href="resources/css/main_style.css" rel="stylesheet" type="text/css" media="all">
-<link href="//fonts.googleapis.com/css?family=Cuprum:400,700" rel="stylesheet">
-<link href="//fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="//fonts.googleapis.com/css?family=Cuprum:400,700"
+	rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Didact+Gothic"
+	rel="stylesheet">
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
 <link href="resources/css/text.css" rel="stylesheet" />
-
+<link href="resources/css/main_style.css" rel="stylesheet"
+	type="text/css" media="all">
 <!-- 캐러셀 -->
 <link rel="stylesheet" type="text/css" href="resources/css/carousel.css">
 
 <!-- 메뉴바 관련 추가 -->
-<link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
-<link href="resources/css/fonts.css" rel="stylesheet" type="text/css" media="all">
-<link href="resources/css/default.css" rel="stylesheet" type="text/css" media="all">
+<link href="http://fonts.googleapis.com/css?family=Didact+Gothic"
+	rel="stylesheet">
+<link href="resources/css/fonts.css" rel="stylesheet" type="text/css"
+	media="all">
+<link href="resources/css/default.css" rel="stylesheet" type="text/css"
+	media="all">
 
 <style type="text/css">
+html, body {
+	width: 100%; height: 100%;
+}
 .search-sec {
 	padding: 2rem;
 }
 
 .search-slt {
 	display: block;
-	width: 100%;
+	width: 90%;
 	font-size: 0.875rem;
 	line-height: 1.5;
 	color: #55595c;
@@ -68,68 +78,77 @@
 
 @media ( max-width : 992px) {
 	.search-sec {
-		background: #1A4668;
+		background: rgba(26, 70, 104, 0.51);
 	}
 }
 
-option{
+option {
 	color: black;
 }
 </style>
 </head>
 <body>
-	<!-- <div class="header"> -->
-		<!-- <a class="navbar-brand absolute" href="main.inc"> <span
-			style="font-size: 30px; color: white;">PMD</span>
-		</a> -->
-		<jsp:include page="menubar.jsp"/>
-	
-	<!-- </div> -->
 
-	<!-- 캐러셀 이미지 사이즈는 30%*300 높이와 시간조절은 js에서 변경-->
-	<div id="carousel_section" class="carousel_section" style="float: left; width: 30%"> 
-		<ul>
-			<li> <img src="resources/images/test1.gif"> </li>
-			<li> <img src="resources/images/test2.gif"> </li>
-			<li> <img src="resources/images/test3.gif"> </li>
-		</ul>
-	</div>
-	
-	<div id="carousel_section2" class="carousel_section" style="float: left; width: 30%"> 
-		<ul>
-			<li> <img src="resources/images/test2.gif"> </li>
-			<li> <img src="resources/images/test3.gif"> </li>
-			<li> <img src="resources/images/test1.gif"> </li>
-		</ul>
-	</div>
-	
-	<div id="carousel_section3" class="carousel_section" style="float: left; width: 30%"> 
-		<ul>
-			<li> <img src="resources/images/test3.gif"> </li>
-			<li> <img src="resources/images/test1.gif"> </li>
-			<li> <img src="resources/images/test2.gif"> </li>
-		</ul>
-	</div>
+	<jsp:include page="menubar.jsp" />
+
+	<div class="container">
 
 
-	<!-- 배너 추천 훈련과정 -->
-	<div class="container-fluid">
-		<div id="carouselExample" class="carouselPrograms carousel slide"
-			data-ride="carousel" data-interval="false">
-			<div class="carousel-inner row w-100 mx-auto" role="listbox">
-				<c:forEach var="mvo" items="${ar }" varStatus="st">
-					<c:if test="${st.index == 0 }">
-						<div class="carousel-item col-md-4 active"
-							style="width: 360px; height: 600px;">
-							<c:choose>
-								<c:when test="${fn:length(mvo.categoryNm) lt 12 }">
-									<h3 style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h3>
-								</c:when>
-								<c:otherwise>
-									<h4 style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h4>
-								</c:otherwise>
-							</c:choose>
-							<div class="panel panel-default">
+		<!-- 캐러셀 이미지 사이즈는 30%*300 높이와 시간조절은 js에서 변경-->
+		<div id="carousel_section" class="carousel_section">
+			<ul>
+				<li><img src="resources/images/test1.gif"></li>
+				<li><img src="resources/images/test2.gif"></li>
+				<li><img src="resources/images/test3.gif"></li>
+				<li><img src="resources/images/test4.gif"></li>
+			</ul>
+		</div>
+
+		<div id="carousel_section2" class="carousel_section">
+			<ul>
+				<li><img src="resources/images/test2.gif"></li>
+				<li><img src="resources/images/test3.gif"></li>
+				<li><img src="resources/images/test4.gif"></li>
+				<li><img src="resources/images/test1.gif"></li>
+			</ul>
+		</div>
+
+		<div id="carousel_section3" class="carousel_section">
+			<ul>
+				<li><img src="resources/images/test3.gif"></li>
+				<li><img src="resources/images/test4.gif"></li>
+				<li><img src="resources/images/test1.gif"></li>
+				<li><img src="resources/images/test2.gif"></li>
+			</ul>
+		</div>
+		<div id="carousel_section4" class="carousel_section">
+			<ul>
+				<li><img src="resources/images/test4.gif"></li>
+				<li><img src="resources/images/test1.gif"></li>
+				<li><img src="resources/images/test2.gif"></li>
+				<li><img src="resources/images/test3.gif"></li>
+			</ul>
+		</div>
+
+		<!-- 배너 추천 훈련과정 -->
+		<div class="container-fluid">
+			<div id="myCarousel" class="carousel slide" data-ride="carousel">
+				<div class="carousel-inner row w-100 mx-auto">
+
+					<c:forEach var="mvo" items="${ar }" varStatus="st">
+						<c:if test="${st.index == 0 }">
+							<div class="carousel-item col-md-4 active">
+								<c:choose>
+									<c:when test="${fn:length(mvo.categoryNm) lt 12 }">
+										<h3
+											style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h3>
+									</c:when>
+									<c:otherwise>
+										<h4
+											style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h4>
+									</c:otherwise>
+								</c:choose>
+								<div class="panel panel-default">
 								<div class="panel-thumbnail">
 									<div class="card h-100 thumb">
 										<a
@@ -139,25 +158,30 @@ option{
 											alt="${mvo.subTitle }" width="350px" height="150px" />
 										</a>
 										<div class="card-body">
-											<a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}&yardMan=${mvo.yardMan}&regCourseMan=${mvo.regCourseMan}">
-											<c:choose>
-												<c:when test="${fn:length(mvo.title) lt 25 }">
-													<h4 class="card-title" style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h4>
-												</c:when>
-												<c:otherwise>
-													<h5 class="card-title" style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h5>
-												</c:otherwise>
-											</c:choose>
+											<a
+												href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}&yardMan=${mvo.yardMan}&regCourseMan=${mvo.regCourseMan}">
+												<c:choose>
+													<c:when test="${fn:length(mvo.title) lt 25 }">
+														<h4 class="card-title"
+															style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h4>
+													</c:when>
+													<c:otherwise>
+														<h5 class="card-title"
+															style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h5>
+													</c:otherwise>
+												</c:choose>
 											</a>
 											<p class="card-text" style="text-align: center;">
-											<c:choose>
-												<c:when test="${fn:length(mvo.subTitle) lt 10 }">
-													<span style="font-weight: bold; font-size: 1.2em; font-size: 18px;">${mvo.subTitle }</span>
-												</c:when>
-												<c:otherwise>
-													<span style="font-weight: bold; font-size: 1.2em; font-size: 15px;">${mvo.subTitle }</span>
-												</c:otherwise>
-											</c:choose>
+												<c:choose>
+													<c:when test="${fn:length(mvo.subTitle) lt 10 }">
+														<span
+															style="font-weight: bold; font-size: 1.2em; font-size: 18px;">${mvo.subTitle }</span>
+													</c:when>
+													<c:otherwise>
+														<span
+															style="font-weight: bold; font-size: 1.2em; font-size: 15px;">${mvo.subTitle }</span>
+													</c:otherwise>
+												</c:choose>
 												<br /> <span
 													style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총
 													훈련비</span>
@@ -181,48 +205,55 @@ option{
 										</div>
 									</div>
 								</div>
+								</div>
 							</div>
-						</div>
-					</c:if>
-					<c:if test="${st.index > 0 }">
-						<div class="carousel-item col-md-4 "
-							style="width: 360px; height: 600px;">
-							<c:choose>
-								<c:when test="${fn:length(mvo.categoryNm) lt 12 }">
-									<h3 style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h3>
-								</c:when>
-								<c:otherwise>
-									<h4 style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h4>
-								</c:otherwise>
-							</c:choose>	
-							<div class="panel panel-default">
+						</c:if>
+						<c:if test="${st.index > 0 }">
+							<div class="carousel-item col-md-4">
+								<c:choose>
+									<c:when test="${fn:length(mvo.categoryNm) lt 12 }">
+										<h3
+											style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h3>
+									</c:when>
+									<c:otherwise>
+										<h4
+											style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h4>
+									</c:otherwise>
+								</c:choose>
+								<div class="panel panel-default">
 								<div class="panel-thumbnail">
 									<div class="card h-100 thumb">
-										<a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}&yardMan=${mvo.yardMan}&regCourseMan=${mvo.regCourseMan}">
+										<a
+											href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}&yardMan=${mvo.yardMan}&regCourseMan=${mvo.regCourseMan}">
 											<img class="card-img-top img-fluid mx-auto d-block"
 											src="resources/images/occupation/${mvo.category}.jpg"
 											alt="${mvo.subTitle }" width="350px" height="150px" />
 										</a>
 										<div class="card-body">
-											<a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}&yardMan=${mvo.yardMan}&regCourseMan=${mvo.regCourseMan}">
-											<c:choose>
-												<c:when test="${fn:length(mvo.title) lt 25 }">
-													<h4 class="card-title" style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h4>
-												</c:when>
-												<c:otherwise>
-													<h5 class="card-title" style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h5>
-												</c:otherwise>
-											</c:choose>
+											<a
+												href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}&yardMan=${mvo.yardMan}&regCourseMan=${mvo.regCourseMan}">
+												<c:choose>
+													<c:when test="${fn:length(mvo.title) lt 25 }">
+														<h4 class="card-title"
+															style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h4>
+													</c:when>
+													<c:otherwise>
+														<h5 class="card-title"
+															style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h5>
+													</c:otherwise>
+												</c:choose>
 											</a>
 											<p class="card-text" style="text-align: center;">
 												<c:choose>
-												<c:when test="${fn:length(mvo.subTitle) lt 10 }">
-													<span style="font-weight: bold; font-size: 1.2em; font-size: 18px;">${mvo.subTitle }</span>
-												</c:when>
-												<c:otherwise>
-													<span style="font-weight: bold; font-size: 1.2em; font-size: 15px;">${mvo.subTitle }</span>
-												</c:otherwise>
-											</c:choose>
+													<c:when test="${fn:length(mvo.subTitle) lt 10 }">
+														<span
+															style="font-weight: bold; font-size: 1.2em; font-size: 18px;">${mvo.subTitle }</span>
+													</c:when>
+													<c:otherwise>
+														<span
+															style="font-weight: bold; font-size: 1.2em; font-size: 15px;">${mvo.subTitle }</span>
+													</c:otherwise>
+												</c:choose>
 												<br /> <span
 													style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총
 													훈련비</span>
@@ -246,29 +277,27 @@ option{
 										</div>
 									</div>
 								</div>
+								</div>
 							</div>
-						</div>
-					</c:if>
-				</c:forEach>
+						</c:if>
+					</c:forEach>
+					<a class="carousel-control-prev" href="#myCarousel" role="button"
+						data-slide="prev"
+						style="display: block; width: 10%; text-align: left; padding-top: 33%;">
+						<img alt="left" src="resources/images/left.png">
+					</a> <a class="carousel-control-next" href="#myCarousel" role="button"
+						data-slide="next"
+						style="display: block; width: 10%; text-align: right; padding-top: 33%;">
+						<img alt="left" src="resources/images/right.png">
+					</a>
+				</div>
 			</div>
-			<a class="carousel-control-prev" href="#carouselExample"
-				role="button" data-slide="prev"> <img alt="right"
-				src="resources/images/left.png" style="position:absolute; left:2px; width: 50px; height: 50px;" />		
-			</a>
-			<a class="carousel-control-next text-faded" href="#carouselExample"
-				role="button" data-slide="next"> <img alt="right"
-				src="resources/images/right.png" style="position:absolute; right:2px; width: 50px; height: 50px;" />
-			</a>
 		</div>
 	</div>
 
-
-
-
-
-
-	<section class="search-sec" style="margin-top: 120px;">
-		<div class="container">
+<div class="container">
+	<section class="search-sec" style="margin-top: 150px; width: 100%;">
+		
 			<form action="#" method="post" novalidate="novalidate">
 				<div class="row">
 					<div class="col-lg-12">
@@ -355,29 +384,33 @@ option{
 									<option value="50">제주</option>
 								</select>
 							</div>
-							<div style="width: 350px; margin: auto;">
+							<div style="width: 100%;">
 								<button type="button" class="btn btn-danger wrn-btn"
-									id="search_btn" style="border-radius: 10px; width: 300px;">검 색</button>
+									id="search_btn" style="border-radius: 10px; width: 300px; display: block; margin: auto;">검
+									색</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</form>
-		</div>
+		
 	</section>
-
+</div>
 	<!-- 리스트 -->
 	<div class="container" id="result" style="display: none;"></div>
 
+	<jsp:include page="footer.jsp" />
+
+
 	<!--scripts-->
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script
+		src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script src="resources/js/jquery-ui.min.js"></script>
 	<script src="resources/js/carousel.js"></script>
 
 	<script>
-	
 		addEventListener("load", function() {
 			setTimeout(hideURLbar, 0);
 		}, false);
@@ -395,25 +428,25 @@ option{
 						showMonthAfterYear : true,
 
 					});
-			$('#carouselExample').on(
-					'slide.bs.carousel',
-					function(e) {
 
+			$("#myCarousel").on(
+					"slide.bs.carousel",
+					function(e) {
 						var $e = $(e.relatedTarget);
 						var idx = $e.index();
 						var itemsPerSlide = 3;
-						var totalItems = $('.carousel-item').length;
+						var totalItems = $(".carousel-item").length;
 
 						if (idx >= totalItems - (itemsPerSlide - 1)) {
 							var it = itemsPerSlide - (totalItems - idx);
 							for (var i = 0; i < it; i++) {
 								// append slides to end
 								if (e.direction == "left") {
-									$('.carousel-item').eq(i).appendTo(
-											'.carousel-inner');
+									$(".carousel-item").eq(i).appendTo(
+											".carousel-inner");
 								} else {
-									$('.carousel-item').eq(0).appendTo(
-											'.carousel-inner');
+									$(".carousel-item").eq(0).appendTo(
+											$(this).find(".carousel-inner"));
 								}
 							}
 						}
@@ -437,7 +470,8 @@ option{
 							function() {
 
 								var srchTraOrganNm = $("#srchTraOrganNm").val(); // 훈련기관
-								var srchTraProcessNm = $("#srchTraProcessNm").val(); // 훈련과정
+								var srchTraProcessNm = $("#srchTraProcessNm")
+										.val(); // 훈련과정
 								var crseTracseSe = $("#crseTracseSe").val(); // 훈련유형
 								var srchKeco1 = $("#srchKeco1").val(); // 훈련분야
 								var date = $("#srchTraStDt").val(); // 훈련시작일
@@ -483,7 +517,8 @@ option{
 									data = param.substring(1, param.length);
 								}
 
-								$.ajax({
+								$
+										.ajax({
 											url : "search.inc",
 											type : "post",
 											data : data,
@@ -495,7 +530,9 @@ option{
 															"block");
 													// console.log(res.ar[0].trprId);
 
-													var str = "<h1 class='my-5' style='font-weight: bold;'>검색 결과 (총 "+res.rowTotal+"건)</h1>";
+													var str = "<h1 class='my-5' style='font-weight: bold;'>검색 결과 (총 "
+															+ res.rowTotal
+															+ "건)</h1>";
 													str += "<hr/>";
 													str += "<div class='row'>";
 
@@ -577,7 +614,7 @@ option{
 													str += "</div>";
 													// console.log(str);
 													$("#result").html(str);
-
+													$( 'html, body' ).stop().animate( { scrollTop : '+=1000' } )
 												}).fail(function(err) {
 											console.log(err);
 										});
@@ -646,7 +683,8 @@ option{
 								$("#result").css("display", "block");
 								// console.log(res.ar[0].trprId);
 
-								var str = "<h1 class='my-5' style='font-weight: bold;'>검색 결과 (총 "+res.rowTotal+"건)</h1>";
+								var str = "<h1 class='my-5' style='font-weight: bold;'>검색 결과 (총 "
+										+ res.rowTotal + "건)</h1>";
 								str += "<hr/>";
 								str += "<div class='row'>";
 
@@ -730,7 +768,6 @@ option{
 		function numberWithCommas(x) {
 			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
-		
 	</script>
 
 </body>
