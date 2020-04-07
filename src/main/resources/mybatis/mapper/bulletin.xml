@@ -104,6 +104,9 @@
 				<if test="b_category != null">
 					b_category = #{b_category},
 				</if>
+				<if test="secret_content != null">
+					secret_content = #{secret_content},
+				</if>
 			</trim>
 		</set>
 		where b_idx = #{b_idx}
