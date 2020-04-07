@@ -21,25 +21,25 @@
 </head>
 <body>
 <div style="background: #6a99cb;" class="container">
-	<div id="sign"
-		style="display: inline-block; float: right; margin: .2rem .8rem;">
-		<c:choose>
-			<c:when test="${userInfo != null}">
-				<span>${userInfo.nickname }님 환영합니다.</span>
-				<a href="mypage.inc" title="내정보"
-					style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">내정보</a>&nbsp;&nbsp;
-				<a href="javascript: logout('${sessionScope.userInfo.sns_type }')" title="로그아웃"
-					style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">로그아웃</a>			
-			</c:when>
-			<c:otherwise>
-				<a href="login.inc" title="로그인"
-					style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">로그인</a>&nbsp;&nbsp;
-				<a href="join.inc" title="회원가입"
-					style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">회원가입</a>
-			</c:otherwise>
-		</c:choose>
-	</div>
-		<div id="header">
+	<div id="header">
+		<div id="sign"
+			style="float: right; margin: .2rem .8rem; position: absolute; top: 2px; right: 5px;">
+			<c:choose>
+				<c:when test="${userInfo != null}">
+					<span>${userInfo.nickname }님 환영합니다.</span>
+					<a href="mypage.inc" title="내정보"
+						style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">내정보</a>&nbsp;&nbsp;
+					<a href="javascript: logout('${sessionScope.userInfo.sns_type }')" title="로그아웃"
+						style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">로그아웃</a>			
+				</c:when>
+				<c:otherwise>
+					<a href="login.inc" title="로그인"
+						style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">로그인</a>&nbsp;&nbsp;
+					<a href="join.inc" title="회원가입"
+						style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">회원가입</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
 		<div id="logo">
 			<h1 class="home">
 				<a href="main.inc">P M D</a>

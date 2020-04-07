@@ -129,9 +129,9 @@ option {
 				<li><img src="resources/images/test3.gif"></li>
 			</ul>
 		</div>
-
+	</div>
 		<!-- 배너 추천 훈련과정 -->
-		<div class="container-fluid">
+		<div class="container">
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				<div class="carousel-inner row w-100 mx-auto">
 
@@ -293,7 +293,7 @@ option {
 				</div>
 			</div>
 		</div>
-	</div>
+	
 
 <div class="container">
 	<section class="search-sec" style="margin-top: 150px; width: 100%;">
