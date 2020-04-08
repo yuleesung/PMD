@@ -46,22 +46,23 @@ input[type=text]{
 <body>
 
 	<jsp:include page="menubar.jsp" />
-
-	<section class="home-slider owl-carousel">
-
-		<div class="slider-item"
-			style="background-image: url('resources/images/mario.gif'); background-size: 30%;">
-			<div class="container">
-				<div
-					class="row slider-text align-items-center justify-content-center">
-					<div class="col-md-8 text-center col-sm-12 element-animate">
-						<h1 style="font-family: inherit;"></h1>
-						<p class="mb-5"></p>
+	
+	<div class="container" style="padding: 0;"> 
+		<section class="home-slider owl-carousel">
+			<div class="slider-item"
+				style="background-image: url('resources/images/mario.gif'); background-size: 30%;">
+				<div class="container">
+					<div
+						class="row slider-text align-items-center justify-content-center">
+						<div class="col-md-8 text-center col-sm-12 element-animate">
+							<h1 style="font-family: inherit;"></h1>
+							<p class="mb-5"></p>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>	
+	</div>
 
 <c:choose>
 <c:when test="${userInfo.u_idx ne null }">
@@ -70,12 +71,12 @@ input[type=text]{
 		<form class="form-horizontal" method="post" action="write.inc" name="writeFrm" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="title" class="col-sm-2 control-label">Title</label>
-				<div class="col-sm-10">
-					<select id="category" name="b_category" class="col-sm-10" style="width: 150px;">
-						<option value="none">:: Category ::</option>
-						<option value="free">자유게시판</option>
-						<option value="qa">Q&A</option>
-						<option value="adv">광고문의</option> 
+				<div class="col-sm-10" >
+					<select id="category" name="b_category" class="col-sm-10" style="width: 150px; cursor: pointer;">
+						<option value="none" style="cursor: pointer;">:: Category ::</option>
+						<option value="free" style="cursor: pointer;">자유게시판</option>
+						<option value="qa"  style="cursor: pointer;">Q&A</option>
+						<option value="adv" style="cursor: pointer;">광고문의</option> 
 					</select>
 					<span id="sel_area" >
 					<!-- <label><input type="checkbox" name="secret_content" id="secret_content" />비밀글</label> -->
@@ -87,8 +88,8 @@ input[type=text]{
 			</div>
 			<div class="form-group">
 				<label for="upload" class="col-sm-2 control-label">Upload File</label>
-				<div class="col-sm-10">
-					<input type="file" name="upload" id="upload"/>
+				<div class="col-sm-10" style="cursor: pointer;">
+					<input type="file" name="upload" id="upload" style="cursor: pointer;"/>
 				</div>
 			</div>
 			
@@ -111,9 +112,8 @@ input[type=text]{
 					<input type="text" class="form-control" id="input_val" placeholder="매크로방지" style="width: 150px; margin-left: 15px;">
 					<div style="float: right;">
 					<label style="font-size: 16px; color: black; font-weight: bold;">작성자 : ${userInfo.nickname }</label><br/>
-					<input id="submit_btn" type="button"
-						value="Submit" class="btn btn-primary">&nbsp;&nbsp;
-						<input id="cancel_btn" type="button"
+					<input id="submit_btn" type="button" value="Submit" class="btn btn-primary" style="cursor: pointer;">&nbsp;&nbsp;
+						<input id="cancel_btn" type="button" style="cursor: pointer;"
 							value="Cancel" class="btn btn-primary" onclick="location.href='list.inc?b_category=${b_category}&nowPage=${nowPage }'">
 					</div>
 					</td>

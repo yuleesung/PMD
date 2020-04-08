@@ -111,20 +111,20 @@
     
     <jsp:include page="menubar.jsp"/>
     
-    <section class="home-slider owl-carousel">
-      
-      <div class="slider-item" style="background-image: url('resources/images/mario.gif'); background-size: 30%;">
-        <div class="container">
-          <div class="row slider-text align-items-center justify-content-center">
-            <div class="col-md-8 text-center col-sm-12 element-animate">
-              <h1 style="font-family: inherit;"></h1>
-              <p class="mb-5"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </section>
+    <div class="container" style="padding: 0;"> 
+	    <section class="home-slider owl-carousel">
+	      <div class="slider-item" style="background-image: url('resources/images/mario.gif'); background-size: 30%;">
+	        <div class="container">
+	          <div class="row slider-text align-items-center justify-content-center">
+	            <div class="col-md-8 text-center col-sm-12 element-animate">
+	              <h1 style="font-family: inherit;"></h1>
+	              <p class="mb-5"></p>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </section>
+    </div>
     
     <section class="section element-animate">
       <div class="container">
@@ -146,10 +146,10 @@
 		          		<tr>
 		          			<td colspan="6" style="text-align: right;">
 		          				<c:if test="${vo.uvo.u_idx eq sessionScope.userInfo.u_idx }">
-			          				<input type="button" class="btn btn-primary" value="수정"  style="font-size: 15px;" onclick="javascript: location.href='updateBoard.inc?b_idx=${vo.b_idx}&b_category=${b_category }&nowPage=${nowPage }'"/>
-			          				<input type="button" class="btn btn-danger" value="삭제"  style="font-size: 15px;" onclick="delPost('${vo.b_idx}', '${nowPage }', '${b_category }')"/>
+			          				<input type="button" class="btn btn-primary" value="수정"  style="font-size: 15px; cursor: pointer;" onclick="javascript: location.href='updateBoard.inc?b_idx=${vo.b_idx}&b_category=${b_category }&nowPage=${nowPage }'"/>
+			          				<input type="button" class="btn btn-danger" value="삭제"  style="font-size: 15px; cursor: pointer;" onclick="delPost('${vo.b_idx}', '${nowPage }', '${b_category }')"/>
 		          				</c:if>
-		          				<input type="button" class="btn btn-primary" value="목록" style="font-size: 15px;" onclick="javascript: location.href='list.inc?nowPage=${nowPage}&b_category=${b_category }'"/>
+		          				<input type="button" class="btn btn-primary" value="목록" style="font-size: 15px; cursor: pointer;" onclick="javascript: location.href='list.inc?nowPage=${nowPage}&b_category=${b_category }'"/>
 		          			</td>
 		          		</tr>
 		          	</thead>
@@ -203,15 +203,16 @@
 	       						<textarea id="comment" placeholder="여기서 댓글 작성하세요!!"></textarea>
 	       					</div>
 	       					<div id="comment_div2">
-	       						<input type="button" class="btn btn-primary" value="댓글등록" id="comment_btn" style="padding: 5px; border-radius: 5px;"/>
+	       						<input type="button" class="btn btn-primary" value="댓글등록" id="comment_btn" style="padding: 5px; border-radius: 5px; cursor: pointer;"/>
 	       					</div>
        					</c:if>
        					<c:if test="${userInfo eq null }">
 	       					<div id="comment_div1">
-	       						<textarea id="comment" placeholder="댓글은 로그인 후 작성 가능합니다." readonly="readonly" style="background-color: #dedede; cursor: pointer;" onclick="javascript: location.href='login.inc'"></textarea>
+	       						<textarea id="comment" placeholder="댓글은 로그인 후 작성 가능합니다." readonly="readonly" 
+	       							style="background-color: #dedede; cursor: pointer;" onclick="javascript: location.href='login.inc'"></textarea>
 	       					</div>
 	       					<div id="comment_div2">
-	       						<input type="button" class="btn btn-primary" value="댓글등록" id="comment_btn" style="padding: 5px; border-radius: 5px;" disabled="disabled"/>
+	       						<input type="button" class="btn btn-primary" value="댓글등록" id="comment_btn" style="padding: 5px; border-radius: 5px; cursor: pointer;" disabled="disabled"/>
 	       					</div>
        					</c:if>
        				</div>
@@ -235,8 +236,8 @@
 				          				<td>${fn:substring(cvo.write_date, 0, 10) }</td>
 				          				<td>
 					          				<c:if test="${cvo.u_idx eq sessionScope.userInfo.u_idx }">
-					          					<input type="button" value="수정" onclick="updateComment(${st.index+1}, ${fn:length(vo.c_list)+1}, ${cvo.c_idx })"/>
-					          					<input type="button" value="삭제" onclick="delComment(${cvo.c_idx })"/>
+					          					<input type="button" value="수정" onclick="updateComment(${st.index+1}, ${fn:length(vo.c_list)+1}, ${cvo.c_idx })" style="cursor: pointer;"/>
+					          					<input type="button" value="삭제" onclick="delComment(${cvo.c_idx })" style="cursor: pointer;"/>
 				          					</c:if>
 				          				</td>
 				          			</tr>
@@ -292,7 +293,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- END footer -->
 
     <!-- loader -->
-    <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/></svg></div>
+    <div id="loader" class="show fullscreen">
+    	<svg class="circular" width="48px" height="48px">
+    	<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+    	<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/>
+		</svg>
+	</div>
 
     <script src="resources/js/jquery-3.2.1.min.js"></script>
     <script src="resources/js/popper.min.js"></script>
@@ -305,14 +311,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     
 
     <script>
-
-	/* 비밀글 체크여부  secret_w  
-	if($("#secret_w").prop("checked")){
-		$("#secret_w").val(1);
-	}else{
-		$("#secret_w").val("");
-	}
-	*/
     
     
 	    document.addEventListener('DOMContentLoaded', function() {
@@ -402,7 +400,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     			dataType: "json"
     		}).done(function(data){
     			// console.log(data.c_ar);
-    			var str = "<tr><td colspan='4' style='padding-top: 20px; font-weight: bold;'>댓글 "+data.c_ar.length+"</td></tr>";
+    			var str = "<tr><td colspan='4' style='padding-top: 20px; font-weight: strong;'>댓글 "+data.c_ar.length+"</td></tr>";
     			
     			for(var i=0; i<data.c_ar.length; i++){
     				str += "<tr>";
@@ -412,8 +410,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       				
       				if(data.c_ar[i].uvo.u_idx == "${sessionScope.userInfo.u_idx}"){
           				str += "<td>";
-	          			str += "<input type='button' value='수정' onclick='updateComment("+(i+1)+", "+(data.c_ar.length+1)+", "+data.c_ar[i].c_idx+")'/>&nbsp;";
-	          			str += "<input type='button' value='삭제' onclick='delComment("+data.c_ar[i].c_idx+")'/>";
+	          			str += "<input type='button' value='수정' style='cursor: pointer;' onclick='updateComment("+(i+1)+", "+(data.c_ar.length+1)+", "+data.c_ar[i].c_idx+")'/>&nbsp;";
+	          			str += "<input type='button' value='삭제' style='cursor: pointer;' onclick='delComment("+data.c_ar[i].c_idx+")'/>";
           				str += "</td>";
       				}else{
       					str += "<td>";
@@ -424,6 +422,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     			}
     			
     			$("#t2 tbody").html(str);
+    			$("#comment_div1").html('<textarea id="comment" placeholder="여기서 댓글 작성하세요!!"></textarea>');
     		}).fail(function(err){
     			console.log(err);
     		});

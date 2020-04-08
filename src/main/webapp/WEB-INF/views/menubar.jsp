@@ -26,7 +26,7 @@
 			style="float: right; margin: .2rem .8rem; position: absolute; top: 2px; right: 5px;">
 			<c:choose>
 				<c:when test="${userInfo != null}">
-					<span>${userInfo.nickname }님 환영합니다.</span>
+					<span style="color: rgba(189,204,86, 1)">${userInfo.nickname }님 환영합니다.</span>&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="mypage.inc" title="내정보"
 						style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">내정보</a>&nbsp;&nbsp;
 					<a href="javascript: logout('${sessionScope.userInfo.sns_type }')" title="로그아웃"

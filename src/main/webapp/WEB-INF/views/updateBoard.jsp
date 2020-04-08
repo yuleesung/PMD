@@ -56,31 +56,27 @@ input[type=text]{
 
 	<jsp:include page="menubar.jsp" />
 
-	<section class="home-slider owl-carousel">
-
-		<div class="slider-item"
-			style="background-image: url('resources/images/mario.gif'); background-size: 30%;">
-			<div class="container">
-				<div
-					class="row slider-text align-items-center justify-content-center">
+	<div class="container" style="padding: 0;"> 
+		<section class="home-slider owl-carousel">
+			<div class="slider-item" style="background-image: url('resources/images/mario.gif'); background-size: 30%;">
+				<div class="container"> <div class="row slider-text align-items-center justify-content-center">
 					<div class="col-md-8 text-center col-sm-12 element-animate">
-						<h1 style="font-family: inherit;"></h1>
-						<p class="mb-5"></p>
+						<h1 style="font-family: inherit;"></h1> <p class="mb-5"></p>
 					</div>
-				</div>
+				</div> </div>
 			</div>
-		</div>
-	</section>
+		</section>
+	</div>
 
 <c:choose>
 <c:when test="${userInfo.u_idx ne null }">
 	<section class="section element-animate">  
 	  <div class="container">
 		<form class="form-horizontal" method="post" action="edit.inc" name="editFrm" enctype="multipart/form-data">
-			<div class="form-group">
+			<div class="form-group" >
 				<label for="title" class="col-sm-2 control-label">Title</label>
 				<div class="col-sm-10">
-					<select id="category" name="b_category" class="col-sm-10" style="width: 150px;">
+					<select id="category" name="b_category" class="col-sm-10" style="width: 150px; cursor: pointer;">
 						<option value="none">:: Category ::</option>
 						<option value="free"
 						<c:if test="${vo.b_category == 'free' }">selected</c:if>>자유게시판</option>
@@ -130,8 +126,8 @@ input[type=text]{
 					<td>
 					<div style="float: right;">
 					<label style="font-size: 16px; color: black; font-weight: bold;">작성자 : ${userInfo.nickname }</label><br/>
-					<input id="submit_btn" type="button" value="Submit" class="btn btn-primary">&nbsp;&nbsp;
-						<input id="cancel_btn" type="button" value="Cancel" class="btn btn-primary" 
+					<input id="submit_btn" type="button" value="Submit" class="btn btn-primary" style="cursor: pointer;">&nbsp;&nbsp;
+						<input id="cancel_btn" type="button" value="Cancel" class="btn btn-primary" style="cursor: pointer;"
 						onclick="location.href='viewBoard.inc?b_idx=${vo.b_idx}&nowPage=${vo.nowPage }&b_category=${vo.b_category }'"> 
 						<!-- 해당게시물로 돌아가기 -->
 					</div>

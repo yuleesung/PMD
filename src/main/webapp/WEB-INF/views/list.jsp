@@ -66,14 +66,22 @@
 		#t1 tfoot tr, #t1 tfoot td{
 			border: none;
 		}
+		.pagination-v4 > li > a.active,
+		.pagination-v4 > li > a:hover,
+		.pagination-v4 > li > span:hover,
+		.pagination-v4 > li > a:focus,
+		.pagination-v4 > li > span:focus {
+			 cursor: pointer;
+			 border-color: #fff;
+		}
     </style>
   </head>
   <body>
     
     <jsp:include page="menubar.jsp"/>
-    
+   
+   <div class="container" style="padding: 0;"> 
     <section class="home-slider owl-carousel">
-      
       <div class="slider-item" style="background-image: url('resources/images/mario.gif'); background-size: 30%;">
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center">
@@ -84,8 +92,8 @@
           </div>
         </div>
       </div>
-
     </section>
+   </div> 
     
     <section class="section element-animate">
       <div class="container">
@@ -168,7 +176,8 @@
 		          			</td>
 		          			<td>
 		          				<c:if test="${userInfo ne null }">
-		          					<input type="button" class="btn btn-primary" value="글쓰기" style="font-size: 15px;" onclick="javascript: location.href='write.inc?nowPage=${nowPage}&b_category=${b_category }'"/>
+		          					<input type="button" class="btn btn-primary" value="글쓰기" style="font-size: 15px; cursor: pointer;" 
+		          					onclick="javascript: location.href='write.inc?nowPage=${nowPage}&b_category=${b_category }'"/>	
 		          				</c:if>
 		          			</td>
 		          		</tr>
