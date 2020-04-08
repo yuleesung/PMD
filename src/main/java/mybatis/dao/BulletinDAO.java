@@ -7,6 +7,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.pmd.vo.AdvVO;
 import com.pmd.vo.BulletinVO;
 import com.pmd.vo.Bulletin_C_VO;
 import com.pmd.vo.UserVO;
@@ -323,4 +324,90 @@ public class BulletinDAO {
 		
 		return chk;
 	}
+	
+	// 회원 정지 또는 해제
+	public boolean blockOrRelUser(String u_idx, String status) {
+		boolean chk = false;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("u_idx", u_idx);
+		map.put("status", status);
+		
+		int cnt = ss.update("bulletin.blockOrRelUser", map);
+		if(cnt > 0)
+			chk = true;
+		
+		return chk;
+	}
+	
+	// 게시물 삭제 또는 복구
+	public boolean delOrRestoreBoard(String b_idx, String status) {
+		boolean chk = false;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("b_idx", b_idx);
+		map.put("status", status);
+		
+		int cnt = ss.update("bulletin.delOrRestoreBoard", map);
+		if(cnt > 0)
+			chk = true;
+		
+		return chk;
+	}
+	
+	// 광고 넣기
+	public boolean addAdv(AdvVO vo) {
+		boolean chk = false;
+		
+		int cnt = ss.insert("bulletin.addAdv", vo);
+		if(cnt > 0)
+			chk = true;
+		
+		return chk;
+	}
+	
+	// 광고목록 보기
+	public AdvVO[] listAdv(String begin, String end, String adv_group) {
+		AdvVO[] ar = null;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("begin", begin);
+		map.put("end", end);
+		map.put("adv_group", adv_group);
+		
+		List<AdvVO> list = ss.selectList("bulletin.listAdv", map);
+		if(list != null && !list.isEmpty()) {
+			ar = new AdvVO[list.size()];
+			list.toArray(ar);
+		}
+		
+		return ar;
+	}
+	
+	// 광고 수정
+	public boolean updateAdv(AdvVO vo) {
+		boolean chk = false;
+		
+		int cnt = ss.update("bulletin.updateAdv", vo);
+		if(cnt > 0)
+			chk = true;
+		
+		return chk;
+	}
+	
+	// 광고 삭제 또는 복구
+	public boolean delOrRestoreAdv(String a_idx, String status) {
+		boolean chk = false;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("a_idx", a_idx);
+		map.put("status", status);
+		
+		int cnt = ss.update("bulletin.delOrRestoreAdv", map);
+		if(cnt > 0)
+			chk = true;
+		
+		return chk;
+	}
+	
 }

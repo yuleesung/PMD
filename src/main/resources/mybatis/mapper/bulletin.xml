@@ -231,4 +231,70 @@
 		select u_phone from users_t where u_phone = #{u_phone}
 	</select>
 	
+	<!-- 회원 정지 또는 해제 -->
+	<update id="blockOrRelUser" parameterType="java.util.Map">
+		update users_t set status = #{status} where u_idx = #{u_idx}
+	</update>
+	
+	<!-- 게시물 삭제 또는 복구 -->
+	<update id="delOrRestoreBoard" parameterType="java.util.Map">
+		update bulletin set status = #{status} where b_idx = #{b_idx}
+	</update>
+	
+	<!-- 광고 넣기 -->
+	<insert id="addAdv" parameterType="com.pmd.vo.AdvVO">
+		insert into adv_t(a_idx, co_name, co_phone, co_email, adv_group, adv_link, file_name<if test="etc != null">, etc</if>, start_date, end_date, reg_date, status)
+		values(adv_t_seq.nextval, #{co_name}, #{co_phone}, #{co_email}, #{adv_group}, #{adv_link}, #{file_name}<if test="etc != null">, #{etc}</if>, #{start_date}, #{end_date}, sysdate, 0)
+	</insert>
+	
+	<!-- 광고목록 보기 -->
+	<select id="listAdv" parameterType="java.util.Map" resultType="com.pmd.vo.AdvVO">
+		select * from(	
+			select rownum r_num, a.* from
+				(select * from adv_t where adv_group = #{adv_group} order by a_idx desc) a
+		)where r_num between #{begin} and #{end}
+	</select>
+	
+	<!-- 광고 수정 -->
+	<update id="updateAdv" parameterType="com.pmd.vo.AdvVO">
+		update adv_t
+		<set>
+			<trim suffixOverrides=",">
+				<if test="co_name != null">
+					co_name = #{co_name},
+				</if>
+				<if test="co_phone != null">
+					co_phone = #{co_phone},
+				</if>
+				<if test="co_email != null">
+					co_email = #{co_email},
+				</if>
+				<if test="adv_group != null">
+					adv_group = #{adv_group},
+				</if>
+				<if test="adv_link != null">
+					adv_link = #{adv_link},
+				</if>
+				<if test="file_name != null">
+					file_name = #{file_name},
+				</if>
+				<if test="etc != null">
+					etc = #{etc},
+				</if>
+				<if test="start_date != null">
+					start_date = #{start_date},
+				</if>
+				<if test="end_date != null">
+					end_date = #{end_date},
+				</if>
+			</trim>
+		</set>
+		where a_idx = #{a_idx}
+	</update>
+	
+	<!-- 광고 삭제 또는 복구 -->
+	<update id="delAdv" parameterType="java.util.Map">
+		update adv_t set status = #{status} where a_idx = #{a_idx}
+	</update>
+	
 </mapper>
