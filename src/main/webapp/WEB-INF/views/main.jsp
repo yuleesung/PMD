@@ -89,49 +89,80 @@ option {
 </head>
 <body>
 
-	<jsp:include page="menubar.jsp" />
+	<jsp:include page="menubar2.jsp" />
 
 	<div class="container">
 
-
-		<!-- 캐러셀 이미지 사이즈는 30%*300 높이와 시간조절은 js에서 변경-->
+		<!-- 이미지 Height+시간조절은 js에서 변경-->
 		<div id="carousel_section" class="carousel_section">
 			<ul>
-				<li><img src="resources/images/test1.gif"></li>
-				<li><img src="resources/images/test2.gif"></li>
-				<li><img src="resources/images/test3.gif"></li>
-				<li><img src="resources/images/test4.gif"></li>
+				<c:if test="${adv_group eq 1}">
+					<li><img src="resources/images/test1.gif"></li>
+				</c:if>
+				<c:if test="${adv_group eq 2}">
+					<li><img src="resources/images/test2.gif"></li>
+				</c:if>
+				<c:if test="${adv_group eq 3}">
+					<li><img src="resources/images/test3.gif"></li>
+				</c:if>
+				<c:if test="${adv_group eq 4}">
+					<li><img src="resources/images/test4.gif"></li>
+				</c:if>
 			</ul>
 		</div>
 
 		<div id="carousel_section2" class="carousel_section">
 			<ul>
-				<li><img src="resources/images/test2.gif"></li>
-				<li><img src="resources/images/test3.gif"></li>
-				<li><img src="resources/images/test4.gif"></li>
-				<li><img src="resources/images/test1.gif"></li>
+				<c:if test="${adv_group eq 2}">
+					<li><img src="resources/images/test2.gif"></li>
+				</c:if>
+				<c:if test="${adv_group eq 3}">
+					<li><img src="resources/images/test3.gif"></li>
+				</c:if>
+				<c:if test="${adv_group eq 4}">
+					<li><img src="resources/images/test4.gif"></li>
+				</c:if>
+				<c:if test="${adv_group eq 1}">
+					<li><img src="resources/images/test1.gif"></li>
+				</c:if>
 			</ul>
 		</div>
 
 		<div id="carousel_section3" class="carousel_section">
 			<ul>
-				<li><img src="resources/images/test3.gif"></li>
-				<li><img src="resources/images/test4.gif"></li>
-				<li><img src="resources/images/test1.gif"></li>
-				<li><img src="resources/images/test2.gif"></li>
+				<c:if test="${adv_group eq 3}">
+					<li><img src="resources/images/test3.gif"></li>
+				</c:if>
+				<c:if test="${adv_group eq 4}">
+					<li><img src="resources/images/test4.gif"></li>
+				</c:if>
+				<c:if test="${adv_group eq 1}">
+					<li><img src="resources/images/test1.gif"></li>
+				</c:if>
+				<c:if test="${adv_group eq 2}">
+					<li><img src="resources/images/test2.gif"></li>
+				</c:if>
 			</ul>
 		</div>
 		<div id="carousel_section4" class="carousel_section">
 			<ul>
-				<li><img src="resources/images/test4.gif"></li>
-				<li><img src="resources/images/test1.gif"></li>
-				<li><img src="resources/images/test2.gif"></li>
-				<li><img src="resources/images/test3.gif"></li>
+				<c:if test="${adv_group eq 4}">
+					<li><img src="resources/images/test4.gif"></li>
+				</c:if>
+				<c:if test="${adv_group eq 1}">
+					<li><img src="resources/images/test1.gif"></li>
+				</c:if>
+				<c:if test="${adv_group eq 2}">
+					<li><img src="resources/images/test2.gif"></li>
+				</c:if>
+				<c:if test="${adv_group eq 3}">
+					<li><img src="resources/images/test3.gif"></li>
+				</c:if>
 			</ul>
 		</div>
-	</div>
+	
 		<!-- 배너 추천 훈련과정 -->
-		<div class="container">
+
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				<div class="carousel-inner row w-100 mx-auto">
 
@@ -292,10 +323,9 @@ option {
 					</a>
 				</div>
 			</div>
-		</div>
+
 	
 
-<div class="container">
 	<section class="search-sec" style="margin-top: 150px; width: 100%;">
 		
 			<form action="#" method="post" novalidate="novalidate">
@@ -392,20 +422,19 @@ option {
 						</div>
 					</div>
 				</div>
-			</form>
-		
+			</form>	
 	</section>
-</div>
+
 	<!-- 리스트 -->
 	<div class="container" id="result" style="display: none;"></div>
-
+	</div>
+	
 	<jsp:include page="footer.jsp" />
-
-
+	
+	
 	<!--scripts-->
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script
-		src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script src="resources/js/jquery-ui.min.js"></script>
 	<script src="resources/js/carousel.js"></script>

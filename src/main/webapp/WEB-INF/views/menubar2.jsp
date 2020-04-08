@@ -21,7 +21,9 @@
 	display: none;
 }
 
-
+#menu a{
+	font-size: 13.5px;
+}
 #buttonMenu ul li a{
 	color: white;
 }
@@ -74,11 +76,11 @@
 				</ul>
 			</div>
 			
-			<button type="button" id="menu_btn" style="float: right; top: -20px; border: 1px solid white; border-radius: 5px; background-color: #6a99cb; width: 40px; height: 40px;">
+			<button type="button" id="menu_btn" style="float: right; top: -20px; border: 1px solid white; border-radius: 5px; background-color: #6a99cb; width: 40px; height: 40px; margin: 20px 0px; padding: 1px 6px;">
 				<img alt="menuBtn" style="width: 100%; height: 100%;" src="resources/images/menuIcon.png"/>
 			</button>
 			
-			<div id="buttonMenu" style="background: #6a99cb; width: 100%; top: 50px; float: left; padding: 20px;">
+			<div id="buttonMenu" style="background: #6a99cb; width: 100%; height: 164px; top: 50px; float: left; padding: 20px;">
 				<ul>
 					<li><a href="chart.inc">지역별 과정현황</a></li>
 					<li><a href="list.inc?b_category=free">자유게시판</a></li>

@@ -40,7 +40,7 @@ p {
 </style>
 </head>
 <body>
-	<div class="col-md-9 order-content">
+	<div class="col-md-9 order-content" style="margin: 0; padding: 0;">
 		<h2 class="heading">
 			<strong>Info </strong> Page <span></span>
 		</h2>

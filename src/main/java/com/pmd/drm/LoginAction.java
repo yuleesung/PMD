@@ -2,6 +2,8 @@ package com.pmd.drm;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pmd.util.MakePath;
@@ -24,7 +27,8 @@ public class LoginAction {
 	private BulletinDAO b_dao;
 	@Autowired
 	private HttpSession session;
-
+	@Autowired
+	private HttpServletRequest request;
 	
 	
 	@RequestMapping(value = "/login.inc", method = RequestMethod.GET)
@@ -36,31 +40,33 @@ public class LoginAction {
 		
 		// 네이버로 로그인하기 화면을 보기 위한 링크 주소 문자열
 		String url = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=YeX1APr9UJODbfW6etcy&state="+state+"&redirect_uri=http://localhost:9090/drm/callback.inc";
-		
+
 		mv.addObject("url", url);
 		mv.setViewName("login");
 		
 		return mv;
 	}
 	
-	@RequestMapping(value = "/login.inc", method = RequestMethod.POST)
-	public ModelAndView login(UserVO vo) {
-		ModelAndView mv = new ModelAndView();
+	@RequestMapping(value = "/loginGo.inc", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> login(UserVO vo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		boolean chk = false;
 		
 		UserVO uvo = b_dao.login(vo.getU_id(), vo.getU_pw());
 		
 		if(uvo != null) {
 			// 로그인 성공
+			chk = true;
 			session.setAttribute("userInfo", uvo);
-			
 			MakePath mp = new MakePath();
-			mv.setViewName(mp.decidePath(session));
+			map.put("chk", chk);
+			map.put("path", mp.decidePath(session).substring(10));
 		} else {
-			mv.setViewName("redirect:/login.inc");
+			map.put("chk", chk);
 		}
-		
-		mv.addObject("loginFail", "fail"); // 로그인실패
-		
-		return mv;
+
+		return map;
 	}
 }

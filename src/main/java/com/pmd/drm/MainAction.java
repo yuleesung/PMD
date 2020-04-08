@@ -235,13 +235,13 @@ public class MainAction {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
 		
 		Calendar cal = Calendar.getInstance(); // 오늘날짜
-		cal.add(Calendar.MONTH, 1); // 한달 뒤
+		cal.add(Calendar.DATE, 14); // 2주 뒤
 		String today = format1.format(cal.getTime());
 		
 		cal.add(Calendar.YEAR, 1); // 1년 뒤
 		String future = format1.format(cal.getTime());
 		
-		// url은 현재날짜에서 1달 뒤 기준으로 내년까지 교육과정을 가져옴
+		// url은 현재날짜에서 2주 뒤 기준으로 내년까지 교육과정을 가져옴
 		// 리스트는 최소 10개이상
 		URL url = new URL("http://www.hrd.go.kr/hrdp/api/apipo/APIPO0101T.do?returnType=XML&pageNum=1&"
 				+ "&authKey=Aflc7YIke55KR8qliEbmLwJGWIpsH2DL&sort=ASC&outType=1&srchTraStDt="+today+"&"

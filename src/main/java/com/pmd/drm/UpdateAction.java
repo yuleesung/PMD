@@ -64,9 +64,7 @@ public class UpdateAction {
 			vo.setFile_name(file_name);
 			
 			mf.transferTo(new File(path, file_name));
-		} else {
-			vo.setFile_name("");
-		}	
+		}
 		
 		boolean chk = b_dao.editPost(vo);
 		
