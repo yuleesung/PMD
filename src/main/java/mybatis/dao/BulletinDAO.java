@@ -395,7 +395,7 @@ public class BulletinDAO {
 		return chk;
 	}
 	
-	// 광고 삭제 또는 복구
+	// 광고 삭제 또는 복구 
 	public boolean delOrRestoreAdv(String a_idx, String status) {
 		boolean chk = false;
 		

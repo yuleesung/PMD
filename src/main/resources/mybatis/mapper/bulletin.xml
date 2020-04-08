@@ -293,7 +293,7 @@
 	</update>
 	
 	<!-- 광고 삭제 또는 복구 -->
-	<update id="delAdv" parameterType="java.util.Map">
+	<update id="delOrRestoreAdv" parameterType="java.util.Map">
 		update adv_t set status = #{status} where a_idx = #{a_idx}
 	</update>
 	

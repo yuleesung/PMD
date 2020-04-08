@@ -1,6 +1,6 @@
 package com.pmd.vo;
 
-public class AdvVO {
+public class AdvVO { 
 
 	private String a_idx, co_name, co_phone, co_email, adv_group, adv_link, file_name, etc, start_date, end_date, reg_date, status;
 
