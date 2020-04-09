@@ -8,8 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>게시물 관리페이지</title>
-<link rel="stylesheet" href="resources/css/text.css" />
-<link rel="stylesheet" href="resources/css/bootstrap.css">
+<link rel="stylesheet" href="resources/css/page.css" />
+ 
 <style type="text/css">
 table {
 	width: 90%;
