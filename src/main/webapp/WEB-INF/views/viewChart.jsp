@@ -129,10 +129,10 @@
 		<div class="container" style="padding: 0;">
 			<div class="full_box">
 				<div class="form_controls">
-					<div class="row" style="width: 100%;">
-						<div class="form-group col-md-3" style="margin-top: 20px;">
+					<div class="row" style="width: 100%; margin: 0;">
+						<div class="form-group col-md-3" style="margin-top: 20px; padding: 0;">
 							<select class="form-control" id="srchKeco1">
-								<option value="none">::훈련분야::</option>
+								<option value="none">:: 분야 선택 ::</option>
 								<option value="01">사업관리(01)</option>
 								<option value="02">경영·회계·사무(02)</option>
 								<option value="03">금융·보험(03)</option>
@@ -158,14 +158,15 @@
 								<option value="23">환경·에너지·안전(23)</option>
 								<option value="24">농림어업(24)</option>
 							</select>
-						</div>
-					</div>
-				</div>
+						</div>				
+					</div>				
+				</div>	
+				<span style="margin-left: 60px; font-size:16px; font-weight:bold; font-family: inherit;">분야별 교육현황을 지역별로 확인해보세요!</span>	
 			</div>
 		</div>
 		<!-- 스택형차트 영역 -->
 		<div class="container" style="display: none; background-color: #dedcee; 
-			position: relative;" id="viewStack">
+			position: relative;" id="viewStack">			
 			<div id="stackchart"></div>			
 		</div>
 		<h2 class="ending">
@@ -175,6 +176,10 @@
 
 	<jsp:include page="footer.jsp" />
 
+<!-- loader -->
+    <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/></svg></div>
+    
+    
 	<!-- 차트 -->
 	<script src="https://www.amcharts.com/lib/4/core.js"></script>
 	<script src="https://www.amcharts.com/lib/4/maps.js"></script>
