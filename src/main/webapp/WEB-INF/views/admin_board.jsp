@@ -93,6 +93,7 @@ table td {
 </head>
 
 <body>
+<div style="width: 898px; margin: 0;">
 	<h1>관리자용 게시글 관리페이지</h1>
 	<br/>
 	<label class="sel_label"> <input type="radio" id="ad_free"
@@ -153,7 +154,7 @@ table td {
 			</tr>
 		</tfoot>
 	</table>
-
+</div>
 	<!-- 스크립트 영역 -->
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script src="resources/js/jquery-ui.min.js"></script>
