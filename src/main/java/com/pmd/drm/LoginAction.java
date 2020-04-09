@@ -69,4 +69,25 @@ public class LoginAction {
 
 		return map;
 	}
+	
+	@RequestMapping(value = "/adminLogin.inc", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> adminLogin(String u_id, String u_pw){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		UserVO vo = b_dao.adminLogin(u_id, u_pw);
+		boolean chk = false;
+		if(vo != null) {
+			// 로그인 성공상태
+			chk = true;
+			session.setAttribute("admin", vo);
+			MakePath mp = new MakePath();
+			map.put("path", mp.decidePath(session).substring(10));
+			map.put("chk", chk);
+		} else {
+			map.put("chk", chk);
+		}
+		
+		return map;
+	}
 }
