@@ -186,7 +186,7 @@
 					data:"u_id=" + encodeURIComponent(id) + "&u_pw="+ encodeURIComponent(pw)
 				}).done(function(data){
 					if(data.chk){
-						alert("관리자 로그인성공");
+						location.href = "admin.inc";
 					} else{
 						alert("관리자 로그인실패");
 					}

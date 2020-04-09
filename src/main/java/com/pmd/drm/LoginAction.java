@@ -27,8 +27,7 @@ public class LoginAction {
 	private BulletinDAO b_dao;
 	@Autowired
 	private HttpSession session;
-	@Autowired
-	private HttpServletRequest request;
+
 	
 	
 	@RequestMapping(value = "/login.inc", method = RequestMethod.GET)
@@ -80,7 +79,7 @@ public class LoginAction {
 		if(vo != null) {
 			// 로그인 성공상태
 			chk = true;
-			session.setAttribute("admin", vo);
+			session.setAttribute("userInfo", vo);
 			MakePath mp = new MakePath();
 			map.put("path", mp.decidePath(session).substring(10));
 			map.put("chk", chk);
