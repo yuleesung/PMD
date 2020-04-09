@@ -302,4 +302,23 @@
 		select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t where u_id = #{u_id} and u_pw = #{u_pw} and status = 9
 	</select>
 	
+	<!-- 유저 한 명이 쓴 댓글 모음 -->
+	<resultMap type="com.pmd.vo.UserVO" id="map4">
+		<id column="u_idx" property="u_idx"/>
+		<collection property="c_list" ofType="com.pmd.vo.Bulletin_C_VO" select="u_commList" column="u_idx"/>
+	</resultMap>
+	
+	<!-- 유저의 댓글 -->
+	<select id="u_commList" parameterType="String" resultType="com.pmd.vo.Bulletin_C_VO">
+		select * from bulletin_c_t where u_idx = #{u_idx}
+	</select>
+	
+	<!-- 유저 목록 -->
+	<select id="listUser" parameterType="java.util.Map" resultMap="map4">
+		select * from(	
+			select rownum r_num, a.* from
+				(select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t where status in(0, 1, 2) order by u_idx desc) a
+		)where r_num between #{begin} and #{end}
+	</select>
+	
 </mapper>

@@ -8,6 +8,8 @@ public class UserVO implements Serializable{
 	private String u_idx, u_id, u_pw, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status;
 
 	private List<BulletinVO> b_list;
+	
+	private List<Bulletin_C_VO> c_list;
 
 	public String getU_idx() {
 		return u_idx;
@@ -113,6 +115,12 @@ public class UserVO implements Serializable{
 		this.b_list = b_list;
 	}
 
-	
+	public List<Bulletin_C_VO> getC_list() {
+		return c_list;
+	}
+
+	public void setC_list(List<Bulletin_C_VO> c_list) {
+		this.c_list = c_list;
+	}
 
 }

@@ -421,4 +421,21 @@ public class BulletinDAO {
 		return vo;
 	}
 	
+	// 유저 목록
+	public UserVO[] listUser(String begin, String end) {
+		UserVO[] ar = null;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("begin", begin);
+		map.put("end", end);
+		
+		List<UserVO> list = ss.selectList("bulletin.listUser", map);
+		if(list != null && !list.isEmpty()) {
+			ar = new UserVO[list.size()];
+			list.toArray(ar);
+		}
+		
+		return ar;
+	}
+	
 }
