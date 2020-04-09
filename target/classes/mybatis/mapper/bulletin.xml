@@ -11,7 +11,7 @@
 	
 	<!-- 회원 로그인 -->
 	<select id="login" resultType="com.pmd.vo.UserVO" parameterType="java.util.Map">
-		select * from users_t where u_id = #{u_id} and u_pw = #{u_pw} and status = 0
+		select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t where u_id = #{u_id} and u_pw = #{u_pw} and status = 0
 	</select>
 
 	<!-- 회원 가입 -->
@@ -296,5 +296,10 @@
 	<update id="delOrRestoreAdv" parameterType="java.util.Map">
 		update adv_t set status = #{status} where a_idx = #{a_idx}
 	</update>
+	
+	<!-- 관리자 로그인 -->
+	<select id="adminLogin" parameterType="java.util.Map" resultType="com.pmd.vo.UserVO">
+		select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t where u_id = #{u_id} and u_pw = #{u_pw} and status = 9
+	</select>
 	
 </mapper>

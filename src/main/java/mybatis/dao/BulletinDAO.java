@@ -410,4 +410,15 @@ public class BulletinDAO {
 		return chk;
 	}
 	
+	// 관리자 로그인
+	public UserVO adminLogin(String u_id, String u_pw) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("u_id", u_id);
+		map.put("u_pw", u_pw);
+		
+		UserVO vo = ss.selectOne("bulletin.adminLogin", map);
+		
+		return vo;
+	}
+	
 }
