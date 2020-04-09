@@ -94,7 +94,7 @@ option {
 	<div class="container">
 
 		<!-- 이미지 Height+시간조절은 js에서 변경-->
-		<div id="carousel_section" class="carousel_section">
+		<%-- <div id="carousel_section" class="carousel_section">
 			<ul>
 				<c:if test="${adv_group eq 1}">
 					<li><img src="resources/images/test1.gif"></li>
@@ -159,8 +159,60 @@ option {
 					<li><img src="resources/images/test3.gif"></li>
 				</c:if>
 			</ul>
+		</div> --%>
+		<div id="carousel_section" class="carousel_section">
+			<ul>
+
+				<li><img src="resources/images/test1.gif"></li>
+
+				<li><img src="resources/images/test2.gif"></li>
+
+				<li><img src="resources/images/test3.gif"></li>
+
+				<li><img src="resources/images/test4.gif"></li>
+
+			</ul>
 		</div>
-	
+		<div id="carousel_section2" class="carousel_section">
+			<ul>
+
+				<li><img src="resources/images/test2.gif"></li>
+
+				<li><img src="resources/images/test3.gif"></li>
+
+				<li><img src="resources/images/test4.gif"></li>
+
+				<li><img src="resources/images/test1.gif"></li>
+
+			</ul>
+		</div>
+		<div id="carousel_section3" class="carousel_section">
+			<ul>
+
+				<li><img src="resources/images/test3.gif"></li>
+
+				<li><img src="resources/images/test4.gif"></li>
+
+				<li><img src="resources/images/test1.gif"></li>
+
+				<li><img src="resources/images/test2.gif"></li>
+
+			</ul>
+		</div>
+		<div id="carousel_section4" class="carousel_section">
+			<ul>
+
+				<li><img src="resources/images/test4.gif"></li>
+
+				<li><img src="resources/images/test1.gif"></li>
+
+				<li><img src="resources/images/test2.gif"></li>
+
+				<li><img src="resources/images/test3.gif"></li>
+
+			</ul>
+		</div>
+
 		<!-- 배너 추천 훈련과정 -->
 
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">

@@ -176,12 +176,23 @@
 			});
 
 			$("#ad_btn").click(function() { // 관리자 로그인 제출
-				var ad_id = $("#ad_id").val();
-				var ad_pw = $("#ad_pw").val();
+				var id = $("#ad_id").val();
+				var pw = $("#ad_pw").val();
 
-				//console.log(ad_id+","+ad_pw);
-
-				//document.adFrm.submit();
+				$.ajax({
+					url:"adminLogin.inc",
+					type:"post",
+					dataType:"json",
+					data:"u_id=" + encodeURIComponent(id) + "&u_pw="+ encodeURIComponent(pw)
+				}).done(function(data){
+					if(data.chk){
+						alert("관리자 로그인성공");
+					} else{
+						alert("관리자 로그인실패");
+					}
+				}).fail(function(err){
+					console.log(err);
+				});
 			});
 		});
 
