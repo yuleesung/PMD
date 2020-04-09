@@ -19,6 +19,8 @@ public class MakePath {
 			path = "redirect:/list.inc?nowPage="+session.getAttribute("nowPage")+"&b_category="+session.getAttribute("b_category");
 		else if(session.getAttribute("path").equals("viewBoard"))
 			path = "redirect:/viewBoard.inc?nowPage="+session.getAttribute("nowPage")+"&b_category="+session.getAttribute("b_category")+"&b_idx="+session.getAttribute("b_idx");
+		else if(session.getAttribute("path").equals("viewChart"))
+			path = "redirect:/chart.inc";
 		
 		return path;
 	}
