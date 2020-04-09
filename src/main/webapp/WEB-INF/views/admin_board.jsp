@@ -7,140 +7,61 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시물 관리페이지</title>
-<link rel="stylesheet" href="resources/css/page.css" />
- 
-<style type="text/css">
-table {
-	width: 90%;
-	margin: auto;
-}
 
-table th {
-	height: 50px;
-	background-color: #92cfbf;
-}
-
-table td {
-	padding-left: 5px;
-}
-
-.hide {
-	display: none;
-}
-
-.show {
-	display: table-row;
-	height: 80px;
-	font-size: 16px;
-	background-color: #FFF;
-}
-
-.title td {
-	cursor: pointer;
-	height: 40px;
-	font-size: 16px;
-	background-color: #FFC;
-}
-
-.button1 {
-	background-color: #008CBA;
-	border: 0;
-	width: 100px;
-	height: 50px;
-	color: white;
-	font-size: 16px;
-	font-weight: bold;
-	margin: 5px;
-	float: right;
-}
-
-.button2 {
-	background-color: #f44336;
-	border: 0;
-	width: 100px;
-	height: 50px;
-	color: white;
-	font-size: 16px;
-	font-weight: bold;
-	margin: 5px;
-	float: right;
-}
-
-.button3 {
-	background-color: #4CAF50;
-	border: 0;
-	width: 100px;
-	height: 50px;
-	color: white;
-	font-size: 16px;
-	font-weight: bold;
-	margin: 5px;
-	float: right;
-}
-
-.radio {
-	width: 18px;
-	height: 18px;
-}
-
-.sel_label {
-	font-size: 20px;
-	font-weight: bold;
-	margin: 10px;
-}
-</style>
 </head>
 
 <body>
-<div style="width: 898px; margin: 0;">
+<div style="width: 890px; margin: 0; height: 100%; margin-left: 10px;">
 	<h1>관리자용 게시글 관리페이지</h1>
 	<br/>
-	<label class="sel_label"> <input type="radio" id="ad_free"
-		class="radio"
-		onclick="location.href='adv_bbsList.inc?b_category=free'" value="free"
-		<c:if test="${b_category eq 'free'}">checked</c:if>>자유게시판
-	</label>
-	<label class="sel_label"> <input type="radio" id="ad_qna"
-		class="radio" onclick="location.href='adv_bbsList.inc?b_category=qa'"
-		value="qa" <c:if test="${b_category eq 'qa'}">checked</c:if>>QnA게시판
-	</label>
-	<label class="sel_label"> <input type="radio" id="ad_adv"
-		class="radio" onclick="location.href='adv_bbsList.inc?b_category=adv'"
-		value="adv" <c:if test="${b_category eq 'adv'}">checked</c:if>>광고게시판
-	</label>
+	<input type="radio" id="ad_free"
+		class="radio" value="free" name="category"><span class="sandwich">자유게시판</span>&nbsp;&nbsp;&nbsp;
+	<input type="radio" id="ad_qna"
+		class="radio" value="qa" name="category"><span class="sandwich">QnA게시판</span>&nbsp;&nbsp;&nbsp;
+	<input type="radio" id="ad_adv"
+		class="radio" value="adv" name="category"><span class="sandwich">광고게시판</span>&nbsp;&nbsp;&nbsp;
 	<hr />
 
-	<table cellspacing="0" border="1" class="recruit">
+	<table class="recruit" id="adv_bbs">
+		<colgroup>
+			<col width="50px"/>
+			<col width="*"/>
+			<col width="140px">
+		</colgroup>
 		<thead>
 			<tr>
-				<th><h3>${board_name }게시판(총${rowTotal }개)</h3></th>
+				<th colspan="3"><h3>${board_name }게시판(총 ${rowTotal }개)</h3></th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:if test="${fn:length(list) > 0 }">
-				<c:forEach var="vo" items="${list }">
+				<c:forEach var="vo" items="${list }" varStatus="st">
 					<tr class="title">
-						<td><b>${vo.uvo.nickname }</b>님의 글 || 제목(댓글): <b>${vo.subject }
-								(${fn:length(vo.c_list) })</b></td>
+						<td>
+							${rowTotal - ((nowPage-1)*blockList+st.index) }
+						</td>
+						<td>
+							<b>${vo.uvo.nickname }</b>님의 글 || 제목(댓글): <b>${vo.subject } (${fn:length(vo.c_list) })</b>
+						</td>
+						<td>
+							<c:if test="${vo.status eq 0 }">
+								<input type="button" value="글 삭제" onclick="boardStatus('${vo.b_idx}', '1', '${vo.b_category }', '${nowPage }')" />
+							</c:if> <c:if test="${vo.status eq 1 }">
+								<input type="button" value="글 복구" onclick="boardStatus('${vo.b_idx}', '0', '${vo.b_category }', '${nowPage }')" />
+							</c:if> 
+							<input type="button" value="글 이동" onclick="location.href='viewBoard.inc?b_idx=${vo.b_idx }&b_category=${b_category}'" />
+						</td>
 					</tr>
 					<tr class="hide">
-						<td><c:if test="${vo.status eq 0 }">
-								<input type="button" value="글 삭제" class="button2"
-									onclick="boardStatus('${vo.b_idx}','1','${vo.b_category }' )" />
-							</c:if> <c:if test="${vo.status eq 1 }">
-								<input type="button" value="글 복구" class="button3"
-									onclick="boardStatus('${vo.b_idx}','0','${vo.b_category }')" />
-							</c:if> <input type="button" value="글 이동" class="button1"
-							onclick="location.href='viewBoard.inc?b_idx=${vo.b_idx }&b_category=${b_category}'" /><br />
-							<br />
-							<div id="b_content">${vo.b_content }</div></td>
+						<td colspan="3">
+							<div id="b_content">${vo.b_content }</div>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:if>
 			<c:if test="${empty list }">
 				<tr>
-					<td>
+					<td colspan="3">
 						<h3 style="color: red;">등록 된 게시물이 없습니다</h3>
 					</td>
 				</tr>
@@ -148,7 +69,7 @@ table td {
 		</tbody>
 		<tfoot>
 			<tr>
-				<td>
+				<td colspan="3">
 					<div class="pagination-wrap">${pageCode }</div>
 				</td>
 			</tr>
@@ -160,20 +81,29 @@ table td {
 	<script src="resources/js/jquery-ui.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
+		
 			var article = (".recruit .show");
-			$(".recruit .title  td").click(function() {
-				var myArticle = $(this).parents().next("tr");
-				if ($(myArticle).hasClass('hide')) {
-					$(article).removeClass('show').addClass('hide');
-					$(myArticle).removeClass('hide').addClass('show');
-				} else {
-					$(myArticle).addClass('hide').removeClass('show');
-				}
+		
+			
+			$('input[name="category"]').change(function(){
+				var val = $('input[name="category"]:checked').val();
+				admin_board(val);
 			});
+			
+			 $(document).on("click", ".recruit .title  td:nth-child(2)", function(event){
+					var myArticle = $(this).parents().next("tr");
+					if ($(myArticle).hasClass('hide')) {
+						$(article).removeClass('show').addClass('hide');
+						$(myArticle).removeClass('hide').addClass('show');
+					} else {
+						$(myArticle).addClass('hide').removeClass('show');
+					}
+			 });
 		});
+		
+		
 
-		function boardStatus(b_idx, status, b_category) {
-			console.log(b_category);
+		function boardStatus(b_idx, status, b_category, nowPage) {
 			var str = "";
 			if (status == 0)
 				str = "복구하시겠습니까?";
@@ -183,9 +113,67 @@ table td {
 			var con = confirm(str);
 
 			if (con) {
-				location.href = "delOrRestoreBoard.inc?b_idx=" + b_idx
-						+ "&status=" + status + "&b_category=" + b_category;
+				var param = "b_idx="+encodeURIComponent(b_idx)+"&status="+encodeURIComponent(status)+"&b_category="+encodeURIComponent(b_category)+"&nowPage="+encodeURIComponent(nowPage);
+				ajax_a("delOrRestoreBoard.inc", param);
 			}
+		}
+		
+		function admin_board(category){
+			var param = "b_category="+encodeURIComponent(category);
+			ajax_a("admin_board.inc", param);
+		}
+		
+		function page(nowPage, category){
+			var param = "nowPage="+encodeURIComponent(nowPage)+"&b_category="+encodeURIComponent(category);
+			ajax_a("admin_board.inc", param);	
+		}
+		
+		
+		function ajax_a(url, param){
+			$.ajax({
+				url: url,
+				type: "post",
+				data: param,
+				dataType: "json"
+			}).done(function(data){
+				var str_h = "<th colspan='3'><h3>"+data.board_name+"게시판(총 "+data.rowTotal+"개)</h3></th>";
+				
+				if(data.ar.length > 0){
+					var str = "";
+					${rowTotal - ((nowPage-1)*blockList+st.index) }
+					for(var i=0; i<data.ar.length; i++){
+						str += "<tr class='title'>";
+						str += "<td>"+(data.rowTotal-((data.nowPage-1)*data.blockList+i))+"</td>";
+						str += "<td><b>"+data.ar[i].uvo.nickname+"</b>님의 글 || 제목(댓글): <b>"+data.ar[i].subject;
+						str += "&nbsp;("+data.ar[i].c_list.length+")</b></td>";
+						str += "<td>";
+						if(data.ar[i].status == '0'){
+							str += "<input type='button' value='글 삭제'";
+							str += "onclick='boardStatus(\""+data.ar[i].b_idx+"\", \"1\", \""+data.ar[i].b_category+"\", \""+data.nowPage+"\")'/>";
+							
+						} else if(data.ar[i].status == '1'){
+							str += "<input type='button' value='글 복구'";
+							str += "onclick='boardStatus(\""+data.ar[i].b_idx+"\", \"0\", \""+data.ar[i].b_category+"\", \""+data.nowPage+"\")'/>";
+						}
+						str += "&nbsp;<input type='button' value='글 이동'";
+						str += "onclick='location.href=\"viewBoard.inc?b_idx="+data.ar[i].b_idx+"&b_category="+data.ar[i].b_category+"\"'/>";
+						str += "</td>";
+						str += "</tr>";
+						str += "<tr class='hide'>";
+						str += "<td colspan='3'>";
+						
+						str += "<br/>";
+						str += "<div id='b_content'>"+data.ar[i].b_content+"</div></td>";
+						str += "</tr>";
+					}
+					
+					$(".recruit thead tr").html(str_h);
+					$(".recruit tbody").html(str);
+					$(".pagination-wrap").html(data.pageCode);
+				}
+			}).fail(function(err){
+				console.log(err);
+			});
 		}
 	</script>
 </body>

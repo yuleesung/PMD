@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
 <link href="resources/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="resources/css/page.css" />
 <style>
 	body{
 		margin: 0;
@@ -36,7 +37,6 @@
 		float: left;
 		padding: 0;
 		margin: 0;
-		white-space: pre-line;
 		overflow: hidden;
 		border: 1px solid blue;
 	}
@@ -194,7 +194,8 @@
 			// $("#right").load("/drm/memSet.inc");
 		});
 		
-		// 메뉴를 눌렀을 때 다른 페이지를 보여주는 기능
+		
+		// 메뉴를 눌렀을 때 다른 페이지를 보여주는 기능!! 
 		function viewPage(num) {
 			/*
 			if(num == '0')
@@ -203,8 +204,6 @@
 			if(num == '1')
 				$("#right").load("/drm/adv_bbsList.inc");
 		}
-		
-		
 		
 	</script>
 </body>

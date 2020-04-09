@@ -1,4 +1,48 @@
-﻿.pagination-wrap {
+﻿table {
+	width: 90%;
+	margin: auto;
+	border-collapse: collapse;
+}
+#adv_bbs {
+	border-collapse: separate;
+}
+
+#adv_bbs th {
+	height: 50px;
+	background-color: #92cfbf;
+}
+
+#adv_bbs td {
+	padding-left: 5px;
+}
+
+.hide {
+	display: none;
+}
+
+.show {
+	display: table-row;
+	height: 80px;
+	font-size: 16px;
+	background-color: #FFF;
+}
+
+.title td {
+	cursor: pointer;
+	height: 40px;
+	font-size: 16px;
+	background-color: #FFC;
+}
+
+.radio {
+	width: 12px;
+	height: 12px;
+}
+.sandwich{
+	font-size: 20px;
+	font-weight: bold;
+}
+.pagination-wrap {
  width: 400px; 
  margin:auto;
  text-align:center;
