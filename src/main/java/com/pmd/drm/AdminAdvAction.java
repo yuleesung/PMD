@@ -60,12 +60,13 @@ public class AdminAdvAction {
 		String board_name = null; 
 		
 		if(adv_group.equals("1"))
-			board_name = "Group #1";
+			board_name = "1번 광고";
 		else if(adv_group.equals("2"))
-			board_name = "Group #2";
+			board_name = "2번 광고";
 		else if(adv_group.equals("3"))
-			board_name = "Group #3";
-		
+			board_name = "3번 광고";
+		else if(adv_group.equals("4"))
+			board_name = "4번 광고";
 		
 		
 		mv.addObject("list", ar);
@@ -105,11 +106,13 @@ public class AdminAdvAction {
 		String board_name = null; 
 		
 		if(adv_group.equals("1"))
-			board_name = "Group #1";
+			board_name = "1번 광고";
 		else if(adv_group.equals("2"))
-			board_name = "Group #2";
+			board_name = "2번 광고";
 		else if(adv_group.equals("3"))
-			board_name = "Group #3";
+			board_name = "3번 광고";
+		else if(adv_group.equals("4"))
+			board_name = "4번 광고";
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -151,11 +154,13 @@ public class AdminAdvAction {
 		String board_name = null; 
 		
 		if(adv_group.equals("1"))
-			board_name = "Group #1";
+			board_name = "1번 광고";
 		else if(adv_group.equals("2"))
-			board_name = "Group #2";
+			board_name = "2번 광고";
 		else if(adv_group.equals("3"))
-			board_name = "Group #3";
+			board_name = "3번 광고";
+		else if(adv_group.equals("4"))
+			board_name = "4번 광고";
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		

@@ -14,13 +14,13 @@
 	<span>&nbsp;Group을 선택해주세요.</span>
 	<br/>
 	<input type="radio"
-		class="radio" value="1" name="adv_group"><span class="sandwich">Group #1</span>&nbsp;&nbsp;&nbsp;
+		class="radio" value="1" name="adv_group"><span class="sandwich">1번 광고</span>&nbsp;&nbsp;&nbsp;
 	<input type="radio"
-		class="radio" value="2" name="adv_group"><span class="sandwich">Group #2</span>&nbsp;&nbsp;&nbsp;
+		class="radio" value="2" name="adv_group"><span class="sandwich">2번 광고</span>&nbsp;&nbsp;&nbsp;
 	<input type="radio"
-		class="radio" value="3" name="adv_group"><span class="sandwich">Group #3</span>&nbsp;&nbsp;&nbsp;
+		class="radio" value="3" name="adv_group"><span class="sandwich">3번 광고</span>&nbsp;&nbsp;&nbsp;
 	<input type="radio"
-		class="radio" value="4" name="adv_group"><span class="sandwich">Group #4</span>&nbsp;&nbsp;&nbsp;
+		class="radio" value="4" name="adv_group"><span class="sandwich">4번 광고</span>&nbsp;&nbsp;&nbsp;
 	<hr/>
 
 	<table class="recruit" id="adv_bbs">
@@ -31,7 +31,7 @@
 		</colgroup>
 		<thead>
 			<tr>
-				<th colspan="3"><h3>${board_name } 리스트(총 ${rowTotal }개)</h3></th>
+				<th colspan="3"><h3>${board_name } 페이지(총 ${rowTotal }개)</h3></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -123,7 +123,7 @@
 				data: param,
 				dataType: "json"
 			}).done(function(data){
-				var str_h = "<th colspan='3'><h3>"+data.board_name+" 리스트(총 "+data.rowTotal+"개)</h3></th>";
+				var str_h = "<th colspan='3'><h3>"+data.board_name+" 페이지(총 "+data.rowTotal+"개)</h3></th>";
 				
 				if(data.ar != null) {
 					var str = "";
