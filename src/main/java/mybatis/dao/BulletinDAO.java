@@ -466,4 +466,9 @@ public class BulletinDAO {
 		return ss.selectOne("bulletin.getCountUser");
 	}
 	
+	// 광고 게시물 수
+	public int getCountAdv() {
+		return ss.selectOne("bulletin.getCountAdv");
+	}
+	
 }

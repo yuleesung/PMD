@@ -339,4 +339,9 @@
 		select count(*) from users_t
 	</select>
 	
+	<!-- 광고 게시물 수 -->
+	<select id="getCountAdv" resultType="int">
+		select count(*) from adv_t
+	</select>
+	
 </mapper>
