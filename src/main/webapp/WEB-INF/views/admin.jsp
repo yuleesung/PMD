@@ -132,7 +132,7 @@
 							<i class="fas fa-tasks"></i>&nbsp;&nbsp;게시물 관리
 						</a>
 					</li>
-					<li>
+					<li style="cursor: pointer;">
 						<a id="adv">
 							<i class="fas fa-ad"></i>&nbsp;&nbsp;광고 관리
 						</a>
@@ -191,18 +191,18 @@
 			});
 			
 			// 오른쪽 화면에서 가장 먼저 로드 되는 기능
-			// $("#right").load("/drm/memSet.inc");
+			$("#right").load("/drm/memSet.inc");
 		});
 		
 		
 		// 메뉴를 눌렀을 때 다른 페이지를 보여주는 기능!! 
 		function viewPage(num) {
-			/*
 			if(num == '0')
 				$("#right").load("/drm/memSet.inc");
-			*/
-			if(num == '1')
+			else if(num == '1')
 				$("#right").load("/drm/adv_bbsList.inc");
+			else if(num == '2')
+				$("#right").load("/drm/advInsert.inc");
 		}
 		
 	</script>
