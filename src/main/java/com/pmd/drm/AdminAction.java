@@ -16,7 +16,7 @@ public class AdminAction {
 	private HttpSession session;
 	
 	@RequestMapping("/admin.inc")
-	public ModelAndView adminPage() {
+	public ModelAndView adminPage(String hometown) {
 		ModelAndView mv = new ModelAndView();
 		
 		// 관리자 로그인을 한 사람만 admin페이지를 보여준다. 보안을 생각하여 노파심에 한 작업
@@ -24,7 +24,12 @@ public class AdminAction {
 		
 		if(vo != null) { // 로그인 안 한 상태여부 확인
 			if(vo.getStatus().equals("9"))
-				mv.setViewName("admin");
+				if(hometown == null) // 관리자페이지에서 광고글을 추가하지 않은 경우
+					mv.setViewName("admin");
+				else { // 관리자페이지에서 광고글을 추가한 경우
+					mv.addObject("hometown", hometown);
+					mv.setViewName("admin");
+				}
 			else {
 				mv.setViewName("redirect:/login.inc");
 			}

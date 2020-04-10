@@ -159,6 +159,7 @@
 			
 		</div>
 	</div>
+	<input type="hidden" id="hometown" value="${hometown }"/>
 	
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript">
@@ -190,8 +191,21 @@
 				$(this).addClass("slideActive");
 			});
 			
-			// 오른쪽 화면에서 가장 먼저 로드 되는 기능
-			$("#right").load("/drm/memSet.inc");
+			var hometown = $("#hometown").val();
+			
+			if(hometown == ""){
+				// 오른쪽 화면에서 가장 먼저 로드 되는 기능
+				$("#right").load("/drm/memSet.inc");
+			}else if(hometown == "fromInsertAdv"){ // 광고 넣기를 하고 광고 목록 보기 화면으로 자동 이동
+				$("#hometown").val("");
+				hometown = "";
+				viewPage('3');
+				$("#menu>li>a:first-child").addClass("active");
+				$("#menu>li>a:last-child").removeClass("active");
+				$("#slide").slideDown();
+				$("#slide li:last-child").addClass("slideActive");
+			}
+				
 		});
 		
 		
