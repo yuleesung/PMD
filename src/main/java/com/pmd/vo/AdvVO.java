@@ -40,7 +40,7 @@ public class AdvVO {
 		this.co_email = co_email;
 	}
 
-	public String getAdv_group() {
+	public String getAdv_group() { 
 		return adv_group;
 	}
 
