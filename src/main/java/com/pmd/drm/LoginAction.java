@@ -80,6 +80,8 @@ public class LoginAction {
 			// 로그인 성공상태
 			chk = true;
 			session.setAttribute("userInfo", vo);
+			session.setAttribute("status", vo.getStatus());
+			
 			MakePath mp = new MakePath();
 			map.put("path", mp.decidePath(session).substring(10));
 			map.put("chk", chk);

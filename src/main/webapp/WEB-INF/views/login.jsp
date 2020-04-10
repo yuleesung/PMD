@@ -111,6 +111,9 @@
 	<input type="hidden" id="loginAct" value="${param.loginAct }" />
 
 	<jsp:include page="footer.jsp" />
+	
+	
+	<%-- <input type="hidden" name="stop_u" id="stop_u" value="${status}" /> --%>
 
 	<!-- 스크립트 영역 -->
 	<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
@@ -133,27 +136,24 @@
 		// SDK 초기화 여부를 판단합니다. true면 정상등록
 		// console.log(Kakao.isInitialized());
 		function loginWithKakao() {
-			Kakao.Auth
-					.login({
-						success : function(authObj) {
-							Kakao.API
-									.request({
-										url : '/v2/user/me',
-										success : function(res) {
-											// alert(JSON.stringify(res))
-											// console.log(JSON.stringify(res))
-											sendData(res)
-										},
-										fail : function(error) {
-											alert('login success, but failed to request user information: '
-													+ JSON.stringify(error))
-										},
-									})
+			Kakao.Auth.login({
+				success : function(authObj) {
+					Kakao.API.request({
+						url : '/v2/user/me',
+						success : function(res) {
+							// alert(JSON.stringify(res))
+							// console.log(JSON.stringify(res))
+							sendData(res)
 						},
-						fail : function(err) {
-							alert(JSON.stringify(err))
+						fail : function(error) {
+							alert('login success, but failed to request user information: '+ JSON.stringify(error))
 						},
 					})
+				},
+				fail : function(err) {
+					alert(JSON.stringify(err))
+				},
+			})
 		}
 
 		function dialog() { // 관리자 로그인 다이얼로그
@@ -215,20 +215,19 @@
 				return;
 			}
 
-			$.ajax(
-					{
-						url : "loginGo.inc",
-						type : "post",
-						dataType : "json",
-						data : "u_id=" + encodeURIComponent(id) + "&u_pw="
-								+ encodeURIComponent(pw)
-					}).done(function(data) {
+			$.ajax({
+				url : "loginGo.inc",
+				type : "post",
+				dataType : "json",
+				data : "u_id="+encodeURIComponent(id)+"&u_pw="+encodeURIComponent(pw)
+			}).done(function(data){
 				if (data.chk) {
 					location.href = data.path;
-				} else {
-					alert("아이디 또는 비밀번호가 다릅니다!!");
+				} else{
+					alert("탈퇴 또는 관리자에 의해 정지된 계정입니다.");
 				}
-			}).fail(function(err) {
+						
+			}).fail(function(err){
 				console.log(err);
 			});
 
@@ -254,21 +253,16 @@
 
 		var googleUser = {};
 		var startApp = function() {
-			gapi
-					.load(
-							'auth2',
-							function() {
-								// Retrieve the singleton for the GoogleAuth library and set up the client.
-								auth2 = gapi.auth2
-										.init({
-											client_id : '1048979766914-cjmet6566e6qmc0tnc1tv8jm9doenhk2.apps.googleusercontent.com',
-											cookiepolicy : 'single_host_origin',
-										// Request scopes in addition to 'profile' and 'email'
-										//scope: 'additional_scope'
-										});
-								attachSignin(document
-										.getElementById('customBtn'));
-							});
+			gapi.load('auth2',function() {
+				// Retrieve the singleton for the GoogleAuth library and set up the client.
+				auth2 = gapi.auth2.init({
+					client_id : '1048979766914-cjmet6566e6qmc0tnc1tv8jm9doenhk2.apps.googleusercontent.com',
+					cookiepolicy : 'single_host_origin',
+					// Request scopes in addition to 'profile' and 'email'
+					//scope: 'additional_scope'
+				});
+				attachSignin(document.getElementById('customBtn'));
+			});
 		};
 
 		function attachSignin(element) {
@@ -289,6 +283,7 @@
 				document.socialFrm.submit();
 			});
 		}
+		
 	</script>
 </body>
 </html>
