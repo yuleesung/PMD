@@ -467,8 +467,8 @@ public class BulletinDAO {
 	}
 	
 	// 광고 게시물 수
-	public int getCountAdv() {
-		return ss.selectOne("bulletin.getCountAdv");
+	public int getCountAdv(String adv_group) {
+		return ss.selectOne("bulletin.getCountAdv", adv_group);
 	}
 	
 }

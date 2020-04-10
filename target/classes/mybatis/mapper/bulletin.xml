@@ -336,12 +336,12 @@
 	
 	<!-- 유저 수 -->
 	<select id="getCountUser" resultType="int">
-		select count(*) from users_t
+		select count(*) from users_t where status in(0, 1, 2)
 	</select>
 	
 	<!-- 광고 게시물 수 -->
-	<select id="getCountAdv" resultType="int">
-		select count(*) from adv_t where status in(0, 1, 2)
+	<select id="getCountAdv" resultType="int" parameterType="String">
+		select count(*) from adv_t where adv_group = #{adv_group}
 	</select>
 	
 </mapper>
