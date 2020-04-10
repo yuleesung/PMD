@@ -7,30 +7,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<style type="text/css">
+.title span{
+	font-size: 14px;
+	font-weight: bold;
+}
+</style>
 </head>
-
 <body>
 <div style="width: 890px; margin: 0; height: 100%; margin-left: 10px;">
 	<h1>관리자용 게시글 관리페이지</h1>
 	<br/>
+	<span>&nbsp;카테고리를 선택해주세요.</span>
+	<br/>
 	<input type="radio" id="ad_free"
-		class="radio" value="free" name="category"><span class="sandwich">자유게시판</span>&nbsp;&nbsp;&nbsp;
+		class="radio" value="free" name="category"><span class="sandwich">자유</span>&nbsp;&nbsp;&nbsp;
 	<input type="radio" id="ad_qna"
-		class="radio" value="qa" name="category"><span class="sandwich">QnA게시판</span>&nbsp;&nbsp;&nbsp;
+		class="radio" value="qa" name="category"><span class="sandwich">QnA</span>&nbsp;&nbsp;&nbsp;
 	<input type="radio" id="ad_adv"
-		class="radio" value="adv" name="category"><span class="sandwich">광고게시판</span>&nbsp;&nbsp;&nbsp;
-	<hr />
+		class="radio" value="adv" name="category"><span class="sandwich">광고문의</span>&nbsp;&nbsp;&nbsp;
+	<hr/>
 
 	<table class="recruit" id="adv_bbs">
 		<colgroup>
 			<col width="50px"/>
 			<col width="*"/>
-			<col width="140px">
+			<col width="210px">
 		</colgroup>
 		<thead>
 			<tr>
-				<th colspan="3"><h3>${board_name }게시판(총 ${rowTotal }개)</h3></th>
+				<th colspan="3"><h3>${board_name } 게시판(총 ${rowTotal }개)</h3></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -41,12 +47,14 @@
 							${rowTotal - ((nowPage-1)*blockList+st.index) }
 						</td>
 						<td>
-							<b>${vo.uvo.nickname }</b>님의 글 || 제목(댓글): <b>${vo.subject } (${fn:length(vo.c_list) })</b>
+							<b>${vo.uvo.nickname }</b>님의 글 <b>||</b> 제목(댓글): <b>${vo.subject } (${fn:length(vo.c_list) })</b>
 						</td>
-						<td>
+						<td style="text-align: right;">
 							<c:if test="${vo.status eq 0 }">
+								<span></span>
 								<input type="button" value="글 삭제" onclick="boardStatus('${vo.b_idx}', '1', '${vo.b_category }', '${nowPage }')" />
 							</c:if> <c:if test="${vo.status eq 1 }">
+								<span style="color: red;">!삭제된 글!</span>
 								<input type="button" value="글 복구" onclick="boardStatus('${vo.b_idx}', '0', '${vo.b_category }', '${nowPage }')" />
 							</c:if> 
 							<input type="button" value="글 이동" onclick="location.href='viewBoard.inc?b_idx=${vo.b_idx }&b_category=${b_category}'" />
@@ -136,7 +144,7 @@
 				data: param,
 				dataType: "json"
 			}).done(function(data){
-				var str_h = "<th colspan='3'><h3>"+data.board_name+"게시판(총 "+data.rowTotal+"개)</h3></th>";
+				var str_h = "<th colspan='3'><h3>"+data.board_name+" 게시판(총 "+data.rowTotal+"개)</h3></th>";
 				
 				if(data.ar.length > 0){
 					var str = "";
@@ -144,14 +152,14 @@
 					for(var i=0; i<data.ar.length; i++){
 						str += "<tr class='title'>";
 						str += "<td>"+(data.rowTotal-((data.nowPage-1)*data.blockList+i))+"</td>";
-						str += "<td><b>"+data.ar[i].uvo.nickname+"</b>님의 글 || 제목(댓글): <b>"+data.ar[i].subject;
+						str += "<td><b>"+data.ar[i].uvo.nickname+"</b>님의 글 <b>||</b> 제목(댓글): <b>"+data.ar[i].subject;
 						str += "&nbsp;("+data.ar[i].c_list.length+")</b></td>";
-						str += "<td>";
+						str += "<td style='text-align: right;'>";
 						if(data.ar[i].status == '0'){
 							str += "<input type='button' value='글 삭제'";
-							str += "onclick='boardStatus(\""+data.ar[i].b_idx+"\", \"1\", \""+data.ar[i].b_category+"\", \""+data.nowPage+"\")'/>";
-							
-						} else if(data.ar[i].status == '1'){
+							str += "onclick='boardStatus(\""+data.ar[i].b_idx+"\", \"1\", \""+data.ar[i].b_category+"\", \""+data.nowPage+"\")'/>";						
+						} else if(data.ar[i].status == '1'){							
+							str += "<span style='color: red;'>!삭제된 글!&nbsp;</span>";
 							str += "<input type='button' value='글 복구'";
 							str += "onclick='boardStatus(\""+data.ar[i].b_idx+"\", \"0\", \""+data.ar[i].b_category+"\", \""+data.nowPage+"\")'/>";
 						}

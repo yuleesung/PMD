@@ -47,7 +47,7 @@ public class AdminBoardAction {
 			this.nowPage = Integer.parseInt(nowPage);
 		
 		
-		rowTotal = b_dao.getCount(b_category); // 총 게시물 수
+		rowTotal = b_dao.getCountForAdmin(b_category); // 총 게시물 수
 		
 		// 페이징 처리.. 나중에 관리자용으로 바꿔야 함
 		Paging_AdvList page = new Paging_AdvList(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, b_category);		
@@ -59,7 +59,7 @@ public class AdminBoardAction {
 		int end = page.getEnd();
 		
 		// 해당 카테고리의 게시물 목록을 설정한 페이징만큼 가져 옴
-		BulletinVO[] ar = b_dao.getList(String.valueOf(begin), String.valueOf(end), b_category);
+		BulletinVO[] ar = b_dao.getListForAdmin(String.valueOf(begin), String.valueOf(end), b_category);
 		
 		String board_name = null; // jsp에서 표현할 문자열
 		
@@ -93,7 +93,7 @@ public class AdminBoardAction {
 			this.nowPage = Integer.parseInt(nowPage);
 		
 		
-		rowTotal = b_dao.getCount(b_category); // 총 게시물 수
+		rowTotal = b_dao.getCountForAdmin(b_category); // 총 게시물 수
 		
 		// 페이징 처리.. 나중에 관리자용으로 바꿔야 함
 		Paging_AdvList page = new Paging_AdvList(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, b_category);		
@@ -105,7 +105,7 @@ public class AdminBoardAction {
 		int end = page.getEnd();
 		
 		// 해당 카테고리의 게시물 목록을 설정한 페이징만큼 가져 옴
-		BulletinVO[] ar = b_dao.getList(String.valueOf(begin), String.valueOf(end), b_category);
+		BulletinVO[] ar = b_dao.getListForAdmin(String.valueOf(begin), String.valueOf(end), b_category);
 		
 		String board_name = null; // jsp에서 표현할 문자열
 		
@@ -141,7 +141,7 @@ public class AdminBoardAction {
 			this.nowPage = Integer.parseInt(nowPage);
 		
 		
-		rowTotal = b_dao.getCount(b_category); // 총 게시물 수
+		rowTotal = b_dao.getCountForAdmin(b_category); // 총 게시물 수
 		
 		// 페이징 처리.. 나중에 관리자용으로 바꿔야 함
 		Paging_AdvList page = new Paging_AdvList(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, b_category);		
@@ -153,7 +153,7 @@ public class AdminBoardAction {
 		int end = page.getEnd();
 		
 		// 해당 카테고리의 게시물 목록을 설정한 페이징만큼 가져 옴
-		BulletinVO[] ar = b_dao.getList(String.valueOf(begin), String.valueOf(end), b_category);
+		BulletinVO[] ar = b_dao.getListForAdmin(String.valueOf(begin), String.valueOf(end), b_category);
 		
 		String board_name = null; // jsp에서 표현할 문자열
 		
