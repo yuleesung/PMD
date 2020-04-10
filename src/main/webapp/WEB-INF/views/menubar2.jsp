@@ -42,7 +42,7 @@
 		<div id="header" style="height: 105px;">
 			<div id="sign"
 				style="float: right; margin: .2rem .8rem; position: absolute; top: 2px; right: 5px;">
-				<c:if test="${userInfo != null and status eq 9 }">
+				<c:if test="${userInfo != null and userInfo.status eq 9 }">
 					<a href="admin.inc" title="관리자페이지로" style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">
 						관리자 페이지
 					</a>&nbsp;&nbsp;&nbsp;&nbsp;
