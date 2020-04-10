@@ -203,6 +203,8 @@
 				$("#right").load("/drm/adv_bbsList.inc");
 			else if(num == '2')
 				$("#right").load("/drm/advInsert.inc");
+			else if(num == '3')
+				$("#right").load("/drm/admin_advList.inc");
 		}
 		
 	</script>

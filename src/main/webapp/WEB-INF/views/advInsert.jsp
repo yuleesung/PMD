@@ -4,15 +4,202 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="resources/css/jquery-ui.css"/>
 </head>
 <body>
-	<div>
+	<div style="width: 898px;">
 		<header>
 			<h1>광고 넣기</h1>
+			<hr/>
 		</header>
-		<form action="advInsert.inc" method="post" enctype="multipart/form-data">
-			
+		<form action="advInsert.inc" method="post" enctype="multipart/form-data" name="frm">
+			<table>
+				<colgroup>
+					<col width="150px"/>
+					<col width="*"/>
+					<col width="150px"/>
+					<col width="300px"/>
+				</colgroup>
+				<tr>
+					<th>파일 업로드</th>
+					<td>
+						<input type="file" name="upload"/>
+					</td>
+					<th>광고주</th>
+					<td>
+						<input type="text" name="co_name" id="co_name"/>
+					</td>
+				</tr>
+				<tr>
+					<th>링크 경로</th>
+					<td colspan="3">
+						<input type="text" name="adv_link" id="adv_link"/>
+						<span id="warning"></span>
+					</td>
+				</tr>
+				<tr>
+					<th>연락처</th>
+					<td>
+						<input type="text" id="co_phone1"/>-
+						<input type="text" id="co_phone2"/>-
+						<input type="text" id="co_phone3"/>
+						<input type="hidden" name="co_phone" id="co_phone"/>
+					</td>
+					<th>이메일</th>
+					<td>
+						<input type="text" id="co_email1"/>@
+						<input type="text" id="co_email2"/>
+						<input type="hidden" name="co_email" id="co_email"/>
+					</td>
+				</tr>
+				<tr>
+					<th>시작일</th>
+					<td>
+						<input type="text" name="start_date" id="start_date"/>
+					</td>
+					<th>종료일</th>
+					<td>
+						<input type="text" name="end_date" id="end_date"/>
+					</td>
+				</tr>
+				<tr>
+					<th>메모할 사항</th>
+					<td colspan="3">
+						<input type="text" name="etc" id="etc"/>
+					</td>
+				</tr>
+				<tr>
+					<th>광고순번</th>
+					<td colspan="3">
+						<input type="radio" name="adv_group" value="1"/><span>1번 광고</span>&nbsp;&nbsp;
+						<input type="radio" name="adv_group" value="2"/><span>2번 광고</span>&nbsp;&nbsp;
+						<input type="radio" name="adv_group" value="3"/><span>3번 광고</span>&nbsp;&nbsp;
+						<input type="radio" name="adv_group" value="4"/><span>4번 광고</span>&nbsp;&nbsp;
+					</td>
+				</tr>
+				<tfoot>
+					<tr>
+						<td colspan="4">
+							<input type="button" id="save_btn" value="저장"/>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
 		</form>
 	</div>
+	
+	<script src="resources/js/jquery-3.4.1.min.js"></script>
+	<script src="resources/js/jquery-ui.min.js"></script>
+	<script>
+		$(function(){
+			
+			$("#start_date").datepicker({
+				dateFormat : "yy-mm-dd",
+				dayNamesMin : [ "일", "월", "화", "수", "목", "금", "토" ],
+				monthNames : [ "1월", "2월", "3월", "4월", "5월", "6월",
+						"7월", "8월", "9월", "10월", "11월", "12월" ],
+				showMonthAfterYear : true,
+			});
+			
+			$("#end_date").datepicker({
+				dateFormat : "yy-mm-dd",
+				dayNamesMin : [ "일", "월", "화", "수", "목", "금", "토" ],
+				monthNames : [ "1월", "2월", "3월", "4월", "5월", "6월",
+						"7월", "8월", "9월", "10월", "11월", "12월" ],
+				showMonthAfterYear : true,
+			});
+			
+			$("#adv_link").keyup(function(){
+				var adv_link = $("#adv_link").val();
+				if(!adv_link.startsWith("www.")){
+					$("#warning").text("www.을 반드시 입력하세요!");
+					return;
+				}else{
+					$("#warning").text("");
+				}
+			});
+			
+			$("#save_btn").click(function(){
+				var co_name = $("#co_name").val();
+				var adv_link = $("#adv_link").val();
+				var co_phone1 = $("#co_phone1").val();
+				var co_phone2 = $("#co_phone2").val();
+				var co_phone3 = $("#co_phone3").val();
+				var co_email1 = $("#co_email1").val();
+				var co_email2 = $("#co_email2").val();
+				var start_date = $("#start_date").val();
+				var end_date = $("#end_date").val();
+				var etc = $("#etc").val();
+				var adv_group = $("input[name='adv_group']:checked").val();
+				
+				if(co_name.trim().length < 1){
+					alert("광고주를 한 자 이상 입력하세요!");
+					$("#co_name").focus();
+					return;
+				}
+				
+				if(adv_link.trim().length < 1){
+					alert("링크 경로를 한 자 이상 입력하세요!");
+					$("#adv_link").focus();
+					return;
+				}
+				
+				if(!adv_link.trim().startsWith("www.")){
+					alert("반드시 www.로 시작해야합니다!");
+					$("#adv_link").focus();
+					return;
+				}
+				
+				if(co_phone1.trim().length < 1){
+					alert("연락처를 한 자 이상 입력하세요!");
+					$("#co_phone1").focus();
+					return;
+				}
+				
+				if(co_phone2.trim().length < 1){
+					alert("연락처를 한 자 이상 입력하세요!");
+					$("#co_phone2").focus();
+					return;
+				}
+				
+				if(co_phone3.trim().length < 1){
+					alert("연락처를 한 자 이상 입력하세요!");
+					$("#co_phone3").focus();
+					return;
+				}
+				
+				if(co_email1.trim().length < 1){
+					alert("이메일을 한 자 이상 입력하세요!");
+					$("#co_email1").focus();
+					return;
+				}
+				
+				if(co_email2.trim().length < 1){
+					alert("이메일을 한 자 이상 입력하세요!");
+					$("#co_email2").focus();
+					return;
+				}
+				
+				if(start_date.trim().length < 1){
+					alert("날짜를 한 자 이상 입력하세요!");
+					$("#start_date").focus();
+					return;
+				}
+				
+				if(end_date.trim().length < 1){
+					alert("날짜를 한 자 이상 입력하세요!");
+					$("#end_date").focus();
+					return;
+				}
+				
+				var s_date = start_date.split("-");
+				var s_date_t = new Date(s_date[0], Number(s_date[1])-1, s_date[2]);
+				
+				var e_date = end_date.split("-");
+				var e_date_t = new Date(e_date[0], Number(e_date[1])-1, e_date[2]);
+				
+			});
+		});
+	</script>
 </body>
 </html>

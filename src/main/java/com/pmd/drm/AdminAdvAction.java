@@ -31,7 +31,7 @@ public class AdminAdvAction {
 
 	
 	// 광고목록 첫 이동
-	@RequestMapping("admin_advList.inc")
+	@RequestMapping("/admin_advList.inc")
 	public ModelAndView admin_advList(String nowPage, String adv_group) {
 		ModelAndView mv = new ModelAndView();
 		
