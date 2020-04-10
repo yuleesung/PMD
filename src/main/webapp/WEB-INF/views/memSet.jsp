@@ -58,8 +58,8 @@
 						</c:choose>
 						</td>	
 						<td>
-							<button type="button" onclick="lock('${vo.u_idx}', '${vo.status }')">정지</button>
-							<button type="button" onclick="unlock('${vo.u_idx}', '${vo.status } }')">해제</button>
+							<button type="button" onclick="lock('${vo.u_idx}', '${vo.status }', '${nowPage }')">정지</button>
+							<button type="button" onclick="unlock('${vo.u_idx}', '${vo.status }', '${nowPage }')">해제</button>
 						</td>
 					</tr>
 				</c:forEach>	
@@ -78,12 +78,13 @@
 	<script src="resources/js/jquery-3.4.1.min.js"></script> 
 	<script>
 	
-	function lock(u_idx, status){
+	function lock(u_idx, status, nowPage){
 		if(confirm('정지 시키겠습니까?')) { //yes 
 			status = 2;
 			
 			// 인자로 보낼 u_idx, status 
-			var param = "u_idx="+encodeURIComponent(u_idx)+"&status="+encodeURIComponent(status);
+			var param = "u_idx="+encodeURIComponent(u_idx)+"&status="+encodeURIComponent(status)+
+						"&nowPage="+encodeURIComponent(nowPage);
 			
 			ajax_a(param);
 			
@@ -91,12 +92,13 @@
 			
 		}
 	}
-	function unlock(u_idx, status){
+	function unlock(u_idx, status, nowPage){
 		if(confirm('정지해지 하시겠습니까?')) { //yes 
 			status = 0;
 		
 			// 인자로 보낼 u_idx, status 
-			var param = "u_idx="+encodeURIComponent(u_idx)+"&status="+encodeURIComponent(status);
+			var param = "u_idx="+encodeURIComponent(u_idx)+"&status="+encodeURIComponent(status)+
+						"&nowPage="+encodeURIComponent(nowPage);
 			
 			ajax_a(param);
 			
@@ -149,14 +151,15 @@
 					}
 					str += "</td>";	
 					str += "<td>";	
-					str += "<button type='button' onclick='lock(\""+data.ar[i].u_idx+"\", \""+data.ar[i].status+"\")'>정지</button>";
-					str += "&nbsp;<button type='button' onclick='unlock(\""+data.ar[i].u_idx+"\", \""+data.ar[i].status+"\")'>해제</button>";
+					str += "<button type='button' onclick='lock(\""+data.ar[i].u_idx+"\", \""+data.ar[i].status+"\", \""+data.nowPage+"\")'>정지</button>";
+					str += "&nbsp;<button type='button' onclick='unlock(\""+data.ar[i].u_idx+"\", \""+data.ar[i].status+"\", \""+data.nowPage+"\")'>해제</button>";
 					str += "</td>";
 				str += "</tr>";
 				
 				} //for문 끝;
 				
 				$("#users_t tbody").html(str);
+				$(".pagination-wrap").html(data.pageCode);
 				
 			}
 			
