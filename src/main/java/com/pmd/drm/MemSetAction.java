@@ -33,12 +33,14 @@ public class MemSetAction {
 	@RequestMapping("/memSet.inc")
 	public ModelAndView memSetting(String nowPage) {
 		
+		
 		// 현재페이지 값 받기
 		if(nowPage == null)
 			this.nowPage = 1;
 		else
 			this.nowPage = Integer.parseInt(nowPage);
 		
+		// 유저 수
 		rowTotal = b_dao.getCountUser();
 		
 		/**** 페이징 ****/
@@ -61,9 +63,12 @@ public class MemSetAction {
 		mv.addObject("rowTotal", rowTotal);	// 총 회원 수
 		mv.addObject("blockList", BLOCK_LIST);	// 한 페이지당 보여질  회원들 수
 		
-		mv.setViewName("memSet");
+		mv.setViewName("admin_users");
 		return mv;
 	}
+	
+	
+	
 	
 	
 	@RequestMapping(value = "/memLock.inc", method = RequestMethod.POST)
@@ -104,4 +109,16 @@ public class MemSetAction {
 		
 		return map;
 	}
+	
+	
+	@RequestMapping("/admin_usersComm.inc")
+	public ModelAndView commSet() {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("admin_usersComm");
+		return mv;
+	}
+	
+	
+	
 }
