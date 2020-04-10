@@ -20,7 +20,6 @@
 	margin-top: 50px;
     font-size: 16px;
     font-family: serif !important;
-    position: absolute;
 	width: 100%;
 	color: white;
 	background-color: #333333;
