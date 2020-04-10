@@ -73,7 +73,7 @@ input[type=text] {
 				</div>
 			</div>
 		</section>
-	</div>
+	
 
 	<c:choose>
 		<c:when test="${userInfo.u_idx ne null }">
@@ -156,7 +156,7 @@ input[type=text] {
 	</c:choose>
 
 	<jsp:include page="footer.jsp"/>
-
+</div>
 	<!-- loader -->
 	<div id="loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">
