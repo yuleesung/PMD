@@ -19,7 +19,7 @@ import mybatis.dao.BulletinDAO;
 public class MemSetAction {
 	
 	// 페이징 기법을 위한 상수들
-	public final int BLOCK_LIST = 5;	// 페이지당 보여질 회원 수
+	public final int BLOCK_LIST = 10;	// 페이지당 보여질 회원 수
 	public final int BLOCK_PAGE = 5; 	// 한 블록당 보여질 페이지 수
 	
 	int nowPage; 	// 현재 페이지 값
