@@ -3,6 +3,7 @@ package com.pmd.drm;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,8 @@ public class AdminAdvAction {
 
 	@Autowired
 	private BulletinDAO b_dao;
+
+	
 
 	
 	// 광고목록 첫 이동
@@ -162,6 +165,8 @@ public class AdminAdvAction {
 		else if(adv_group.equals("4"))
 			board_name = "4번 광고";
 		
+		AdvVO avo = b_dao.viewAdv(a_idx);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("ar", ar); // 검색 결과값
@@ -170,6 +175,8 @@ public class AdminAdvAction {
 		map.put("rowTotal", rowTotal); // 검색결과 총 갯수
 		map.put("blockList", BLOCK_LIST); // 한 페이지에 보여질 리스트 갯수
 		map.put("board_name", board_name);
+		map.put("img", avo.getFile_name());
+		map.put("adv_group", avo.getAdv_group());
 		
 		return map;
 	}

@@ -18,11 +18,12 @@
 }
 
 .full_box {
-	background: #dedcee;
+	background: #FFFCEC;
 	height: 200px;
 }
+
 .heading {
-	border-bottom: 2px solid yellow;
+	border-bottom: 2px solid #EB593C;
 	padding-bottom: 10px;
 	position: relative;
 	margin-top: 20px;
@@ -30,7 +31,7 @@
 }
 
 .heading span {
-	background: #00b992 none repeat scroll 0 0;
+	background: #333333 none repeat scroll 0 0;
 	bottom: -2px;
 	height: 3px;
 	left: 0;
@@ -39,7 +40,7 @@
 }
 
 .ending {
-	border-bottom: 2px solid #00b992;
+	border-bottom: 2px solid #333333;
 	padding-bottom: 10px;
 	position: relative;
 	top: -10px;
@@ -48,7 +49,7 @@
 }
 
 .ending span {
-	background: yellow none repeat scroll 0 0;
+	background: #EB593C none repeat scroll 0 0;
 	bottom: -2px;
 	height: 2px;
 	left: 0;
@@ -115,7 +116,7 @@
 		<h2 class="heading" style="font-family: fantasy;">
 			<strong>지역별 </strong> 교육현황 <span></span>
 		</h2>
-		<div style="background-color: #dedcee; height: 550px; padding-top: 20px;">
+		<div style="background-color: #FFFCEC; height: 550px; padding-top: 20px;">
 			<div id="mapchart"></div>
 		</div>
 		<h2 class="ending">
@@ -130,7 +131,7 @@
 			<div class="full_box">
 				<div class="form_controls">
 					<div class="row" style="width: 100%; margin: 0;">
-						<div class="form-group col-md-3" style="margin-top: 20px; padding: 0;">
+						<div class="form-group col-md-3" style="margin-top: 20px;">
 							<select class="form-control" id="srchKeco1">
 								<option value="none">:: 분야 선택 ::</option>
 								<option value="01">사업관리(01)</option>
@@ -161,11 +162,11 @@
 						</div>				
 					</div>				
 				</div>	
-				<span style="margin-left: 60px; font-size:16px; font-weight:bold; font-family: inherit;">분야별 교육현황을 지역별로 확인해보세요!</span>	
+				<span style="margin-left: 5%; font-size:16px; font-weight:bold; font-family: inherit;">분야별 교육현황을 지역별로 확인해보세요!</span>	
 			</div>
 		</div>
 		<!-- 스택형차트 영역 -->
-		<div class="container" style="display: none; background-color: #dedcee; 
+		<div class="container" style="display: none; background-color: #FFFCEC; 
 			position: relative;" id="viewStack">			
 			<div id="stackchart"></div>			
 		</div>

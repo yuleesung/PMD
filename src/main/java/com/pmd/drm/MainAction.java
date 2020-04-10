@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.jdom2.Document;
@@ -25,9 +26,12 @@ public class MainAction {
 
 	@Autowired
 	private HttpSession session;
+	@Autowired
+	private ServletContext application;
+	
 	
 	@RequestMapping("/main.inc")
-	public ModelAndView main() throws Exception{
+	public ModelAndView main(String adv_group, String img) throws Exception{
 		
 	
 		// 카테고리별 목록 10개씩 받아 옴
@@ -171,6 +175,11 @@ public class MainAction {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("ar", ar);
+		
+		if(adv_group != null && img != null) {
+			mv.addObject("adv_group", adv_group);
+			mv.addObject("img", application.getContextPath()+"/resources/upload/"+img);
+		}
 		mv.setViewName("main");
 
 		return mv;

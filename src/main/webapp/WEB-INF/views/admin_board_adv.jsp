@@ -104,9 +104,9 @@
 
 			var str = "";
 			if (status == 0)
-				str = "업로드하시겠습니까?";
+				str = "광고를 내리시겠습니까?";
 			else
-				str = "광고 내리는 걸 고급적으로 표현하지 못 함 TT";
+				str = "광고를 올리시겠습니까?";
 
 			var con = confirm(str);
 
@@ -150,7 +150,14 @@
 					$(".recruit thead tr").html(str_h);
 					$(".recruit tbody").html(str);
 					$(".pagination-wrap").html(data.pageCode);	
-
+					
+					if(data.adv_group != null && data.img != null){
+						var con = confirm("메인에서 확인하시겠습니까?");
+						
+						if(con){
+							location.href = "main.inc?adv_group="+data.adv_group+"&img="+data.img;
+						}
+					}
 				} else{				
 					var str = "";
 
