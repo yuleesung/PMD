@@ -471,4 +471,9 @@ public class BulletinDAO {
 		return ss.selectOne("bulletin.getCountAdv", adv_group);
 	}
 	
+	// 광고 하나 넣기
+	public AdvVO viewAdv(String a_idx) {
+		return ss.selectOne("bulletin.viewAdv", a_idx);
+	}
+	
 }

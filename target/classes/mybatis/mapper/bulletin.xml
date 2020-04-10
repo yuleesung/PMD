@@ -344,4 +344,9 @@
 		select count(*) from adv_t where adv_group = #{adv_group}
 	</select>
 	
+	<!-- 광고 하나 넣기 -->
+	<select id="viewAdv" parameterType="String" resultType="com.pmd.vo.AdvVO">
+		select * from adv_t where a_idx = #{a_idx}
+	</select>
+	
 </mapper>
