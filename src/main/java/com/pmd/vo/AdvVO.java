@@ -1,9 +1,13 @@
 package com.pmd.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class AdvVO { 
 
-	private String a_idx, co_name, co_phone, co_email, adv_group, adv_link, file_name, etc, start_date, end_date, reg_date, status;
+	private String a_idx, co_name, co_phone, co_email, adv_group, adv_link, file_name, etc, start_date, end_date, reg_date, status, nowPage;
 
+	private MultipartFile upload;
+	
 	public String getA_idx() {
 		return a_idx;
 	}
@@ -98,6 +102,22 @@ public class AdvVO {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getNowPage() {
+		return nowPage;
+	}
+
+	public void setNowPage(String nowPage) {
+		this.nowPage = nowPage;
+	}
+
+	public MultipartFile getUpload() {
+		return upload;
+	}
+
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
 	}
 	
 }
