@@ -438,4 +438,27 @@ public class BulletinDAO {
 		return ar;
 	}
 	
+	// 관리자용 게시물 전체보기
+	public BulletinVO[] getListForAdmin(String begin, String end, String b_category) {
+		BulletinVO[] ar = null;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("begin", begin);
+		map.put("end", end);
+		map.put("b_category", b_category);
+		
+		List<BulletinVO> list = ss.selectList("bulletin.getListForAdmin", map);
+		if(list != null && !list.isEmpty()) {
+			ar = new BulletinVO[list.size()];
+			list.toArray(ar);
+		}
+		
+		return ar;
+	}
+	
+	// 관리자용 게시물 수
+	public int getCountForAdmin(String b_category) {
+		return ss.selectOne("bulletin.getCountForAdmin", b_category);
+	}
+	
 }
