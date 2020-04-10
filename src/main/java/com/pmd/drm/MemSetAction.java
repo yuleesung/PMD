@@ -19,7 +19,7 @@ import mybatis.dao.BulletinDAO;
 public class MemSetAction {
 	
 	// 페이징 기법을 위한 상수들
-	public final int BLOCK_LIST = 10;	// 페이지당 보여질 회원 수
+	public final int BLOCK_LIST = 5;	// 페이지당 보여질 회원 수
 	public final int BLOCK_PAGE = 5; 	// 한 블록당 보여질 페이지 수
 	
 	int nowPage; 	// 현재 페이지 값
@@ -39,6 +39,8 @@ public class MemSetAction {
 		else
 			this.nowPage = Integer.parseInt(nowPage);
 		
+		rowTotal = b_dao.getCountUser();
+		
 		/**** 페이징 ****/
 		// 메서드 호출
 		Paging_UsersList page = new Paging_UsersList(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE);
@@ -49,11 +51,7 @@ public class MemSetAction {
 		// JSP에서 표현할 회원들 목록
 		int begin = page.getBegin(); 
 		int end = page.getEnd();
-//		int begin = 1;
-//		int end = 3;
-		
-		System.out.println("begin:"+begin);
-		System.out.println("end"+end);
+
 		UserVO[] ar = b_dao.listUser(String.valueOf(begin), String.valueOf(end));
 		
 		ModelAndView mv = new ModelAndView();
@@ -70,12 +68,40 @@ public class MemSetAction {
 	
 	@RequestMapping(value = "/memLock.inc", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Boolean> userStatus(String u_idx, String status){
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
+	public Map<String, Object> userStatus(String u_idx, String status, String nowPage){
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		Boolean chk = b_dao.blockOrRelUser(u_idx, status);
+		if(u_idx != null && status != null) {
+			Boolean chk = b_dao.blockOrRelUser(u_idx, status);
+		}
 		
-		map.put("res", chk);
+		// 현재페이지 값 받기
+		if(nowPage == null)
+			this.nowPage = 1;
+		else
+			this.nowPage = Integer.parseInt(nowPage);
+		
+		rowTotal = b_dao.getCountUser();
+		
+		/**** 페이징 ****/
+		// 메서드 호출
+		Paging_UsersList page = new Paging_UsersList(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE);
+		
+		// 페이지 버튼 코드
+		pageCode = page.getSb().toString();
+		
+		// JSP에서 표현할 회원들 목록
+		int begin = page.getBegin(); 
+		int end = page.getEnd();
+		
+		UserVO[] ar = b_dao.listUser(String.valueOf(begin), String.valueOf(end));
+		
+		map.put("ar", ar);
+		map.put("pageCode", pageCode);
+		map.put("nowPage", page.getNowPage());	// 현재 페이지
+		map.put("rowTotal", rowTotal);	// 총 회원 수
+		map.put("blockList", BLOCK_LIST);	// 한 페이지당 보여질  회원들 수
+		
 		return map;
 	}
 }

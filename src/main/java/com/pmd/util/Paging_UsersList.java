@@ -24,6 +24,7 @@ public class Paging_UsersList {
 		this.rowTotal = rowTotal;
 		this.blockList = blockList;
 		this.blockPage = blockPage;
+
 		
 		// 이전으로 기능과 다음으로 기능을 초기화
 		isPrePage = false;
@@ -31,6 +32,7 @@ public class Paging_UsersList {
 		
 		// 입력된 전체 회원의 수를 통해 전체 페이지 수 구하기
 		totalPage = (int) Math.ceil((double)rowTotal/blockList);
+		
 		
 		// 현재페이지 값이 전체페이지 값보다 크면, 현재페이지 값을 전체페이지 값으로 지정
 		if(nowPage > totalPage)
@@ -96,6 +98,7 @@ public class Paging_UsersList {
 			}
 		
 		sb.append("</ul>");
+		
 	}
 
 

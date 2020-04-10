@@ -341,7 +341,7 @@
 	
 	<!-- 광고 게시물 수 -->
 	<select id="getCountAdv" resultType="int">
-		select count(*) from adv_t
+		select count(*) from adv_t where status in(0, 1, 2)
 	</select>
 	
 </mapper>
