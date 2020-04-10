@@ -461,4 +461,9 @@ public class BulletinDAO {
 		return ss.selectOne("bulletin.getCountForAdmin", b_category);
 	}
 	
+	// 유저 수
+	public int getCountUser() {
+		return ss.selectOne("bulletin.getCountUser");
+	}
+	
 }
