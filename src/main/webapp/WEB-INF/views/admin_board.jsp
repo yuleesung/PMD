@@ -146,9 +146,9 @@
 			}).done(function(data){
 				var str_h = "<th colspan='3'><h3>"+data.board_name+" 게시판(총 "+data.rowTotal+"개)</h3></th>";
 				
-				if(data.ar.length > 0){
+				if(data.ar != null){
 					var str = "";
-					${rowTotal - ((nowPage-1)*blockList+st.index) }
+					
 					for(var i=0; i<data.ar.length; i++){
 						str += "<tr class='title'>";
 						str += "<td>"+(data.rowTotal-((data.nowPage-1)*data.blockList+i))+"</td>";
@@ -178,6 +178,19 @@
 					$(".recruit thead tr").html(str_h);
 					$(".recruit tbody").html(str);
 					$(".pagination-wrap").html(data.pageCode);
+				} else{
+					console.log("no!");
+					
+					var str = "";
+
+					str += "<tr>";
+					str += "<td colspan='3'>";
+					str += "<h3 style='color: red;'>등록 된 게시물이 없습니다<h3>";
+					str += "</td>";
+					str += "</tr>";
+					
+					$(".recruit thead tr").html(str_h);
+					$(".recruit tbody").html(str);
 				}
 			}).fail(function(err){
 				console.log(err);
