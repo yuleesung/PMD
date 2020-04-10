@@ -119,5 +119,6 @@ public class AdvVO {
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
 	}
+
 	
 }
