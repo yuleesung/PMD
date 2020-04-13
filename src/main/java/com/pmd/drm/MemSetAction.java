@@ -1,6 +1,7 @@
 package com.pmd.drm;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pmd.util.Paging_UsersList;
+import com.pmd.vo.Bulletin_C_VO;
 import com.pmd.vo.UserVO;
 
 import mybatis.dao.BulletinDAO;
@@ -56,8 +58,15 @@ public class MemSetAction {
 
 		UserVO[] ar = b_dao.listUser(String.valueOf(begin), String.valueOf(end));
 		
+		List<Bulletin_C_VO> c_list = null;
+		for(int i=0; i<ar.length; i++) {
+			c_list =  ar[i].getC_list();
+			
+		}
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("ar", ar);
+		mv.addObject("c_list", "c_list");
 		mv.addObject("pageCode", pageCode); // 페이지 버튼
 		mv.addObject("nowPage", page.getNowPage());	// 현재 페이지
 		mv.addObject("rowTotal", rowTotal);	// 총 회원 수
@@ -111,11 +120,14 @@ public class MemSetAction {
 	}
 	
 	
-	@RequestMapping("/admin_usersComm.inc")
-	public ModelAndView commSet() {
+	@RequestMapping("/admin_userComm.inc")
+	public ModelAndView userComm(UserVO vo , String nowPage) {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("admin_usersComm");
+		System.out.println(vo.getU_id());
+		mv.addObject("vo", vo);
+		
+		mv.setViewName("admin_userComm");
 		return mv;
 	}
 	

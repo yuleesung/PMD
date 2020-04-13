@@ -4,6 +4,11 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
+<style>
+	tbody tr:hover{
+		background-color: rgba(106,153,203, 0.2);
+	}
+</style>
 <head>
 <meta charset="UTF-8">
 </head>
@@ -11,7 +16,31 @@
 
 	<div id="memberSetting" style="width: 898px; margin: 0;">
 		<h2> 관리자 - 회원관리</h2>
+		<form action="">
+		<div>
+			<select>
+				<option selected="selected">::전체::</option>
+				<option>아이디</option>
+				<option>닉네임</option>
+				<option>이름</option>
+				<option>이메일</option>
+				<option>소셜아이디</option>
+			</select>
+			<input type="text">
+			
+			<label>가입일:<input type="date" title="가입일"></label>
+			
+			<label>상태:
+				<input type="checkbox" value="전체" checked="checked">전체
+				<input type="checkbox" value="활동중">활동중
+				<input type="checkbox" value="활동정지">활동정지
+				<input type="checkbox" value="탈퇴">탈퇴
+			</label>
+			
+			<input type="button" value="회원검색">
+		</div>
 		
+		</form>
 		<pre> 총 ${rowTotal } 명</pre>
 		<hr/>
 		<table id="users_t">
@@ -46,9 +75,9 @@
 			</thead>
 			<tbody>
 				<c:forEach var="vo" items="${ar }" varStatus="st" >
-					<tr>
+					<tr onclick="userComm('${vo}', '${nowPage }')">
 						<td>${rowTotal - ((nowPage-1)*blockList+st.index) }</td>
-						<td>${vo.u_id }</td>
+						<td>${vo.u_id}</td>
 						<td>${vo.nickname }</td>
 						<td>${vo.u_name }</td>
 						<td>${vo.u_phone }</td>
@@ -66,6 +95,7 @@
 						<td>
 							<button type="button" onclick="lock('${vo.u_idx}', '${vo.status }', '${nowPage }')">정지</button>
 							<button type="button" onclick="unlock('${vo.u_idx}', '${vo.status }', '${nowPage }')">해제</button>
+							<input type="hidden" value="${vo.c_list }" name="c_list" id="c_list" />
 						</td>
 					</tr>
 				</c:forEach>	
@@ -79,6 +109,13 @@
 		    </tfoot>
 		</table>
 	</div>
+	
+	<form action="">
+		<c:forEach var="c_list" items="${ar[6].c_list }" varStatus="st">
+			<p>${st.index } <c:out value="${c_list.c_content }"/></p>
+		</c:forEach>
+	</form>
+	
 	
 	
 	
@@ -179,9 +216,16 @@
 		});
 	}
 	
+	function userComm(uvo, nowPage){
+		
+		console.log(uvo);
+			
+		//location.href="admin_userComm.inc?vo&nowPage=nowPage";
+	}
+	
 	$(function(){
 		
-		$("#users_t tbody tr").click(function(nowPage){
+		/* $("#users_t tbody tr").click(function(nowPage){
 			var str = "";
 			var tdArr = new Array();	//배열 선언
 			
@@ -189,9 +233,12 @@
 			var tr = $(this);
 			var td = tr.children(); 
 			
-			location.href ="admin_usersComm.inc";
+			var c_list = $("#c_list");
 			
-		});
+			location.href ="admin_userComm.inc?nowPage=nowPage&c_list=c_list";
+			
+			
+		}); */
 		
 	});
 	
