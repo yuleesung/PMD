@@ -201,6 +201,7 @@
 						str += "</td>";
 						str += "</tr>";
 					}
+					
 					$(".recruit thead tr").html(str_h);
 					$(".recruit tbody").html(str);
 					$(".pagination-wrap").html(data.pageCode);	
@@ -209,7 +210,7 @@
 						var con = confirm("메인에서 확인하시겠습니까?");
 						
 						if(con){
-							location.href = "main.inc?adv_group="+data.adv_group+"&img="+data.img;
+							location.href = "main.inc";
 						}
 					}
 				} else{				
