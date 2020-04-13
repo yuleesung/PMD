@@ -335,11 +335,26 @@
 	
 	<!-- 전체 게시판 검색한 후 총 게시물 수 -->
 	<select id="getSearchAllCount" resultType="int" parameterType="java.util.Map">
-		select count(*) from bulletin 
-		where ((lower(subject) like lower('%'||#{keyword}||'%') and status = 0)
-		or (lower(b_content) like lower('%'||#{keyword}||'%') and status = 0)
-		or (u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{keyword}||'%')) and status = 0))
-		and b_category = #{b_category}
+		select count(*) from bulletin
+		<if test="searchType != null and searchValue != null">
+			<choose>
+				<when test="searchType == 0">
+					where ((lower(subject) like lower('%'||#{searchValue}||'%') and status = 0)
+					or (lower(b_content) like lower('%'||#{searchValue}||'%') and status = 0)
+					or (u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{searchValue}||'%')) and status = 0))
+					and b_category = #{b_category}
+				</when>
+				<when test="searchType == 1">
+					where lower(subject) like lower('%'||#{searchValue}||'%') and status = 0 and b_category = #{b_category}
+				</when>
+				<when test="searchType == 2">
+					where u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{searchValue}||'%')) and status = 0 and b_category = #{b_category}
+				</when>
+				<when test="searchType == 3">
+					where lower(b_content) like lower('%'||#{searchValue}||'%') and status = 0 and b_category = #{b_category}
+				</when>
+			</choose>
+		</if>
 	</select>
 	
 	<!-- 전체 게시판 검색기능 -->
@@ -347,36 +362,26 @@
 		select * from(
 			select rownum r_num, a.* from
 				(select * from bulletin 
-					where ((lower(subject) like lower('%'||#{keyword}||'%') and status = 0)
-					or (lower(b_content) like lower('%'||#{keyword}||'%') and status = 0)
-					or (u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{keyword}||'%')) and status = 0))
-					and b_category = #{b_category}
-					order by b_idx desc) a
-		)where r_num between #{begin} and #{end}
-	</select>
-	
-	<!-- 게시판 검색기능(제목, 글쓴이, 내용) -->
-	<select id="searchBulletin" parameterType="java.util.Map" resultMap="map1">
-		select * from(
-			select rownum r_num, a.* from
-				(select * from bulletin
-				<if test="searchType != null and searchValue != null">
-					<where>
+					<if test="searchType != null and searchValue != null">
 						<choose>
 							<when test="searchType == 0">
-								lower(subject) like lower('%'||#{searchValue}||'%')
+								where ((lower(subject) like lower('%'||#{keyword}||'%') and status = 0)
+								or (lower(b_content) like lower('%'||#{keyword}||'%') and status = 0)
+								or (u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{keyword}||'%')) and status = 0))
+								and b_category = #{b_category}
 							</when>
 							<when test="searchType == 1">
-								u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{searchValue}||'%'))
+								where lower(subject) like lower('%'||#{searchValue}||'%') and status = 0 and b_category = #{b_category}
 							</when>
 							<when test="searchType == 2">
-								lower(b_content) like lower('%'||#{searchValue}||'%')
+								where u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{searchValue}||'%')) and status = 0 and b_category = #{b_category}
+							</when>
+							<when test="searchType == 3">
+								where lower(b_content) like lower('%'||#{searchValue}||'%') and status = 0 and b_category = #{b_category}
 							</when>
 						</choose>
-					</where>
-					and b_category = #{b_category}
-				</if>
-				order by b_idx desc) a
+					</if>
+					order by b_idx desc) a
 		)where r_num between #{begin} and #{end}
 	</select>
 	

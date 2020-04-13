@@ -445,10 +445,11 @@ public class BulletinDAO {
 	}
 	
 	// 전체 게시판 검색한 후 총 게시물 수
-	public int getSearchAllCount(String keyword, String b_category) {
+	public int getSearchAllCount(String searchType, String searchValue, String b_category) {
 		
 		Map<String, String > map = new HashMap<String, String>();
-		map.put("keyword", keyword);
+		map.put("searchType", searchType);
+		map.put("searchValue", searchValue);
 		map.put("b_category", b_category);
 
 		int total = ss.selectOne("bulletin.getSearchAllCount", map);
@@ -457,13 +458,14 @@ public class BulletinDAO {
 	}
 
 	// 전체 게시판 검색기능
-	public BulletinVO[] searchAll(String begin, String end, String keyword, String b_category) {
+	public BulletinVO[] searchAll(String begin, String end, String searchType, String searchValue, String b_category) {
 		BulletinVO[] ar = null;
 
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("begin", begin);
 		map.put("end", end);
-		map.put("keyword", keyword);
+		map.put("searchType", searchType);
+		map.put("searchValue", searchValue);
 		map.put("b_category", b_category);
 
 		List<BulletinVO> list = ss.selectList("bulletin.searchAll", map);
@@ -472,26 +474,6 @@ public class BulletinDAO {
 			list.toArray(ar);
 		}
 
-		return ar;
-	}
-	
-	// 게시판 검색기능(제목, 글쓴이, 내용)
-	public BulletinVO[] searchBulletin(String begin, String end, String searchType, String searchValue, String b_category) {
-		BulletinVO[] ar = null;
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("begin", begin);
-		map.put("end", end);
-		map.put("searchType", searchType);
-		map.put("searchValue", searchValue);
-		map.put("b_category", b_category);
-		
-		List<BulletinVO> list = ss.selectList("bulletin.searchBulletin", map);
-		if(list != null && !list.isEmpty()) {
-			ar = new BulletinVO[list.size()];
-			list.toArray(ar);
-		}
-		
 		return ar;
 	}
 	
