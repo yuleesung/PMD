@@ -37,7 +37,7 @@ function carouselInit( height, t ){
 	carouselCount = $carouselLi.length; // 캐러셀 사진 갯수
 	carouselCount2 = $carouselLi2.length;
 	carouselCount3 = $carouselLi3.length;
-	carouselCount4 = $carouselLi3.length;
+	carouselCount4 = $carouselLi4.length;
 	
 	currentIndex = 0; // 현재 보여지는 슬라이드 인덱스 값
 	currentIndex2 = 0;
