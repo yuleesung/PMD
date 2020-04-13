@@ -571,4 +571,46 @@ public class BulletinDAO {
 		
 		return ar;
 	}
+	
+	// 게시물 하나당 전체 댓글 수
+	public int commCount(String b_idx) {
+		return ss.selectOne("bulletin.commCount", b_idx);
+	}
+	
+	// ajax용 게시물 댓글 모음
+	public Bulletin_C_VO[] commListForAjax(String b_idx, String begin, String end) {
+		Bulletin_C_VO[] ar = null;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("b_idx", b_idx);
+		map.put("begin", begin);
+		map.put("end", end);
+		
+		List<Bulletin_C_VO> list = ss.selectList("bulletin.commListForAjax", map);
+		if(list != null && !list.isEmpty()) {
+			ar = new Bulletin_C_VO[list.size()];
+			list.toArray(ar);
+		}
+		
+		return ar;
+	}
+	
+	// ajax용 유저의 댓글 모음
+	public Bulletin_C_VO[] u_commListForAjax(String b_idx, String begin, String end) {
+		Bulletin_C_VO[] ar = null;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("b_idx", b_idx);
+		map.put("begin", begin);
+		map.put("end", end);
+		
+		List<Bulletin_C_VO> list = ss.selectList("bulletin.u_commListForAjax", map);
+		if(list != null && !list.isEmpty()) {
+			ar = new Bulletin_C_VO[list.size()];
+			list.toArray(ar);
+		}
+		
+		return ar;
+	}
+	
 }
