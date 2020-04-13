@@ -333,8 +333,8 @@
 		select * from adv_t where status = 1
 	</select>
 	
-	<!-- 전체 게시판 검색한 후 총 게시물 수 -->
-	<select id="getSearchAllCount" resultType="int" parameterType="java.util.Map">
+	<!-- 전체, 제목, 이름, 내용 검색한 후 총 게시물 수 -->
+	<select id="searchBulletinCount" resultType="int" parameterType="java.util.Map">
 		select count(*) from bulletin
 		<if test="searchType != null and searchValue != null">
 			<choose>
@@ -357,17 +357,17 @@
 		</if>
 	</select>
 	
-	<!-- 전체 게시판 검색기능 -->
-	<select id="searchAll" resultMap="map1" parameterType="java.util.Map">
+	<!-- 전체, 제목, 이름, 내용 게시판 검색기능 -->
+	<select id="searchBulletin" resultMap="map1" parameterType="java.util.Map">
 		select * from(
 			select rownum r_num, a.* from
 				(select * from bulletin 
 					<if test="searchType != null and searchValue != null">
 						<choose>
 							<when test="searchType == 0">
-								where ((lower(subject) like lower('%'||#{keyword}||'%') and status = 0)
-								or (lower(b_content) like lower('%'||#{keyword}||'%') and status = 0)
-								or (u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{keyword}||'%')) and status = 0))
+								where ((lower(subject) like lower('%'||#{searchValue}||'%') and status = 0)
+								or (lower(b_content) like lower('%'||#{searchValue}||'%') and status = 0)
+								or (u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{searchValue}||'%')) and status = 0))
 								and b_category = #{b_category}
 							</when>
 							<when test="searchType == 1">
