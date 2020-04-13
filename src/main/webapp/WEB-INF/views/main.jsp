@@ -85,6 +85,9 @@ html, body {
 option {
 	color: black;
 }
+.carousel_section{
+	width: 270px;
+}
 </style>
 </head>
 <body>
