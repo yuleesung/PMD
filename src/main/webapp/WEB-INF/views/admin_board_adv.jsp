@@ -21,6 +21,16 @@
 		class="radio" value="3" name="adv_group"><span class="sandwich">3번 광고</span>&nbsp;&nbsp;&nbsp;
 	<input type="radio"
 		class="radio" value="4" name="adv_group"><span class="sandwich">4번 광고</span>&nbsp;&nbsp;&nbsp;
+	
+	<div style="display: inline-flex; float: right; margin-right: 10%;">
+		<select id="search_sel" name="search_sel" style="height: 25px;">
+			<option value="all">전체</option>
+			<option value="co_name">회사명</option>
+			<option value="co_email">이메일</option>
+		</select>
+		<input type="text" id="search_txt" name="search_txt"/>
+		<input type="button" value="검색" id="search_btn"/>
+	</div>
 	<hr/>
 
 	<table class="recruit" id="adv_bbs">
@@ -40,6 +50,7 @@
 				<c:set var="reg" value="${vo.reg_date }"/>
 				<c:set var="start" value="${vo.start_date }"/>
 				<c:set var="end" value="${vo.end_date }"/>
+				
 					<tr class="adv_title">
 						<td>
 							${rowTotal - ((nowPage-1)*blockList+st.index) }
@@ -49,10 +60,12 @@
 							<b>등록기간: </b>${fn:substring(start,0,10) } ~ ${fn:substring(end,0,10) }<b> || </b>${vo.etc }
 						</td>
 						<td style="text-align: right;">
-							<c:if test="${vo.status eq 0 }">								
+							<c:if test="${vo.status eq 0 }">
+								<input type="button" value="수정" onclick="advEdit('${vo.a_idx}', '${vo.status }', '${vo.adv_group }', '${nowPage }')"/>						
 								<input type="button" value="올리기" onclick="advStatus('${vo.a_idx}', '1', '${vo.adv_group }', '${nowPage }')" />&nbsp;
 							</c:if> <c:if test="${vo.status eq 1 }">
-								<span style="color: red;">!업로드 중!</span>		
+								<span style="color: red;">!업로드 중!</span>
+								<input type="button" value="수정" onclick="advEdit('${vo.a_idx}', '${vo.status }', '${vo.adv_group }', '${nowPage }')"/>	
 								<input type="button" value="내리기" onclick="advStatus('${vo.a_idx}', '0', '${vo.adv_group }', '${nowPage }')" />&nbsp;
 							</c:if>
 						</td>
@@ -80,28 +93,50 @@
 	<script src="resources/js/jquery-ui.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			var val = ""; // Group 값
+			
 			$('input[name="adv_group"]').change(function(){
-				var val = $('input[name="adv_group"]:checked').val();
-				//console.log(val);
+				// 라디오버튼 선택하면 진입
+				val = $('input[name="adv_group"]:checked').val();
+
 				admin_groupList(val);
 			});
+			
+			$("#search_btn").click(function(){
+				var group_val = "1"; // 그룹 초기값
+				
+				if(val != "")
+					group_val = val;
+				
+				var sel = $("#search_sel").val(); // 셀렉트
+				var txt = $("#search_txt").val(); // 텍스트
+		
+				if(sel == "all")
+					admin_groupList(group_val);
+				else if(sel == "co_name")
+					console.log(sel, txt);
+				else if(sel == "co_email")
+					console.log(sel, txt);
+			});
 		});
-	
+		
 		
 		function admin_groupList(group){
+			// 해당 그룹의 목록을 뿌려줌
 			var param = "adv_group="+group;			
 			ajax_a("admin_groupList.inc", param);
 		}
 		
 	
 		function page(nowPage, group){
+			// 페이징
 			var param = "nowPage="+encodeURIComponent(nowPage)+"&adv_group="+encodeURIComponent(group);
 			ajax_a("admin_groupList.inc", param);	
 		}
 		
 		
 		function advStatus(a_idx, status, adv_group, nowPage) {
-
+			// 업로드 버튼
 			var str = "";
 			if (status == 0)
 				str = "광고를 내리시겠습니까?";
@@ -116,6 +151,16 @@
 			}
 		}
 		
+		
+		function advEdit(a_idx, status, adv_group, nowPage){
+			// 수정 버튼
+			console.log("a_idx => "+a_idx);
+			console.log("status => "+status);
+			console.log("adv_group => "+adv_group);
+			console.log("nowPage => "+nowPage);
+		}
+		
+		
 		function ajax_a(url, param){
 			$.ajax({
 				url: url,
@@ -129,19 +174,28 @@
 					var str = "";
 
 					for(var i=0; i<data.ar.length; i++){
+						var etc = "";
+						
+						if(data.ar[i].etc == null) // Memo의 내용이 없으면 공백을 표현
+							etc = "";
+						else
+							etc = data.ar[i].etc;
+						
 						str += "<tr class='adv_title'>";
 						str += "<td>";
 						str += (data.rowTotal-((data.nowPage-1)*data.blockList+i));
 						str += "</td>";
 						str += "<td>";
 						str += "<b>"+data.ar[i].co_name+"</b>님 정보<b> || </b>"+data.ar[i].co_phone+"<b> || </b>"+data.ar[i].co_email+"<br/>";
-						str += "<b>등록기간: </b>"+data.ar[i].start_date.substring(0,10)+" ~ "+data.ar[i].end_date.substring(0,10)+"<b> || </b>"+data.ar[i].etc;
+						str += "<b>등록기간: </b>"+data.ar[i].start_date.substring(0,10)+" ~ "+data.ar[i].end_date.substring(0,10)+"<b> || </b>"+etc;
 						str += "</td>";
 						str += "<td style='text-align: right;'>";
-						if(data.ar[i].status == 0){						
+						if(data.ar[i].status == 0){							
+							str += "<input type='button' value='수정' onclick='advEdit(\""+data.ar[i].a_idx+"\", \""+data.ar[i].status+"\", \""+data.ar[i].adv_group+"\", \""+data.nowPage+"\")'/>&nbsp;";
 							str += "<input type='button' value='올리기' onclick='advStatus(\""+data.ar[i].a_idx+"\", \"1\", \""+data.ar[i].adv_group+"\", \""+data.nowPage+"\")'/>&nbsp;";
 						} else if(data.ar[i].status == 1){
 							str += "<span style='color: red;'>!업로드 중!&nbsp;<span>";
+							str += "<input type='button' value='수정' onclick='advEdit(\""+data.ar[i].a_idx+"\", \""+data.ar[i].status+"\",  \""+data.ar[i].adv_group+"\", \""+data.nowPage+"\")'/>&nbsp;";
 							str += "<input type='button' value='내리기' onclick='advStatus(\""+data.ar[i].a_idx+"\", \"0\", \""+data.ar[i].adv_group+"\", \""+data.nowPage+"\")'/>&nbsp;";
 						}
 						str += "</td>";

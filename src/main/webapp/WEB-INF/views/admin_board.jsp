@@ -26,6 +26,16 @@
 		class="radio" value="qa" name="category"><span class="sandwich">QnA</span>&nbsp;&nbsp;&nbsp;
 	<input type="radio" id="ad_adv"
 		class="radio" value="adv" name="category"><span class="sandwich">광고문의</span>&nbsp;&nbsp;&nbsp;
+	<div style="display: inline-flex; float: right; margin-right: 10%;">
+		<select id="search_sel" name="search_sel" style="height: 25px; ">
+			<option value="all">전체</option>
+			<option value="subject">제목</option>
+			<option value="nickname">이름</option>
+			<option value="content">내용</option>
+		</select>
+		<input type="text" id="search_txt" name="search_txt"/>
+		<input type="button" value="검색" id="search_btn"/>
+	</div>
 	<hr/>
 
 	<table class="recruit" id="adv_bbs">
@@ -91,10 +101,10 @@
 		$(function() {
 		
 			var article = (".recruit .show");
-		
+			var val = "";
 			
 			$('input[name="category"]').change(function(){
-				var val = $('input[name="category"]:checked').val();
+				val = $('input[name="category"]:checked').val();
 				admin_board(val);
 			});
 			
@@ -107,6 +117,22 @@
 						$(myArticle).addClass('hide').removeClass('show');
 					}
 			 });
+			 
+			 
+			 $("#search_btn").click(function(){
+					var group_val = "free"; // 그룹 초기값
+					
+					if(val != "")
+						group_val = val;
+					
+					var sel = $("#search_sel").val(); // 셀렉트
+					var txt = $("#search_txt").val(); // 텍스트
+			
+					if(sel == "all") // 전체
+						admin_board(group_val);
+					else
+						console.log(group_val+",,"+sel+",,"+txt);
+				});
 		});
 		
 		
@@ -127,11 +153,13 @@
 		}
 		
 		function admin_board(category){
+			// 그룹 별 리스트
 			var param = "b_category="+encodeURIComponent(category);
 			ajax_a("admin_board.inc", param);
 		}
 		
 		function page(nowPage, category){
+			// 페이징
 			var param = "nowPage="+encodeURIComponent(nowPage)+"&b_category="+encodeURIComponent(category);
 			ajax_a("admin_board.inc", param);	
 		}
@@ -179,7 +207,6 @@
 					$(".recruit tbody").html(str);
 					$(".pagination-wrap").html(data.pageCode);
 				} else{
-					console.log("no!");
 					
 					var str = "";
 
