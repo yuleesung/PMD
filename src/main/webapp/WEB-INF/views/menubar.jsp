@@ -25,6 +25,17 @@
 #buttonMenu ul li a{
 	color: white;
 }
+
+#menu li a:hover{
+	font-size: 16px;
+	font-weight: bold;
+	color: black;	
+}
+#sign a:hover{
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none; 
+}
 /* @media (min-width: 767px) {
   #menu {
     position: relative;
