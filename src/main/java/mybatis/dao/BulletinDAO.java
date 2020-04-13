@@ -445,7 +445,7 @@ public class BulletinDAO {
 	}
 	
 	// 전체, 제목, 이름, 내용 검색한 후 총 게시물 수
-	public int getSearchAllCount(String searchType, String searchValue, String b_category) {
+	public int searchBulletinCount(String searchType, String searchValue, String b_category) {
 		
 		Map<String, String > map = new HashMap<String, String>();
 		map.put("searchType", searchType);
@@ -458,7 +458,7 @@ public class BulletinDAO {
 	}
 
 	// 전체, 제목, 이름, 내용 게시판 검색기능
-	public BulletinVO[] searchAll(String begin, String end, String searchType, String searchValue, String b_category) {
+	public BulletinVO[] searchBulletin(String begin, String end, String searchType, String searchValue, String b_category) {
 		BulletinVO[] ar = null;
 
 		Map<String, String> map = new HashMap<String, String>();
@@ -477,4 +477,98 @@ public class BulletinDAO {
 		return ar;
 	}
 	
+	// 관리자용 전체, 제목, 이름, 내용 검색한 후 총 게시물 수
+	public int searchBulletinCountForAdmin(String searchTypeForAdmin, String searchValueForAdmin, String b_category) {
+		
+		Map<String, String > map = new HashMap<String, String>();
+		map.put("searchTypeForAdmin", searchTypeForAdmin);
+		map.put("searchValueForAdmin", searchValueForAdmin);
+		map.put("b_category", b_category);
+
+		int total = ss.selectOne("bulletin.searchBulletinCountForAdmin", map);
+
+		return total;
+	}
+
+	// 관리자용 전체, 제목, 이름, 내용 게시판 검색기능
+	public BulletinVO[] searchBulletinForAdmin(String begin, String end, String searchTypeForAdmin, String searchValueForAdmin, String b_category) {
+		BulletinVO[] ar = null;
+
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("begin", begin);
+		map.put("end", end);
+		map.put("searchTypeForAdmin", searchTypeForAdmin);
+		map.put("searchValueForAdmin", searchValueForAdmin);
+		map.put("b_category", b_category);
+
+		List<BulletinVO> list = ss.selectList("searchBulletinForAdmin.searchBulletin", map);
+		if (list != null && !list.isEmpty()) {
+			ar = new BulletinVO[list.size()];
+			list.toArray(ar);
+		}
+
+		return ar;
+	}
+	
+	// 회원 검색 후 총 회원 수
+	public int searchUserCountForAdmin(String u_id, String nickname, String u_name, String email, String sns_id) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("u_id", u_id);
+		map.put("nickname", nickname);
+		map.put("u_name", u_name);
+		map.put("email", email);
+		map.put("sns_id", sns_id);
+		
+		return ss.selectOne("bulletin.searchUserCountForAdmin", map);
+	}
+	
+	// 회원 검색 기능
+	public UserVO[] searchUserForAdmin(String u_id, String nickname, String u_name, String email, String sns_id, String begin, String end) {
+		UserVO[] ar = null;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("u_id", u_id);
+		map.put("nickname", nickname);
+		map.put("u_name", u_name);
+		map.put("email", email);
+		map.put("sns_id", sns_id);
+		map.put("begin", begin);
+		map.put("end", end);
+		
+		List<UserVO> list = ss.selectList("bulletin.searchUserForAdmin", map);
+		if(list != null && !list.isEmpty()) {
+			ar = new UserVO[list.size()];
+			list.toArray(ar);
+		}
+		
+		return ar;
+	}
+	
+	// 광고 전체, 회사, 이메일 검색하고난 후 총 광고 수
+	public int searchAdvCount(String searchTypeForAdv, String searchValueForAdv) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchTypeForAdv", searchTypeForAdv);
+		map.put("searchValueForAdv", searchValueForAdv);
+		
+		return ss.selectOne("bulletin.searchAdvCount", map);
+	}
+	
+	// 광고 전체, 회사, 이메일로 검색하는 기능
+	public AdvVO[] searchAdv(String searchTypeForAdv, String searchValueForAdv, String begin, String end) {
+		AdvVO[] ar = null;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchTypeForAdv", searchTypeForAdv);
+		map.put("searchValueForAdv", searchValueForAdv);
+		map.put("begin", begin);
+		map.put("end", end);
+		
+		List<AdvVO> list = ss.selectList("bulletin.searchAdv", map);
+		if(list != null && !list.isEmpty()) {
+			ar = new AdvVO[list.size()];
+			list.toArray(ar);
+		}
+		
+		return ar;
+	}
 }

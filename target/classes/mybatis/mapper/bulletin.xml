@@ -339,10 +339,10 @@
 		<if test="searchType != null and searchValue != null">
 			<choose>
 				<when test="searchType == 0">
-					where ((lower(subject) like lower('%'||#{searchValue}||'%') and status = 0)
-					or (lower(b_content) like lower('%'||#{searchValue}||'%') and status = 0)
-					or (u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{searchValue}||'%')) and status = 0))
-					and b_category = #{b_category}
+					where ((lower(subject) like lower('%'||#{searchValue}||'%'))
+					or (lower(b_content) like lower('%'||#{searchValue}||'%'))
+					or (u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{searchValue}||'%'))))
+					and b_category = #{b_category} and status = 0
 				</when>
 				<when test="searchType == 1">
 					where lower(subject) like lower('%'||#{searchValue}||'%') and status = 0 and b_category = #{b_category}
@@ -365,10 +365,10 @@
 					<if test="searchType != null and searchValue != null">
 						<choose>
 							<when test="searchType == 0">
-								where ((lower(subject) like lower('%'||#{searchValue}||'%') and status = 0)
-								or (lower(b_content) like lower('%'||#{searchValue}||'%') and status = 0)
-								or (u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{searchValue}||'%')) and status = 0))
-								and b_category = #{b_category}
+								where ((lower(subject) like lower('%'||#{searchValue}||'%'))
+								or (lower(b_content) like lower('%'||#{searchValue}||'%'))
+								or (u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{searchValue}||'%'))))
+								and b_category = #{b_category} and status = 0
 							</when>
 							<when test="searchType == 1">
 								where lower(subject) like lower('%'||#{searchValue}||'%') and status = 0 and b_category = #{b_category}
@@ -382,6 +382,154 @@
 						</choose>
 					</if>
 					order by b_idx desc) a
+		)where r_num between #{begin} and #{end}
+	</select>
+	
+	<!-- 관리자용 전체, 제목, 이름, 내용 검색한 후 총 게시물 수 -->
+	<select id="searchBulletinCountForAdmin" resultType="int" parameterType="java.util.Map">
+		select count(*) from bulletin
+		<if test="searchTypeForAdmin != null and searchValueForAdmin != null">
+			<choose>
+				<when test="searchTypeForAdmin == 0">
+					where ((lower(subject) like lower('%'||#{searchValueForAdmin}||'%'))
+					or (lower(b_content) like lower('%'||#{searchValueForAdmin}||'%'))
+					or (u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{searchValueForAdmin}||'%'))))
+					and b_category = #{b_category}
+				</when>
+				<when test="searchTypeForAdmin == 1">
+					where lower(subject) like lower('%'||#{searchValueForAdmin}||'%') and b_category = #{b_category}
+				</when>
+				<when test="searchTypeForAdmin == 2">
+					where u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{searchValueForAdmin}||'%')) and b_category = #{b_category}
+				</when>
+				<when test="searchTypeForAdmin == 3">
+					where lower(b_content) like lower('%'||#{searchValueForAdmin}||'%') and b_category = #{b_category}
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	<!-- 관리자용 전체, 제목, 이름, 내용 게시판 검색기능 -->
+	<select id="searchBulletinForAdmin" resultMap="map1" parameterType="java.util.Map">
+		select * from(
+			select rownum r_num, a.* from
+				(select * from bulletin 
+					<if test="searchTypeForAdmin != null and searchValueForAdmin != null">
+						<choose>
+							<when test="searchTypeForAdmin == 0">
+								where ((lower(subject) like lower('%'||#{searchValueForAdmin}||'%'))
+								or (lower(b_content) like lower('%'||#{searchValueForAdmin}||'%'))
+								or (u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{searchValueForAdmin}||'%'))))
+								and b_category = #{b_category}
+							</when>
+							<when test="searchTypeForAdmin == 1">
+								where lower(subject) like lower('%'||#{searchValueForAdmin}||'%') and b_category = #{b_category}
+							</when>
+							<when test="searchTypeForAdmin == 2">
+								where u_idx in(select u_idx from users_t where lower(nickname) like lower('%'||#{searchValueForAdmin}||'%')) and b_category = #{b_category}
+							</when>
+							<when test="searchTypeForAdmin == 3">
+								where lower(b_content) like lower('%'||#{searchValueForAdmin}||'%') and b_category = #{b_category}
+							</when>
+						</choose>
+					</if>
+					order by b_idx desc) a
+		)where r_num between #{begin} and #{end}
+	</select>
+	
+	<!-- 회원 검색 후 총 회원 수 -->
+	<select id="searchUserCountForAdmin" parameterType="java.util.Map" resultType="int">
+		select count(*) from users_t
+		<where>
+			<trim suffixOverrides=",">
+				<if test="u_id != null">
+					lower(u_id) like lower('%'||#{u_id}||'%'),
+				</if>
+				<if test="nickname != null">
+					lower(nickname) like lower('%'||#{nickname}||'%'),
+				</if>
+				<if test="u_name != null">
+					lower(u_name) like lower('%'||#{u_name}||'%'),
+				</if>
+				<if test="email != null">
+					lower(email) like lower('%'||#{email}||'%'),
+				</if>
+				<if test="sns_id != null">
+					lower(sns_id) like lower('%'||#{sns_id}||'%'),
+				</if>
+			</trim>
+		</where>
+	</select>
+	
+	<!-- 회원 검색 기능 -->
+	<select id="searchUserForAdmin" parameterType="java.util.Map" resultMap="map4">
+		select * from(
+			select rownum r_num, a.* from
+				(select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t
+				<where>
+					<trim suffixOverrides=",">
+						<if test="u_id != null">
+							lower(u_id) like lower('%'||#{u_id}||'%'),
+						</if>
+						<if test="nickname != null">
+							lower(nickname) like lower('%'||#{nickname}||'%'),
+						</if>
+						<if test="u_name != null">
+							lower(u_name) like lower('%'||#{u_name}||'%'),
+						</if>
+						<if test="email != null">
+							lower(email) like lower('%'||#{email}||'%'),
+						</if>
+						<if test="sns_id != null">
+							lower(sns_id) like lower('%'||#{sns_id}||'%'),
+						</if>
+					</trim>
+				</where>
+			order by b_idx desc) a
+		)where r_num between #{begin} and #{end}
+	</select>
+	
+	<!-- 광고 전체, 회사, 이메일 검색하고난 후 총 광고 수 -->
+	<select id="searchAdvCount" parameterType="java.util.Map" resultType="int">
+		select count(*) from adv_t
+		<if test="searchTypeForAdv != null and searchValueForAdv != null">
+			<where>
+				<choose>
+					<when test="searchTypeForAdv == 0">
+						lower(co_name) like lower('%'||#{searchValueForAdv}||'%') and lower(co_email) like lower('%'||#{searchValueForAdv}||'%')
+					</when>
+					<when test="searchTypeForAdv == 1">
+						lower(co_name) like lower('%'||#{searchValueForAdv}||'%')
+					</when>
+					<when test="searchTypeForAdv == 2">
+						lower(co_email) like lower('%'||#{searchValueForAdv}||'%')
+					</when>
+				</choose>
+			</where>
+		</if>
+	</select>
+	
+	<!-- 광고 전체, 회사, 이메일로 검색하는 기능 -->
+	<select id="searchAdv" parameterType="java.util.Map" resultType="com.pmd.vo.AdvVO">
+		select * from(
+			select rownum r_num, a.* from	
+				(select * from adv_t
+				<if test="searchTypeForAdv != null and searchValueForAdv != null">
+					<where>
+						<choose>
+							<when test="searchTypeForAdv == 0">
+								lower(co_name) like lower('%'||#{searchValueForAdv}||'%') and lower(co_email) like lower('%'||#{searchValueForAdv}||'%')
+							</when>
+							<when test="searchTypeForAdv == 1">
+								lower(co_name) like lower('%'||#{searchValueForAdv}||'%')
+							</when>
+							<when test="searchTypeForAdv == 2">
+								lower(co_email) like lower('%'||#{searchValueForAdv}||'%')
+							</when>
+						</choose>
+					</where>
+				</if>
+				order by a_idx desc) a
 		)where r_num between #{begin} and #{end}
 	</select>
 	
