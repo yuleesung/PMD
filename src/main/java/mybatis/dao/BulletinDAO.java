@@ -476,4 +476,28 @@ public class BulletinDAO {
 		return ss.selectOne("bulletin.viewAdv", a_idx);
 	}
 	
+	// 광고 상태를 모두 0으로 바꾸기
+	public boolean setAdvZero(String adv_group) {
+		boolean chk = false;
+		
+		int cnt = ss.update("bulletin.setAdvZero", adv_group);
+		if(cnt > 0)
+			chk = true;
+		
+		return chk;
+	}
+	
+	// 게시될 광고 가져오기
+	public AdvVO[] showAdvOnMain() {
+		AdvVO[] ar = null;
+		
+		List<AdvVO> list = ss.selectList("bulletin.showAdvOnMain");
+		if(list != null && !list.isEmpty()) {
+			ar = new AdvVO[list.size()];
+			list.toArray(ar);
+		}
+		
+		return ar;
+	}
+	
 }

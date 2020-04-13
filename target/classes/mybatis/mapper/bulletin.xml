@@ -349,4 +349,16 @@
 		select * from adv_t where a_idx = #{a_idx}
 	</select>
 	
+	<!-- 광고 상태를 모두 0으로 바꾸기 -->
+	<update id="setAdvZero" parameterType="String">
+		update adv_t set status = 0 where adv_group = #{adv_group}
+	</update>
+	
+	<!-- 게시될 광고 가져오기 -->
+	<select id="showAdvOnMain" resultType="com.pmd.vo.AdvVO">
+		select * from adv_t where status = 1
+	</select>
+	
+	
+	
 </mapper>
