@@ -203,62 +203,6 @@ public class BulletinDAO {
 
 		return chk;
 	}
-
-	// 전체게시판 검색한 후 총 게시물 수
-	public int getSearchAllCount(String subject) {
-
-		int total = ss.selectOne("bulletin.getSearchAllCount", subject);
-
-		return total;
-	}
-
-	// 전체 게시판 검색기능
-	public BulletinVO[] searchAll(String begin, String end, String subject) {
-		BulletinVO[] ar = null;
-
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("begin", begin);
-		map.put("end", end);
-		map.put("subject", subject);
-
-		List<BulletinVO> list = ss.selectList("bulletin.searchAll", map);
-		if (list != null && !list.isEmpty()) {
-			ar = new BulletinVO[list.size()];
-			list.toArray(ar);
-		}
-
-		return ar;
-	}
-
-	// 카테고리별 게시판 검색한 총 게시물 수
-	public int getSearchBoardCount(String subject, String b_category) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("subject", subject);
-		map.put("b_category", b_category);
-
-		int total = ss.selectOne("bulletin.getSearchBoardCount", map);
-
-		return total;
-	}
-
-	// 카테고리별 게시판 검색기능
-	public BulletinVO[] searchBoard(String begin, String end, String subject, String b_category) {
-		BulletinVO[] ar = null;
-
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("begin", begin);
-		map.put("end", end);
-		map.put("subject", subject);
-		map.put("b_category", b_category);
-
-		List<BulletinVO> list = ss.selectList("bulletin.searchBoard", map);
-		if (list != null && !list.isEmpty()) {
-			ar = new BulletinVO[list.size()];
-			list.toArray(ar);
-		}
-
-		return ar;
-	}
 	
 	// 소셜 아이디로 회원가입
 	public boolean socialReg(Map<String, String> map) {
@@ -494,6 +438,57 @@ public class BulletinDAO {
 		List<AdvVO> list = ss.selectList("bulletin.showAdvOnMain");
 		if(list != null && !list.isEmpty()) {
 			ar = new AdvVO[list.size()];
+			list.toArray(ar);
+		}
+		
+		return ar;
+	}
+	
+	// 전체 게시판 검색한 후 총 게시물 수
+	public int getSearchAllCount(String keyword, String b_category) {
+		
+		Map<String, String > map = new HashMap<String, String>();
+		map.put("keyword", keyword);
+		map.put("b_category", b_category);
+
+		int total = ss.selectOne("bulletin.getSearchAllCount", map);
+
+		return total;
+	}
+
+	// 전체 게시판 검색기능
+	public BulletinVO[] searchAll(String begin, String end, String keyword, String b_category) {
+		BulletinVO[] ar = null;
+
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("begin", begin);
+		map.put("end", end);
+		map.put("keyword", keyword);
+		map.put("b_category", b_category);
+
+		List<BulletinVO> list = ss.selectList("bulletin.searchAll", map);
+		if (list != null && !list.isEmpty()) {
+			ar = new BulletinVO[list.size()];
+			list.toArray(ar);
+		}
+
+		return ar;
+	}
+	
+	// 게시판 검색기능(제목, 글쓴이, 내용)
+	public BulletinVO[] searchBulletin(String begin, String end, String searchType, String searchValue, String b_category) {
+		BulletinVO[] ar = null;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("begin", begin);
+		map.put("end", end);
+		map.put("searchType", searchType);
+		map.put("searchValue", searchValue);
+		map.put("b_category", b_category);
+		
+		List<BulletinVO> list = ss.selectList("bulletin.searchBulletin", map);
+		if(list != null && !list.isEmpty()) {
+			ar = new BulletinVO[list.size()];
 			list.toArray(ar);
 		}
 		
