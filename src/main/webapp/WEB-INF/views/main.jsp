@@ -94,144 +94,57 @@ option {
 	<div class="container">
 
 		<!-- 이미지 Height+시간조절은 js에서 변경-->
+
 		<div id="carousel_section" class="carousel_section">
 			<ul>
-				<c:if test="${adv_group eq '1'}">
-					<li><img src="${img }"></li>
-				</c:if>
-				<c:if test="${adv_group eq '2'}">
-					<li><img src="${img }"></li>
-				</c:if>
-				<c:if test="${adv_group eq '3'}">
-					<li><img src="${img }"></li>
-				</c:if>
-				<c:if test="${adv_group eq '4'}">
-					<li><img src="${img }"></li>
-				</c:if>
+				<c:forEach var="img_ar1" items="${img_ar1 }" varStatus="st">
+					<li><a href="${link_ar1[st.index] }"><img src="${img_ar1 }"></a></li>
+				</c:forEach>
 			</ul>
 		</div>
 
 		<div id="carousel_section2" class="carousel_section">
 			<ul>
-				<c:if test="${adv_group eq '2'}">
-					<li><img src="${img }"></li>
-				</c:if>
-				<c:if test="${adv_group eq '3'}">
-					<li><img src="${img }"></li>
-				</c:if>
-				<c:if test="${adv_group eq '4'}">
-					<li><img src="${img }"></li>
-				</c:if>
-				<c:if test="${adv_group eq '1'}">
-					<li><img src="${img }"></li>
-				</c:if>
+				<c:forEach var="img_ar2" items="${img_ar2 }" varStatus="st">
+					<li><a href="${link_ar2[st.index] }"><img src="${img_ar2 }"></a></li>
+				</c:forEach>
 			</ul>
 		</div>
 
 		<div id="carousel_section3" class="carousel_section">
 			<ul>
-				<c:if test="${adv_group eq '3'}">
-					<li><img src="${img }"></li>
-				</c:if>
-				<c:if test="${adv_group eq '4'}">
-					<li><img src="${img }"></li>
-				</c:if>
-				<c:if test="${adv_group eq '1'}">
-					<li><img src="${img }"></li>
-				</c:if>
-				<c:if test="${adv_group eq '2'}">
-					<li><img src="${img }"></li>
-				</c:if>
+				<c:forEach var="img_ar3" items="${img_ar3 }" varStatus="st">
+					<li><a href="${link_ar3[st.index] }"><img src="${img_ar3 }"></a></li>
+				</c:forEach>
 			</ul>
 		</div>
 		<div id="carousel_section4" class="carousel_section">
 			<ul>
-				<c:if test="${adv_group eq '4'}">
-					<li><img src="${img }"></li>
-				</c:if>
-				<c:if test="${adv_group eq '1'}">
-					<li><img src="${img }"></li>
-				</c:if>
-				<c:if test="${adv_group eq '2'}">
-					<li><img src="${img }"></li>
-				</c:if>
-				<c:if test="${adv_group eq '3'}">
-					<li><img src="${img }"></li>
-				</c:if>
+				<c:forEach var="img_ar4" items="${img_ar4 }" varStatus="st">
+					<li><a href="${link_ar4[st.index] }"><img src="${img_ar4 }"></a></li>
+				</c:forEach>
 			</ul>
 		</div>
-		<!-- <div id="carousel_section" class="carousel_section">
-			<ul>
-
-				<li><img src="resources/images/test1.gif"></li>
-
-				<li><img src="resources/images/test2.gif"></li>
-
-				<li><img src="resources/images/test3.gif"></li>
-
-				<li><img src="resources/images/test4.gif"></li>
-
-			</ul>
-		</div>
-		<div id="carousel_section2" class="carousel_section">
-			<ul>
-
-				<li><img src="resources/images/test2.gif"></li>
-
-				<li><img src="resources/images/test3.gif"></li>
-
-				<li><img src="resources/images/test4.gif"></li>
-
-				<li><img src="resources/images/test1.gif"></li>
-
-			</ul>
-		</div>
-		<div id="carousel_section3" class="carousel_section">
-			<ul>
-
-				<li><img src="resources/images/test3.gif"></li>
-
-				<li><img src="resources/images/test4.gif"></li>
-
-				<li><img src="resources/images/test1.gif"></li>
-
-				<li><img src="resources/images/test2.gif"></li>
-
-			</ul>
-		</div>
-		<div id="carousel_section4" class="carousel_section">
-			<ul>
-
-				<li><img src="resources/images/test4.gif"></li>
-
-				<li><img src="resources/images/test1.gif"></li>
-
-				<li><img src="resources/images/test2.gif"></li>
-
-				<li><img src="resources/images/test3.gif"></li>
-
-			</ul>
-		</div> -->
 
 		<!-- 배너 추천 훈련과정 -->
 
-			<div id="myCarousel" class="carousel slide" data-ride="carousel">
-				<div class="carousel-inner row w-100 mx-auto">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner row w-100 mx-auto">
 
-					<c:forEach var="mvo" items="${ar }" varStatus="st">
-						<c:if test="${st.index == 0 }">
-							<div class="carousel-item col-md-4 active">
-								<c:choose>
-									<c:when test="${fn:length(mvo.categoryNm) lt 12 }">
-										<h3
-											style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h3>
-									</c:when>
-									<c:otherwise>
-										<h4
-											style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h4>
-									</c:otherwise>
-								</c:choose>
-								<div class="panel panel-default">
+				<c:forEach var="mvo" items="${ar }" varStatus="st">
+					<c:if test="${st.index == 0 }">
+						<div class="carousel-item col-md-4 active">
+							<c:choose>
+								<c:when test="${fn:length(mvo.categoryNm) lt 12 }">
+									<h3
+										style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h3>
+								</c:when>
+								<c:otherwise>
+									<h4
+										style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h4>
+								</c:otherwise>
+							</c:choose>
+							<div class="panel panel-default">
 								<div class="panel-thumbnail">
 									<div class="card h-100 thumb">
 										<a
@@ -288,22 +201,22 @@ option {
 										</div>
 									</div>
 								</div>
-								</div>
 							</div>
-						</c:if>
-						<c:if test="${st.index > 0 }">
-							<div class="carousel-item col-md-4">
-								<c:choose>
-									<c:when test="${fn:length(mvo.categoryNm) lt 12 }">
-										<h3
-											style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h3>
-									</c:when>
-									<c:otherwise>
-										<h4
-											style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h4>
-									</c:otherwise>
-								</c:choose>
-								<div class="panel panel-default">
+						</div>
+					</c:if>
+					<c:if test="${st.index > 0 }">
+						<div class="carousel-item col-md-4">
+							<c:choose>
+								<c:when test="${fn:length(mvo.categoryNm) lt 12 }">
+									<h3
+										style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h3>
+								</c:when>
+								<c:otherwise>
+									<h4
+										style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h4>
+								</c:otherwise>
+							</c:choose>
+							<div class="panel panel-default">
 								<div class="panel-thumbnail">
 									<div class="card h-100 thumb">
 										<a
@@ -360,26 +273,26 @@ option {
 										</div>
 									</div>
 								</div>
-								</div>
 							</div>
-						</c:if>
-					</c:forEach>
-					<a class="carousel-control-prev" href="#myCarousel" role="button"
-						data-slide="prev"
-						style="display: block; width: 10%; text-align: left; padding-top: 33%;">
-						<img alt="left" src="resources/images/left.png">
-					</a> <a class="carousel-control-next" href="#myCarousel" role="button"
-						data-slide="next"
-						style="display: block; width: 10%; text-align: right; padding-top: 33%;">
-						<img alt="left" src="resources/images/right.png">
-					</a>
-				</div>
+						</div>
+					</c:if>
+				</c:forEach>
+				<a class="carousel-control-prev" href="#myCarousel" role="button"
+					data-slide="prev"
+					style="display: block; width: 10%; text-align: left; padding-top: 33%;">
+					<img alt="left" src="resources/images/left.png">
+				</a> <a class="carousel-control-next" href="#myCarousel" role="button"
+					data-slide="next"
+					style="display: block; width: 10%; text-align: right; padding-top: 33%;">
+					<img alt="left" src="resources/images/right.png">
+				</a>
 			</div>
+		</div>
 
-	
 
-	<section class="search-sec" style="margin-top: 150px; width: 100%;">
-		
+
+		<section class="search-sec" style="margin-top: 150px; width: 100%;">
+
 			<form action="#" method="post" novalidate="novalidate">
 				<div class="row">
 					<div class="col-lg-12">
@@ -468,19 +381,20 @@ option {
 							</div>
 							<div style="width: 100%;">
 								<button type="button" class="btn btn-danger wrn-btn"
-									id="search_btn" style="border-radius: 10px; width: 300px; display: block; margin: auto;">검
+									id="search_btn"
+									style="border-radius: 10px; width: 300px; display: block; margin: auto;">검
 									색</button>
 							</div>
 						</div>
 					</div>
 				</div>
-			</form>	
-	</section>
+			</form>
+		</section>
 
-	<!-- 리스트 -->
-	<div class="container" id="result" style="display: none;"></div>
+		<!-- 리스트 -->
+		<div class="container" id="result" style="display: none;"></div>
 	</div>
-	
+
 	<jsp:include page="footer.jsp" />
 	
 	
