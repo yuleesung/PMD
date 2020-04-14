@@ -108,8 +108,8 @@
 				if(val != "")
 					group_val = val;
 				
-				var sel = $("#search_sel").val(); // 셀렉트
-				var txt = $("#search_txt").val(); // 텍스트
+				var sel = $("#search_sel").val(); // 셀렉트!
+				var txt = $("#search_txt").val(); // 텍스트!
 		
 				if(sel == "all")
 					admin_groupList(group_val);
