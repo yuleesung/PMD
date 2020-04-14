@@ -54,28 +54,28 @@
 					</td>
 				</tr>
 				<tr>
-					<th>시작일</th>
-					<td>
-						<input type="text" name="start_date" id="start_date"/>
-					</td>
-					<th>종료일</th>
-					<td>
-						<input type="text" name="end_date" id="end_date"/>
-					</td>
-				</tr>
-				<tr>
-					<th>메모할 사항</th>
-					<td colspan="3">
-						<input type="text" name="etc" id="etc"/>
-					</td>
-				</tr>
-				<tr>
 					<th>광고순번</th>
 					<td colspan="3">
 						<input type="radio" name="adv_group" value="1"/><span>1번 광고</span>&nbsp;&nbsp;
 						<input type="radio" name="adv_group" value="2"/><span>2번 광고</span>&nbsp;&nbsp;
 						<input type="radio" name="adv_group" value="3"/><span>3번 광고</span>&nbsp;&nbsp;
 						<input type="radio" name="adv_group" value="4"/><span>4번 광고</span>&nbsp;&nbsp;
+					</td>
+				</tr>
+				<tr>
+					<th>시작일</th>
+					<td>
+						<input type="date" name="start_date" id="start_date"/>
+					</td>
+					<th>종료일</th>
+					<td>
+						<input type="date" name="end_date" id="end_date"/>
+					</td>
+				</tr>
+				<tr>
+					<th>메모할 사항</th>
+					<td colspan="3">
+						<input type="text" name="etc" id="etc"/>
 					</td>
 				</tr>
 				<tfoot>
@@ -94,22 +94,6 @@
 	<script>
 		$(function(){
 			
-			$("#start_date").datepicker({
-				dateFormat : "yy-mm-dd",
-				dayNamesMin : [ "일", "월", "화", "수", "목", "금", "토" ],
-				monthNames : [ "1월", "2월", "3월", "4월", "5월", "6월",
-						"7월", "8월", "9월", "10월", "11월", "12월" ],
-				showMonthAfterYear : true,
-			});
-			
-			$("#end_date").datepicker({
-				dateFormat : "yy-mm-dd",
-				dayNamesMin : [ "일", "월", "화", "수", "목", "금", "토" ],
-				monthNames : [ "1월", "2월", "3월", "4월", "5월", "6월",
-						"7월", "8월", "9월", "10월", "11월", "12월" ],
-				showMonthAfterYear : true,
-			});
-			
 			$("#adv_link").keyup(function(){
 				var adv_link = $("#adv_link").val();
 				if(!adv_link.startsWith("www.")){
@@ -118,6 +102,34 @@
 				}else{
 					$("#warning").text("");
 				}
+			});
+			
+			$("#start_date").click(function(){
+				var adv_group = $("input[name='adv_group']:checked").val();
+				if(adv_group == undefined){
+					alert("광고순번을 선택하세요!");
+					return;
+				}				
+			});
+			
+			$("#end_date").click(function(){
+				var adv_group = $("input[name='adv_group']:checked").val();
+				if(adv_group == undefined){
+					alert("광고순번을 선택하세요!");
+					return;
+				}
+			});
+			
+			$("#start_date").change(function(){
+				var adv_group = $("input[name='adv_group']:checked").val();
+				var start_date = $("#start_date").val();
+				ajax_check(adv_group, start_date, "시작일");
+			});
+			
+			$("#end_date").change(function(){
+				var adv_group = $("input[name='adv_group']:checked").val();
+				var end_date = $("#end_date").val();
+				ajax_check(adv_group, end_date, "종료일");
 			});
 			
 			$("#save_btn").click(function(){
@@ -226,6 +238,30 @@
 				
 			});
 		});
+		
+		function ajax_check(adv_group, inputDate, str) {
+			var param = "adv_group="+encodeURIComponent(adv_group)+"&inputDate="+encodeURIComponent(inputDate);
+			
+			$.ajax({
+				url: "checkDate.inc",
+				type: "post",
+				data: param,
+				dataType: "json"
+			}).done(function(data){
+				if(data.chk){
+					if(str == "시작일"){
+						alert("DB에 등록된 기간과 중복됩니다!");
+						$("#start_date").focus();
+					}else if(str == "종료일"){
+						alert("DB에 등록된 기간과 중복됩니다!");
+						$("#end_date").focus();
+					}
+				}
+			}).fail(function(err){
+				console.log(err);
+			});
+		}
+		
 	</script>
 </body>
 </html>
