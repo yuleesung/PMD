@@ -594,7 +594,7 @@
 	
 	<!-- 유저 하나당 전체 댓글 수 -->
 	<select id="commCountForAdmin" resultType="int" parameterType="String">
-		select count(*) from bulletin_c_t where b_idx = #{b_idx}
+		select count(*) from bulletin_c_t where u_idx = #{u_idx}
 	</select>
 	
 	<!-- ajax용 게시물 댓글 모음 -->

@@ -588,8 +588,8 @@ public class BulletinDAO {
 	}
 	
 	// 게시물 하나당 전체 댓글 수
-	public int commCountForAdmin(String b_idx) {
-		return ss.selectOne("bulletin.commCountForAdmin", b_idx);
+	public int commCountForAdmin(String u_idx) {
+		return ss.selectOne("bulletin.commCountForAdmin", u_idx);
 	}
 	
 	// ajax용 게시물 댓글 모음
