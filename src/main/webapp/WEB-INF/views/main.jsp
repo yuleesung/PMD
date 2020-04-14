@@ -97,38 +97,42 @@ option {
 	<div class="container">
 
 		<!-- 이미지 Height+시간조절은 js에서 변경-->
+		<div style="width: 1080px; margin: auto;">
+			<div id="carousel_section" class="carousel_section">
+				<ul>
+					<c:forEach var="img_ar1" items="${img_ar1 }" varStatus="st">
+						<li><a href="${link_ar1[st.index] }"><img
+								src="${img_ar1 }"></a></li>
+					</c:forEach>
+				</ul>
+			</div>
 
-		<div id="carousel_section" class="carousel_section">
-			<ul>
-				<c:forEach var="img_ar1" items="${img_ar1 }" varStatus="st">
-					<li><a href="${link_ar1[st.index] }"><img src="${img_ar1 }"></a></li>
-				</c:forEach>
-			</ul>
-		</div>
+			<div id="carousel_section2" class="carousel_section">
+				<ul>
+					<c:forEach var="img_ar2" items="${img_ar2 }" varStatus="st">
+						<li><a href="${link_ar2[st.index] }"><img
+								src="${img_ar2 }"></a></li>
+					</c:forEach>
+				</ul>
+			</div>
 
-		<div id="carousel_section2" class="carousel_section">
-			<ul>
-				<c:forEach var="img_ar2" items="${img_ar2 }" varStatus="st">
-					<li><a href="${link_ar2[st.index] }"><img src="${img_ar2 }"></a></li>
-				</c:forEach>
-			</ul>
+			<div id="carousel_section3" class="carousel_section">
+				<ul>
+					<c:forEach var="img_ar3" items="${img_ar3 }" varStatus="st">
+						<li><a href="${link_ar3[st.index] }"><img
+								src="${img_ar3 }"></a></li>
+					</c:forEach>
+				</ul>
+			</div>
+			<div id="carousel_section4" class="carousel_section">
+				<ul>
+					<c:forEach var="img_ar4" items="${img_ar4 }" varStatus="st">
+						<li><a href="${link_ar4[st.index] }"><img
+								src="${img_ar4 }"></a></li>
+					</c:forEach>
+				</ul>
+			</div>
 		</div>
-
-		<div id="carousel_section3" class="carousel_section">
-			<ul>
-				<c:forEach var="img_ar3" items="${img_ar3 }" varStatus="st">
-					<li><a href="${link_ar3[st.index] }"><img src="${img_ar3 }"></a></li>
-				</c:forEach>
-			</ul>
-		</div>
-		<div id="carousel_section4" class="carousel_section">
-			<ul>
-				<c:forEach var="img_ar4" items="${img_ar4 }" varStatus="st">
-					<li><a href="${link_ar4[st.index] }"><img src="${img_ar4 }"></a></li>
-				</c:forEach>
-			</ul>
-		</div>
-
 		<!-- 배너 추천 훈련과정 -->
 
 		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="position: unset;">
