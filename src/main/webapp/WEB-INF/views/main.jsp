@@ -86,7 +86,7 @@ option {
 	color: black;
 }
 .carousel_section{
-	width: 277px;
+	width: 270px;
 }
 </style>
 </head>

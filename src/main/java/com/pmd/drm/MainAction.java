@@ -192,7 +192,7 @@ public class MainAction {
 		int g3 = 2;
 		int g4 = 3;
 
-		if (adv_ar.length == 4) { // 광고가 4개 모두 업로드 되었을 때,
+		if (adv_ar != null && adv_ar.length == 4) { // 광고가 4개 모두 업로드 되었을 때,
 			for (int i = 0; i < 4; i++) {
 				img_ar1[i] = real_route + adv_ar[g1].getFile_name();
 				img_ar2[i] = real_route + adv_ar[g2].getFile_name();
