@@ -511,19 +511,24 @@ public class BulletinDAO {
 	}
 	
 	// 회원 검색 후 총 회원 수
-	public int searchUserCountForAdmin(String u_id, String nickname, String u_name, String email, String sns_id) {
+	public int searchUserCountForAdmin(String u_id, String nickname, String u_name, String email, String sns_id, String reg_date, String total, String active, String stop, String leave) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("u_id", u_id);
 		map.put("nickname", nickname);
 		map.put("u_name", u_name);
 		map.put("email", email);
 		map.put("sns_id", sns_id);
+		map.put("reg_date", reg_date);
+		map.put("total", total);
+		map.put("active", active);
+		map.put("stop", stop);
+		map.put("leave", leave);
 		
 		return ss.selectOne("bulletin.searchUserCountForAdmin", map);
 	}
 	
 	// 회원 검색 기능
-	public UserVO[] searchUserForAdmin(String u_id, String nickname, String u_name, String email, String sns_id, String begin, String end) {
+	public UserVO[] searchUserForAdmin(String u_id, String nickname, String u_name, String email, String sns_id, String reg_date, String total, String active, String stop, String leave, String begin, String end) {
 		UserVO[] ar = null;
 		
 		Map<String, String> map = new HashMap<String, String>();
@@ -532,6 +537,11 @@ public class BulletinDAO {
 		map.put("u_name", u_name);
 		map.put("email", email);
 		map.put("sns_id", sns_id);
+		map.put("reg_date", reg_date);
+		map.put("total", total);
+		map.put("active", active);
+		map.put("stop", stop);
+		map.put("leave", leave);
 		map.put("begin", begin);
 		map.put("end", end);
 		

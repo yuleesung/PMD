@@ -463,6 +463,30 @@
 				<if test="sns_id != null">
 					lower(sns_id) like lower('%'||#{sns_id}||'%'),
 				</if>
+				<if test="reg_date != null">
+					reg_date = #{reg_date},
+				</if>
+				<if test="total != null">
+					status in(0, 1, 2),
+				</if>
+				<if test="active != null and stop != null">
+					status in(0, 2),
+				</if>
+				<if test="active != null and leave != null">
+					status in(0, 1),
+				</if>
+				<if test="stop != null and leave != null">
+					status in(1, 2),
+				</if>
+				<if test="active != null">
+					status = 0,
+				</if>
+				<if test="stop != null">
+					status = 2,
+				</if>
+				<if test="leave != null">
+					status = 1,
+				</if>
 			</trim>
 		</where>
 	</select>
@@ -488,6 +512,30 @@
 						</if>
 						<if test="sns_id != null">
 							lower(sns_id) like lower('%'||#{sns_id}||'%'),
+						</if>
+						<if test="reg_date != null">
+							reg_date = #{reg_date},
+						</if>
+						<if test="total != null">
+							status in(0, 1, 2),
+						</if>
+						<if test="active != null and stop != null">
+							status in(0, 2),
+						</if>
+						<if test="active != null and leave != null">
+							status in(0, 1),
+						</if>
+						<if test="stop != null and leave != null">
+							status in(1, 2),
+						</if>
+						<if test="active != null">
+							status = 0,
+						</if>
+						<if test="stop != null">
+							status = 2,
+						</if>
+						<if test="leave != null">
+							status = 1,
 						</if>
 					</trim>
 				</where>
