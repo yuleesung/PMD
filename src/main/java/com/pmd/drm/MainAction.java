@@ -177,51 +177,54 @@ public class MainAction {
 		AdvVO[] adv_ar = b_dao.showAdvOnMain();
 		String real_route = application.getContextPath() + "/resources/upload/";
 
-		String[] img_ar1 = new String[4];
+		String[] img_ar1 = new String[4]; // 이미지
 		String[] img_ar2 = new String[4];
 		String[] img_ar3 = new String[4];
 		String[] img_ar4 = new String[4];
 
-		String[] link_ar1 = new String[4];
+		String[] link_ar1 = new String[4]; // 링크
 		String[] link_ar2 = new String[4];
 		String[] link_ar3 = new String[4];
 		String[] link_ar4 = new String[4];
+		
 		int g1 = 0;
 		int g2 = 1;
 		int g3 = 2;
 		int g4 = 3;
 
-		for (int i = 0; i < 4; i++) { // 0 ~ 3
-			img_ar1[i] = real_route + adv_ar[g1].getFile_name();
-			img_ar2[i] = real_route + adv_ar[g2].getFile_name();
-			img_ar3[i] = real_route + adv_ar[g3].getFile_name();
-			img_ar4[i] = real_route + adv_ar[g4].getFile_name();
-			
-			link_ar1[i] = adv_ar[g1].getAdv_link();
-			link_ar2[i] = adv_ar[g2].getAdv_link();
-			link_ar3[i] = adv_ar[g3].getAdv_link();
-			link_ar4[i] = adv_ar[g4].getAdv_link();
-			
-			g1++;
-			g2++;
-			g3++;
-			g4++;
-
-			if (g1 == 4)
-				g1 = 0;
-			if (g2 == 4)
-				g2 = 0;
-			if (g3 == 4)
-				g3 = 0;
-			if (g4 == 4)
-				g4 = 0;
+		if (adv_ar.length == 4) { // 광고가 4개 모두 업로드 되었을 때,
+			for (int i = 0; i < 4; i++) {
+				img_ar1[i] = real_route + adv_ar[g1].getFile_name();
+				img_ar2[i] = real_route + adv_ar[g2].getFile_name();
+				img_ar3[i] = real_route + adv_ar[g3].getFile_name();
+				img_ar4[i] = real_route + adv_ar[g4].getFile_name();
+				
+				link_ar1[i] = adv_ar[g1].getAdv_link();
+				link_ar2[i] = adv_ar[g2].getAdv_link();
+				link_ar3[i] = adv_ar[g3].getAdv_link();
+				link_ar4[i] = adv_ar[g4].getAdv_link();
+				
+				g1++;
+				g2++;
+				g3++;
+				g4++;
+	
+				if (g1 == 4)
+					g1 = 0;
+				if (g2 == 4)
+					g2 = 0;
+				if (g3 == 4)
+					g3 = 0;
+				if (g4 == 4)
+					g4 = 0;
+			}
 		}
 
 		session.setAttribute("path", "main"); // 로그인할 때 필요한 세션
 
 		ModelAndView mv = new ModelAndView();
 
-		if (adv_ar.length > 0 && adv_ar != null) {
+		if (adv_ar.length == 4) { // 광고가 4개 업로드 되었을 때 추가
 			mv.addObject("adv_ar", adv_ar);
 			mv.addObject("img_ar1", img_ar1);
 			mv.addObject("img_ar2", img_ar2);
@@ -236,7 +239,7 @@ public class MainAction {
 
 		mv.addObject("ar", ar); // 추천목록에 표현하기 위한 ar
 
-		mv.setViewName("main");
+		mv.setViewName("main"); // main.jsp로 이동
 
 		return mv;
 	}

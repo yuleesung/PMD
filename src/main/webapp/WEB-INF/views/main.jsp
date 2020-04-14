@@ -86,7 +86,7 @@ option {
 	color: black;
 }
 .carousel_section{
-	width: 270px;
+	width: 277px;
 }
 </style>
 </head>
@@ -100,32 +100,64 @@ option {
 
 		<div id="carousel_section" class="carousel_section">
 			<ul>
-				<c:forEach var="img_ar1" items="${img_ar1 }" varStatus="st">
-					<li><a href="${link_ar1[st.index] }"><img src="${img_ar1 }"></a></li>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${fn:length(adv_ar) eq 4 }">
+						<c:forEach var="img_ar1" items="${img_ar1 }" varStatus="st">
+							<li><a href="${link_ar1[st.index] }"><img
+									src="${img_ar1 }"></a></li>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<li><img src="resources/images/loading.gif"></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 
 		<div id="carousel_section2" class="carousel_section">
 			<ul>
-				<c:forEach var="img_ar2" items="${img_ar2 }" varStatus="st">
-					<li><a href="${link_ar2[st.index] }"><img src="${img_ar2 }"></a></li>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${fn:length(adv_ar) eq 4 }">
+						<c:forEach var="img_ar2" items="${img_ar2 }" varStatus="st">
+							<li><a href="${link_ar2[st.index] }"><img
+									src="${img_ar2 }"></a></li>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<li><img src="resources/images/loading.gif"></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 
 		<div id="carousel_section3" class="carousel_section">
 			<ul>
-				<c:forEach var="img_ar3" items="${img_ar3 }" varStatus="st">
-					<li><a href="${link_ar3[st.index] }"><img src="${img_ar3 }"></a></li>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${fn:length(adv_ar) eq 4 }">
+						<c:forEach var="img_ar3" items="${img_ar3 }" varStatus="st">
+							<li><a href="${link_ar3[st.index] }"><img
+									src="${img_ar3 }"></a></li>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<li><img src="resources/images/loading.gif"></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 		<div id="carousel_section4" class="carousel_section">
 			<ul>
-				<c:forEach var="img_ar4" items="${img_ar4 }" varStatus="st">
-					<li><a href="${link_ar4[st.index] }"><img src="${img_ar4 }"></a></li>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${fn:length(adv_ar) eq 4 }">
+						<c:forEach var="img_ar4" items="${img_ar4 }" varStatus="st">
+							<li><a href="${link_ar4[st.index] }"><img
+									src="${img_ar4 }"></a></li>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<li><img src="resources/images/loading.gif"></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 
