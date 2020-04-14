@@ -14,7 +14,7 @@
 	<span>&nbsp;Group을 선택해주세요.</span>
 	<br/>
 	<input type="radio"
-		class="radio" value="1" name="adv_group"><span class="sandwich">1번 광고</span>&nbsp;&nbsp;&nbsp;
+		class="radio" value="1" name="adv_group" checked="checked"><span class="sandwich">1번 광고</span>&nbsp;&nbsp;&nbsp;
 	<input type="radio"
 		class="radio" value="2" name="adv_group"><span class="sandwich">2번 광고</span>&nbsp;&nbsp;&nbsp;
 	<input type="radio"

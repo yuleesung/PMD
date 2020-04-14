@@ -1,13 +1,19 @@
 package com.pmd.drm;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pmd.util.Paging_Bulletin;
+import com.pmd.util.Paging_SearchBulletin;
 import com.pmd.vo.BulletinVO;
 
 import mybatis.dao.BulletinDAO;
@@ -29,6 +35,8 @@ public class ListAction {
 	@Autowired
 	private BulletinDAO b_dao;
 	
+	
+	// 카테고리 별 게시판 보여주기
 	@RequestMapping("/list.inc")
 	public ModelAndView list(String nowPage, String b_category) {
 		
@@ -55,11 +63,15 @@ public class ListAction {
 		BulletinVO[] ar = b_dao.getList(String.valueOf(begin), String.valueOf(end), b_category);
 		
 		// 게시물의 댓글 갯수를 저장하기 위한 정수형 배열
-		int[] comm_ar = new int[ar.length];
+		int[] comm_ar = null;
 		
-		// 댓글 갯수를 가져오기 위한 for문
-		for(int i=0; i<comm_ar.length; i++) {
-			comm_ar[i] = b_dao.commCount(ar[i].getB_idx());
+		if(ar != null && ar.length > 0) {
+			comm_ar = new int[ar.length];
+			
+			// 댓글 갯수를 가져오기 위한 for문
+			for(int i=0; i<comm_ar.length; i++) {
+				comm_ar[i] = b_dao.commCount(ar[i].getB_idx());
+			}
 		}
 		
 		String board_name = null;
@@ -90,4 +102,68 @@ public class ListAction {
 		return mv;
 	}
 	
+	
+	// 검색할 때 
+	@RequestMapping(value = "/searchBulletin.inc", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> searchBulletin(String nowPage, String searchType, String searchValue, String b_category){
+		
+		if(nowPage == null)
+			this.nowPage = 1;
+		else
+			this.nowPage = Integer.parseInt(nowPage);
+		
+		rowTotal = b_dao.searchBulletinCount(searchType, searchValue, b_category);
+		
+		// 페이징 처리
+		Paging_SearchBulletin page = new Paging_SearchBulletin(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, b_category, searchType, searchValue);
+		// 생성된 페이지 기법의 HTML코드를 만들자
+		pageCode = page.getSb().toString();
+		
+		// JSP에서 표현할 게시물들의 목록
+		int begin = page.getBegin();
+		int end = page.getEnd();
+		
+		// 검색결과 목록을 가져 옴
+		BulletinVO[] ar = b_dao.searchBulletin(String.valueOf(begin), String.valueOf(end), searchType, searchValue, b_category);
+		
+		
+		// 게시물의 댓글 갯수를 저장하기 위한 정수형 배열
+		int[] comm_ar = null;
+		
+		if(ar != null && ar.length > 0) {
+			comm_ar = new int[ar.length];
+			
+			// 댓글 갯수를 가져오기 위한 for문
+			for(int i=0; i<comm_ar.length; i++) {
+				comm_ar[i] = b_dao.commCount(ar[i].getB_idx());
+			}
+		}
+
+		String board_name = null;
+		if(b_category.equals("free"))
+			board_name = "자유게시판";
+		else if(b_category.equals("qa"))
+			board_name = "Q&A";
+		else if(b_category.equals("adv"))
+			board_name = "광고문의";
+		
+		session.setAttribute("path", "list");
+		session.setAttribute("nowPage", page.getNowPage());
+		session.setAttribute("b_category", b_category);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+	
+		map.put("ar", ar); // 해당 게시물 정보들
+		map.put("pageCode", pageCode); // 페이징 코드
+		map.put("nowPage", page.getNowPage()); // 현재 페이지
+		map.put("rowTotal", rowTotal); // 검색결과 수
+		map.put("blockList", BLOCK_LIST); // 페이지 당 보여질 갯수
+		map.put("board_name", board_name); // 게시판 이름(한글)
+		map.put("b_category", b_category); // 게시판 이름(코드값)
+		map.put("comm_ar", comm_ar); // 댓글 수 표현목적
+		
+		return map;
+	}
 }

@@ -21,7 +21,7 @@
 	<span>&nbsp;카테고리를 선택해주세요.</span>
 	<br/>
 	<input type="radio" id="ad_free"
-		class="radio" value="free" name="category"><span class="sandwich">자유</span>&nbsp;&nbsp;&nbsp;
+		class="radio" value="free" name="category" checked="checked"><span class="sandwich">자유</span>&nbsp;&nbsp;&nbsp;
 	<input type="radio" id="ad_qna"
 		class="radio" value="qa" name="category"><span class="sandwich">QnA</span>&nbsp;&nbsp;&nbsp;
 	<input type="radio" id="ad_adv"
