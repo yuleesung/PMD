@@ -84,6 +84,7 @@ public class AdminAdvAction {
 		return mv;
 	}
 	
+	
 	// 그룹 변경
 	@RequestMapping(value = "/admin_groupList.inc", method = RequestMethod.POST)
 	@ResponseBody
@@ -129,12 +130,14 @@ public class AdminAdvAction {
 		return map;
 	}
 	
-	//delOrRestoreAdv
+	// 업로드하는 곳
 	@RequestMapping(value = "/delOrRestoreAdv.inc", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> delOrRestoreAdv(String a_idx, String status, String adv_group, String nowPage){
 
-		boolean chk = b_dao.delOrRestoreAdv(a_idx, status);
+		
+		boolean chk_zero = b_dao.setAdvZero(adv_group); // 모든 광고 status를 0으로 만들고, !!!
+		boolean chk = b_dao.delOrRestoreAdv(a_idx, status); // 광고 status 값 변경
 		
 		if(nowPage == null) // 첫 진입 때는 Page값 1
 			this.nowPage = 1;
@@ -165,7 +168,7 @@ public class AdminAdvAction {
 		else if(adv_group.equals("4"))
 			board_name = "4번 광고";
 		
-		AdvVO avo = b_dao.viewAdv(a_idx);
+		AdvVO avo = b_dao.viewAdv(a_idx); // 해당 광고정보
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
