@@ -267,10 +267,10 @@ table#t2 tfoot td ul.pagination-v4{
 												<td><c:if
 														test="${cvo.u_idx eq sessionScope.userInfo.u_idx }">
 														<input type="button" value="수정"
-															onclick="updateComment(${st.index+1}, ${fn:length(vo.c_list)+1}, ${cvo.c_idx })"
+															onclick="updateComment('${st.index+1}', '${fn:length(vo.c_list)+1}', '${cvo.c_idx }', '1')"
 															style="cursor: pointer;" />
 														<input type="button" value="삭제"
-															onclick="delComment(${cvo.c_idx })"
+															onclick="delComment('${cvo.c_idx }', '1')"
 															style="cursor: pointer;" />
 													</c:if></td>
 											</tr>
@@ -353,7 +353,7 @@ table#t2 tfoot td ul.pagination-v4{
 	    	});
 	    });
 	    
-	    function updateComment(cnt, len, c_idx) {
+	    function updateComment(cnt, len, c_idx, nowPage) {
 			var second_td = document.getElementById("t2_tbody").children[cnt].children[1];
 			var third_td = document.getElementById("t2_tbody").children[cnt].children[3];
 			var second_tdContent = second_td.innerHTML;
@@ -364,12 +364,12 @@ table#t2 tfoot td ul.pagination-v4{
 			
 			second_td.innerHTML = "<textarea id='revision"+cnt+"' style='width: 100%; height: 60px; resize: none;'>"+second_tdContent+"</textarea>";
 			document.getElementById("revision"+cnt).select();
-			third_td.innerHTML = "<input type='button' value='저장' onclick='c_save("+cnt+", \""+c_idx+"\")'/>&nbsp;<input type='button' value='취소' onclick='c_cancel()'/>";
+			third_td.innerHTML = "<input type='button' value='저장' onclick='c_save(\""+cnt+"\", \""+c_idx+"\", \""+nowPage+"\")'/>&nbsp;<input type='button' value='취소' onclick='c_cancel(\""+nowPage+"\")'/>";
 		}
 	    
-	    function delComment(c_idx) {
+	    function delComment(c_idx, nowPage) {
 			var c_url = "delComment.inc";
-			var param = "c_idx="+c_idx+"&b_idx=${vo.b_idx}";
+			var param = "c_idx="+c_idx+"&b_idx=${vo.b_idx}&nowPage="+nowPage;
 			
 			var chk = confirm("삭제 하시겠습니까?");
 			
@@ -378,10 +378,10 @@ table#t2 tfoot td ul.pagination-v4{
 			}
 		}
 	    
-	    function c_save(cnt, c_idx) {
+	    function c_save(cnt, c_idx, nowPage) {
 			var ta = $("#revision"+cnt).val();
 			var c_url = "updateComment.inc";
-			var param = "c_content="+ta+"&b_idx=${vo.b_idx}&u_idx=${sessionScope.userInfo.u_idx}&c_idx="+c_idx;
+			var param = "c_content="+ta+"&b_idx=${vo.b_idx}&c_idx="+c_idx+"&nowPage="+nowPage;
 			
 			if(ta.trim().length < 1){
     			alert("댓글 내용을 입력하세요!");
@@ -392,9 +392,9 @@ table#t2 tfoot td ul.pagination-v4{
 			ajax_m(c_url, param);
 		}
 	    
-	    function c_cancel() {
+	    function c_cancel(nowPage) {
 			var c_url = "viewComment.inc";
-			var param = "b_idx=${vo.b_idx}";
+			var param = "b_idx=${vo.b_idx}&nowPage="+nowPage;
 			
 			ajax_m(c_url, param);
 		}
@@ -407,7 +407,7 @@ table#t2 tfoot td ul.pagination-v4{
     			dataType: "json"
     		}).done(function(data){
     			// console.log(data.c_ar);
-    			var str = "<tr><td colspan='4' style='padding-top: 20px; font-weight: bold;'>댓글 "+data.c_ar.length+"</td></tr>";
+    			var str = "<tr><td colspan='4' style='padding-top: 20px; font-weight: bold;'>댓글 "+data.c_length+"</td></tr>";
     			
     			for(var i=0; i<data.c_ar.length; i++){
     				str += "<tr>";
@@ -417,8 +417,8 @@ table#t2 tfoot td ul.pagination-v4{
       				
       				if(data.c_ar[i].uvo.u_idx == "${sessionScope.userInfo.u_idx}"){
           				str += "<td>";
-	          			str += "<input type='button' value='수정' style='cursor: pointer;' onclick='updateComment("+(i+1)+", "+(data.c_ar.length+1)+", "+data.c_ar[i].c_idx+")'/>&nbsp;";
-	          			str += "<input type='button' value='삭제' style='cursor: pointer;' onclick='delComment("+data.c_ar[i].c_idx+")'/>";
+	          			str += "<input type='button' value='수정' style='cursor: pointer;' onclick='updateComment(\""+(i+1)+"\", \""+(data.c_ar.length+1)+"\", \""+data.c_ar[i].c_idx+"\", \""+data.nowPage+"\")'/>&nbsp;";
+	          			str += "<input type='button' value='삭제' style='cursor: pointer;' onclick='delComment(\""+data.c_ar[i].c_idx+"\", \""+data.nowPage+"\")'/>";
           				str += "</td>";
       				}else{
       					str += "<td>";
@@ -429,6 +429,7 @@ table#t2 tfoot td ul.pagination-v4{
     			}
     			
     			$("#t2 tbody").html(str);
+    			$("#t2 tfoot tr td").html(data.pageCode);
     			$("#comment_div1").html('<textarea id="comment" placeholder="여기서 댓글 작성하세요!!"></textarea>');
     		}).fail(function(err){
     			console.log(err);
@@ -458,8 +459,11 @@ table#t2 tfoot td ul.pagination-v4{
 	    	}
 		}
 	    
-	    function pageCode(nowPage, b_idx) {
+	    function page(nowPage, b_idx) {
+			var c_url = "viewComment.inc";
+			var param = "nowPage="+encodeURIComponent(nowPage)+"&b_idx="+encodeURIComponent(b_idx);
 			
+			ajax_m(c_url, param);
 		}
     </script>
 </body>

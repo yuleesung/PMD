@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Bulletin_C_VO implements Serializable{
 	
-	private String c_idx, c_content, write_date, ip, status, b_idx, u_idx;
+	private String c_idx, c_content, write_date, ip, status, b_idx, u_idx, nowPage;
 
 	private UserVO uvo;
 
@@ -70,6 +70,14 @@ public class Bulletin_C_VO implements Serializable{
 
 	public void setUvo(UserVO uvo) {
 		this.uvo = uvo;
+	}
+
+	public String getNowPage() {
+		return nowPage;
+	}
+
+	public void setNowPage(String nowPage) {
+		this.nowPage = nowPage;
 	}
 
 }
