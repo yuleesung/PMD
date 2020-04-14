@@ -592,7 +592,7 @@
 		select count(*) from bulletin_c_t where b_idx = #{b_idx} and status = 0
 	</select>
 	
-	<!-- 게시물 하나당 전체 댓글 수 -->
+	<!-- 유저 하나당 전체 댓글 수 -->
 	<select id="commCountForAdmin" resultType="int" parameterType="String">
 		select count(*) from bulletin_c_t where b_idx = #{b_idx}
 	</select>
@@ -609,7 +609,7 @@
 	<select id="u_commListForAjax" parameterType="java.util.Map" resultType="com.pmd.vo.Bulletin_C_VO">
 		select * from(	
 			select rownum r_num, a.* from
-			(select * from bulletin_c_t where u_idx = #{u_idx} order by c_idx asc) a
+			(select * from bulletin_c_t where u_idx = #{u_idx} order by c_idx desc) a
 		)where r_num between #{begin} and #{end}
 	</select>
 	

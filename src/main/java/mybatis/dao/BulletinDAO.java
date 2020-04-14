@@ -611,11 +611,11 @@ public class BulletinDAO {
 	}
 	
 	// ajax용 유저의 댓글 모음
-	public Bulletin_C_VO[] u_commListForAjax(String b_idx, String begin, String end) {
+	public Bulletin_C_VO[] u_commListForAjax(String u_idx, String begin, String end) {
 		Bulletin_C_VO[] ar = null;
 		
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("b_idx", b_idx);
+		map.put("u_idx", u_idx);
 		map.put("begin", begin);
 		map.put("end", end);
 		
