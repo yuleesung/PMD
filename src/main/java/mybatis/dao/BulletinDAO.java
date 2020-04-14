@@ -501,7 +501,7 @@ public class BulletinDAO {
 		map.put("searchValueForAdmin", searchValueForAdmin);
 		map.put("b_category", b_category);
 
-		List<BulletinVO> list = ss.selectList("searchBulletinForAdmin.searchBulletinForAdmin", map);
+		List<BulletinVO> list = ss.selectList("bulletin.searchBulletinForAdmin", map);
 		if (list != null && !list.isEmpty()) {
 			ar = new BulletinVO[list.size()];
 			list.toArray(ar);
