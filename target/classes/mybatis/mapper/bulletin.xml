@@ -589,6 +589,11 @@
 	
 	<!-- 게시물 하나당 전체 댓글 수 -->
 	<select id="commCount" resultType="int" parameterType="String">
+		select count(*) from bulletin_c_t where b_idx = #{b_idx} and status = 0
+	</select>
+	
+	<!-- 게시물 하나당 전체 댓글 수 -->
+	<select id="commCountForAdmin" resultType="int" parameterType="String">
 		select count(*) from bulletin_c_t where b_idx = #{b_idx}
 	</select>
 	
