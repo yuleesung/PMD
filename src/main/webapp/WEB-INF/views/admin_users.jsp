@@ -17,30 +17,31 @@
 	<div id="memberSetting" style="width: 898px; margin: 0;">
 		<h2> 관리자 - 회원관리</h2>
 		<form action="">
-		<div>
-			<select>
-				<option selected="selected">::전체::</option>
-				<option>아이디</option>
-				<option>닉네임</option>
-				<option>이름</option>
-				<option>이메일</option>
-				<option>소셜아이디</option>
-			</select>
-			<input type="text">
+		<fieldset>
+			<legend>회원 검색</legend>
+			<div title="회원검색">
+			<label><input type="radio" value="all" name="choice" checked="checked"/>전체</label>
+			<label><input type="radio" value="normal" name="choice" />일반회원</label>
+			<label><input type="radio" value="social" name="choice" />소셜회원</label>
+			&nbsp;&nbsp;&nbsp;
+			<label>상태:</label>
+			<input type="checkbox" value="total" name="chk" id="total" />전체
+			<input type="checkbox" value="active" name="chk" />활동중
+			<input type="checkbox" value="stop" name="chk" />활동정지
+			<input type="checkbox" value="leave" name="chk"  />탈퇴
+			<br/>
+			<label for="u_id">아이디:</label> <input type="text" name="u_id" id="u_id"/>
+			<label for="nickname">닉네임: </label> <input type="text" name="nickname" id="nickname" />
+			<label for="u_name">이름: </label> <input type="text" name="u_name" id="u_name" /><br/>
+			<label for="email">이메일: </label> <input type="text" name="email" id="email" />
+			<label for="sns_id">소셜 아이디: </label> <input type="text" name="sns_id" id="sns_id" />
+			<label for="reg_date">가입일: </label> <input type="date" name="reg_date" id="reg_date" title="가입일" /><br/>
 			
-			<label>가입일:<input type="date" title="가입일"></label>
-			
-			<label>상태:
-				<input type="checkbox" value="전체" checked="checked">전체
-				<input type="checkbox" value="활동중">활동중
-				<input type="checkbox" value="활동정지">활동정지
-				<input type="checkbox" value="탈퇴">탈퇴
-			</label>
-			
-			<input type="button" value="회원검색">
-		</div>
-		
+			<input type="button" value="검색" id="userSrch" />
+			</div>
+		</fieldset>
 		</form>
+		
 		<pre> 총 ${rowTotal } 명</pre>
 		<hr/>
 		<table id="users_t">
@@ -75,7 +76,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="vo" items="${ar }" varStatus="st" >
-					<tr onclick="userComm('${vo}', '${nowPage }')">
+					<tr onclick="userComm('${vo.u_idx}', '${nowPage }')">
 						<td>${rowTotal - ((nowPage-1)*blockList+st.index) }</td>
 						<td>${vo.u_id}</td>
 						<td>${vo.nickname }</td>
@@ -95,7 +96,6 @@
 						<td>
 							<button type="button" onclick="lock('${vo.u_idx}', '${vo.status }', '${nowPage }')">정지</button>
 							<button type="button" onclick="unlock('${vo.u_idx}', '${vo.status }', '${nowPage }')">해제</button>
-							<input type="hidden" value="${vo.c_list }" name="c_list" id="c_list" />
 						</td>
 					</tr>
 				</c:forEach>	
@@ -207,7 +207,6 @@
 				
 				$("#users_t tbody").html(str);
 				$(".pagination-wrap").html(data.pageCode);
-				
 			}
 			
 			
@@ -216,32 +215,61 @@
 		});
 	}
 	
-	function userComm(uvo, nowPage){
+	function userComm(u_idx, nowPage){
 		
-		console.log(uvo);
+		var param = "u_idx="+encodeURIComponent(u_idx)+"&nowPage="+encodeURIComponent(nowPage);
+		$.ajax({
+			url: "admin_userComm.inc",
+			type: "post",
+			data: param,
+			dataType: "json"
 			
-		//location.href="admin_userComm.inc?vo&nowPage=nowPage";
+		}).done(function(data){
+			
+			//location.href = "admin_userComm_frm.inc";
+		}).fail(function(err){
+			console.log(err);
+		});			
+			
 	}
+	
 	
 	$(function(){
 		
-		/* $("#users_t tbody tr").click(function(nowPage){
-			var str = "";
-			var tdArr = new Array();	//배열 선언
-			
-			// 현재 클릭된 row(<tr>)
-			var tr = $(this);
-			var td = tr.children(); 
-			
-			var c_list = $("#c_list");
-			
-			location.href ="admin_userComm.inc?nowPage=nowPage&c_list=c_list";
-			
-			
-		}); */
+		
+		$(document).ready(function(){
+			$("input[type=checkbox]").each(function(){
+				$(this).prop('checked', true);
+			});
+		});
+		
+		// 상태: '전체' 선택 했을 경우
+		$("#total").click(function(){
+			if($("#total").prop("checked")){
+				$("input[name=chk]").prop("checked", true);
+			}else{
+				$("input[name=chk]").prop("checked", false);
+			}
+		});
+		
+		if($("input[type=checkbox]") && !$("checkboox[value='total']")){
+			$("#total").prop("checked", false);
+		}
+		
+		
+		// 회원검색 클릭했을 때,
+		$("#userSrch").on("click", function(){
+			var u_id = $("#u_id").val().trim();
+			var nickname = $("#nickname").val().trim();
+			var u_name = $("#u_name").val().trim();
+			var email = $("#email").val().trim();
+			var sns_id = $("#sns_id").val().trim();
+			var reg_date = $("#reg_date").val().trim();
+		});
+		
 		
 	});
-	
+		
 	</script>
 	
 
