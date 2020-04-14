@@ -29,9 +29,9 @@
 	<div style="display: inline-flex; float: right; margin-right: 10%;">
 		<select id="search_sel" name="search_sel" style="height: 25px; ">
 			<option value="all">전체</option>
-			<option value="subject">제목</option>
-			<option value="nickname">이름</option>
-			<option value="content">내용</option>
+			<option value="1">제목</option>
+			<option value="2">이름</option>
+			<option value="3">내용</option>
 		</select>
 		<input type="text" id="search_txt" name="search_txt"/>
 		<input type="button" value="검색" id="search_btn"/>
@@ -120,6 +120,7 @@
 			 
 			 
 			 $("#search_btn").click(function(){
+				 // 검색 버튼 클릭 시 
 					var group_val = "free"; // 그룹 초기값
 					
 					if(val != "")
@@ -128,16 +129,21 @@
 					var sel = $("#search_sel").val(); // 셀렉트
 					var txt = $("#search_txt").val(); // 텍스트
 			
-					if(sel == "all") // 전체
+					if(sel == "all") // 전체검색
 						admin_board(group_val);
-					else
-						console.log(group_val+",,"+sel+",,"+txt);
+					else{ // 조건부검색
+						var url = "searchBulletinCountForAdmin.inc";
+						var param = "searchTypeForAdmin="+encodeURIComponent(sel)+"&searchValueForAdmin="+encodeURIComponent(txt)
+									+"&b_category="+encodeURIComponent(group_val);
+						ajax_a(url, param);
+					}
 				});
 		});
 		
 		
 
-		function boardStatus(b_idx, status, b_category, nowPage) {
+		function boardStatus(b_idx, status, b_category, nowPage) { 
+			// 글 삭제 or 복구
 			var str = "";
 			if (status == 0)
 				str = "복구하시겠습니까?";
@@ -161,7 +167,14 @@
 		function page(nowPage, category){
 			// 페이징
 			var param = "nowPage="+encodeURIComponent(nowPage)+"&b_category="+encodeURIComponent(category);
-			ajax_a("admin_board.inc", param);	
+			ajax_a("admin_board.inc", param);
+		}
+		
+		function searchPage(nowPage, category, searchTypeForAdmin, searchValueForAdmin){
+			// 검색 페이징
+			var param = "nowPage="+encodeURIComponent(nowPage)+"&b_category="+encodeURIComponent(category)
+						+"&searchTypeForAdmin="+encodeURIComponent(searchTypeForAdmin)+"&searchValueForAdmin="+searchValueForAdmin;
+			ajax_a("searchBulletinCountForAdmin.inc", param);
 		}
 		
 		

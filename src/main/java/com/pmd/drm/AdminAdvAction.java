@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pmd.util.Paging_AdvGroup;
+import com.pmd.util.Paging_SearchAdvGroup;
 import com.pmd.vo.AdvVO;
 
 import mybatis.dao.BulletinDAO;
@@ -180,6 +181,60 @@ public class AdminAdvAction {
 		map.put("board_name", board_name);
 		map.put("img", avo.getFile_name());
 		map.put("adv_group", avo.getAdv_group());
+		
+		return map;
+	}
+	
+
+	// 검색기능
+	@RequestMapping(value = "/searchAdv.inc", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> searchAdv(String nowPage, String searchTypeForAdv, String searchValueForAdv, String adv_group){
+		// nowPage, 현재페이지
+		// searchTypeForAdv, 셀렉트 값
+		// searchValueForAdv, 검색 텍스트 값
+		// adv_group, 그룹 값
+		
+		if(nowPage == null) // 첫 진입 때는 Page값 1
+			this.nowPage = 1;
+		else
+			this.nowPage = Integer.parseInt(nowPage);
+		
+		rowTotal = b_dao.searchAdvCount(searchTypeForAdv, searchValueForAdv, adv_group); // 검색결과 목록의 갯수
+		
+		// 페이징처리.. 검색용으로 바꿔야 함
+		Paging_SearchAdvGroup page = new Paging_SearchAdvGroup(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, 
+																	adv_group, searchTypeForAdv, searchValueForAdv);
+		
+		pageCode = page.getSb().toString(); // 페이징 HTML처리
+		
+		String begin = String.valueOf(page.getBegin());
+		String end = String.valueOf(page.getEnd());
+		
+		AdvVO[] ar = b_dao.searchAdv(searchTypeForAdv, searchValueForAdv, adv_group, begin, end); // 검색결과 목록을 가져 옴
+		
+		// jsp에서 표현할 문자열
+		String board_name = null; 
+		
+		if(adv_group.equals("1"))
+			board_name = "1번 광고";
+		else if(adv_group.equals("2"))
+			board_name = "2번 광고";
+		else if(adv_group.equals("3"))
+			board_name = "3번 광고";
+		else if(adv_group.equals("4"))
+			board_name = "4번 광고";
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("ar", ar); // 검색 결과값
+		map.put("pageCode", pageCode); // 페이지버튼
+		map.put("nowPage", page.getNowPage()); // 현재페이지
+		map.put("rowTotal", rowTotal); // 검색결과 총 갯수
+		map.put("blockList", BLOCK_LIST); // 한 페이지에 보여질 리스트 갯수
+		map.put("board_name", board_name);
+
 		
 		return map;
 	}

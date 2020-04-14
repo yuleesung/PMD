@@ -25,8 +25,8 @@
 	<div style="display: inline-flex; float: right; margin-right: 10%;">
 		<select id="search_sel" name="search_sel" style="height: 25px;">
 			<option value="all">전체</option>
-			<option value="co_name">회사명</option>
-			<option value="co_email">이메일</option>
+			<option value="1">회사명</option>
+			<option value="2">이메일</option>
 		</select>
 		<input type="text" id="search_txt" name="search_txt"/>
 		<input type="button" value="검색" id="search_btn"/>
@@ -111,12 +111,14 @@
 				var sel = $("#search_sel").val(); // 셀렉트!
 				var txt = $("#search_txt").val(); // 텍스트!
 		
-				if(sel == "all")
+				if(sel == "all") // 전체검색
 					admin_groupList(group_val);
-				else if(sel == "co_name")
-					console.log(sel, txt);
-				else if(sel == "co_email")
-					console.log(sel, txt);
+				else { // 조건부 검색
+					var url = "searchAdv.inc";
+					var param = "searchTypeForAdv="+encodeURIComponent(sel)+"&searchValueForAdv="+encodeURIComponent(txt)
+								+"&adv_group="+encodeURIComponent(group_val);
+					ajax_a(url, param);
+				}
 			});
 		});
 		
@@ -132,6 +134,15 @@
 			// 페이징
 			var param = "nowPage="+encodeURIComponent(nowPage)+"&adv_group="+encodeURIComponent(group);
 			ajax_a("admin_groupList.inc", param);	
+		}
+		
+
+		function searchPage(nowPage, group, searchTypeForAdv, searchValueForAdv){
+			// 검색결과 페이징
+			var param = "nowPage="+encodeURIComponent(nowPage)+"&adv_group="+encodeURIComponent(group)
+			+"&searchTypeForAdv="+encodeURIComponent(searchTypeForAdv)+"&searchValueForAdv="+encodeURIComponent(searchValueForAdv);
+			
+			ajax_a("searchAdv.inc", param);	
 		}
 		
 		
@@ -158,6 +169,10 @@
 			console.log("status => "+status);
 			console.log("adv_group => "+adv_group);
 			console.log("nowPage => "+nowPage);
+			
+			var url = "추가예정";
+			var param = "a_idx="+encodeURIComponent(a_idx)+"&status="+encodeURIComponent(status)
+						+"&adv_group="+encodeURIComponent(adv_group)+"&nowPage="+encodeURIComponent(nowPage);
 		}
 		
 		
