@@ -77,7 +77,7 @@ div#b_content {
 }
 
 div#b_content:hover {
-	overflow: scroll;
+	overflow: auto;
 }
 
 textarea#comment {

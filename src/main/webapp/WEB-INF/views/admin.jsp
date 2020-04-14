@@ -42,7 +42,7 @@
 	}
 	
 	#right:hover{
-		overflow: scroll;
+		overflow: auto;
 	}
 	
 	a{
