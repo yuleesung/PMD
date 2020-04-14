@@ -511,7 +511,7 @@ public class BulletinDAO {
 	}
 	
 	// 회원 검색 후 총 회원 수
-	public int searchUserCountForAdmin(String u_id, String nickname, String u_name, String email, String sns_id, String reg_date, String total, String active, String stop, String leave) {
+	public int searchUserCountForAdmin(String u_id, String nickname, String u_name, String email, String sns_id, String reg_date, String total, String active, String stop, String leave, String choice) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("u_id", u_id);
 		map.put("nickname", nickname);
@@ -523,12 +523,13 @@ public class BulletinDAO {
 		map.put("active", active);
 		map.put("stop", stop);
 		map.put("leave", leave);
+		map.put("choice", choice);
 		
 		return ss.selectOne("bulletin.searchUserCountForAdmin", map);
 	}
 	
 	// 회원 검색 기능
-	public UserVO[] searchUserForAdmin(String u_id, String nickname, String u_name, String email, String sns_id, String reg_date, String total, String active, String stop, String leave, String begin, String end) {
+	public UserVO[] searchUserForAdmin(String u_id, String nickname, String u_name, String email, String sns_id, String reg_date, String total, String active, String stop, String leave, String choice, String begin, String end) {
 		UserVO[] ar = null;
 		
 		Map<String, String> map = new HashMap<String, String>();
@@ -542,6 +543,7 @@ public class BulletinDAO {
 		map.put("active", active);
 		map.put("stop", stop);
 		map.put("leave", leave);
+		map.put("choice", choice);
 		map.put("begin", begin);
 		map.put("end", end);
 		
@@ -624,6 +626,19 @@ public class BulletinDAO {
 		List<Bulletin_C_VO> list = ss.selectList("bulletin.u_commListForAjax", map);
 		if(list != null && !list.isEmpty()) {
 			ar = new Bulletin_C_VO[list.size()];
+			list.toArray(ar);
+		}
+		
+		return ar;
+	}
+	
+	// 날짜 비교를 위한 adv_t 날짜 검색 기능
+	public AdvVO[] searchDateOnAdv_t(String adv_group) {
+		AdvVO[] ar = null;
+		
+		List<AdvVO> list = ss.selectList("bulletin.searchDateOnAdv_t", adv_group);
+		if(list != null && !list.isEmpty()) {
+			ar = new AdvVO[list.size()];
 			list.toArray(ar);
 		}
 		

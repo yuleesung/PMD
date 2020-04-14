@@ -447,47 +447,54 @@
 	<select id="searchUserCountForAdmin" parameterType="java.util.Map" resultType="int">
 		select count(*) from users_t
 		<where>
-			<trim suffixOverrides=",">
-				<if test="u_id != null">
-					lower(u_id) like lower('%'||#{u_id}||'%'),
-				</if>
-				<if test="nickname != null">
-					lower(nickname) like lower('%'||#{nickname}||'%'),
-				</if>
-				<if test="u_name != null">
-					lower(u_name) like lower('%'||#{u_name}||'%'),
-				</if>
-				<if test="email != null">
-					lower(email) like lower('%'||#{email}||'%'),
-				</if>
-				<if test="sns_id != null">
-					lower(sns_id) like lower('%'||#{sns_id}||'%'),
-				</if>
-				<if test="reg_date != null">
-					reg_date = #{reg_date},
-				</if>
-				<if test="total != null">
-					status in(0, 1, 2),
-				</if>
-				<if test="active != null and stop != null">
-					status in(0, 2),
-				</if>
-				<if test="active != null and leave != null">
-					status in(0, 1),
-				</if>
-				<if test="stop != null and leave != null">
-					status in(1, 2),
-				</if>
-				<if test="active != null">
-					status = 0,
-				</if>
-				<if test="stop != null">
-					status = 2,
-				</if>
-				<if test="leave != null">
-					status = 1,
-				</if>
-			</trim>
+			<if test="u_id != null">
+				lower(u_id) like lower('%'||#{u_id}||'%') and
+			</if>
+			<if test="nickname != null">
+				lower(nickname) like lower('%'||#{nickname}||'%') and
+			</if>
+			<if test="u_name != null">
+				lower(u_name) like lower('%'||#{u_name}||'%') and
+			</if>
+			<if test="email != null">
+				lower(email) like lower('%'||#{email}||'%') and
+			</if>
+			<if test="sns_id != null">
+				lower(sns_id) like lower('%'||#{sns_id}||'%') and
+			</if>
+			<if test="reg_date != null">
+				reg_date = #{reg_date} and
+			</if>
+			<if test="total != null">
+				status in(0, 1, 2) and
+			</if>
+			<if test="active != null and stop != null">
+				status in(0, 2) and
+			</if>
+			<if test="active != null and leave != null">
+				status in(0, 1) and
+			</if>
+			<if test="stop != null and leave != null">
+				status in(1, 2) and
+			</if>
+			<if test="active != null">
+				status = 0 and
+			</if>
+			<if test="stop != null">
+				status = 2 and
+			</if>
+			<if test="leave != null">
+				status = 1 and
+			</if>
+			<if test="choice == 'all'">
+				u_id is not null and sns_id is not null
+			</if>
+			<if test="choice == 'normal'">
+				u_id is not null
+			</if>
+			<if test="choice == 'social'">
+				sns_id is not null
+			</if>
 		</where>
 	</select>
 	
@@ -497,47 +504,54 @@
 			select rownum r_num, a.* from
 				(select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t
 				<where>
-					<trim suffixOverrides=",">
-						<if test="u_id != null">
-							lower(u_id) like lower('%'||#{u_id}||'%'),
-						</if>
-						<if test="nickname != null">
-							lower(nickname) like lower('%'||#{nickname}||'%'),
-						</if>
-						<if test="u_name != null">
-							lower(u_name) like lower('%'||#{u_name}||'%'),
-						</if>
-						<if test="email != null">
-							lower(email) like lower('%'||#{email}||'%'),
-						</if>
-						<if test="sns_id != null">
-							lower(sns_id) like lower('%'||#{sns_id}||'%'),
-						</if>
-						<if test="reg_date != null">
-							reg_date = #{reg_date},
-						</if>
-						<if test="total != null">
-							status in(0, 1, 2),
-						</if>
-						<if test="active != null and stop != null">
-							status in(0, 2),
-						</if>
-						<if test="active != null and leave != null">
-							status in(0, 1),
-						</if>
-						<if test="stop != null and leave != null">
-							status in(1, 2),
-						</if>
-						<if test="active != null">
-							status = 0,
-						</if>
-						<if test="stop != null">
-							status = 2,
-						</if>
-						<if test="leave != null">
-							status = 1,
-						</if>
-					</trim>
+					<if test="u_id != null">
+						lower(u_id) like lower('%'||#{u_id}||'%') and
+					</if>
+					<if test="nickname != null">
+						lower(nickname) like lower('%'||#{nickname}||'%') and
+					</if>
+					<if test="u_name != null">
+						lower(u_name) like lower('%'||#{u_name}||'%') and
+					</if>
+					<if test="email != null">
+						lower(email) like lower('%'||#{email}||'%') and
+					</if>
+					<if test="sns_id != null">
+						lower(sns_id) like lower('%'||#{sns_id}||'%') and
+					</if>
+					<if test="reg_date != null">
+						reg_date = #{reg_date} and
+					</if>
+					<if test="total != null">
+						status in(0, 1, 2) and
+					</if>
+					<if test="active != null and stop != null">
+						status in(0, 2) and
+					</if>
+					<if test="active != null and leave != null">
+						status in(0, 1) and
+					</if>
+					<if test="stop != null and leave != null">
+						status in(1, 2) and
+					</if>
+					<if test="active != null">
+						status = 0 and
+					</if>
+					<if test="stop != null">
+						status = 2 and
+					</if>
+					<if test="leave != null">
+						status = 1 and
+					</if>
+					<if test="choice == 'all'">
+						u_id is not null and sns_id is not null
+					</if>
+					<if test="choice == 'normal'">
+						u_id is not null
+					</if>
+					<if test="choice == 'social'">
+						sns_id is not null
+					</if>
 				</where>
 			order by b_idx desc) a
 		)where r_num between #{begin} and #{end}
@@ -611,6 +625,11 @@
 			select rownum r_num, a.* from
 			(select * from bulletin_c_t where u_idx = #{u_idx} order by c_idx desc) a
 		)where r_num between #{begin} and #{end}
+	</select>
+	
+	<!-- 날짜 비교를 위한 adv_t 날짜 검색 기능 -->
+	<select id="searchDateOnAdv_t" parameterType="String" resultType="com.pmd.vo.AdvVO">
+		select * from adv_t where adv_group = #{adv_group}
 	</select>
 	
 </mapper>
