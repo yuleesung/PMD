@@ -218,24 +218,35 @@ public class MainAction {
 				if (g4 == 4)
 					g4 = 0;
 			}
+		} else {
+			for(int i=0; i<4; i++) {
+				img_ar1[i] = "resources/images/loading.gif";
+				img_ar2[i] = "resources/images/loading.gif";
+				img_ar3[i] = "resources/images/loading.gif";
+				img_ar4[i] = "resources/images/loading.gif";
+				
+				link_ar1[i] = "#";
+				link_ar2[i] = "#";
+				link_ar3[i] = "#";
+				link_ar4[i] = "#";
+			}		
 		}
 
 		session.setAttribute("path", "main"); // 로그인할 때 필요한 세션
 
 		ModelAndView mv = new ModelAndView();
 
-		if (adv_ar.length == 4) { // 광고가 4개 업로드 되었을 때 추가
-			mv.addObject("adv_ar", adv_ar);
-			mv.addObject("img_ar1", img_ar1);
-			mv.addObject("img_ar2", img_ar2);
-			mv.addObject("img_ar3", img_ar3);
-			mv.addObject("img_ar4", img_ar4);
-			
-			mv.addObject("link_ar1", link_ar1);
-			mv.addObject("link_ar2", link_ar2);
-			mv.addObject("link_ar3", link_ar3);
-			mv.addObject("link_ar4", link_ar4);
-		}
+
+		mv.addObject("adv_ar", adv_ar);
+		mv.addObject("img_ar1", img_ar1);
+		mv.addObject("img_ar2", img_ar2);
+		mv.addObject("img_ar3", img_ar3);
+		mv.addObject("img_ar4", img_ar4);
+		
+		mv.addObject("link_ar1", link_ar1);
+		mv.addObject("link_ar2", link_ar2);
+		mv.addObject("link_ar3", link_ar3);
+		mv.addObject("link_ar4", link_ar4);
 
 		mv.addObject("ar", ar); // 추천목록에 표현하기 위한 ar
 
