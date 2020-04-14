@@ -163,7 +163,7 @@ option {
 
 		<!-- 배너 추천 훈련과정 -->
 
-		<div id="myCarousel" class="slide" data-ride="carousel">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="position: unset;">
 			<div class="carousel-inner row w-100 mx-auto">
 
 				<c:forEach var="mvo" items="${ar }" varStatus="st">
