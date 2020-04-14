@@ -550,13 +550,13 @@
 			<where>
 				<choose>
 					<when test="searchTypeForAdv == 0">
-						lower(co_name) like lower('%'||#{searchValueForAdv}||'%') and lower(co_email) like lower('%'||#{searchValueForAdv}||'%')
+						lower(co_name) like lower('%'||#{searchValueForAdv}||'%') and lower(co_email) like lower('%'||#{searchValueForAdv}||'%') and adv_group = #{adv_group}
 					</when>
 					<when test="searchTypeForAdv == 1">
-						lower(co_name) like lower('%'||#{searchValueForAdv}||'%')
+						lower(co_name) like lower('%'||#{searchValueForAdv}||'%') and adv_group = #{adv_group}
 					</when>
 					<when test="searchTypeForAdv == 2">
-						lower(co_email) like lower('%'||#{searchValueForAdv}||'%')
+						lower(co_email) like lower('%'||#{searchValueForAdv}||'%') and adv_group = #{adv_group}
 					</when>
 				</choose>
 			</where>
@@ -572,13 +572,13 @@
 					<where>
 						<choose>
 							<when test="searchTypeForAdv == 0">
-								lower(co_name) like lower('%'||#{searchValueForAdv}||'%') and lower(co_email) like lower('%'||#{searchValueForAdv}||'%')
+								lower(co_name) like lower('%'||#{searchValueForAdv}||'%') and lower(co_email) like lower('%'||#{searchValueForAdv}||'%') and adv_group = #{adv_group}
 							</when>
 							<when test="searchTypeForAdv == 1">
-								lower(co_name) like lower('%'||#{searchValueForAdv}||'%')
+								lower(co_name) like lower('%'||#{searchValueForAdv}||'%') and adv_group = #{adv_group}
 							</when>
 							<when test="searchTypeForAdv == 2">
-								lower(co_email) like lower('%'||#{searchValueForAdv}||'%')
+								lower(co_email) like lower('%'||#{searchValueForAdv}||'%') and adv_group = #{adv_group}
 							</when>
 						</choose>
 					</where>

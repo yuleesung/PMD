@@ -555,21 +555,23 @@ public class BulletinDAO {
 	}
 	
 	// 광고 전체, 회사, 이메일 검색하고난 후 총 광고 수
-	public int searchAdvCount(String searchTypeForAdv, String searchValueForAdv) {
+	public int searchAdvCount(String searchTypeForAdv, String searchValueForAdv, String adv_group) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchTypeForAdv", searchTypeForAdv);
 		map.put("searchValueForAdv", searchValueForAdv);
+		map.put("adv_group", adv_group);
 		
 		return ss.selectOne("bulletin.searchAdvCount", map);
 	}
 	
 	// 광고 전체, 회사, 이메일로 검색하는 기능
-	public AdvVO[] searchAdv(String searchTypeForAdv, String searchValueForAdv, String begin, String end) {
+	public AdvVO[] searchAdv(String searchTypeForAdv, String searchValueForAdv, String adv_group, String begin, String end) {
 		AdvVO[] ar = null;
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchTypeForAdv", searchTypeForAdv);
 		map.put("searchValueForAdv", searchValueForAdv);
+		map.put("adv_group", adv_group);
 		map.put("begin", begin);
 		map.put("end", end);
 		
