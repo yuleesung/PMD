@@ -54,6 +54,14 @@ public class ListAction {
 		
 		BulletinVO[] ar = b_dao.getList(String.valueOf(begin), String.valueOf(end), b_category);
 		
+		// 게시물의 댓글 갯수를 저장하기 위한 정수형 배열
+		int[] comm_ar = new int[ar.length];
+		
+		// 댓글 갯수를 가져오기 위한 for문
+		for(int i=0; i<comm_ar.length; i++) {
+			comm_ar[i] = b_dao.commCount(ar[i].getB_idx());
+		}
+		
 		String board_name = null;
 		if(b_category.equals("free"))
 			board_name = "자유게시판";
@@ -75,6 +83,7 @@ public class ListAction {
 		mv.addObject("blockList", BLOCK_LIST);
 		mv.addObject("board_name", board_name);
 		mv.addObject("b_category", b_category);
+		mv.addObject("comm_ar", comm_ar);
 		mv.setViewName("list");
 		
 		

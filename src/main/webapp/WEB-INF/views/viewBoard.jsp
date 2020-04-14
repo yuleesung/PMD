@@ -114,6 +114,11 @@ table#t2 tbody td {
 	padding: 5px;
 	padding-top: 12px;
 }
+
+table#t2 tfoot td ul.pagination-v4{
+	width: 400px;
+	margin: auto;
+}
 </style>
 </head>
 <body>
@@ -251,7 +256,7 @@ table#t2 tbody td {
 								<tbody id="t2_tbody">
 									<tr>
 										<td colspan="4" style="padding-top: 20px; font-weight: bold;">댓글
-											${fn:length(vo.c_list) }</td>
+											${c_length }</td>
 									</tr>
 									<c:if test="${fn:length(vo.c_list) > 0}">
 										<c:forEach var="cvo" items="${vo.c_list }" varStatus="st">
@@ -272,6 +277,15 @@ table#t2 tbody td {
 										</c:forEach>
 									</c:if>
 								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="4">
+											<c:if test="${c_length > 10 }">
+												${pageCode }
+											</c:if>
+										</td>
+									</tr>
+								</tfoot>
 							</table>
 						</div>
 					</div>
@@ -393,7 +407,7 @@ table#t2 tbody td {
     			dataType: "json"
     		}).done(function(data){
     			// console.log(data.c_ar);
-    			var str = "<tr><td colspan='4' style='padding-top: 20px; font-weight: strong;'>댓글 "+data.c_ar.length+"</td></tr>";
+    			var str = "<tr><td colspan='4' style='padding-top: 20px; font-weight: bold;'>댓글 "+data.c_ar.length+"</td></tr>";
     			
     			for(var i=0; i<data.c_ar.length; i++){
     				str += "<tr>";
@@ -442,6 +456,10 @@ table#t2 tbody td {
 					console.log(err);
 				});
 	    	}
+		}
+	    
+	    function pageCode(nowPage, b_idx) {
+			
 		}
     </script>
 </body>

@@ -135,7 +135,7 @@
 											${vo.subject }
 										 </a>
 										 <c:if test="${fn:length(vo.c_list) > 0 }">
-										 	&nbsp;<span style="font-weight: bold; color: #6a99cb">(${fn:length(vo.c_list) })</span>
+										 	&nbsp;<span style="font-weight: bold; color: #6a99cb">(${comm_ar[st.index] })</span>
 										 </c:if>
 									 </c:if>
 									 <c:if test="${vo.u_idx ne uvo.u_idx  }">
@@ -150,7 +150,7 @@
 										${vo.subject }
 									 </a>
 									 <c:if test="${fn:length(vo.c_list) > 0 }">
-									 	&nbsp;<span style="font-weight: bold; color: #6a99cb">(${fn:length(vo.c_list) })</span>
+									 	&nbsp;<span style="font-weight: bold; color: #6a99cb">(${comm_ar[st.index] })</span>
 									 </c:if>
 								  </c:if>
 								  </td>

@@ -10,12 +10,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pmd.util.Paging_ViewBoard_Comm;
 import com.pmd.vo.BulletinVO;
 
 import mybatis.dao.BulletinDAO;
 
 @Controller
 public class ViewBoardAction {
+	
+	// 페이징 기법을 위한 상수들
+	public final int BLOCK_LIST = 10; // 한 페이지당 보여질 게시물의 수
+	public final int BLOCK_PAGE = 5; // 한 블록당 보여질 페이지 수
+	
+	int nowPage; // 현재 페이지 값
+	int rowTotal; // 전체 게시물 수
+	String pageCode; // 페이징 처리된 HTML코드값
 	
 	@Autowired
 	private HttpSession session;
@@ -69,11 +78,19 @@ public class ViewBoardAction {
 			}
 		}
 		
+		// 댓글 페이징을 위한 값 설정
+		this.nowPage = 1;
+		rowTotal = b_dao.commCount(b_idx);
+		Paging_ViewBoard_Comm page = new Paging_ViewBoard_Comm(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, b_idx);
+		pageCode = page.getSb().toString();
+		
+		
 		mv.addObject("vo", vo);
 		mv.addObject("nowPage", nowPage);
 		mv.addObject("b_category", b_category);
+		mv.addObject("c_length", b_dao.commCount(b_idx));
+		mv.addObject("pageCode", pageCode);
 		mv.setViewName("viewBoard");
-		
 		
 		
 		return mv;
