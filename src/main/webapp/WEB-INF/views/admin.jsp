@@ -160,10 +160,39 @@
 		</div>
 	</div>
 	<input type="hidden" id="hometown" value="${hometown }"/>
+	<input type="hidden" id="a_idx" value="${a_idx }"/>
+	<input type="hidden" id="nowPage" value="${nowPage }"/>
 	
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			var hometown = $("#hometown").val(); // 광고추가 했을 때 들어오는 영역
+			var a_idx = $("#a_idx").val(); // 광고수정시 들어오는 파라미터
+			var adv_group = $("#adv_group").val(); // 광고수정시 들어오는 파라미터
+			var nowPage = $("#nowPage").val(); // 광고수정시 들어오는 파라미터
+			
+			if(hometown == "" && a_idx == "" && nowPage == ""){
+				// 오른쪽 화면에서 가장 먼저 로드 되는 기능
+				$("#right").load("/drm/memSet.inc");
+			}else if(hometown == "fromInsertAdv" && a_idx == "" && nowPage == ""){ // 광고 넣기를 하고 광고 목록 보기 화면으로 자동 이동
+				$("#hometown").val("");
+				hometown = "";
+				viewPage('3');
+				$("#menu>li>a:first-child").addClass("active");
+				$("#menu>li>a:last-child").removeClass("active");
+				$("#slide").slideDown();
+				$("#slide li:last-child").addClass("slideActive");
+			}else if(hometown == "" && a_idx != "" && nowPage != ""){ // 수정버튼을 눌렀을 때 광고 수정페이지를 보여주는 기능
+				$("#right").load("/drm/showAdvUpdate.inc?a_idx="+a_idx+"&nowPage="+nowPage);
+			}else if(hometown == "fromUpdateAdv" && a_idx == "" && nowPage != ""){ // 광고 수정을 하고 나서 광고목록으로 가는 기능
+				$("#hometown").val("");
+				hometown = "";
+				$("#right").load("/drm/admin_advList.inc?nowPage="+nowPage);
+				$("#menu>li>a:first-child").addClass("active");
+				$("#menu>li>a:last-child").removeClass("active");
+				$("#slide").slideDown();
+				$("#slide li:last-child").addClass("slideActive");
+			}
 			
 			// 광고문의 메뉴 클릭시 아코디언으로 보여주는 기능
 			$("#adv").bind("click", function(){
@@ -190,21 +219,6 @@
 				$("#slide li").removeClass("slideActive");
 				$(this).addClass("slideActive");
 			});
-			
-			var hometown = $("#hometown").val();
-			
-			if(hometown == ""){
-				// 오른쪽 화면에서 가장 먼저 로드 되는 기능
-				$("#right").load("/drm/memSet.inc");
-			}else if(hometown == "fromInsertAdv"){ // 광고 넣기를 하고 광고 목록 보기 화면으로 자동 이동
-				$("#hometown").val("");
-				hometown = "";
-				viewPage('3');
-				$("#menu>li>a:first-child").addClass("active");
-				$("#menu>li>a:last-child").removeClass("active");
-				$("#slide").slideDown();
-				$("#slide li:last-child").addClass("slideActive");
-			}
 				
 		});
 		

@@ -632,4 +632,9 @@
 		select * from adv_t where adv_group = #{adv_group}
 	</select>
 	
+	<!-- 수정시 날짜 비교를 위한 adv_t 날짜 검색 기능 -->
+	<select id="searchDateOnAdv_tForUpdate" parameterType="java.util.Map" resultType="com.pmd.vo.AdvVO">
+		select * from adv_t where not a_idx = #{a_idx} and adv_group = #{adv_group}
+	</select>
+	
 </mapper>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,12 +9,14 @@
 <link rel="stylesheet" href="resources/css/jquery-ui.css"/>
 </head>
 <body>
-	<div id="advInsert" style="width: 898px;">
+	<div id="advUpdate" style="width: 898px;">
 		<header>
-			<h1>광고 넣기</h1>
+			<h1>광고 수정</h1>
 			<hr/>
 		</header>
-		<form action="advInsert.inc" method="post" enctype="multipart/form-data" name="frm">
+		<form action="doAdvUpdate.inc" method="post" enctype="multipart/form-data" name="frm">
+			<input type="hidden" name="nowPage" value="${nowPage }"/>
+			<input type="hidden" name="a_idx" value="${vo.a_idx }"/>
 			<table>
 				<colgroup>
 					<col width="150px"/>
@@ -24,16 +28,19 @@
 					<th>파일 업로드</th>
 					<td>
 						<input type="file" name="upload" id="upload"/>
+						<c:if test="${vo.file_name ne null }">
+							(${vo.file_name })
+						</c:if>
 					</td>
 					<th>광고주</th>
 					<td>
-						<input type="text" name="co_name" id="co_name"/>
+						<input type="text" name="co_name" id="co_name" value="${vo.co_name }"/>
 					</td>
 				</tr>
 				<tr>
 					<th>링크 경로</th>
 					<td colspan="3">
-						<input type="text" id="adv_link"/>
+						<input type="text" id="adv_link" value="${fn:substring(vo.adv_link, 7, fn:length(vo.adv_link)) }"/>
 						<span id="warning"></span>
 						<input type="hidden" name="adv_link"/>
 					</td>
@@ -41,41 +48,54 @@
 				<tr>
 					<th>연락처</th>
 					<td>
-						<input type="text" id="co_phone1"/>-
-						<input type="text" id="co_phone2"/>-
-						<input type="text" id="co_phone3"/>
-						<input type="hidden" name="co_phone" id="co_phone"/>
+						<c:if test="${fn:length(vo.co_phone) gt 12 }">
+							<input type="text" id="co_phone1" value="${fn:substring(vo.co_phone, 0, 3) }"/>-
+							<input type="text" id="co_phone2" value="${fn:substring(vo.co_phone, 4, 8) }"/>-
+							<input type="text" id="co_phone3" value="${fn:substring(vo.co_phone, 9, 13) }"/>
+							<input type="hidden" name="co_phone" id="co_phone"/>
+						</c:if>
+						<c:if test="${fn:length(vo.co_phone) lt 12 }">
+							<input type="text" id="co_phone1" value="${fn:substring(vo.co_phone, 0, 3) }"/>-
+							<input type="text" id="co_phone2" value="${fn:substring(vo.co_phone, 4, 7) }"/>-
+							<input type="text" id="co_phone3" value="${fn:substring(vo.co_phone, 8, 11) }"/>
+							<input type="hidden" name="co_phone" id="co_phone"/>
+						</c:if>
 					</td>
 					<th>이메일</th>
 					<td>
-						<input type="text" id="co_email1"/>@
-						<input type="text" id="co_email2"/>
+						<input type="text" id="co_email1" value="${fn:substring(vo.co_email, 0, fn:indexOf(vo.co_email, '@')) }"/>@
+						<input type="text" id="co_email2" value="${fn:substring(vo.co_email, (fn:indexOf(vo.co_email, '@'))+1, fn:length(vo.co_email)) }"/>
 						<input type="hidden" name="co_email" id="co_email"/>
 					</td>
 				</tr>
 				<tr>
 					<th>광고순번</th>
 					<td colspan="3">
-						<input type="radio" name="adv_group" value="1"/><span>1번 광고</span>&nbsp;&nbsp;
-						<input type="radio" name="adv_group" value="2"/><span>2번 광고</span>&nbsp;&nbsp;
-						<input type="radio" name="adv_group" value="3"/><span>3번 광고</span>&nbsp;&nbsp;
-						<input type="radio" name="adv_group" value="4"/><span>4번 광고</span>&nbsp;&nbsp;
+						<input type="radio" name="adv_group" id="adv_group1" value="1"/><span>1번 광고</span>&nbsp;&nbsp;
+						<input type="radio" name="adv_group" id="adv_group2" value="2"/><span>2번 광고</span>&nbsp;&nbsp;
+						<input type="radio" name="adv_group" id="adv_group3" value="3"/><span>3번 광고</span>&nbsp;&nbsp;
+						<input type="radio" name="adv_group" id="adv_group4" value="4"/><span>4번 광고</span>&nbsp;&nbsp;
 					</td>
 				</tr>
 				<tr>
 					<th>시작일</th>
 					<td>
-						<input type="date" name="start_date" id="start_date"/>
+						<input type="date" name="start_date" id="start_date" value="${fn:substring(vo.start_date, 0, 4)}-${fn:substring(vo.start_date, 5, 7)}-${fn:substring(vo.start_date, 8, 10)}"/>
 					</td>
 					<th>종료일</th>
 					<td>
-						<input type="date" name="end_date" id="end_date"/>
+						<input type="date" name="end_date" id="end_date" value="${fn:substring(vo.end_date, 0, 4)}-${fn:substring(vo.end_date, 5, 7)}-${fn:substring(vo.end_date, 8, 10)}"/>
 					</td>
 				</tr>
 				<tr>
 					<th>메모할 사항</th>
 					<td colspan="3">
-						<input type="text" name="etc" id="etc"/>
+						<c:if test="${vo.etc eq null }">
+							<input type="text" name="etc" id="etc"/>
+						</c:if>
+						<c:if test="${vo.etc ne null }">
+							<input type="text" name="etc" id="etc" value="${vo.etc }"/>
+						</c:if>
 					</td>
 				</tr>
 				<tfoot>
@@ -89,10 +109,29 @@
 		</form>
 	</div>
 	
+	<input type="hidden" id="adv_group" value="${vo.adv_group }">
+	
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script src="resources/js/jquery-ui.min.js"></script>
 	<script>
 		$(function(){
+			
+			var adv_groupH = $("#adv_group").val();
+			
+			switch (adv_groupH) { // DB에 저장된 그룹과 같은 라디오 버튼을 선택하게 하는 기능
+				case '1':
+					$("#adv_group1").prop("checked", "checked");
+					break;
+				case '2':
+					$("#adv_group2").prop("checked", "checked");
+					break;
+				case '3':
+					$("#adv_group3").prop("checked", "checked");
+					break;
+				case '4':
+					$("#adv_group4").prop("checked", "checked");
+					break;
+			}
 			
 			$("#adv_link").keyup(function(){
 				var adv_link = $("#adv_link").val();
@@ -121,15 +160,17 @@
 			});
 			
 			$("#start_date").change(function(){
+				var a_idx = $("#a_idx").val();
 				var adv_group = $("input[name='adv_group']:checked").val();
 				var start_date = $("#start_date").val();
-				ajax_check(adv_group, start_date, "시작일");
+				ajax_check(adv_group, start_date, "시작일", a_idx);
 			});
 			
 			$("#end_date").change(function(){
+				var a_idx = $("#a_idx").val();
 				var adv_group = $("input[name='adv_group']:checked").val();
 				var end_date = $("#end_date").val();
-				ajax_check(adv_group, end_date, "종료일");
+				ajax_check(adv_group, end_date, "종료일", a_idx);
 			});
 			
 			$("input[name='adv_group']").change(function(){
@@ -141,7 +182,6 @@
 			});
 			
 			$("#save_btn").click(function(){
-				var upload = $("#upload").val();
 				var co_name = $("#co_name").val();
 				var adv_link = $("#adv_link").val();
 				var co_phone1 = $("#co_phone1").val();
@@ -153,11 +193,6 @@
 				var end_date = $("#end_date").val();
 				var etc = $("#etc").val();
 				var adv_group = $("input[name='adv_group']:checked").val();
-				
-				if(upload.length < 1){
-					alert("파일을 첨부하세요!");
-					return;
-				}
 				
 				if(co_name.trim().length < 1){
 					alert("광고주를 한 자 이상 입력하세요!");
@@ -243,7 +278,7 @@
 				$("#co_email").val(co_email1+"@"+co_email2);
 				
 				
-				var con = confirm("저장하시겠습니까?");
+				var con = confirm("수정하시겠습니까?");
 				
 				if(con){
 					document.frm.submit();
@@ -252,11 +287,11 @@
 			});
 		});
 		
-		function ajax_check(adv_group, inputDate, str) {
-			var param = "adv_group="+encodeURIComponent(adv_group)+"&inputDate="+encodeURIComponent(inputDate);
+		function ajax_check(adv_group, inputDate, str, a_idx) {
+			var param = "adv_group="+encodeURIComponent(adv_group)+"&inputDate="+encodeURIComponent(inputDate)+"&a_idx="+encodeURIComponent(a_idx);
 			
 			$.ajax({
-				url: "checkDate.inc",
+				url: "checkDateForUpdate.inc",
 				type: "post",
 				data: param,
 				dataType: "json"

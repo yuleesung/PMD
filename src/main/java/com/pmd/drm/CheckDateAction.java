@@ -44,6 +44,53 @@ public class CheckDateAction {
 		return map;
 	}
 	
+	@RequestMapping(value = "/checkDateForUpdate.inc", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> checkInputDateForUpdate(String a_idx, String adv_group, String inputDate) throws ParseException{
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		boolean chk = false;
+		AdvVO[] ar = b_dao.searchDateOnAdv_tForUpdate(a_idx, adv_group);
+		for(int i=0; i<ar.length; i++) {
+			if(checkDate(inputDate, ar[i].getStart_date(), ar[i].getEnd_date())){
+				chk = true;
+				break;
+			}
+		}
+		
+		map.put("chk", chk);
+		
+		return map;
+	}
+	
+	@RequestMapping(value = "/checkBothDateForUpdate.inc", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> checkBothDateForUpdate(String a_idx, String adv_group, String start_date, String end_date) throws ParseException{
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		boolean start_chk = false;
+		boolean end_chk = false;
+		AdvVO[] ar = b_dao.searchDateOnAdv_tForUpdate(a_idx, adv_group);
+		for(int i=0; i<ar.length; i++) {
+			if(checkDate(start_date, ar[i].getStart_date(), ar[i].getEnd_date())){
+				start_chk = true;
+				break;
+			}
+		}
+		
+		for(int i=0; i<ar.length; i++) {
+			if(checkDate(end_date, ar[i].getStart_date(), ar[i].getEnd_date())){
+				end_chk = true;
+				break;
+			}
+		}
+		
+		map.put("start_chk", start_chk);
+		map.put("end_chk", end_chk);
+		
+		return map;
+	}
+	
 	private boolean checkDate(String inputDate, String start_date, String end_date) throws ParseException{
 		boolean chk = false;
 

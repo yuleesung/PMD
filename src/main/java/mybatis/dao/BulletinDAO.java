@@ -645,4 +645,21 @@ public class BulletinDAO {
 		return ar;
 	}
 	
+	// 수정시 날짜 비교를 위한 adv_t 날짜 검색 기능
+	public AdvVO[] searchDateOnAdv_tForUpdate(String a_idx, String adv_group) {
+		AdvVO[] ar = null;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("a_idx", a_idx);
+		map.put("adv_group", adv_group);
+		
+		List<AdvVO> list = ss.selectList("bulletin.searchDateOnAdv_tForUpdate", map);
+		if(list != null && !list.isEmpty()) {
+			ar = new AdvVO[list.size()];
+			list.toArray(ar);
+		}
+		
+		return ar;
+	}
+	
 }
