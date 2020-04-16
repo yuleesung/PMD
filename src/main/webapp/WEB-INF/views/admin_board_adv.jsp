@@ -163,7 +163,7 @@
 		}
 		
 		
-		function advEdit(a_idx, status, adv_group, nowPage){
+		function advEdit(a_idx, adv_group, nowPage){
 			// 수정 버튼
 			
 			location.href = "advUpdate.inc?a_idx="+encodeURIComponent(a_idx)+"&adv_group="+encodeURIComponent(adv_group)+"&nowPage="+encodeURIComponent(nowPage);
