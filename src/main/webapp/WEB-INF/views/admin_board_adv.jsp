@@ -61,11 +61,11 @@
 						</td>
 						<td style="text-align: right;">
 							<c:if test="${vo.status eq 0 }">
-								<input type="button" value="수정" onclick="advEdit('${vo.a_idx}', '${vo.status }', '${vo.adv_group }', '${nowPage }')"/>						
+								<input type="button" value="수정" onclick="advEdit('${vo.a_idx}', '${vo.adv_group }', '${nowPage }')"/>						
 								<input type="button" value="올리기" onclick="advStatus('${vo.a_idx}', '1', '${vo.adv_group }', '${nowPage }')" />&nbsp;
 							</c:if> <c:if test="${vo.status eq 1 }">
 								<span style="color: red;">!업로드 중!</span>
-								<input type="button" value="수정" onclick="advEdit('${vo.a_idx}', '${vo.status }', '${vo.adv_group }', '${nowPage }')"/>	
+								<input type="button" value="수정" onclick="advEdit('${vo.a_idx}', '${vo.adv_group }', '${nowPage }')"/>	
 								<input type="button" value="내리기" onclick="advStatus('${vo.a_idx}', '0', '${vo.adv_group }', '${nowPage }')" />&nbsp;
 							</c:if>
 						</td>
@@ -165,14 +165,8 @@
 		
 		function advEdit(a_idx, status, adv_group, nowPage){
 			// 수정 버튼
-			console.log("a_idx => "+a_idx);
-			console.log("status => "+status);
-			console.log("adv_group => "+adv_group);
-			console.log("nowPage => "+nowPage);
 			
-			var url = "추가예정";
-			var param = "a_idx="+encodeURIComponent(a_idx)+"&status="+encodeURIComponent(status)
-						+"&adv_group="+encodeURIComponent(adv_group)+"&nowPage="+encodeURIComponent(nowPage);
+			location.href = "advUpdate.inc?a_idx="+encodeURIComponent(a_idx)+"&adv_group="+encodeURIComponent(adv_group)+"&nowPage="+encodeURIComponent(nowPage);
 		}
 		
 		
