@@ -7,110 +7,7 @@
 <title>관리자 페이지</title>
 <link href="resources/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="resources/css/page.css" />
-<style>
-	body{
-		margin: 0;
-		padding: 0;
-	}
-
-	#container{
-		width: 1200px;
-		height: 900px;
-		margin: auto;
-		padding: 0;
-		border: 1px solid black;
-	}
-	
-	#left{
-		width: 298px;
-		height: 100%;
-		float: left;
-		padding: 0;
-		margin: 0;
-		border: 1px solid red;
-		background-color: #6a99cb;
-	}
-	
-	#right{
-		width: 898px;
-		height: 100%;
-		float: left;
-		padding: 0;
-		margin: 0;
-		overflow: hidden;
-		border: 1px solid blue;
-	}
-	
-	#right:hover{
-		overflow: auto;
-	}
-	
-	a{
-		color: white;
-		text-decoration: none;
-	}
-	
-	#menu{
-		padding: 0;
-		margin: 0;
-	}
-	
-	#menu li{
-		list-style: none;
-		padding: 20px;
-		padding-left: 40px;
-		font-size: 20px;
-	}
-	
-	#menu li a{
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-	
-	#menu li a:hover{
-		color: #0080ff;
-	}
-	
-	#slide{
-		padding-top: 10px;
-		width: 100%;
-		height: 70px;
-		background-color: #CADBE9;
-		display: none;
-	}
-	
-	#slide ul{
-		padding: 0;
-	}
-	
-	#slide li{
-		padding: 5px;
-		font-size: 15px;
-	}
-	
-	#slide li:hover{
-		background-color: #0080ff;
-	}
-	
-	#slide li a:hover{
-		color: white;
-	}
-	
-	#slide li a{
-		text-indent: 50px;
-	}
-	
-	.active{
-		color: #0080ff;
-	}
-	
-	.slideActive{
-		background-color: #0080ff;
-		color: white;
-	}
-		
-</style>
+<link rel="stylesheet" href="resources/css/admin.css" />
 </head>
 <body>
 	<div id="container">
@@ -176,7 +73,7 @@
 			if(hometown == "" && a_idx == "" && nowPage == "" && adv_group == ""){
 				// 오른쪽 화면에서 가장 먼저 로드 되는 기능
 				$("#right").load("/drm/memSet.inc");
-			}else if(hometown == "fromInsertAdv" && a_idx == "" && nowPage == "" && adv_group == ""){ // 광고 넣기를 하고 광고 목록 보기 화면으로 자동 이동
+			}else if(hometown == "fromInsertAdv" && a_idx == "" && adv_group == ""){ // 광고 넣기를 하고 광고 목록 보기 화면으로 자동 이동
 				
 				viewPage('3');
 				$("#menu>li>a:first-child").addClass("active");
