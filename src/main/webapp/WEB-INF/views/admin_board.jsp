@@ -97,20 +97,37 @@
 			var article = (".recruit .show");
 			var val = "";
 			
+			
 			$('input[name="category"]').change(function(){
 				val = $('input[name="category"]:checked').val();
 				admin_board(val);
 			});
-			
+			/*
 			 $(document).on("click", ".recruit .title  td:nth-child(2)", function(event){
+				 	
 					var myArticle = $(this).parents().next("tr");
+					
 					if ($(myArticle).hasClass('hide')) {
-						$(article).removeClass('show').addClass('hide');
+						console.log("hide"+$(myArticle).hasClass('hide'));
+						$(myArticle).removeClass('hide').addClass('show');
+					} else {
+						console.log("show"+$(myArticle).hasClass('show'));
+						$(myArticle).addClass('hide').removeClass('show');
+					}
+			 });
+			 */
+			 
+			 // div가 안 열리면 위에껄로 대체해야하나?!
+			 $(".recruit .title  td:nth-child(2)").click(function(){
+				 var myArticle = $(this).parents().next("tr");
+					
+					if ($(myArticle).hasClass('hide')) {
 						$(myArticle).removeClass('hide').addClass('show');
 					} else {
 						$(myArticle).addClass('hide').removeClass('show');
 					}
 			 });
+			 
 			 
 			 
 			 $("#search_btn").click(function(){
