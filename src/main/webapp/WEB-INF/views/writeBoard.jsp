@@ -73,90 +73,93 @@ input[type=text] {
 				</div>
 			</div>
 		</section>
-	
 
-	<c:choose>
-		<c:when test="${userInfo.u_idx ne null }">
-			<section class="section element-animate">
+
+		<c:choose>
+			<c:when test="${userInfo.u_idx ne null }">
+				<section class="section element-animate">
+					<div class="container">
+						<form class="form-horizontal" method="post" action="write.inc"
+							name="writeFrm" enctype="multipart/form-data">
+							<div class="form-group">
+								<label for="title" class="col-sm-2 control-label">Title</label>
+								<div>
+									<select id="category" name="b_category" class="col-sm-10"
+										style="width: 150px; cursor: pointer;">
+										<option value="none" style="cursor: pointer;">::
+											Category ::</option>
+										<option value="free"
+											<c:if test="${b_category == 'free' }">selected</c:if>
+											style="cursor: pointer;">자유게시판</option>
+										<option value="qa"
+											<c:if test="${b_category == 'qa' }">selected</c:if>
+											style="cursor: pointer;">Q&A</option>
+										<option value="adv"
+											<c:if test="${b_category == 'adv' }">selected</c:if>
+											style="cursor: pointer;">광고문의</option>
+									</select> <span id="sel_area"><c:if
+											test="${b_category == 'adv' }">
+											<label><input type="checkbox" name="secret_content"
+												id="secret_content" checked="checked"/>비밀글</label>
+										</c:if> </span> <input type="text" class="form-control" id="title"
+										name="subject" placeholder="제목" style="width: 90%;">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="upload" class="col-sm-2 control-label">Upload
+									File</label>
+								<div class="col-sm-10" style="cursor: pointer;">
+									<input type="file" name="upload" id="upload"
+										style="cursor: pointer;" />
+								</div>
+							</div>
+
+							<input type="hidden" name="u_idx" value="${userInfo.u_idx }" />
+							<input type="hidden" name="b_content" id="str" /> <input
+								type="hidden" id="ran_val" value="${ran_val }">
+						</form>
+
+						<table style="width: 90%;">
+							<tbody>
+								<tr>
+									<td
+										style="padding-bottom: 15px; padding-left: 15px; width: 900px;">
+										<textarea name="content" cols="50" rows="8" id="content"></textarea>
+									</td>
+								</tr>
+
+								<tr>
+									<td><label for="human" class="col-sm-2 control-label"
+										style="font-size: 16px;">${ran1 } + ${ran2 } = ? </label> <input
+										type="text" class="form-control" id="input_val"
+										placeholder="매크로방지" style="width: 150px; margin-left: 15px;">
+										<div style="float: right;">
+											<label
+												style="font-size: 16px; color: black; font-weight: bold;">작성자
+												: ${userInfo.nickname }</label><br /> <input id="submit_btn"
+												type="button" value="Submit" class="btn btn-primary"
+												style="cursor: pointer;">&nbsp;&nbsp; <input
+												id="cancel_btn" type="button" style="cursor: pointer;"
+												value="Cancel" class="btn btn-primary"
+												onclick="location.href='list.inc?b_category=${b_category}&nowPage=${nowPage }'">
+										</div></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
+			</c:when>
+			<c:otherwise>
 				<div class="container">
-					<form class="form-horizontal" method="post" action="write.inc"
-						name="writeFrm" enctype="multipart/form-data">
-						<div class="form-group">
-							<label for="title" class="col-sm-2 control-label">Title</label>
-							<div>
-								<select id="category" name="b_category" class="col-sm-10"
-									style="width: 150px; cursor: pointer;">
-									<option value="none" style="cursor: pointer;">::
-										Category ::</option>
-									<option value="free"
-										<c:if test="${b_category == 'free' }">selected</c:if>
-										style="cursor: pointer;">자유게시판</option>
-									<option value="qa"
-										<c:if test="${b_category == 'qa' }">selected</c:if>
-										style="cursor: pointer;">Q&A</option>
-									<option value="adv"
-										<c:if test="${b_category == 'adv' }">selected</c:if>
-										style="cursor: pointer;">광고문의</option>
-								</select> <span id="sel_area"> <!-- <label><input type="checkbox" name="secret_content" id="secret_content" />비밀글</label> -->
-								</span> <input type="text" class="form-control" id="title"
-									name="subject" placeholder="제목" style="width: 90%;">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="upload" class="col-sm-2 control-label">Upload
-								File</label>
-							<div class="col-sm-10" style="cursor: pointer;">
-								<input type="file" name="upload" id="upload"
-									style="cursor: pointer;" />
-							</div>
-						</div>
-
-						<input type="hidden" name="u_idx" value="${userInfo.u_idx }" /> <input
-							type="hidden" name="b_content" id="str" /> <input type="hidden"
-							id="ran_val" value="${ran_val }">
-					</form>
-
-					<table style="width: 90%;">
-						<tbody>
-							<tr>
-								<td
-									style="padding-bottom: 15px; padding-left: 15px; width: 900px;">
-									<textarea name="content" cols="50" rows="8" id="content"></textarea>
-								</td>
-							</tr>
-
-							<tr>
-								<td><label for="human" class="col-sm-2 control-label"
-									style="font-size: 16px;">${ran1 } + ${ran2 } = ? </label> <input
-									type="text" class="form-control" id="input_val"
-									placeholder="매크로방지" style="width: 150px; margin-left: 15px;">
-									<div style="float: right;">
-										<label
-											style="font-size: 16px; color: black; font-weight: bold;">작성자
-											: ${userInfo.nickname }</label><br /> <input id="submit_btn"
-											type="button" value="Submit" class="btn btn-primary"
-											style="cursor: pointer;">&nbsp;&nbsp; <input
-											id="cancel_btn" type="button" style="cursor: pointer;"
-											value="Cancel" class="btn btn-primary"
-											onclick="location.href='list.inc?b_category=${b_category}&nowPage=${nowPage }'">
-									</div></td>
-							</tr>
-						</tbody>
-					</table>
+					<h1
+						style="height: 300px; text-align: center; padding-top: 30px; font-style: inherit;">로그인
+						후 이용해주세요</h1>
 				</div>
-			</section>
-		</c:when>
-		<c:otherwise>
-			<div class="container">
-				<h1
-					style="height: 300px; text-align: center; padding-top: 30px; font-style: inherit;">로그인
-					후 이용해주세요</h1>
-			</div>
-		</c:otherwise>
-	</c:choose>
+			</c:otherwise>
+		</c:choose>
 
-	<jsp:include page="footer.jsp"/>
-</div>
+		<jsp:include page="footer.jsp" />
+	</div>
 	<!-- loader -->
 	<div id="loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">
@@ -231,22 +234,15 @@ input[type=text] {
 
 			$("#content").summernote("lineHeight", 1.0);
 
-			$("#category")
-					.on(
-							"click",
-							function() {
-
-								var select = $("#category option:selected")
-										.val();
-								if (select == 'adv') {
-									$("#sel_area")
-											.html(
-													'<label style="margin-bottom: 0;"><input type="checkbox" name="secret_content" id="secret_content" value=0 />비밀글</label>');
-								} else {
-									$("#sel_area").html("");
-								}
-
-							});
+			 $("#category").on("click", function() {
+					var select = $("#category option:selected").val();
+					if (select == 'adv') {
+						$("#sel_area").html('<label><input type="checkbox" name="secret_content" id="secret_content" checked="checked" />비밀글</label>');
+					} else {
+						$("#sel_area").html("");
+					}
+	
+				});
 
 		}); //jquery함수 끝
 
