@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
 <style type="text/css">
 #tothetop {
 	position: fixed;
@@ -20,9 +20,9 @@
 <body>
 
 <a id="tothetop">
-	<img style="all: unset; width: 100%; height: 100%;" src="resources/images/tothetop.png" 
-	onmousedown="this.src='resources/images/tothetopOn.png'" 
-	onmouseup="this.src='resources/images/tothetop.png'" title="맨위로"/>
+	<img style="all: unset; width: 100%; height: 100%;" src="resources/images/totheTOP.png" 
+	onmousedown="this.src='resources/images/tothetopON.png'" 
+	onmouseup="this.src='resources/images/totheTOP.png'" title="맨위로"/>
 </a>
 
 <script src="resources/js/jquery-3.4.1.min.js"></script>

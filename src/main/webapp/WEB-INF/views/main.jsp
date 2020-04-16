@@ -408,7 +408,7 @@ option {
 			</form>
 		</section>
 
-		<!-- 리스트 -->
+		<!-- 리스트! -->
 		<div class="container" id="result" style="display: none;"></div>
 	</div>
 
