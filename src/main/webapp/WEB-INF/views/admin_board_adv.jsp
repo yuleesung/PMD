@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 </head>
 <body>
-<div id="advList" style="width: 890px; margin: 0; height: 80%;">
+<div id="advList" style="width: 890px; margin: 0; height: 80%;"> 
 	<h1>관리자용 광고목록 페이지</h1>
 	<br/>
 	<span>&nbsp;Group을 선택해주세요.</span>

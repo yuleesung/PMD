@@ -101,7 +101,7 @@
 				<tfoot>
 					<tr>
 						<td colspan="4">
-							<input type="button" id="save_btn" value="수정"/>
+							<input type="button" id="save_btn" value="수정"/> 
 						</td>
 					</tr>
 				</tfoot>
