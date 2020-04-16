@@ -151,13 +151,6 @@ public class MemSetAction {
 		return map;
 	}
 	
-	@RequestMapping("/admin_userComm_frm.inc")
-	public ModelAndView userComm_frm() {
-		ModelAndView mv = new ModelAndView();
-		
-		mv.setViewName("admin_userComm");
-		return mv;
-	}
 	
 	
 }

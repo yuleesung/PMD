@@ -4,47 +4,72 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
-<style>
-	tbody tr:hover{
-		background-color: rgba(106,153,203, 0.2);
-	}
-</style>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="resources/css/jquery-ui.min.css" />
+<style>
+	#users_t tbody tr:hover{
+		background-color: rgba(106,153,203, 0.2);
+	}
+	
+	#CommPopup{
+		display: none;
+	}
+</style>
 </head>
 <body>
 
 	<div id="memberSetting" style="width: 898px; margin: 0;">
-		<h2> 관리자 - 회원관리</h2>
-		<form action="">
-		<fieldset>
-			<legend>회원 검색</legend>
-			<div title="회원검색">
-			<label><input type="radio" value="all" name="choice" checked="checked"/>전체</label>
-			<label><input type="radio" value="normal" name="choice" />일반회원</label>
-			<label><input type="radio" value="social" name="choice" />소셜회원</label>
-			&nbsp;&nbsp;&nbsp;
-			<label>상태:</label>
-			<input type="checkbox" value="total" name="chk" id="total" />전체
-			<input type="checkbox" value="active" name="chk" />활동중
-			<input type="checkbox" value="stop" name="chk" />활동정지
-			<input type="checkbox" value="leave" name="chk"  />탈퇴
-			<br/>
-			<label for="u_id">아이디:</label> <input type="text" name="u_id" id="u_id"/>
-			<label for="nickname">닉네임: </label> <input type="text" name="nickname" id="nickname" />
-			<label for="u_name">이름: </label> <input type="text" name="u_name" id="u_name" /><br/>
-			<label for="email">이메일: </label> <input type="text" name="email" id="email" />
-			<label for="sns_id">소셜 아이디: </label> <input type="text" name="sns_id" id="sns_id" />
-			<label for="reg_date">가입일: </label> <input type="date" name="reg_date" id="reg_date" title="가입일" /><br/>
-			
-			<input type="button" value="검색" id="userSrch" />
-			</div>
-		</fieldset>
-		</form>
+		<h1> 관리자 - 회원관리</h1>
+		<table id="srch_t">
+			<caption style="text-indent: -9999px;">회원 검색</caption>
+			<tbody>
+				<tr>
+					<th>가입유형 :</th>
+					<td colspan="2"><label><input type="radio" value="all" name="choice" checked="checked"/>전체</label>
+						<label><input type="radio" value="normal" name="choice" />일반회원</label>
+						<label><input type="radio" value="social" name="choice" />소셜회원</label>
+					</td>
+					<th>상태 :</th>
+					<td colspan="3">
+						<input type="checkbox" value="total" name="chk" id="total" />전체
+						<input type="checkbox" value="active" name="chk" />활동중
+						<input type="checkbox" value="stop" name="chk" />활동정지
+						<input type="checkbox" value="leave" name="chk"  />탈퇴
+					</td>
+				</tr>
+				<tr>
+					<th><label for="u_id">아이디:</label> </th> 
+					<td colspan="2"><input type="text" name="u_id" id="u_id"/> </td>
+					<th><label for="sns_id">소셜 아이디: </label> </th>
+					<td colspan="2"><input type="text" name="sns_id" id="sns_id" /></td>
+				</tr>
+				<tr>
+					<th><label for="u_name">이름: </label></th> 
+					<td colspan="2"><input type="text" name="u_name" id="u_name" /></td>
+					<th><label for="nickname">닉네임: </label></th> 
+					<td colspan="2"><input type="text" name="nickname" id="nickname" /></td>
+				</tr>
+				<tr>
+					<th><label for="email">이메일: </label></th>
+					<td colspan="2"><input type="text" name="email" id="email" /></td>
+					<th><label for="reg_date">가입일: </label> </th>
+					<td colspan="2"><input type="date" name="reg_date" id="reg_date" title="가입일" /></td>
+				</tr>
+				<tr>
+					<td>
+						<input type="button" value="검색" id="userSrch" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		
+		
 		
 		<pre> 총 ${rowTotal } 명</pre>
 		<hr/>
-		<table id="users_t">
+		<table id="users_t"> 
 			<caption style="text-indent: -9999px;">관리자페이지 - 회원관리</caption>
 			<colgroup>
 				<col width="50px;">
@@ -76,7 +101,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="vo" items="${ar }" varStatus="st" >
-					<tr onclick="userComm('${vo.u_idx}', '${nowPage }')">
+					<tr onclick="userComm('${vo.u_idx}')" style="cursor: pointer;">
 						<td>${rowTotal - ((nowPage-1)*blockList+st.index) }</td>
 						<td>${vo.u_id}</td>
 						<td>${vo.nickname }</td>
@@ -98,6 +123,7 @@
 							<button type="button" onclick="unlock('${vo.u_idx}', '${vo.status }', '${nowPage }')">해제</button>
 						</td>
 					</tr>
+					
 				</c:forEach>	
 			</tbody>
 			<tfoot>
@@ -110,11 +136,39 @@
 		</table>
 	</div>
 	
-	<form action="">
-		<c:forEach var="c_list" items="${ar[6].c_list }" varStatus="st">
-			<p>${st.index } <c:out value="${c_list.c_content }"/></p>
-		</c:forEach>
-	</form>
+
+	
+	<div id="CommPopup">
+			<form action="#" name="myForm" method="post">
+				<table id="comm_t" style="width: 100%;">
+					<caption>회원님의 댓글</caption>
+					<colgroup>
+						<col width="*" />
+						<col width="120px;" />
+						<col width="80px;" />
+						<col width="120px;" />
+					</colgroup>
+					<thead>
+						<tr>
+							<th>내용</th>
+							<th>등록일</th>
+							<th>상태</th>
+							<th>비고</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="4">
+								
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</form>
+		</div>	
 	
 	
 	
@@ -122,6 +176,7 @@
 
 
 	<script src="resources/js/jquery-3.4.1.min.js"></script> 
+	<script src="resources/js/jquery-ui.min.js"></script>
 	<script>
 	
 	function lock(u_idx, status, nowPage){
@@ -169,8 +224,10 @@
 		}).done(function(data){
 			if(data.ar.length > 0){
 				var str = "";
+				var set = '<c:set value="${vo.u_id }" var="u_id" />';
 				for(var i=0; i<data.ar.length; i++){
-					str += "<tr>";
+					str += set;
+					str += "<tr onclick='userComm(\""+data.ar[i].u_idx+"\")' style='cursor: pointer;'>";
 					str += "<td>"+(data.rowTotal - ((data.nowPage-1)*data.blockList+i))+"</td>";
 					str += "<td>"+data.ar[i].u_id+"</td>";
 					str += "<td>"+data.ar[i].nickname+"</td>";
@@ -215,33 +272,30 @@
 		});
 	}
 	
-	function userComm(u_idx, nowPage){
+	// 회원별 댓글 모음
+	function userComm(u_idx){
 		
-		var param = "u_idx="+encodeURIComponent(u_idx)+"&nowPage="+encodeURIComponent(nowPage);
-		$.ajax({
-			url: "admin_userComm.inc",
-			type: "post",
-			data: param,
-			dataType: "json"
-			
-		}).done(function(data){
-			
-			//location.href = "admin_userComm_frm.inc";
-		}).fail(function(err){
-			console.log(err);
-		});			
-			
+		$("#CommPopup").dialog({
+			title : "회원 관리 > 댓글",
+			width : 750,
+			height: 500,
+			position: ["center"],
+			modal : true
+		});
+		
+		var param = "u_idx="+encodeURIComponent(u_idx);
+		ajax_a(param);
 	}
-	
-	
+		
 	$(function(){
 		
+		$("#CommPopup").hide(); // dialog창 숨기기
 		
-		$(document).ready(function(){
-			$("input[type=checkbox]").each(function(){
-				$(this).prop('checked', true);
-			});
+		
+		$("input[type=checkbox]").each(function(){
+			$(this).prop('checked', true);
 		});
+	
 		
 		// 상태: '전체' 선택 했을 경우
 		$("#total").click(function(){
@@ -269,7 +323,57 @@
 		
 		
 	});
-		
+	
+	function ajax_a(param){
+		$.ajax({
+			url: "admin_userComm.inc",
+			type: "post",
+			data: param,
+			dataType: "json"
+		}).done(function(data){
+			
+			if(data.ar != null){
+				
+				var str ="";
+				for(var i=0; i<data.ar.length; i++){
+					str += "<tr>";
+					str += "<td>"+data.ar[i].c_content+"</td>";
+					str += "<td>"+data.ar[i].write_date.substring(0, 10)+"</td>";
+					str += "<td>";
+					switch (data.ar[i].status) {
+						case '0':
+							str += "게시";
+							break;
+						case '1':
+							str += "삭제";
+							break;
+					}
+				str += "</td>";	
+				str += "<td>";
+				str += "<input type='button' onclick='del(\""+data.ar[i].c_idx+"\")' value='삭제'/>";
+				str += "<input type='button' onclick='restore(\""+data.ar[i].c_idx+"\")' value='복구' />";
+				str += "</td>";
+				str += "</tr>";
+				}
+				
+				$("#CommPopup #comm_t tbody").html(str);
+				
+				if(data.ar.length >10){
+					$("#CommPopup #comm_t tfoot td").html(data.pageCode);
+				}
+			}else{
+				var str ="";
+				str += "<tr>";
+					str += "<td colspan='4' style='text-align: center;'>등록된 댓글이 없습니다.";
+					str += "</td>";	
+				str += "</tr>";
+				$("#CommPopup #comm_t tbody").html(str);
+			}
+			
+		}).fail(function(err){
+			console.log(err);
+		});
+	}
 	</script>
 	
 

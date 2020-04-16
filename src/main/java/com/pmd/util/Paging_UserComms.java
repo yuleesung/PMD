@@ -62,7 +62,7 @@ public class Paging_UserComms {
 		sb = new StringBuffer("<ul class='pagination-v4'>");
 		
 		if(isPrePage) {	// '이전으로'기능 활성화
-			sb.append("<li><a href='javascript:page(\"");
+			sb.append("<li><a href='javascript:pageComm(\"");
 			sb.append(nowPage-blockPage);
 			sb.append("\")'> &lt; </a></li>");
 		} else {	// '이전으로'기능 비활성화
@@ -78,7 +78,7 @@ public class Paging_UserComms {
 				sb.append(i);
 				sb.append("</a></li>");
 			}else {	// 현재페이지가 아닌 경우
-				sb.append("<li><a href='javascript:page(\"");
+				sb.append("<li><a href='javascript:pageComm(\"");
 				sb.append(i);	//파라미터값
 				sb.append("\")'>");
 				sb.append(i);	// 화면에 보이는 값
@@ -89,7 +89,7 @@ public class Paging_UserComms {
 		
 		// 다음으로 기능 활성화 여부
 		if(isNextPage) { // '다음으로'기능 활성화
-			sb.append("<li><a href='javascript:page(\"");
+			sb.append("<li><a href='javascript:pageComm(\"");
 			sb.append(nowPage+blockPage);
 			sb.append("\")'> &gt; </a></li>");
 		}else {	// '다음으로' 기능 비활성화
