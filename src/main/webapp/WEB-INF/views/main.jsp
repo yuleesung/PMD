@@ -414,6 +414,7 @@ option {
 
 	<jsp:include page="footer.jsp" />
 	
+	<jsp:include page="scroll.jsp" />
 	
 	<!--scripts-->
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>

@@ -226,6 +226,8 @@
 
 	<jsp:include page="footer.jsp" />
 
+	<jsp:include page="scroll.jsp" />
+	
 	<!-- loader -->
 	<div id="loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">

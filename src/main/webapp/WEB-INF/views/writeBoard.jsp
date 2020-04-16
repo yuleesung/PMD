@@ -98,7 +98,7 @@ input[type=text] {
 											<c:if test="${b_category == 'adv' }">selected</c:if>
 											style="cursor: pointer;">광고문의</option>
 									</select> <span id="sel_area"><c:if
-											test="${b_category == 'adv' }">
+											test="${b_category == 'adv'}">
 											<label><input type="checkbox" name="secret_content"
 												id="secret_content" checked="checked"/>비밀글</label>
 										</c:if> </span> <input type="text" class="form-control" id="title"
@@ -159,6 +159,7 @@ input[type=text] {
 		</c:choose>
 
 		<jsp:include page="footer.jsp" />
+		<jsp:include page="scroll.jsp" />
 	</div>
 	<!-- loader -->
 	<div id="loader" class="show fullscreen">
