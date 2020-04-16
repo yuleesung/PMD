@@ -14,13 +14,13 @@
 	<span>&nbsp;Group을 선택해주세요.</span>
 	<br/>
 	<input type="radio"
-		class="radio" value="1" name="adv_group" checked="checked"><span class="sandwich">1번 광고</span>&nbsp;&nbsp;&nbsp;
+		class="radio" value="1" name="adv_group" id="adv_group1"><span class="sandwich">1번 광고</span>&nbsp;&nbsp;&nbsp;
 	<input type="radio"
-		class="radio" value="2" name="adv_group"><span class="sandwich">2번 광고</span>&nbsp;&nbsp;&nbsp;
+		class="radio" value="2" name="adv_group" id="adv_group2"><span class="sandwich">2번 광고</span>&nbsp;&nbsp;&nbsp;
 	<input type="radio"
-		class="radio" value="3" name="adv_group"><span class="sandwich">3번 광고</span>&nbsp;&nbsp;&nbsp;
+		class="radio" value="3" name="adv_group" id="adv_group3"><span class="sandwich">3번 광고</span>&nbsp;&nbsp;&nbsp;
 	<input type="radio"
-		class="radio" value="4" name="adv_group"><span class="sandwich">4번 광고</span>&nbsp;&nbsp;&nbsp;
+		class="radio" value="4" name="adv_group" id="adv_group4"><span class="sandwich">4번 광고</span>&nbsp;&nbsp;&nbsp;
 	
 	<div style="display: inline-flex; float: right; margin-right: 10%;">
 		<select id="search_sel" name="search_sel" style="height: 25px;">
@@ -89,11 +89,30 @@
 		</tfoot>
 	</table>
 </div>
+
+<input type="hidden" id="adv_group" value="${adv_group }"/>
+
 <script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script src="resources/js/jquery-ui.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			var val = ""; // Group 값
+			var adv_group = $("#adv_group").val();
+			
+			switch (adv_group) { // DB에 저장된 그룹과 같은 라디오 버튼을 선택하게 하는 기능
+			case '1':
+				$("#adv_group1").prop("checked", "checked");
+				break;
+			case '2':
+				$("#adv_group2").prop("checked", "checked");
+				break;
+			case '3':
+				$("#adv_group3").prop("checked", "checked");
+				break;
+			case '4':
+				$("#adv_group4").prop("checked", "checked");
+				break;
+			}
 			
 			$('input[name="adv_group"]').change(function(){
 				// 라디오버튼 선택하면 진입
@@ -200,11 +219,11 @@
 						str += "</td>";
 						str += "<td style='text-align: right;'>";
 						if(data.ar[i].status == 0){							
-							str += "<input type='button' value='수정' onclick='advEdit(\""+data.ar[i].a_idx+"\", \""+data.ar[i].status+"\", \""+data.ar[i].adv_group+"\", \""+data.nowPage+"\")'/>&nbsp;";
+							str += "<input type='button' value='수정' onclick='advEdit(\""+data.ar[i].a_idx+"\", \""+data.nowPage+"\")'/>&nbsp;";
 							str += "<input type='button' value='올리기' onclick='advStatus(\""+data.ar[i].a_idx+"\", \"1\", \""+data.ar[i].adv_group+"\", \""+data.nowPage+"\")'/>&nbsp;";
 						} else if(data.ar[i].status == 1){
 							str += "<span style='color: red;'>!업로드 중!&nbsp;<span>";
-							str += "<input type='button' value='수정' onclick='advEdit(\""+data.ar[i].a_idx+"\", \""+data.ar[i].status+"\",  \""+data.ar[i].adv_group+"\", \""+data.nowPage+"\")'/>&nbsp;";
+							str += "<input type='button' value='수정' onclick='advEdit(\""+data.ar[i].a_idx+"\", \""+data.nowPage+"\")'/>&nbsp;";
 							str += "<input type='button' value='내리기' onclick='advStatus(\""+data.ar[i].a_idx+"\", \"0\", \""+data.ar[i].adv_group+"\", \""+data.nowPage+"\")'/>&nbsp;";
 						}
 						str += "</td>";
