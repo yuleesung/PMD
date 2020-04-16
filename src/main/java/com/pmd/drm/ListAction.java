@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pmd.util.Paging_Bulletin;
 import com.pmd.util.Paging_SearchBulletin;
 import com.pmd.vo.BulletinVO;
+import com.pmd.vo.UserVO;
 
 import mybatis.dao.BulletinDAO;
 
@@ -148,6 +149,8 @@ public class ListAction {
 		else if(b_category.equals("adv"))
 			board_name = "광고문의";
 		
+		UserVO uvo = null;
+		
 		session.setAttribute("path", "list");
 		session.setAttribute("nowPage", page.getNowPage());
 		session.setAttribute("b_category", b_category);
@@ -163,6 +166,13 @@ public class ListAction {
 		map.put("board_name", board_name); // 게시판 이름(한글)
 		map.put("b_category", b_category); // 게시판 이름(코드값)
 		map.put("comm_ar", comm_ar); // 댓글 수 표현목적
+		
+	
+		if(session.getAttribute("userInfo") != null) { // 비밀글 접근목적
+			uvo = (UserVO) session.getAttribute("userInfo");
+			map.put("userInfo", uvo.getU_idx());
+			map.put("status", uvo.getStatus()); // 9 = 관리자
+		}
 		
 		return map;
 	}

@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>${board_name }게시물 목록</title>
+<title>${board_name }게시물목록</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -117,23 +117,26 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="list_div">
-						<h2 class="title"
-							style="margin-bottom: 50px; display: inline-block;">${board_name }
-							게시물 목록</h2>
+						<h2 class="title" style="margin-bottom: 50px; display: inline-block;">${board_name } 게시물 목록</h2>
 
 						<div style="display: inline-flex; float: right; margin-top: 3%;">
 							<select id="search_sel" name="search_sel"
 								style="width: 80px; background-color: white; font-weight: bold;">
-								<option value="all">전체</option>
-								<option value="1">제목</option>
-								<option value="2">이름</option>
-								<option value="3">내용</option>
-							</select> <input type="text" id="search_txt" name="search_txt" /> <a
-								style="width: 50px; height: 50px;" id="search_btn"
-								onclick="javascript:searchList('${b_category}');"><img
-								alt="버튼" src="resources/images/search_btn.png"
-								style="width: 100%; height: 100%;"></a>
+								<option style="font-weight: bold;" value="all">전 체</option>
+								<option style="font-weight: bold;" value="1">제 목</option>
+								<option style="font-weight: bold;" value="2">글쓴이</option>
+								<option style="font-weight: bold;" value="3">글 내용</option>
+							</select>
+							
+							<input type="text" id="search_txt" name="search_txt" placeholder=" Search" onkeypress="enterkey('${b_category}')"/> 
+							
+							<a style="width: 50px; height: 50px; margin-left: 5px; border-radius: 5px;" id="search_btn" onclick="javascript:searchList('${b_category}');">
+								<img title="검색하기" style="width: 100%; height: 100%; cursor: pointer;"
+								src="resources/images/search_btn.png" onmouseover="this.src='resources/images/searchOn_btn.png'" 
+								onmouseout="this.src='resources/images/search_btn.png'"/>
+							</a>
 						</div>
+						
 						<table id="t1">
 							<caption>${board_name }게시물목록</caption>
 							<colgroup>
@@ -158,38 +161,43 @@
 									<c:forEach var="vo" items="${list }" varStatus="st">
 										<tr>
 											<td>${rowTotal - ((nowPage-1)*blockList+st.index) }</td>
-											<td><c:if
-													test='${vo.secret_content eq 1 && b_category eq "adv"}'>
-													<c:set value="${sessionScope.userInfo }" var="uvo" />
-													<c:if test="${vo.u_idx eq uvo.u_idx  }">
-														<a
-															href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}">
-															${vo.subject } </a>
-														<c:if test="${fn:length(vo.c_list) > 0 }">
-										 	&nbsp;<span style="font-weight: bold; color: #6a99cb">(${comm_ar[st.index] })</span>
-														</c:if>
-													</c:if>
-													<c:if test="${vo.u_idx ne uvo.u_idx  }">
-										${vo.subject }
-									 </c:if>
-
-													<i class="fas fa-lock fa-lg"
-														style="color: rgba(38, 81, 168, 0.8)"></i>
-												</c:if> <c:if
-													test="${'광고문의' ne board_name || vo.secret_content ne 1}">
-													<a
-														href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}">
-														${vo.subject } </a>
-													<c:if test="${fn:length(vo.c_list) > 0 }">
-									 	&nbsp;<span style="font-weight: bold; color: #6a99cb">(${comm_ar[st.index] })</span>
-													</c:if>
-												</c:if></td>
+											<td>
+											<c:if test='${vo.secret_content eq 1 && b_category eq "adv"}'>
+												<c:set value="${sessionScope.userInfo }" var="uvo" />
+												<c:if test="${vo.u_idx eq uvo.u_idx  || uvo.status eq '9'}">
+													<a href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}">
+														${vo.subject } 
+													</a>													
+												</c:if>
+												<c:if test="${vo.u_idx ne uvo.u_idx }">
+													<c:if test="${uvo.status ne '9' }">
+														${vo.subject }
+														<i class="fas fa-lock fa-lg" style="color: rgba(38, 81, 168, 0.8)"></i>
+													</c:if>			
+												 </c:if>
+												 
+												<c:if test="${fn:length(vo.c_list) > 0 }">
+									 				&nbsp;<span style="font-weight: bold; color: #6a99cb">(${comm_ar[st.index] })</span>
+												</c:if>
+											</c:if> 
+											
+											<c:if test="${'광고문의' ne board_name || vo.secret_content ne 1}">
+												<a href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}">
+													${vo.subject }
+												</a>
+												<c:if test="${fn:length(vo.c_list) > 0 }">
+								 					&nbsp;<span style="font-weight: bold; color: #6a99cb">(${comm_ar[st.index] })</span>
+												</c:if>
+											</c:if>											
+											</td>
+											
 											<td>${vo.uvo.nickname }</td>
 											<td>${fn:substring(vo.write_date, 0, 10) }</td>
 											<td>${vo.hit }</td>
 										</tr>
 									</c:forEach>
 								</c:if>
+								
 								<c:if test="${empty list }">
 									<tr>
 										<td colspan="5" height="70" align="center">등록된 게시물이 없습니다.</td>
@@ -201,11 +209,12 @@
 									<td colspan="4">
 										<div class="pagination-wrap">${pageCode }</div>
 									</td>
-									<td><c:if test="${userInfo ne null }">
-											<input type="button" class="btn btn-primary" value="글쓰기"
-												style="font-size: 15px; cursor: pointer;"
+									<td>
+										<c:if test="${userInfo ne null }">
+											<input type="button" class="btn btn-primary" value="글쓰기" style="font-size: 15px; cursor: pointer;"
 												onclick="javascript: location.href='write.inc?nowPage=${nowPage}&b_category=${b_category }'" />
-										</c:if></td>
+										</c:if>
+									</td>
 								</tr>
 							</tfoot>
 						</table>
@@ -220,10 +229,8 @@
 	<!-- loader -->
 	<div id="loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke-miterlimit="10" stroke="#f4b214" /></svg>
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214" /></svg>
 	</div>
 
 	<script src="resources/js/jquery-3.2.1.min.js"></script>
@@ -254,6 +261,13 @@
             }
         });
 	    
+	    function enterkey(category) { /* 엔터버튼 눌렀을 때 진입 */
+			if (window.event.keyCode == 13) {
+				searchList(category); // 함수 호출
+			}
+		}
+	    
+	    
 	    function searchList(category){ // 검색
 	    	var sel = $("#search_sel").val(); // 셀렉트
 	    	var txt = $("#search_txt").val(); // 텍스트
@@ -269,10 +283,10 @@
 	    	}
 	    }
 	  
-	    function searchPage(nowPage, category, searchType, searchValue){
+	    function searchPage(nowPage, b_category, searchType, searchValue){
 	    	// 검색결과 페이징
 	    	var url = "searchBulletin.inc";
-    		var param = "searchType="+encodeURIComponent(sel)+"&searchValue="+encodeURIComponent(txt)+"&b_category="+category+"&nowPage="+nowPage;
+    		var param = "searchType="+encodeURIComponent(searchType)+"&searchValue="+encodeURIComponent(searchValue)+"&b_category="+b_category+"&nowPage="+nowPage;
     		
     		ajax_a(url, param);
 	    }
@@ -285,24 +299,62 @@
 	    		type: "post",
 	    		dataType: "json"
 	    	}).done(function(data){
-	    				
+
 	    		var str = "";
 	    		var str_f = "";
 	    		
 				if(data.ar != null){ // 결과값이 있을 때,
 					
 					for(var i=0; i<data.ar.length; i++){
+
+						str += "<tr>";
+						str += "<td>"+(data.rowTotal-((data.nowPage-1)*data.blockList+i))+"</td>";
+
+						str += "<td>";
 						
-					}
-					
+						if(data.ar[i].secret_content == '1' && data.b_category == 'adv'){ // 광고게시판에서 !!
+							if(data.ar[i].u_idx == data.userInfo || data.status == '9'){ // 로그인정보가 글 작성자와 동일 or 관리자로그인
+								str += "<a href='viewBoard.inc?b_idx="+data.ar[i].b_idx+"&nowPage="+data.nowPage+"&b_category="+data.b_category+"'>";
+								str += data.ar[i].subject;
+								str += "</a>";
+								} else { // 비로그인 or 로그인의 정보가 작성자와 미일치
+									str += data.ar[i].subject;
+									str += "&nbsp;<i class='fas fa-lock fa-lg' style='color: rgba(38, 81, 168, 0.8)'></i>";
+								}
+						
+							if(data.ar[i].c_list.length > 0){ // 댓글 표시
+								str += "&nbsp;<span style='font-weight: bold; color: #6a99cb'>";
+								str += "("+data.ar[i].c_list.length+")";
+								str += "</span>";
+							}
+						} else if(data.board_name != '광고문의' || data.ar[i].secret_content != '1'){ // 자유게시판, QnA게시판
+							str += "<a href='viewBoard.inc?b_idx="+data.ar[i].b_idx+"&nowPage="+data.nowPage+"&b_category="+data.b_category+"'>";
+							str += data.ar[i].subject;
+							str += "</a>";
+							
+							if(data.ar[i].c_list.length > 0){ // 댓글 표시
+								str += "&nbsp;<span style='font-weight: bold; color: #6a99cb'>";
+								str += "("+data.ar[i].c_list.length+")";
+								str += "</span>";
+							}
+						}					
+						str += "</td>";
+						
+						str += "<td>"+data.ar[i].uvo.nickname+"</td>"; // 닉네임
+						str += "<td>"+data.ar[i].write_date.substring(0,10)+"</td>"; // 작성일
+						str += "<td>"+data.ar[i].hit+"</td>"; // 조회수
+						
+						str += "</tr>";
+					} // 반복문 끝
+				
 					str_f += "<td colspan='4'>";
 					str_f += "<div class='pagination-wrap'>"+data.pageCode+"</div>";
 					str_f += "</td>";
 				
 					$("#t1 tbody").html(str);
 					$("#t1 tfoot").html(str_f);
-					
-				}else{ // 결과값이 없을 때,
+
+				} else{ // 결과값이 없을 때,
 					str += "<tr>";
 					str += "<td colspan='5' height='70' align='center'>등록된 게시물이 없습니다.</td>";
 					str += "</tr>";
@@ -315,6 +367,7 @@
 					$("#t1 tbody").html(str);
 					$("#t1 tfoot").html(str_f);
 				}
+
 	    	}).fail(function(err){
 	    		console.log(err);
 	    	});
