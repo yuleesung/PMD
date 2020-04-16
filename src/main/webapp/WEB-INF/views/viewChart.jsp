@@ -166,9 +166,9 @@
 			</div>
 		</div>
 		<!-- 스택형차트 영역 -->
-		<div class="container" style="display: none; background-color: #FFFCEC; 
-			position: relative;" id="viewStack">			
-			<div id="stackchart"></div>			
+		<div class="container" style="display: none; background-color: #FFFCEC; position: relative;" id="viewStack">
+			<span style="margin-left: 5%; font-weight:bold;">※ 속도느림</span>
+			<div id="stackchart"></div>
 		</div>
 		<h2 class="ending">
 			<strong></strong><span style="text-align: right;"></span>
@@ -437,9 +437,11 @@
 									} // for 끝
 
 									stackChart(); // 스택차트 함수호출
-
 								}).fail(function(err) {
 							console.log(err);
+							alert("개설 된 교육이 없습니다.");
+							$("#viewStack").css("display", "none");
+							$("#stackchart").empty();
 						});
 
 					});

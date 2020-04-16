@@ -78,14 +78,21 @@
 			<br />
 			<c:choose>
 				<c:when test="${userInfo.u_id ne null }">
-					<div class="form">
-						<form action="mypage_leave.inc" method="post" id="leaveFrm" name="leaveFrm">
-							<input type="password" placeholder="Input Your Pwd" name="u_pw"
-								id="u_pw" class="txt" style="width: 400px;">
-							<button type="button" class="btn btn-default" onclick="leave('${sessionScope.userInfo.u_idx}')"
-								style="margin-left: 20px;">Leave Now</button>
-						</form>
-					</div>
+					<c:if test="${userInfo.status ne '9' }">
+						<div class="form">
+							<form action="mypage_leave.inc" method="post" id="leaveFrm" name="leaveFrm">
+								<input type="password" placeholder="Input Your Pwd" name="u_pw"
+									id="u_pw" class="txt" style="width: 400px;">
+								<button type="button" class="btn btn-default" onclick="leave('${sessionScope.userInfo.u_idx}')"
+									style="margin-left: 20px;">Leave Now</button>
+							</form>
+						</div>
+					</c:if>
+					<c:if test="${userInfo.status eq '9' }">
+						<div class="form">
+							<p style="color: black;">탈퇴가 불가능합니다. (사유: 관리자)</p>
+						</div>
+					</c:if>
 				</c:when>
 				<c:otherwise>
 				<c:if test="${sessionScope.userInfo.sns_type ne 'google' }">

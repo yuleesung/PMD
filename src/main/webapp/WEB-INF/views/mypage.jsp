@@ -32,9 +32,13 @@
 				<div class="profile-sidebar">
 					<!-- SIDEBAR USERPIC -->
 					<div class="profile-userpic">
-						<img
-							src="https://media.rockstargames.com/chinatownwars/global/downloads/avatars/zhou_256x256.jpg"
-							class="img-responsive" alt="">
+						<c:if test="${userInfo.status ne '9' }">
+							<img src="https://media.rockstargames.com/chinatownwars/global/downloads/avatars/zhou_256x256.jpg"
+								class="img-responsive" alt="profileImage"/>
+						</c:if>
+						<c:if test="${userInfo.status eq '9' }">
+							<img src="resources/images/admin.png" class="img-responsive" alt="profileImage"/>
+						</c:if>
 					</div>
 
 					<div class="profile-usertitle">

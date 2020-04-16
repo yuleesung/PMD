@@ -78,26 +78,34 @@
 			<br />
 			<c:choose>
 				<c:when test="${userInfo.u_id ne null }">
-					<div class="form">
-						<form action="mypage_edit.inc" method="post" id="editFrm"
-							name="editFrm">
-							<input type="text" placeholder="Name" value="${userInfo.u_name }"
-								name="u_name" id="u_name" class="txt"><br /> <input
-								type="text" placeholder="Email" value="${userInfo.email }"
-								name="email" id="email" class="txt"><br /> <input
-								type="text" placeholder="Phone" value="${userInfo.u_phone }"
-								name="u_phone" id="u_phone" class="txt"><br /> <input
-								type="text" placeholder="NickName" value="${userInfo.nickname }"
-								name="nickname" id="nickname" class="txt"><br /> <input
-								type="password" placeholder="Change Pwd" name="u_pw" id="u_pw"
-								class="txt"><br /> <br /> <br />
-							<button type="button" class="btn btn-default" id="sub_btn">Update</button>
-						</form>
-					</div>
+					<c:if test="${userInfo.status ne '9' }">
+						<div class="form">
+							<form action="mypage_edit.inc" method="post" id="editFrm"
+								name="editFrm">
+								<input type="text" placeholder="Name" value="${userInfo.u_name }"
+									name="u_name" id="u_name" class="txt"><br /> <input
+									type="text" placeholder="Email" value="${userInfo.email }"
+									name="email" id="email" class="txt"><br /> <input
+									type="text" placeholder="Phone" value="${userInfo.u_phone }"
+									name="u_phone" id="u_phone" class="txt"><br /> <input
+									type="text" placeholder="NickName" value="${userInfo.nickname }"
+									name="nickname" id="nickname" class="txt"><br /> <input
+									type="password" placeholder="Change Pwd" name="u_pw" id="u_pw"
+									class="txt"><br /> <br /> <br />
+								<button type="button" class="btn btn-default" id="sub_btn">Update</button>
+							</form>
+						</div>
+					</c:if>
+					<c:if test="${userInfo.status eq '9' }">
+						<div class="form">
+							<p style="color: black;">수정이 불가능합니다. (사유: 관리자)</p>
+						</div>
+					</c:if>
 				</c:when>
+				
 				<c:otherwise>
 					<div class="form">
-						<p>이 계정은 SNS으로 연동되었습니다.</p>
+						<p style="color: black;">이 계정은 SNS으로 연동되었습니다.</p>
 					</div>
 				</c:otherwise>
 			</c:choose>
