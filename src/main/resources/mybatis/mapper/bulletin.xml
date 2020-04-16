@@ -637,4 +637,9 @@
 		select * from adv_t where not a_idx = #{a_idx} and adv_group = #{adv_group}
 	</select>
 	
+	<!-- 댓글 복구 -->
+	<update id="restoreComm" parameterType="String">
+		update bulletin_c_t set status = 0 where c_idx = #{c_idx}
+	</update>
+	
 </mapper>

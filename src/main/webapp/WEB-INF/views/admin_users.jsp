@@ -20,7 +20,7 @@
 <body>
 
 	<div id="memberSetting" style="width: 898px; margin: 0;">
-		<h1> 관리자 - 회원관리</h1>
+		<h1><i class="fas fa-folder"></i>&nbsp;관리자 - 회원관리</h1>
 		<table id="srch_t">
 			<caption style="text-indent: -9999px;">회원 검색</caption>
 			<tbody>
@@ -57,8 +57,8 @@
 					<td colspan="2"><input type="date" name="reg_date" id="reg_date" title="가입일" /></td>
 				</tr>
 				<tr>
-					<td>
-						<input type="button" value="검색" id="userSrch" />
+					<td colspan="5" style="text-align: center;">
+						<input type="button" value="검색" id="userSrch" style="border-radius: 5px; font-size: 20px; font-weight: bold; padding: 10px; border: 1px solid rgba(0, 0, 0, 0.5); cursor: pointer;"/>
 					</td>
 				</tr>
 			</tbody>
@@ -72,17 +72,17 @@
 		<table id="users_t"> 
 			<caption style="text-indent: -9999px;">관리자페이지 - 회원관리</caption>
 			<colgroup>
-				<col width="50px;">
-				<col width="60px;" />
-				<col width="60px;" />
-				<col width="60px;" />
-				<col width="115px;" />
-				<col width="*" />
-				<col width="90px;" />
-				<col width="90px;" />
-				<col width="99px;" />
-				<col width="80px;" />
-				<col width="120px;" />
+				<col width="50px">
+				<col width="70px"/>
+				<col width="70px"/>
+				<col width="70px"/>
+				<col width="70px"/>
+				<col width="*"/>
+				<col width="70px"/>
+				<col width="70px"/>
+				<col width="70px"/>
+				<col width="70px"/>
+				<col width="100px"/>
 			</colgroup>
 			<thead>
 				<tr style="text-align: center;">
@@ -128,7 +128,7 @@
 			</tbody>
 			<tfoot>
 		    	<tr>
-		        	<td colspan="10">
+		        	<td colspan="11">
 		          		<div class="pagination-wrap">${pageCode }</div>
 		          	</td>
 		        </tr>

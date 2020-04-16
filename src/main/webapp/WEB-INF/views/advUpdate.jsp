@@ -11,7 +11,7 @@
 <body>
 	<div id="advInsert" style="width: 898px;">
 		<header>
-			<h1>광고 수정</h1>
+			<h1><i class="fas fa-folder"></i>&nbsp;광고 수정</h1>
 			<hr/>
 		</header>
 		<form action="doAdvUpdate.inc" method="post" enctype="multipart/form-data" name="frm">
@@ -29,7 +29,7 @@
 					<td>
 						<input type="file" name="upload" id="upload"/>
 						<c:if test="${vo.file_name ne null }">
-							(${vo.file_name })
+							<span>(${vo.file_name })</span>
 						</c:if>
 					</td>
 					<th>광고주</th>

@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* 기본세팅*/
 body{
 	margin: 0;
 	padding: 0;
@@ -63,6 +64,7 @@ a{
 	color: #0080ff;
 }
 
+/* 아코디언 효과 */
 #slide{
 	padding-top: 10px;
 	width: 100%;
@@ -101,6 +103,11 @@ a{
 	color: white;
 }
 
+h1{
+	text-shadow: 0px 1px #ffffff, 4px 4px 0px #dad7d7;
+}
+
+/* 테이블 기본 세팅 */
 table {
 	width: 90%;
 	margin: auto;
@@ -114,6 +121,7 @@ table th, td{
 	padding-bottom: 10px;
 }
 
+/* 게시판 목록 세팅 */
 .hide {
 	display: none;
 }
@@ -127,10 +135,29 @@ table th, td{
 .title td {
 	cursor: pointer;
 	height: 40px;
+	
 }
+
+.title:hover{
+	background-color: #FFFFF3;
+}
+
+.title td:first-child{
+	text-align: center;
+	font-weight: bold;
+}
+
+.title td:last-child span{
+	background-color: rgba(255, 0, 0, 0.3);
+	border-radius: 5px;
+	font-weight: bold;
+	padding: 5px;
+}
+
 .adv_title td{
 	height: 40px;
 }
+
 .sandwich{
 	font-weight: bold;
 }
@@ -144,9 +171,144 @@ table th, td{
 	border-radius: 3px;
 	background-color: #6a99cb;
 	color: white;
+	cursor: pointer;
+	border: 1px solid rgba(0, 0, 255, 0.5);
 }
 
 table th{
 	background-color: #dedede;
 }
-	
+
+#boardList>span{
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.show{
+	background-color: rgba(240, 240, 240, 0.5);
+}
+
+.show td{
+	padding: 10px;
+}
+
+/* 회원 정보 목록 */
+#memberSetting{
+	padding: 10px;
+}
+
+#memberSetting #srch_t td{
+	text-align: center;
+	padding: 5px;
+}
+
+#memberSetting #srch_t td input[type=text], #memberSetting #srch_t td input[type=date]{
+	padding: 4px;
+	width: 250px;
+}
+
+#memberSetting>pre{
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#memberSetting>#users_t>thead>tr>th{
+	font-size: 14px;
+}
+
+#memberSetting>#users_t>tbody>tr>td:first-child{
+	font-weight: bold;
+}
+
+#memberSetting>#users_t>tbody>tr>td{
+	font-size: 14px;
+	text-align: center;
+	font-family: sans-serif;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/* 광고 목록 */
+#advList{
+	padding: 10px;
+}
+
+#advList>span{
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#advList>#adv_bbs tbody td:first-child{
+	text-align: center;
+	font-weight: bold;
+}
+
+#advList>#adv_bbs>tbody>tr>td span{
+	font-weight: bold;
+}
+
+#advList>#adv_bbs>tbody>tr:hover{
+	background-color: #FFFFF3;
+}
+
+/* 광고 넣기, 수정 */
+#advInsert{
+	padding: 10px;
+}
+
+#advInsert>form>table>tfoot>tr>td{
+	text-align: center;
+}
+
+#advInsert>form>table>tbody>tr>td{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#advInsert>form>table>tfoot>tr>td>input[type=button]{
+	border: 1px solid blcak;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 10px;
+}
+
+#advInsert>form>table>tbody input[type=text]{
+	padding: 4px;
+}
+
+#advInsert>form>table>tbody>tr:first-child td span{
+	font-size: 14px;
+	font-weight: bold;
+	font-style: italic;
+}
+
+#advInsert>form>table>tbody>tr:first-child input[type=text]{
+	width: 250px;
+}
+
+#advInsert>form>table>tbody>tr:nth-child(2) input[type=text]{
+	width: 380px;
+}
+
+#advInsert>form>table>tbody>tr:nth-child(2) span#warning{
+	font-size: 14px;
+	font-weight: bold;
+	font-style: italic;
+	color: rgba(255, 0, 0, 0.8);
+}
+
+#advInsert>form>table>tbody>tr:nth-child(3) td:nth-child(2) input[type=text]{
+	width: 50px;
+}
+
+#advInsert>form>table>tbody>tr:nth-child(3) td:last-child input[type=text]{
+	width: 90px;
+}
+
+#advInsert>form>table>tbody>tr:nth-child(5) input[type=date]{
+	width: 200px;
+}
+
+#advInsert>form>table>tbody>tr:last-child input[type=text]{
+	width: 685px;
+}

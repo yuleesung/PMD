@@ -10,9 +10,9 @@
 </head>
 <body>
 <div id="boardList" style="width: 890px; margin: 0; height: 80%;"> 
-	<h1>관리자용 게시글 관리페이지</h1>
+	<h1><i class="fas fa-folder"></i>&nbsp;관리자용 게시글 관리페이지</h1>
 	<br/>
-	<span>&nbsp;카테고리를 선택해주세요.</span>
+	<span>&nbsp;<i class="fas fa-check-circle"></i>&nbsp;카테고리를 선택해주세요.</span>
 	<br/>
 	<input type="radio" id="ad_free"
 		class="radio" value="free" name="category" checked="checked"><span class="sandwich">자유</span>&nbsp;&nbsp;&nbsp;
@@ -55,10 +55,9 @@
 						</td>
 						<td style="text-align: right;">
 							<c:if test="${vo.status eq 0 }">
-								<span></span>
 								<input type="button" value="글 삭제" onclick="boardStatus('${vo.b_idx}', '1', '${vo.b_category }', '${nowPage }')" />
 							</c:if> <c:if test="${vo.status eq 1 }">
-								<span style="color: red;">!삭제된 글!</span>
+								<span style="color: red;"><i class="fas fa-trash-alt"></i>&nbsp;삭제된 글</span>
 								<input type="button" value="글 복구" onclick="boardStatus('${vo.b_idx}', '0', '${vo.b_category }', '${nowPage }')" />
 							</c:if> 
 							<input type="button" value="글 이동" onclick="location.href='viewBoard.inc?b_idx=${vo.b_idx }&b_category=${b_category}'" />
@@ -211,7 +210,7 @@
 							str += "<input type='button' value='글 삭제'";
 							str += "onclick='boardStatus(\""+data.ar[i].b_idx+"\", \"1\", \""+data.ar[i].b_category+"\", \""+data.nowPage+"\")'/>";						
 						} else if(data.ar[i].status == '1'){							
-							str += "<span style='color: red;'>!삭제된 글!&nbsp;</span>";
+							str += "<span style='color: red;'><i class='fas fa-trash-alt'></i>&nbsp;삭제된 글</span>&nbsp;";
 							str += "<input type='button' value='글 복구'";
 							str += "onclick='boardStatus(\""+data.ar[i].b_idx+"\", \"0\", \""+data.ar[i].b_category+"\", \""+data.nowPage+"\")'/>";
 						}

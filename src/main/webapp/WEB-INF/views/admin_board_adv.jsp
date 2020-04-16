@@ -9,9 +9,9 @@
 </head>
 <body>
 <div id="advList" style="width: 890px; margin: 0; height: 80%;"> 
-	<h1>관리자용 광고목록 페이지</h1>
+	<h1><i class="fas fa-folder"></i>&nbsp;관리자용 광고목록 페이지</h1>
 	<br/>
-	<span>&nbsp;Group을 선택해주세요.</span>
+	<span>&nbsp;<i class="fas fa-check-circle"></i>&nbsp;Group을 선택해주세요.</span>
 	<br/>
 	<input type="radio"
 		class="radio" value="1" name="adv_group" id="adv_group1"><span class="sandwich">1번 광고</span>&nbsp;&nbsp;&nbsp;
@@ -64,7 +64,7 @@
 								<input type="button" value="수정" onclick="advEdit('${vo.a_idx}', '${nowPage }')"/>						
 								<input type="button" value="올리기" onclick="advStatus('${vo.a_idx}', '1', '${vo.adv_group }', '${nowPage }')" />&nbsp;
 							</c:if> <c:if test="${vo.status eq 1 }">
-								<span style="color: red;">!업로드 중!</span>
+								<span style="color: red;"><i class="fas fa-arrow-alt-circle-up"></i>업로드 중</span>
 								<input type="button" value="수정" onclick="advEdit('${vo.a_idx}', '${nowPage }')"/>	
 								<input type="button" value="내리기" onclick="advStatus('${vo.a_idx}', '0', '${vo.adv_group }', '${nowPage }')" />&nbsp;
 							</c:if>
@@ -222,7 +222,7 @@
 							str += "<input type='button' value='수정' onclick='advEdit(\""+data.ar[i].a_idx+"\", \""+data.nowPage+"\")'/>&nbsp;";
 							str += "<input type='button' value='올리기' onclick='advStatus(\""+data.ar[i].a_idx+"\", \"1\", \""+data.ar[i].adv_group+"\", \""+data.nowPage+"\")'/>&nbsp;";
 						} else if(data.ar[i].status == 1){
-							str += "<span style='color: red;'>!업로드 중!&nbsp;<span>";
+							str += "<span style='color: red;'><i class='fas fa-arrow-alt-circle-up'></i>업로드 중<span>&nbsp;";
 							str += "<input type='button' value='수정' onclick='advEdit(\""+data.ar[i].a_idx+"\", \""+data.nowPage+"\")'/>&nbsp;";
 							str += "<input type='button' value='내리기' onclick='advStatus(\""+data.ar[i].a_idx+"\", \"0\", \""+data.ar[i].adv_group+"\", \""+data.nowPage+"\")'/>&nbsp;";
 						}

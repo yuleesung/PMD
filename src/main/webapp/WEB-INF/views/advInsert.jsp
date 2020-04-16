@@ -9,7 +9,7 @@
 <body>
 	<div id="advInsert" style="width: 898px;">
 		<header>
-			<h1>광고 넣기</h1>
+			<h1><i class="fas fa-folder"></i>&nbsp;광고 넣기</h1>
 			<hr/>
 		</header>
 		<form action="advInsert.inc" method="post" enctype="multipart/form-data" name="frm">

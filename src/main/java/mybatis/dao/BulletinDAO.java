@@ -662,4 +662,15 @@ public class BulletinDAO {
 		return ar;
 	}
 	
+	// 댓글 복구
+	public boolean restoreComm(String c_idx) {
+		boolean chk = false;
+		
+		int cnt = ss.update("bulletin.restoreComm", c_idx);
+		if(cnt > 0)
+			chk = true;
+		
+		return chk;
+	}
+	
 }
