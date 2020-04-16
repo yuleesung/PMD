@@ -88,6 +88,20 @@ option {
 .carousel_section{
 	width: 270px;
 }
+.carousel_section img:hover{
+
+	border-bottom: 5px solid #BDBDBD;
+	border-right: 5px solid #BDBDBD;
+	border-radius: 12px;
+}
+
+.carousel_section img:active{
+	border-left: 5px solid #BDBDBD;
+	border-top: 5px solid #BDBDBD;
+	border-bottom: 0;
+	border-right: 0;
+	border-radius: 12px;
+}
 </style>
 </head>
 <body>
@@ -101,8 +115,7 @@ option {
 			<div id="carousel_section" class="carousel_section">
 				<ul>
 					<c:forEach var="img_ar1" items="${img_ar1 }" varStatus="st">
-						<li><a href="${link_ar1[st.index] }"><img
-								src="${img_ar1 }"></a></li>
+						<li><a href="${link_ar1[st.index] }"><img title="${link_ar1[st.index] }" src="${img_ar1 }"></a></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -110,8 +123,7 @@ option {
 			<div id="carousel_section2" class="carousel_section">
 				<ul>
 					<c:forEach var="img_ar2" items="${img_ar2 }" varStatus="st">
-						<li><a href="${link_ar2[st.index] }"><img
-								src="${img_ar2 }"></a></li>
+						<li><a href="${link_ar2[st.index] }"><img title="${link_ar2[st.index] }" src="${img_ar2 }"></a></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -119,16 +131,14 @@ option {
 			<div id="carousel_section3" class="carousel_section">
 				<ul>
 					<c:forEach var="img_ar3" items="${img_ar3 }" varStatus="st">
-						<li><a href="${link_ar3[st.index] }"><img
-								src="${img_ar3 }"></a></li>
+						<li><a href="${link_ar3[st.index] }"><img title="${link_ar3[st.index] }" src="${img_ar3 }"></a></li>
 					</c:forEach>
 				</ul>
 			</div>
 			<div id="carousel_section4" class="carousel_section">
 				<ul>
 					<c:forEach var="img_ar4" items="${img_ar4 }" varStatus="st">
-						<li><a href="${link_ar4[st.index] }"><img
-								src="${img_ar4 }"></a></li>
+						<li><a href="${link_ar4[st.index] }"><img title="${link_ar4[st.index] }" src="${img_ar4 }"></a></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -298,7 +308,7 @@ option {
 
 
 
-		<section class="search-sec" style="margin-top: 150px; width: 100%;">
+		<section class="search-sec" style="margin-top: 170px; width: 100%;">
 
 			<form action="#" method="post" novalidate="novalidate">
 				<div class="row">
