@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-<div style="width: 890px; margin: 0; height: 100%; margin-left: 10px;">
+<div style="width: 890px; margin: 0; height: 80%;">
 	<h1>관리자용 게시글 관리페이지</h1>
 	<br/>
 	<span>&nbsp;카테고리를 선택해주세요.</span>
