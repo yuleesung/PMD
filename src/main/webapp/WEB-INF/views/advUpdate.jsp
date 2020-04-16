@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="resources/css/jquery-ui.css"/>
 </head>
 <body>
-	<div id="advUpdate" style="width: 898px;">
+	<div id="advInsert" style="width: 898px;">
 		<header>
 			<h1>광고 수정</h1>
 			<hr/>
@@ -101,7 +101,7 @@
 				<tfoot>
 					<tr>
 						<td colspan="4">
-							<input type="button" id="save_btn" value="저장"/>
+							<input type="button" id="save_btn" value="수정"/>
 						</td>
 					</tr>
 				</tfoot>
