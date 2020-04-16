@@ -30,6 +30,7 @@ public class AdminUpdateAction {
 	
 	@RequestMapping(value = "/advUpdate.inc", method = RequestMethod.GET)
 	public ModelAndView showAdv(String a_idx, String nowPage) { // admin.inc를 거쳐가야 분할 화면으로 보여줄 수 있기 때문에 쓰이는 함수
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("a_idx", a_idx);
 		mv.addObject("nowPage", nowPage);
@@ -70,6 +71,7 @@ public class AdminUpdateAction {
 		
 		mv.addObject("fromUpdate", "fromUpdateAdv");
 		mv.addObject("nowPage", vo.getNowPage());
+		mv.addObject("adv_group", vo.getAdv_group());
 		mv.setViewName("redirect:/admin.inc");
 		
 		return mv;
