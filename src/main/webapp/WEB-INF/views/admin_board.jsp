@@ -7,12 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style type="text/css">
-.title span{
-	font-size: 14px;
-	font-weight: bold;
-}
-</style>
 </head>
 <body>
 <div id="boardList" style="width: 890px; margin: 0; height: 80%;"> 
