@@ -135,6 +135,20 @@
 				
 		});
 		
+		// 게시물관리 내용 펼치기용 **
+		 $(document).on("click", ".recruit .title  td:nth-child(2)", function(event){ 	
+				var myArticle = $(this).parents().next("tr");
+				
+				console.log("admin.jsp:"+myArticle);
+				
+				if ($(myArticle).hasClass('hide')) {
+					
+					$(myArticle).removeClass('hide').addClass('show');
+				} else {						
+					$(myArticle).addClass('hide').removeClass('show');
+				}
+		 });
+		
 		
 		// 메뉴를 눌렀을 때 다른 페이지를 보여주는 기능!! 
 		function viewPage(num) {
