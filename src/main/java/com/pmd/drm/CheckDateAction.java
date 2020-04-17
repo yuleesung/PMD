@@ -71,17 +71,20 @@ public class CheckDateAction {
 		boolean start_chk = false;
 		boolean end_chk = false;
 		AdvVO[] ar = b_dao.searchDateOnAdv_tForUpdate(a_idx, adv_group);
-		for(int i=0; i<ar.length; i++) {
-			if(checkDate(start_date, ar[i].getStart_date(), ar[i].getEnd_date())){
-				start_chk = true;
-				break;
-			}
-		}
 		
-		for(int i=0; i<ar.length; i++) {
-			if(checkDate(end_date, ar[i].getStart_date(), ar[i].getEnd_date())){
-				end_chk = true;
-				break;
+		if(ar != null) {
+			for(int i=0; i<ar.length; i++) {
+				if(checkDate(start_date, ar[i].getStart_date(), ar[i].getEnd_date())){
+					start_chk = true;
+					break;
+				}
+			}
+			
+			for(int i=0; i<ar.length; i++) {
+				if(checkDate(end_date, ar[i].getStart_date(), ar[i].getEnd_date())){
+					end_chk = true;
+					break;
+				}
 			}
 		}
 		

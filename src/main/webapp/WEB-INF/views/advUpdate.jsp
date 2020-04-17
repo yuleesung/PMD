@@ -178,7 +178,15 @@
 				var start_date = $("#start_date").val();
 				var end_date = $("#end_date").val();
 				var a_idx = $("#a_idx").val();
-				ajax_bothCheck(adv_group, start_date, end_date, a_idx);
+				
+				if(start_date != "")
+					ajax_check(adv_group, start_date, "시작일", a_idx);
+				
+				if(end_date != "")
+					ajax_check(adv_group, end_date, "종료일", a_idx);
+				
+				if(start_date != "" && end_date != "")
+					ajax_bothCheck(adv_group, start_date, end_date, a_idx);
 			});
 			
 			$("#save_btn").click(function(){
