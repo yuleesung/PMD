@@ -19,9 +19,9 @@
 			<input type="hidden" name="a_idx" value="${vo.a_idx }"/>
 			<table>
 				<colgroup>
-					<col width="150px"/>
+					<col width="100px"/>
 					<col width="*"/>
-					<col width="150px"/>
+					<col width="100px"/>
 					<col width="300px"/>
 				</colgroup>
 				<tr>

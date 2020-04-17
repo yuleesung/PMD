@@ -15,9 +15,9 @@
 		<form action="advInsert.inc" method="post" enctype="multipart/form-data" name="frm">
 			<table>
 				<colgroup>
-					<col width="150px"/>
+					<col width="100px"/>
 					<col width="*"/>
-					<col width="150px"/>
+					<col width="100px"/>
 					<col width="300px"/>
 				</colgroup>
 				<tr>
