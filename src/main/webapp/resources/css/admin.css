@@ -287,7 +287,7 @@ table th{
 }
 
 #advInsert>form>table>tbody>tr:nth-child(2) input[type=text]{
-	width: 380px;
+	width: 396px;
 }
 
 #advInsert>form>table>tbody>tr:nth-child(2) span#warning{
@@ -298,17 +298,17 @@ table th{
 }
 
 #advInsert>form>table>tbody>tr:nth-child(3) td:nth-child(2) input[type=text]{
-	width: 50px;
+	width: 70px;
 }
 
 #advInsert>form>table>tbody>tr:nth-child(3) td:last-child input[type=text]{
-	width: 90px;
+	width: 110px;
 }
 
 #advInsert>form>table>tbody>tr:nth-child(5) input[type=date]{
-	width: 200px;
+	width: 270px;
 }
 
 #advInsert>form>table>tbody>tr:last-child input[type=text]{
-	width: 685px;
+	width: 671px;
 }
