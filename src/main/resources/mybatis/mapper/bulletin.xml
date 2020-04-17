@@ -287,10 +287,7 @@
 	
 	<!-- 유저의 댓글 -->
 	<select id="u_commList" parameterType="String" resultType="com.pmd.vo.Bulletin_C_VO">
-		select * from(	
-			select rownum r_num, a.* from
-			(select * from bulletin_c_t where u_idx = #{u_idx} order by c_idx desc) a
-		)where r_num between 1 and 10
+		select * from bulletin_c_t where u_idx = #{u_idx} order by c_idx desc
 	</select>
 	
 	<!-- 유저 목록 -->
