@@ -141,7 +141,7 @@
 							
 							<a style="width: 50px; height: 50px; margin-left: 5px; border-radius: 5px;" id="search_btn" onclick="javascript:searchList('${b_category}');">
 								<img title="검색하기" style="width: 100%; height: 100%; cursor: pointer;"
-								src="resources/images/search_btn.png" onmouseover="this.src='resources/images/searchOn_btn.png'" 
+								src="resources/images/search_btn.png" onmouseover="this.src='resources/images/search_btn2.png'" 
 								onmouseout="this.src='resources/images/search_btn.png'"/>
 							</a>
 						</div>

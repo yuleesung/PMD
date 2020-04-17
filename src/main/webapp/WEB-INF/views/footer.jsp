@@ -16,7 +16,7 @@
 
  #footer{
 	width: auto;
-	padding: 40px 0px 50px;/* 위 좌/우 아래 */
+	padding: 40px 0px 20px;/* 위 좌/우 아래 */
 	background: rgba(26, 70, 104, 0.51);
 	margin-top: 100px;
 }
@@ -62,7 +62,7 @@
 
     <div id="footer">
 			<div class="footer_area" >
-				<div style="margin-bottom: 10px;">
+				<div style="margin-bottom: 14px;">
 					<ul class="foot_guide">
 						<li><a href="">개인정보취급방침</a></li>
 						<li><a href="">웹회원 이용약관</a></li>
@@ -70,13 +70,12 @@
 						<li><a href="">이메일 무단수집 거부</a></li>
 					</ul>
 				</div>
-				<address style="font-size: 14px;">
-				 서울특별시 관악구 조원동 &nbsp;
-				 (대표이사: 마루치) <br/><br/>
-				 고객상담: 국번없이 114 혹은 <br/>
-				 02-1234-1234 (평일 09:00~17:00) <br/>
+				<address style="font-size: 16px;">
+				 서울특별시 금천구 가산동 <br/>	 
+				 대표번호: 02-1234-1234 (평일 09:00~17:00) <br/><br/>
+				 대표이사:&nbsp;마루치 <br/>
 				</address> 
-				<p class="copyright" style="color: black; font-size: 16px; font-weight: bold;">
+				<p class="copyright" style="color: black; font-size: 18px; font-weight: bold;">
 					Copyright (c) PMD.
 					All rights reserved.
 				</p>

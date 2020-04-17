@@ -67,6 +67,23 @@
 	min-height: 460px;
 	width: 800px;
 }
+
+#leave_btn1, #leave_btn2{
+	width: 150px; 
+	height: 50px; 
+	font-size: 16px;
+	font-weight: inherit;
+	border-radius: 15px; 
+	background-color: #6a99cb; 
+	color: white;
+}
+
+#leave_btn1:hover, #leave_btn2:hover{
+	background-color: #f8585b;
+	color: white;
+}
+
+
 </style>
 </head>
 <body>
@@ -84,7 +101,7 @@
 								<input type="password" placeholder="Input Your Pwd" name="u_pw"
 									id="u_pw" class="txt" style="width: 400px;">
 								<button type="button" class="btn btn-default" onclick="leave('${sessionScope.userInfo.u_idx}')"
-									style="margin-left: 20px;">Leave Now</button>
+									id="leave_btn1">Leave Now</button>
 							</form>
 						</div>
 					</c:if>
@@ -97,8 +114,8 @@
 				<c:otherwise>
 				<c:if test="${sessionScope.userInfo.sns_type ne 'google' }">
 					<div class="form">
-						<button type="button" class="btn btn-default" onclick="discon('${sessionScope.userInfo.sns_type}')" 
-						style="width: 150px; height: 50px; font-size: 16px;">연동해제</button>
+						<button type="button" class="btn btn-default" id="leave_btn2" 
+						onclick="discon('${sessionScope.userInfo.sns_type}')">연동해제</button>			
 					</div>
 				</c:if>
 				<c:if test="${sessionScope.userInfo.sns_type eq 'google' }">

@@ -67,6 +67,21 @@
 	min-height: 460px;
 	width: 800px;
 }
+
+#sub_btn {
+	width: 150px; 
+	height: 50px; 
+	font-size: 16px;
+	font-weight: inherit;
+	border-radius: 15px; 
+	background-color: #6a99cb; 
+	color: white;
+}
+
+#sub_btn:hover {
+	background-color: green;
+	color: white;
+}
 </style>
 </head>
 <body>
