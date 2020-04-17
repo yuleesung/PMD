@@ -70,7 +70,7 @@
 			var nowPage = $("#nowPage").val(); // 광고수정시 들어오는 파라미터
 			var adv_group = $("#adv_group").val();
 			
-			if(hometown == "" && a_idx == "" && nowPage == "" && adv_group == ""){
+			if(hometown == "" && a_idx == "" && adv_group == ""){
 				// 오른쪽 화면에서 가장 먼저 로드 되는 기능
 				$("#right").load("/drm/memSet.inc");
 			}else if(hometown == "fromInsertAdv" && a_idx == "" && adv_group == ""){ // 광고 넣기를 하고 광고 목록 보기 화면으로 자동 이동
