@@ -62,8 +62,17 @@
 	text-align: center;
 }
 
+#t1 th{
+	background-color: #8EC0E4;
+}
+
+#t1 tbody td:first-child{
+	font-weight: bold;
+}
+
 #t1 th, #t1 td {
-	border: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
 	padding: 20px;
 	color: black;
 }
