@@ -460,7 +460,7 @@
 				lower(sns_id) like lower('%'||#{sns_id}||'%') and
 			</if>
 			<if test="reg_date != null">
-				reg_date = #{reg_date} and
+				to_char(reg_date, 'YYYY-MM-DD') = #{reg_date} and
 			</if>
 			<if test="total != null">
 				status in(0, 1, 2) and
@@ -484,7 +484,7 @@
 				status = 1 and
 			</if>
 			<if test="choice == 'all'">
-				u_id is not null and sns_id is not null
+				u_id is not null or sns_id is not null
 			</if>
 			<if test="choice == 'normal'">
 				u_id is not null
@@ -517,7 +517,7 @@
 						lower(sns_id) like lower('%'||#{sns_id}||'%') and
 					</if>
 					<if test="reg_date != null">
-						reg_date = #{reg_date} and
+						to_char(reg_date, 'YYYY-MM-DD') = #{reg_date} and
 					</if>
 					<if test="total != null">
 						status in(0, 1, 2) and
@@ -541,7 +541,7 @@
 						status = 1 and
 					</if>
 					<if test="choice == 'all'">
-						u_id is not null and sns_id is not null
+						u_id is not null or sns_id is not null
 					</if>
 					<if test="choice == 'normal'">
 						u_id is not null
@@ -550,7 +550,7 @@
 						sns_id is not null
 					</if>
 				</where>
-			order by b_idx desc) a
+			order by u_idx desc) a
 		)where r_num between #{begin} and #{end}
 	</select>
 	

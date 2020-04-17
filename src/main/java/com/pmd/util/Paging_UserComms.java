@@ -11,18 +11,23 @@ public class Paging_UserComms {
 				endPage, // 끝 페이지
 				begin, // 각 페이지별 회원의 댓글들 가져오기 위한 범위의 시작 값
 				end; // 각 페이지별 회원의 댓글들 가져오기 위한 범위의 끝 값
+				
+	private String u_idx, nickname;
+	
 
 	private boolean isPrePage; // '이전으로 가기'기능 가능여부
 	private boolean isNextPage; // '다음으로 가기'기능 가능여부
 
 	private StringBuffer sb; // JSP에서 표현할 페이징 HTML코드를 저장할 곳
 
-	public Paging_UserComms(int nowPage, int rowTotal, int blockList, int blockPage) {
+	public Paging_UserComms(int nowPage, int rowTotal, int blockList, int blockPage, String u_idx, String nickname) {
 		super();
 		this.nowPage = nowPage;
 		this.rowTotal = rowTotal;
 		this.blockList = blockList;
 		this.blockPage = blockPage;
+		this.u_idx = u_idx;
+		this.nickname = nickname;
 		
 		
 		// 이전으로 기능과 다음으로 기능을 초기화
@@ -64,6 +69,10 @@ public class Paging_UserComms {
 		if(isPrePage) {	// '이전으로'기능 활성화
 			sb.append("<li><a href='javascript:pageComm(\"");
 			sb.append(nowPage-blockPage);
+			sb.append("\", \"");
+			sb.append(u_idx);
+			sb.append("\", \"");
+			sb.append(nickname);
 			sb.append("\")'> &lt; </a></li>");
 		} else {	// '이전으로'기능 비활성화
 			sb.append("<li class='disable'> &lt; </li>");
@@ -80,6 +89,10 @@ public class Paging_UserComms {
 			}else {	// 현재페이지가 아닌 경우
 				sb.append("<li><a href='javascript:pageComm(\"");
 				sb.append(i);	//파라미터값
+				sb.append("\", \"");
+				sb.append(u_idx);
+				sb.append("\", \"");
+				sb.append(nickname);
 				sb.append("\")'>");
 				sb.append(i);	// 화면에 보이는 값
 				sb.append("</a></li>");
@@ -91,6 +104,10 @@ public class Paging_UserComms {
 		if(isNextPage) { // '다음으로'기능 활성화
 			sb.append("<li><a href='javascript:pageComm(\"");
 			sb.append(nowPage+blockPage);
+			sb.append("\", \"");
+			sb.append(u_idx);
+			sb.append("\", \"");
+			sb.append(nickname);
 			sb.append("\")'> &gt; </a></li>");
 		}else {	// '다음으로' 기능 비활성화
 			sb.append("<li class='disable'> &gt; </li>");
@@ -198,6 +215,22 @@ public class Paging_UserComms {
 
 	public void setSb(StringBuffer sb) {
 		this.sb = sb;
+	}
+
+	public String getU_idx() {
+		return u_idx;
+	}
+
+	public void setU_idx(String u_idx) {
+		this.u_idx = u_idx;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 	

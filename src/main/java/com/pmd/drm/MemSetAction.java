@@ -114,10 +114,41 @@ public class MemSetAction {
 		return map;
 	}
 	
+	@RequestMapping(value = "/memSearch.inc", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> memSearch(String u_id, String nickname, String u_name, String email, String sns_id, String reg_date, String choice, String total, String active, String stop, String leave){
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		this.nowPage = 1;
+		
+		rowTotal = b_dao.searchUserCountForAdmin(u_id, nickname, u_name, email, sns_id, reg_date, total, active, stop, leave, choice);
+		
+		/**** 페이징 ****/
+		// 메서드 호출
+		Paging_UsersList page = new Paging_UsersList(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE);
+		
+		// 페이지 버튼 코드
+		pageCode = page.getSb().toString();
+		
+		// JSP에서 표현할 회원들 목록
+		int begin = page.getBegin(); 
+		int end = page.getEnd();
+		
+		UserVO[] ar = b_dao.searchUserForAdmin(u_id, nickname, u_name, email, sns_id, reg_date, total, active, stop, leave, choice, String.valueOf(begin), String.valueOf(end));
+		
+		map.put("ar", ar);
+		map.put("pageCode", pageCode);
+		map.put("nowPage", page.getNowPage());	// 현재 페이지
+		map.put("rowTotal", rowTotal);	// 총 회원 수
+		map.put("blockList", BLOCK_LIST);	// 한 페이지당 보여질  회원들 수
+		
+		return map;
+	}
+	
 	
 	@RequestMapping(value = "/admin_userComm.inc", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> userComm(String u_idx, String nowPage) {
+	public Map<String, Object> userComm(String u_idx, String nowPage, String nickname) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		// 현재 페이지값 받기
@@ -130,7 +161,7 @@ public class MemSetAction {
 		
 		/**** 페이징 ****/
 		// 메서드 호출
-		Paging_UserComms page = new Paging_UserComms(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE);
+		Paging_UserComms page = new Paging_UserComms(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, u_idx, nickname);
 		
 		// 페이지 버튼 코드
 		pageCode = page.getSb().toString();
@@ -146,11 +177,55 @@ public class MemSetAction {
 		map.put("nowPage", page.getNowPage());	// 현재 페이지
 		map.put("rowTotal", rowTotal);	// 총 회원 수
 		map.put("blockList", BLOCK_LIST);	// 한 페이지당 보여질  회원들 수
+		map.put("nickname", nickname);
+		map.put("count", b_dao.commCountForAdmin(u_idx));
 		
 		
 		return map;
 	}
 	
-	
+	@RequestMapping(value = "/admin_statusComm.inc", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> admin_statusComm(String c_idx, String u_idx, String nowPage, String nickname, String check){
+		
+		if(check.equals("del")) {
+			b_dao.delComment(c_idx);
+		}else if(check.equals("restore")) {
+			b_dao.restoreComm(c_idx);
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		// 현재 페이지값 받기
+		if(nowPage == null)
+			this.nowPage = 1;
+		else
+			this.nowPage = Integer.parseInt(nowPage);
+		
+		rowTotal = b_dao.commCountForAdmin(u_idx);
+		
+		/**** 페이징 ****/
+		// 메서드 호출
+		Paging_UserComms page = new Paging_UserComms(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, u_idx, nickname);
+		
+		// 페이지 버튼 코드
+		pageCode = page.getSb().toString();
+		
+		// JSP에서 표현될 댓글들 목록
+		int begin = page.getBegin();
+		int end = page.getEnd();
+		
+		Bulletin_C_VO[] ar = b_dao.u_commListForAjax(u_idx, String.valueOf(begin), String.valueOf(end));
+		
+		map.put("ar", ar);
+		map.put("pageCode", pageCode);
+		map.put("nowPage", page.getNowPage());	// 현재 페이지
+		map.put("rowTotal", rowTotal);	// 총 회원 수
+		map.put("blockList", BLOCK_LIST);	// 한 페이지당 보여질  회원들 수
+		map.put("nickname", nickname);
+		map.put("count", b_dao.commCountForAdmin(u_idx));
+		
+		
+		return map;
+	}
 	
 }
