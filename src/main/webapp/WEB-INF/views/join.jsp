@@ -328,7 +328,7 @@ margin-bottom: 0px !important;
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> 
 												<input type="password" class="form-control" name="u_pw" required="required"
-													id="u_pw" placeholder="4자 이상 입력하세요" value="">
+													id="u_pw" placeholder="4자 이상 입력하세요"   />
 											</div>
 										</div>
 									</div>
@@ -340,6 +340,9 @@ margin-bottom: 0px !important;
 												<input type="password" class="form-control" name="cpw" id="cpw" placeholder="비밀번호를 재확인하세요"
 													required="required" />
 											</div>
+										</div>
+										<div id="pwMsg" style="display: inline-block; position: relative; margin-top: 5px; padding-right:0;">
+											<!-- -------비밀번호 중복체크 영역--------- -->
 										</div>
 									</div>
 									<div class="form-group">
@@ -573,6 +576,18 @@ margin-bottom: 0px !important;
 			$("#cpw").focus();
 			return;
 		} 
+	 	if(u_pw == cpw && u_pw.length >3){// 비밀번호가 같으면
+			$("#pwConf").html("<i class='glyphicon glyphicon-check succ'></i>");
+			$("#pwMsg").html("<small style='color:green; font-weight:bold; background: #fff;font-size: 75%;'>일치</small>");
+			chk = true;
+		}else if(u_pw != cpw && cpw.length > 3){
+			$("#pwConf").html("<i class='glyphicon glyphicon-check'></i>");
+			$("#pwMsg").html("<small style='color:red; font-weight:bold; background: #fff; font-size: 75%;'>불일치!!</small>");
+			chk = false;
+			alert("비밀번호를 재확인하세요.");
+			return;
+		}
+	 	
 		if( u_name.length <1){
 			alert("이름을 입력하세요!");
 			$("#u_name").focus();
@@ -647,15 +662,32 @@ margin-bottom: 0px !important;
 			var u_pw = $("#u_pw").val().trim();
 			var cpw = $("#cpw").val().trim();
 			
+			if(u_pw == cpw && u_pw.length >3){// 비밀번호가 같으면
+				$("#pwConf").html("<i class='glyphicon glyphicon-check succ'></i>");
+				$("#pwMsg").html("<small style='color:green; font-weight:bold; background: #fff;font-size: 75%;'>일치</small>");
+				chk = true;
+			}else if(u_pw != cpw || u_pw.length > 2){
+				$("#pwConf").html("<i class='glyphicon glyphicon-check'></i>");
+				$("#pwMsg").html("<small style='color:red; font-weight:bold; background: #fff; font-size: 75%;'>불일치!!</small>");
+				chk = false;
+				return;
+			}
+			
+			/* 
+			
+			
+			
+			
 			if(u_pw == cpw && u_pw.length >3){ // 비밀번호가 같으면
 				$("#pwConf").html("<i class='glyphicon glyphicon-check succ'></i>");
 				chk = true;
-			} else {
+			} else if(u_pw != cpw && u_pw.length > 3) {
 				$("#pwConf").html("<i class='glyphicon glyphicon-check'></i>");
+				chk = false;
 				return;
 				
 			}
-			
+			 */
 		});
 		
 		//아이디 중복 체크	ConfirmAction
