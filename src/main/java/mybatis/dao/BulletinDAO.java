@@ -673,4 +673,24 @@ public class BulletinDAO {
 		return chk;
 	}
 	
+	// 이전 비밀번호 확인
+	public boolean checkPrePw(String u_idx, String u_pw) {
+		boolean chk = false;
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("u_idx", u_idx);
+		map.put("u_pw", u_pw);
+		
+		UserVO vo = ss.selectOne("bulletin.checkPrePw", map);
+		if(vo != null)
+			chk = true;
+		
+		return chk;
+	}
+	
+	// 회원 정보 수정 후 로그인 정보 갱신 후 세션 저장용
+	public UserVO afterUpdateUserInfo(String u_idx) {
+		return ss.selectOne("bulletin.afterUpdateUserInfo", u_idx);
+	}
+	
 }

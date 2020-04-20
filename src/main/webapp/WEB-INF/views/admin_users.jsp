@@ -101,21 +101,21 @@
 			</thead>
 			<tbody>
 				<c:forEach var="vo" items="${ar }" varStatus="st" >
-					<tr onclick="userComm('${vo.u_idx}', '${vo.nickname }')" style="cursor: pointer;">
+					<tr>
 						<td>${rowTotal - ((nowPage-1)*blockList+st.index) }</td>
-						<td>${vo.u_id}</td>
-						<td>${vo.nickname }</td>
-						<td>${vo.u_name }</td>
-						<td>${vo.u_phone }</td>
-						<td>${vo.email }</td>
-						<td>${vo.sns_id }</td>
-						<td>${vo.sns_type }</td>
-						<td>${fn:substring(vo.reg_date, 0, 10) }</td>
+						<td onclick="userComm('${vo.u_idx}', '${vo.nickname }')" style="cursor: pointer;">${vo.u_id}</td>
+						<td onclick="userComm('${vo.u_idx}', '${vo.nickname }')" style="cursor: pointer;">${vo.nickname }</td>
+						<td onclick="userComm('${vo.u_idx}', '${vo.nickname }')" style="cursor: pointer;">${vo.u_name }</td>
+						<td onclick="userComm('${vo.u_idx}', '${vo.nickname }')" style="cursor: pointer;">${vo.u_phone }</td>
+						<td onclick="userComm('${vo.u_idx}', '${vo.nickname }')" style="cursor: pointer;">${vo.email }</td>
+						<td onclick="userComm('${vo.u_idx}', '${vo.nickname }')" style="cursor: pointer;">${vo.sns_id }</td>
+						<td onclick="userComm('${vo.u_idx}', '${vo.nickname }')" style="cursor: pointer;">${vo.sns_type }</td>
+						<td onclick="userComm('${vo.u_idx}', '${vo.nickname }')" style="cursor: pointer;">${fn:substring(vo.reg_date, 0, 10) }</td>
 						<td>
 						<c:choose>
-							<c:when test="${vo.status eq 0 }">활동중</c:when>
-							<c:when test="${vo.status eq 1 }">탈퇴</c:when>
-							<c:when test="${vo.status eq 2 }"> 활동정지</c:when>
+							<c:when test="${vo.status eq 0 }"><span style="color: blue; font-weight: bold;">활동중</span></c:when>
+							<c:when test="${vo.status eq 1 }"><span style="color: red; font-weight: bold;">탈퇴</span></c:when>
+							<c:when test="${vo.status eq 2 }"><span style="color: #f9c00c; font-weight: bold;">활동정지</span></c:when>
 						</c:choose>
 						</td>	
 						<td>
@@ -225,41 +225,61 @@
 			
 		}).done(function(data){
 			
-			console.log(data.ar);
 			if(data.ar != null){
 				var str = "";
 				var set = '<c:set value="${vo.u_id }" var="u_id" />';
 				for(var i=0; i<data.ar.length; i++){
 					str += set;
-					str += "<tr onclick='userComm(\""+data.ar[i].u_idx+"\")' style='cursor: pointer;'>";
+					str += "<tr>";
 					str += "<td>"+(data.rowTotal - ((data.nowPage-1)*data.blockList+i))+"</td>";
-					str += "<td>"+data.ar[i].u_id+"</td>";
-					str += "<td>"+data.ar[i].nickname+"</td>";
-					str += "<td>"+data.ar[i].u_name+"</td>";
-					str += "<td>"+data.ar[i].u_phone+"</td>";
-					str += "<td>"+data.ar[i].email+"</td>";
+					
+					if(data.ar[i].u_id != null){
+						str += "<td onclick='userComm(\""+data.ar[i].u_idx+"\", \""+data.ar[i].nickname+"\")' style='cursor: pointer;'>"+data.ar[i].u_id+"</td>";
+					}else{
+						str += "<td onclick='userComm(\""+data.ar[i].u_idx+"\", \""+data.ar[i].nickname+"\")' style='cursor: pointer;'></td>";
+					}
+					str += "<td onclick='userComm(\""+data.ar[i].u_idx+"\", \""+data.ar[i].nickname+"\")' style='cursor: pointer;'>"+data.ar[i].nickname+"</td>";
+					
+					if(data.ar[i].u_name != null){
+						str += "<td onclick='userComm(\""+data.ar[i].u_idx+"\", \""+data.ar[i].nickname+"\")' style='cursor: pointer;'>"+data.ar[i].u_name+"</td>";
+					}else{
+						str += "<td onclick='userComm(\""+data.ar[i].u_idx+"\", \""+data.ar[i].nickname+"\")' style='cursor: pointer;'></td>";
+					}
+					
+					if(data.ar[i].u_phone != null){
+						str += "<td onclick='userComm(\""+data.ar[i].u_idx+"\", \""+data.ar[i].nickname+"\")' style='cursor: pointer;'>"+data.ar[i].u_phone+"</td>";
+					}else{
+						str += "<td onclick='userComm(\""+data.ar[i].u_idx+"\", \""+data.ar[i].nickname+"\")' style='cursor: pointer;'></td>";
+					}
+					
+					if(data.ar[i].email != null){
+						str += "<td onclick='userComm(\""+data.ar[i].u_idx+"\", \""+data.ar[i].nickname+"\")' style='cursor: pointer;'>"+data.ar[i].email+"</td>";
+					}else{
+						str += "<td onclick='userComm(\""+data.ar[i].u_idx+"\", \""+data.ar[i].nickname+"\")' style='cursor: pointer;'></td>";
+					}
+					
 					if(data.ar[i].sns_id == null){
-						str += "<td></td>";
+						str += "<td onclick='userComm(\""+data.ar[i].u_idx+"\", \""+data.ar[i].nickname+"\")' style='cursor: pointer;'></td>";
 					}else
-						str += "<td>"+data.ar[i].sns_id+"</td>";
+						str += "<td onclick='userComm(\""+data.ar[i].u_idx+"\", \""+data.ar[i].nickname+"\")' style='cursor: pointer;'>"+data.ar[i].sns_id+"</td>";
 					
 					if(data.ar[i].sns_type == null){
-						str += "<td></td>";
+						str += "<td onclick='userComm(\""+data.ar[i].u_idx+"\", \""+data.ar[i].nickname+"\")' style='cursor: pointer;'></td>";
 					}else{
-						str += "<td>"+data.ar[i].sns_type+"</td>";
+						str += "<td onclick='userComm(\""+data.ar[i].u_idx+"\", \""+data.ar[i].nickname+"\")' style='cursor: pointer;'>"+data.ar[i].sns_type+"</td>";
 					}
-					str += "<td>"+data.ar[i].reg_date.substring(0, 10)+"</td>";
+					str += "<td onclick='userComm(\""+data.ar[i].u_idx+"\", \""+data.ar[i].nickname+"\")' style='cursor: pointer;'>"+data.ar[i].reg_date.substring(0, 10)+"</td>";
 					str += "<td>";
 					if(data.ar[i].status == '0'){
-						str += "활동중";
+						str += "<span style='color: blue; font-weight: bold;'>활동중</span>";
 					}else if(data.ar[i].status == '1'){
-						str += "탈퇴";
+						str += "<span style='color: red; font-weight: bold;'>탈퇴</span>";
 					}else if(data.ar[i].status == '2'){
-						str += "활동정지";
+						str += "<span style='color: #f9c00c; font-weight: bold;'>활동정지</span>";
 					}
 					str += "</td>";	
 					str += "<td>";	
-					str += "<button type='button' onclick='lock(\""+data.ar[i].u_idx+"\", \""+data.ar[i].status+"\", \""+data.nowPage+"\")'>정지</button>";
+					str += "&nbsp;<button type='button' onclick='lock(\""+data.ar[i].u_idx+"\", \""+data.ar[i].status+"\", \""+data.nowPage+"\")'>정지</button>";
 					str += "&nbsp;<button type='button' onclick='unlock(\""+data.ar[i].u_idx+"\", \""+data.ar[i].status+"\", \""+data.nowPage+"\")'>해제</button>";
 					str += "</td>";
 				str += "</tr>";
@@ -457,10 +477,10 @@
 					str += "<td>";
 					switch (data.ar[i].status) {
 						case '0':
-							str += "게시";
+							str += "<span style='color: blue; font-weight: bold;'>게시</span>";
 							break;
 						case '1':
-							str += "삭제";
+							str += "<span style='color: red; font-weight: bold;'>삭제</span>";
 							break;
 					}
 				str += "</td>";	
@@ -475,6 +495,8 @@
 				
 				if(data.count >10){
 					$("#CommPopup #comm_t tfoot td .pagination-wrap").html(data.pageCode);
+				}else{
+					$("#CommPopup #comm_t tfoot td .pagination-wrap").html("");
 				}
 			}else{
 				var str ="";
@@ -482,7 +504,7 @@
 					str += "<td colspan='4' style='text-align: center;'>등록된 댓글이 없습니다.";
 					str += "</td>";	
 				str += "</tr>";
-				$('#CommPopup #comm_t caption').text(data.nickname+"회원님의 댓글");
+				$('#CommPopup #comm_t caption').html("<span style='color: blue; font-weight:bold;'>"+data.nickname+"</span>&nbsp;회원님의 댓글");
 				
 				$("#CommPopup #comm_t tbody").html(str);
 			}
@@ -511,7 +533,7 @@
 	
 	function pageComm(nowPage, u_idx, nickname){
 		
-		var param = "nowPage="+encodeURIComponent(nowPage)+"&u_idx="+encodeURIComponent(u_idx)+"bnickname="+encodeURIComponent(nickname);
+		var param = "nowPage="+encodeURIComponent(nowPage)+"&u_idx="+encodeURIComponent(u_idx)+"&nickname="+encodeURIComponent(nickname);
 		
 		ajax_b(param, "admin_userComm.inc");
 	}

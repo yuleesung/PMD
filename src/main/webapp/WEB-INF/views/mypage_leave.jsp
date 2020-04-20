@@ -101,7 +101,7 @@
 								<input type="password" placeholder="Input Your Pwd" name="u_pw"
 									id="u_pw" class="txt" style="width: 400px;">
 								<button type="button" class="btn btn-default" onclick="leave('${sessionScope.userInfo.u_idx}')"
-									id="leave_btn1">Leave Now</button>
+									id="leave_btn1">회원탈퇴</button>
 							</form>
 						</div>
 					</c:if>

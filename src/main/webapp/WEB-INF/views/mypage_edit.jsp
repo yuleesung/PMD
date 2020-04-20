@@ -97,23 +97,30 @@
 						<div class="form">
 							<form action="mypage_edit.inc" method="post" id="editFrm"
 								name="editFrm">
-								<input type="text" placeholder="Name" value="${userInfo.u_name }"
-									name="u_name" id="u_name" class="txt"><br /> <input
-									type="text" placeholder="Email" value="${userInfo.email }"
-									name="email" id="email" class="txt"><br /> <input
-									type="text" placeholder="Phone" value="${userInfo.u_phone }"
-									name="u_phone" id="u_phone" class="txt"><br /> <input
-									type="text" placeholder="NickName" value="${userInfo.nickname }"
-									name="nickname" id="nickname" class="txt"><br /> <input
-									type="password" placeholder="Change Pwd" name="u_pw" id="u_pw"
-									class="txt"><br /> <br /> <br />
-								<button type="button" class="btn btn-default" id="sub_btn">Update</button>
+								<input type="text" placeholder="이름" value="${userInfo.u_name }" name="u_name" id="u_name" class="txt"><br />
+								<input type="text" placeholder="이메일" value="${userInfo.email }" name="email" id="email" class="txt"><br /> 
+								<input type="text" placeholder="연락처" value="${userInfo.u_phone }" name="u_phone" id="u_phone" class="txt"><br /> 
+								<input type="text" placeholder="닉네임" value="${userInfo.nickname }" name="nickname" id="nickname" class="txt"><br />
+								<input type="password" placeholder="이전 비밀번호" name="pre_pw" id="pre_pw" class="txt"/><br/>
+								<input type="password" placeholder="비밀번호 변경" name="u_pw" id="u_pw" class="txt"><br/>
+								<input type="password" placeholder="비밀번호 변경 확인" name="u_pw_con" id="u_pw_con" class="txt"><br/>
+								<span id="pwChk"></span>
+								<br/><br/><br/>
+								<button type="button" class="btn btn-default" id="sub_btn">회원정보 수정</button>
 							</form>
 						</div>
 					</c:if>
 					<c:if test="${userInfo.status eq '9' }">
 						<div class="form">
-							<p style="color: black;">수정이 불가능합니다. (사유: 관리자)</p>
+							<form action="mypage_edit.inc" method="post" id="editFrm"
+								name="editFrm">
+								<input type="password" placeholder="이전 비밀번호" name="pre_pw" id="pre_pw" class="txt"/><br/>
+								<input type="password" placeholder="비밀번호 변경" name="u_pw" id="u_pw" class="txt"><br/>
+								<input type="password" placeholder="비밀번호 변경 확인" name="u_pw_con" id="u_pw_con" class="txt"><br/>
+								<span id="pwChk"></span>
+								<br/><br/><br/>
+								<button type="button" class="btn btn-default" id="sub_btn">회원정보 수정</button>
+							</form>
 						</div>
 					</c:if>
 				</c:when>
@@ -131,12 +138,59 @@
 		$(function() {
 			$("#sub_btn").click(function() {
 				var u_pw = $("#u_pw").val();
+				var u_pw_con = $("#u_pw_con").val();
 
-				if (u_pw.trim().length > 3) {
-					alert("수정 성공");
-					document.editFrm.submit();
-				} else
-					alert("비밀번호를 4자 이상 입력하세요");
+				if (u_pw.trim().length < 3) {
+					alert("비밀번호 변경란을 4자 이상 입력하세요!");
+					$("#u_pw").focus();
+					return;
+				}
+				
+				if(u_pw_con.trim().length < 3){
+					alert("비밀번호 변경 확인란을 4자 이상 입력하세요!");
+					$("#u_pw_con").focus();
+					return;
+				}
+				
+				if(u_pw.trim() != u_pw_con.trim()){
+					alert("비밀번호 변경과 확인란이 같지 않습니다!");
+					return;
+				}
+			
+			
+				var pre_pw = $("#pre_pw").val();
+				
+				$.ajax({
+					url: "checkPrePw.inc",
+					type: "post",
+					data: "pre_pw="+encodeURIComponent(pre_pw),
+					dataType: "json"
+				}).done(function(data){
+					if(data.chk){
+						document.editFrm.submit();
+					}else{
+						alert("이전 비밀번호가 다릅니다!");
+						$("#pre_pw").focus();
+					}
+				}).fail(function(err){
+					console.log(err);
+				});
+			
+			});
+			
+			$("#u_pw_con").keyup(function(){
+				var u_pw = $("#u_pw").val();
+				var u_pw_con = $("#u_pw_con").val();
+				
+				if(u_pw.trim() != u_pw_con.trim()){
+					$("#pwChk").css("color", "red");
+					$("#pwChk").css("fontWeight", "bold");
+					$("#pwChk").html("비밀번호 변경과 확인이 서로 다릅니다!");
+				}else if(u_pw.trim() == u_pw_con.trim()){
+					$("#pwChk").css("color", "blue");
+					$("#pwChk").css("fontWeight", "bold");
+					$("#pwChk").html("비밀번호 변경과 확인이 같습니다.")
+				}
 			});
 		});
 	</script>

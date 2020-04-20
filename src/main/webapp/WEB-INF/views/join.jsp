@@ -584,16 +584,27 @@ margin-bottom: 0px !important;
 			return;
 		}
 		if( u_phone.length <1){
-			alert("연락처를 입력하세요!");
+			alert("연락처를 한 자 이상 입력하세요!");
 			$("#u_phone").focus();
 			return;
 		}
-		if( email.length <12){
-			alert("이메일을 입력하세요!");
+		if( u_phone.length < 12){
+			alert("연락처를 정확히 입력하세요!");
+			$("#u_phone").focus();
+			return;
+		}
+		
+		if( email.length <2){
+			alert("이메일을 한 자 이상  입력하세요!");
 			$("#email").focus();
 			return;
 		}
 		
+		if( email.length <9){
+			alert("이메일을 정확히 입력하세요!");
+			$("#email").focus();
+			return;
+		}
 		
 		var param = "u_id="+encodeURIComponent(u_id)+
 				"&u_pw="+encodeURIComponent(u_pw)+
@@ -680,7 +691,7 @@ margin-bottom: 0px !important;
 		         });
 	         
 		      }else{
-		         $("#box").html("");
+		         $("#box").html("<small style='color:red; font-weight:bold; background: #fff; font-size: 75%;'>4자 이상 입력하세요!</small>");
 		      }
 		   
 		});
@@ -692,7 +703,7 @@ margin-bottom: 0px !important;
 			//사용자가 입력한 값을 얻어낸다.
 		    var u_phone = $(this).val().trim();
 		    
-			if(u_phone.length > 4 ){
+			if(u_phone.length > 11 ){
 		     	// 연락처를 5자이상 입력시 수행   
 		         $.ajax({
 		            
@@ -701,7 +712,6 @@ margin-bottom: 0px !important;
 		            data: "u_phone="+encodeURIComponent(u_phone)
 		            
 		         }).done(function (data) {
-		        	 console.log(data.value);
 		            if(data.value == true){
 		               // 연락처가 중복일 때,
 		               chk = false;
@@ -718,7 +728,7 @@ margin-bottom: 0px !important;
 		         });
 	         
 		      } else{
-		         $("#p_box").html("");
+		         $("#p_box").html("<small style='color:red; font-weight:bold; background: #fff;font-size: 50%;' class='fail'>'-'포함 12자 이상</small>");
 		      }
 		   
 		});
@@ -793,16 +803,10 @@ margin-bottom: 0px !important;
 	  function checkEmail(){
 		  
 		  var email = $("#email").val().trim() + "@"+$("#input_email").val().trim();
-			
-			var front = $("#email").val().trim();
-			if(front.length <1){
-				
-				alert("한글자 이상 입력하세요.");
-				$("#email").focus();
-				return;
-			}
-		    
-			if(email.length > 13 ){
+		  var front = $("#input_email").val().trim();
+		  
+		  if(!front.startsWith("@")){
+			if(email.length > 9 ){
 		     	//email 13자이상 입력시 수행   
 		         
 		         $.ajax({
@@ -826,6 +830,9 @@ margin-bottom: 0px !important;
 		         });
 	         
 		      } else{  $("#e_box").html(""); }
+		  }else{
+			  $("#e_box").html("<small style='color:red; font-weight:bold; background: #fff;font-size: 75%;'>'@'로 시작불가</small>");
+		  }
 	  }
 	</script>
 

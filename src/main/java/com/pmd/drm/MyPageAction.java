@@ -59,6 +59,8 @@ public class MyPageAction {
 		
 		boolean chk = b_dao.updateMember(vo);
 		
+		session.setAttribute("userInfo", b_dao.afterUpdateUserInfo(uvo.getU_idx()));
+		
 		ModelAndView mv = new ModelAndView();
 		
 		mv.setViewName("mypage");
@@ -77,6 +79,20 @@ public class MyPageAction {
 		
 		if(chk)  // 탈퇴성공 시, session을 지움
 			session.removeAttribute("userInfo");
+		
+		map.put("chk", chk);
+		
+		return map;
+	}
+	
+	@RequestMapping(value = "/checkPrePw.inc", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> checkPrePw(String pre_pw){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		UserVO uvo = (UserVO) session.getAttribute("userInfo");
+		
+		boolean chk = b_dao.checkPrePw(uvo.getU_idx(), pre_pw);
 		
 		map.put("chk", chk);
 		

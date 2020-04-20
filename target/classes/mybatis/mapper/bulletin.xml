@@ -11,7 +11,7 @@
 	
 	<!-- 회원 로그인 -->
 	<select id="login" resultType="com.pmd.vo.UserVO" parameterType="java.util.Map">
-		select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t where u_id = #{u_id} and u_pw = #{u_pw} and status = 0
+		select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t where u_id = #{u_id} and u_pw = #{u_pw}
 	</select>
 
 	<!-- 회원 가입 -->
@@ -484,7 +484,7 @@
 				status = 1 and
 			</if>
 			<if test="choice == 'all'">
-				u_id is not null or sns_id is not null
+				(u_id is not null or sns_id is not null)
 			</if>
 			<if test="choice == 'normal'">
 				u_id is not null
@@ -541,7 +541,7 @@
 						status = 1 and
 					</if>
 					<if test="choice == 'all'">
-						u_id is not null or sns_id is not null
+						(u_id is not null or sns_id is not null)
 					</if>
 					<if test="choice == 'normal'">
 						u_id is not null
@@ -638,5 +638,15 @@
 	<update id="restoreComm" parameterType="String">
 		update bulletin_c_t set status = 0 where c_idx = #{c_idx}
 	</update>
+	
+	<!-- 이전 비밀번호 확인 -->
+	<select id="checkPrePw" parameterType="java.util.Map" resultType="com.pmd.vo.UserVO">
+		select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t where u_idx = #{u_idx} and u_pw = #{u_pw}
+	</select>
+	
+	<!-- 회원 정보 수정 후 로그인 정보 갱신 후 세션 저장용 -->
+	<select id="afterUpdateUserInfo" parameterType="String" resultType="com.pmd.vo.UserVO">
+		select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t where u_idx = #{u_idx}
+	</select>
 	
 </mapper>

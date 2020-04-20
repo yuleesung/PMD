@@ -51,19 +51,20 @@ public class LoginAction {
 	public Map<String, Object> login(UserVO vo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		boolean chk = false;
-		
 		UserVO uvo = b_dao.login(vo.getU_id(), vo.getU_pw());
 		
 		if(uvo != null) {
 			// 로그인 성공
-			chk = true;
-			session.setAttribute("userInfo", uvo);
-			MakePath mp = new MakePath();
-			map.put("chk", chk);
-			map.put("path", mp.decidePath(session).substring(10));
+			if(uvo.getStatus().equals("0") || uvo.getStatus().equals("9")) {
+				session.setAttribute("userInfo", uvo);
+				MakePath mp = new MakePath();
+				map.put("chk", "success");
+				map.put("path", mp.decidePath(session).substring(10));
+			}else if(uvo.getStatus().equals("1") || uvo.getStatus().equals("2")) {
+				map.put("chk", "stopOrLeave");
+			}
 		} else {
-			map.put("chk", chk);
+			map.put("chk", "fail");
 		}
 
 		return map;

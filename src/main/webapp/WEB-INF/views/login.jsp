@@ -221,10 +221,12 @@
 				dataType : "json",
 				data : "u_id="+encodeURIComponent(id)+"&u_pw="+encodeURIComponent(pw)
 			}).done(function(data){
-				if (data.chk) {
+				if (data.chk == "success") {
 					location.href = data.path;
-				} else{
-					alert("탈퇴 또는 관리자에 의해 정지된 계정입니다.");
+				} else if(data.chk == "stopOrLeave"){
+					alert("탈퇴 또는 관리자에 의해 정지된 계정입니다");
+				} else if(data.chk == "fail"){
+					alert("아이디 또는 비밀번호가 다릅니다!");
 				}
 						
 			}).fail(function(err){
