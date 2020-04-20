@@ -666,7 +666,7 @@ margin-bottom: 0px !important;
 				$("#pwConf").html("<i class='glyphicon glyphicon-check succ'></i>");
 				$("#pwMsg").html("<small style='color:green; font-weight:bold; background: #fff;font-size: 75%;'>일치</small>");
 				chk = true;
-			}else if(u_pw != cpw || u_pw.length > 2){
+			}else if(u_pw != cpw && cpw.length > 3){
 				$("#pwConf").html("<i class='glyphicon glyphicon-check'></i>");
 				$("#pwMsg").html("<small style='color:red; font-weight:bold; background: #fff; font-size: 75%;'>불일치!!</small>");
 				chk = false;
