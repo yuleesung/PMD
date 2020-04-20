@@ -131,7 +131,7 @@
 						<div style="display: inline-flex; float: right; margin-top: 3%;">
 							<select id="search_sel" name="search_sel"
 								style="width: 80px; background-color: white; font-weight: bold;">
-								<option style="font-weight: bold;" value="all">전 체</option>
+								<option style="font-weight: bold;" value="0">전 체</option>
 								<option style="font-weight: bold;" value="1">제 목</option>
 								<option style="font-weight: bold;" value="2">글쓴이</option>
 								<option style="font-weight: bold;" value="3">글 내용</option>
@@ -282,16 +282,11 @@
 	    function searchList(category){ // 검색
 	    	var sel = $("#search_sel").val(); // 셀렉트
 	    	var txt = $("#search_txt").val(); // 텍스트
-	    	
 
-	    	if(sel == "all"){ // 전체 검색
-	    		location.href = "list.inc?b_category="+category;
-	    	}else { // 조건부 검색
-	    		var url = "searchBulletin.inc";
-	    		var param = "searchType="+encodeURIComponent(sel)+"&searchValue="+encodeURIComponent(txt)+"&b_category="+category;
+	    	var url = "searchBulletin.inc";
+	    	var param = "searchType="+encodeURIComponent(sel)+"&searchValue="+encodeURIComponent(txt)+"&b_category="+category;
 	    		
-	    		ajax_a(url, param);
-	    	}
+	    	ajax_a(url, param);
 	    }
 	  
 	    function searchPage(nowPage, b_category, searchType, searchValue){

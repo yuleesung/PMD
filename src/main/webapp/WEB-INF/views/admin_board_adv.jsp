@@ -24,7 +24,7 @@
 	
 	<div style="display: inline-flex; float: right; margin-right: 10%;">
 		<select id="search_sel" name="search_sel" style="height: 25px;">
-			<option value="all">전체</option>
+			<option value="0">전체</option>
 			<option value="1">회사명</option>
 			<option value="2">이메일</option>
 		</select>
@@ -130,14 +130,11 @@
 				var sel = $("#search_sel").val(); // 셀렉트!
 				var txt = $("#search_txt").val(); // 텍스트!
 		
-				if(sel == "all") // 전체검색
-					admin_groupList(group_val);
-				else { // 조건부 검색
-					var url = "searchAdv.inc";
-					var param = "searchTypeForAdv="+encodeURIComponent(sel)+"&searchValueForAdv="+encodeURIComponent(txt)
+				var url = "searchAdv.inc";
+				var param = "searchTypeForAdv="+encodeURIComponent(sel)+"&searchValueForAdv="+encodeURIComponent(txt)
 								+"&adv_group="+encodeURIComponent(group_val);
-					ajax_a(url, param);
-				}
+				
+				ajax_a(url, param);
 			});
 		});
 		

@@ -22,7 +22,7 @@
 		class="radio" value="adv" name="category"><span class="sandwich">광고문의</span>&nbsp;&nbsp;&nbsp;
 	<div style="display: inline-flex; float: right; margin-right: 10%;">
 		<select id="search_sel" name="search_sel" style="height: 25px; ">
-			<option value="all">전체</option>
+			<option value="0">전체</option>
 			<option value="1">제목</option>
 			<option value="2">이름</option>
 			<option value="3">내용</option>
@@ -111,14 +111,12 @@
 					var sel = $("#search_sel").val(); // 셀렉트
 					var txt = $("#search_txt").val(); // 텍스트
 			
-					if(sel == "all") // 전체검색
-						admin_board(group_val);
-					else{ // 조건부검색
-						var url = "searchBulletinCountForAdmin.inc";
-						var param = "searchTypeForAdmin="+encodeURIComponent(sel)+"&searchValueForAdmin="+encodeURIComponent(txt)
+					var url = "searchBulletinCountForAdmin.inc";
+					var param = "searchTypeForAdmin="+encodeURIComponent(sel)+"&searchValueForAdmin="+encodeURIComponent(txt)
 									+"&b_category="+encodeURIComponent(group_val);
-						ajax_a(url, param);
-					}
+					
+					ajax_a(url, param);
+					
 				});
 		});
 			
