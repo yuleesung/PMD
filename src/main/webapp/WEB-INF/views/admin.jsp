@@ -139,8 +139,6 @@
 		 $(document).on("click", ".recruit .title  td:nth-child(2)", function(event){ 	
 				var myArticle = $(this).parents().next("tr");
 				
-				console.log("admin.jsp:"+myArticle);
-				
 				if ($(myArticle).hasClass('hide')) {
 					
 					$(myArticle).removeClass('hide').addClass('show');
