@@ -88,6 +88,10 @@ option {
 .carousel_section{
 	width: 270px;
 }
+.carousel_section img{
+	width: 100%;
+}
+
 .carousel_section img:hover{
 
 	border-bottom: 5px solid #BDBDBD;
