@@ -99,7 +99,7 @@ input[type=text] {
 											style="cursor: pointer;">광고문의</option>
 									</select> <span id="sel_area"><c:if
 											test="${b_category == 'adv'}">
-											<label><input type="checkbox" name="secret_content"
+											<label style="color: black;"><input type="checkbox" name="secret_content"
 												id="secret_content" checked="checked"/>비밀글</label>
 										</c:if> </span> <input type="text" class="form-control" id="title"
 										name="subject" placeholder="제목" style="width: 90%;">
@@ -137,10 +137,10 @@ input[type=text] {
 											<label
 												style="font-size: 16px; color: black; font-weight: bold;">작성자
 												: ${userInfo.nickname }</label><br /> <input id="submit_btn"
-												type="button" value="Submit" class="btn btn-primary"
+												type="button" value="작성완료" class="btn btn-primary"
 												style="cursor: pointer;">&nbsp;&nbsp; <input
 												id="cancel_btn" type="button" style="cursor: pointer;"
-												value="Cancel" class="btn btn-primary"
+												value="이전으로" class="btn btn-primary"
 												onclick="location.href='list.inc?b_category=${b_category}&nowPage=${nowPage }'">
 										</div></td>
 								</tr>
@@ -238,7 +238,7 @@ input[type=text] {
 			 $("#category").on("click", function() {
 					var select = $("#category option:selected").val();
 					if (select == 'adv') {
-						$("#sel_area").html('<label><input type="checkbox" name="secret_content" id="secret_content" checked="checked" />비밀글</label>');
+						$("#sel_area").html('<label style="color:black;"><input type="checkbox" name="secret_content" id="secret_content" checked="checked"/>비밀글</label>');
 					} else {
 						$("#sel_area").html("");
 					}

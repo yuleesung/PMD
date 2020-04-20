@@ -102,8 +102,8 @@
 								<input type="text" placeholder="연락처" value="${userInfo.u_phone }" name="u_phone" id="u_phone" class="txt"><br /> 
 								<input type="text" placeholder="닉네임" value="${userInfo.nickname }" name="nickname" id="nickname" class="txt"><br />
 								<input type="password" placeholder="이전 비밀번호" name="pre_pw" id="pre_pw" class="txt"/><br/>
-								<input type="password" placeholder="비밀번호 변경" name="u_pw" id="u_pw" class="txt"><br/>
-								<input type="password" placeholder="비밀번호 변경 확인" name="u_pw_con" id="u_pw_con" class="txt"><br/>
+								<input type="password" placeholder="비밀번호 변경 (4글자 이상 입력하세요)" name="u_pw" id="u_pw" class="txt"><br/>
+								<input type="password" placeholder="비밀번호 변경 확인 (4글자 이상 입력하세요)" name="u_pw_con" id="u_pw_con" class="txt"><br/>
 								<span id="pwChk"></span>
 								<br/><br/><br/>
 								<button type="button" class="btn btn-default" id="sub_btn">회원정보 수정</button>
@@ -115,8 +115,8 @@
 							<form action="mypage_edit.inc" method="post" id="editFrm"
 								name="editFrm">
 								<input type="password" placeholder="이전 비밀번호" name="pre_pw" id="pre_pw" class="txt"/><br/>
-								<input type="password" placeholder="비밀번호 변경" name="u_pw" id="u_pw" class="txt"><br/>
-								<input type="password" placeholder="비밀번호 변경 확인" name="u_pw_con" id="u_pw_con" class="txt"><br/>
+								<input type="password" placeholder="비밀번호 변경 (4글자 이상 입력하세요)" name="u_pw" id="u_pw" class="txt"><br/>
+								<input type="password" placeholder="비밀번호 변경 확인 (4글자 이상 입력하세요)" name="u_pw_con" id="u_pw_con" class="txt"><br/>
 								<span id="pwChk"></span>
 								<br/><br/><br/>
 								<button type="button" class="btn btn-default" id="sub_btn">회원정보 수정</button>
@@ -178,11 +178,11 @@
 			
 			});
 			
-			$("#u_pw_con").keyup(function(){
+			$("#u_pw_con,#u_pw").keyup(function(){
 				var u_pw = $("#u_pw").val();
 				var u_pw_con = $("#u_pw_con").val();
 				
-				if(u_pw.trim() != u_pw_con.trim()){
+				if(u_pw.trim() != u_pw_con.trim() && u_pw_con.trim().length > 3){
 					$("#pwChk").css("color", "red");
 					$("#pwChk").css("fontWeight", "bold");
 					$("#pwChk").html("비밀번호 변경과 확인이 서로 다릅니다!");

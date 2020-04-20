@@ -117,7 +117,7 @@
 			<strong>지역별 </strong> 교육현황 <span></span>
 		</h2>
 		<div style="background-color: #FFFCEC; height: 550px; padding-top: 20px;">
-			<div id="mapchart"></div>
+			<div id="mapchart"><img src="resources/images/loading_circle.gif" style="margin: auto;  display: block;  margin-top: 150px;"/></div>
 		</div>
 		<h2 class="ending">
 			<strong></strong><span style="text-align: right;"></span>
@@ -257,6 +257,8 @@
 					function() {
 						srchKeco1 = $("#srchKeco1").val();
 
+						$("#stackchart").html('<img src="resources/images/loading_circle.gif" style="margin: auto;  display: block;  margin-top: 150px;"/>');
+						
 						if (srchKeco1 == "none") {
 							$('#viewStack').hide();
 							return;

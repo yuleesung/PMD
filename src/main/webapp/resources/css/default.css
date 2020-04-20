@@ -361,7 +361,8 @@
       letter-spacing: 1px;
       text-decoration: none;
       text-transform: uppercase;
-      font-size: 0.9em;
+      font-size: 1.2em;
+      font-weight: bold;
       color: rgba(255,255,255,0.80);
    }
    

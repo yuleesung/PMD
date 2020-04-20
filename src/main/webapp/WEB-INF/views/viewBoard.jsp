@@ -192,8 +192,7 @@ table#t2 tfoot td ul.pagination-v4{
 									<tr>
 										<th>파일 이름</th>
 										<c:if test="${vo.file_name ne null }">
-											<td><a
-												href="FileDownload?f_name=${vo.file_name }&dir=upload">${vo.file_name }</a></td>
+											<td><a style="color: blue; font-family: sans-serif;" href="FileDownload?f_name=${vo.file_name }&dir=upload">${vo.file_name }</a></td>
 										</c:if>
 										<c:if test="${vo.file_name eq null }">
 											<td></td>

@@ -85,8 +85,11 @@
 			<div id="menu">
 				<ul>
 					<li><a href="chart.inc">지역별 과정현황</a></li>
+					<li><span style="line-height: 35px; padding: 0;">/</span></li>
 					<li><a href="list.inc?b_category=free">자유게시판</a></li>
+					<li><span style="line-height: 35px; padding: 0;">/</span></li>
 					<li><a href="list.inc?b_category=qa">Q&A</a></li>
+					<li><span style="line-height: 35px; padding: 0;">/</span></li>
 					<li><a href="list.inc?b_category=adv">광고문의</a></li>
 				</ul>
 			</div>
