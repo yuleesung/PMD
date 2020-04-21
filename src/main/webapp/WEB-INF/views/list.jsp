@@ -320,7 +320,7 @@
 						
 						if(data.ar[i].secret_content == '1' && data.b_category == 'adv'){ // 광고게시판에서 !!
 							if(data.ar[i].u_idx == data.userInfo || data.status == '9'){ // 로그인정보가 글 작성자와 동일 or 관리자로그인
-								str += "<a href='viewBoard.inc?b_idx="+data.ar[i].b_idx+"&nowPage="+data.nowPage+"&b_category="+data.b_category+"'>";
+								str += "<a href='viewBoard.inc?b_idx="+data.ar[i].b_idx+"&nowPage="+data.nowPage+"&b_category="+data.b_category+"&active=${active}'>";
 								str += data.ar[i].subject;
 								str += "</a>";
 								} else { // 비로그인 or 로그인의 정보가 작성자와 미일치
@@ -334,7 +334,7 @@
 								str += "</span>";
 							}
 						} else if(data.board_name != '광고문의' || data.ar[i].secret_content != '1'){ // 자유게시판, QnA게시판
-							str += "<a href='viewBoard.inc?b_idx="+data.ar[i].b_idx+"&nowPage="+data.nowPage+"&b_category="+data.b_category+"'>";
+							str += "<a href='viewBoard.inc?b_idx="+data.ar[i].b_idx+"&nowPage="+data.nowPage+"&b_category="+data.b_category+"&active=${active}'>";
 							str += data.ar[i].subject;
 							str += "</a>";
 							

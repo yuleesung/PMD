@@ -234,7 +234,7 @@ table#t2 tfoot td ul.pagination-v4{
 										<textarea id="comment" placeholder="댓글은 로그인 후 작성 가능합니다."
 											readonly="readonly"
 											style="background-color: #dedede; cursor: pointer;"
-											onclick="javascript: location.href='login.inc'"></textarea>
+											onclick="javascript: location.href='login.inc?active=${active}'"></textarea>
 									</div>
 									<div id="comment_div2">
 										<input type="button" class="btn btn-primary" value="댓글등록"
@@ -368,7 +368,7 @@ table#t2 tfoot td ul.pagination-v4{
 	    
 	    function delComment(c_idx, nowPage) {
 			var c_url = "delComment.inc";
-			var param = "c_idx="+encodeURIComponent(c_idx)+"&b_idx=${vo.b_idx}&nowPage="+encodeURIComponent(nowPage);
+			var param = "c_idx="+encodeURIComponent(c_idx)+"&b_idx="+encodeURIComponent("${vo.b_idx}")+"&nowPage="+encodeURIComponent(nowPage);
 			
 			var chk = confirm("삭제 하시겠습니까?");
 			
