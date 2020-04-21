@@ -81,7 +81,7 @@ input[type=text] {
 					<div class="container">
 						<form class="form-horizontal" method="post" action="write.inc"
 							name="writeFrm" enctype="multipart/form-data">
-							<div class="form-group">
+							<div class="form-group" style="margin: auto; width: 90%; padding-left: 17px;">
 								<label for="title" class="col-sm-2 control-label">Title</label>
 								<div>
 									<select id="category" name="b_category" class="col-sm-10"
@@ -105,7 +105,7 @@ input[type=text] {
 										name="subject" placeholder="제목" style="width: 90%;">
 								</div>
 							</div>
-							<div class="form-group">
+							<div class="form-group" style="margin: auto; width: 90%;">
 								<label for="upload" class="col-sm-2 control-label">Upload
 									File</label>
 								<div class="col-sm-10" style="cursor: pointer;">
@@ -120,7 +120,7 @@ input[type=text] {
 							<input type="hidden" name="active" value="${active }"/>
 						</form>
 
-						<table style="width: 90%;">
+						<table style="width: 90%; margin: auto;">
 							<tbody>
 								<tr>
 									<td

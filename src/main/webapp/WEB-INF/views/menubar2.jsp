@@ -85,10 +85,13 @@
 							style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">로그아웃</a>
 					</c:when>
 					<c:otherwise>
-						<a href="login.inc?active=${active }" title="로그인"
-							style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">로그인</a>&nbsp;&nbsp;
-					<a href="join.inc?active=${active }" title="회원가입"
-							style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">회원가입</a>
+						<c:if test="${active ne null }">
+							<a href="login.inc?active=${active }" title="로그인" style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">로그인</a>&nbsp;&nbsp;
+						</c:if>
+						<c:if test="${active eq null }">
+							<a href="login.inc" title="로그인" style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">로그인</a>&nbsp;&nbsp;
+						</c:if>
+						<a href="join.inc?active=${active }" title="회원가입" style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">회원가입</a>
 					</c:otherwise>
 				</c:choose>
 			</div>

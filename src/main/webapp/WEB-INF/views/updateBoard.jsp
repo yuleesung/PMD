@@ -73,7 +73,7 @@ input[type=text]{
 	<section class="section element-animate">  
 	  <div class="container">
 		<form class="form-horizontal" method="post" action="edit.inc" name="editFrm" enctype="multipart/form-data">
-			<div class="form-group" >
+			<div class="form-group"  style="margin: auto; width: 90%;">
 				<label for="title" class="col-sm-2 control-label">Title</label>
 				<div class="col-sm-10">
 					<select id="category" name="b_category" class="col-sm-10" style="width: 150px; cursor: pointer;">
@@ -104,7 +104,7 @@ input[type=text]{
 						placeholder="제목" style="width: 100%;" value="${vo.subject }"/>
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" style="margin: auto; width: 90%;">
 				<label for="upload" class="col-sm-2 control-label">Upload File</label>
 				<div class="col-sm-10">
 					<input type="file" name="upload" id="upload" style="cursor: pointer;"/>
@@ -116,7 +116,7 @@ input[type=text]{
 			<input type="hidden" name="active" value="${active }"/>
 		</form>
 
-		<table>
+		<table style="width: 90%; margin: auto;">
 			<tbody>
 				<tr>
 					<td style="padding-bottom: 15px; padding-left: 15px; width: 900px;">
