@@ -151,6 +151,7 @@ option {
 				<c:forEach var="mvo" items="${ar }" varStatus="st">
 					<c:if test="${st.index == 0 }">
 						<div class="carousel-item col-md-4 active">
+							<a style="color: black;" href="javascript: goView('${mvo.trprId}', '${mvo.trprDegr}', '${mvo.traStartDate}', '${mvo.traEndDate}', '${mvo.trainstCstId}', '${mvo.trainTarget}', '${mvo.superViser}', '${mvo.yardMan}', '${mvo.regCourseMan}')">
 							<c:choose>
 								<c:when test="${fn:length(mvo.categoryNm) lt 12 }">
 									<h3 style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">
@@ -166,24 +167,19 @@ option {
 							<div class="panel panel-default">
 								<div class="panel-thumbnail">
 									<div class="card h-100 thumb">
-										<a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}&yardMan=${mvo.yardMan}&regCourseMan=${mvo.regCourseMan}">
 											<img class="card-img-top img-fluid mx-auto d-block" src="resources/images/occupation/${mvo.category}.jpg"
 												alt="${mvo.subTitle }" width="350px" height="150px" />
-										</a>
 										<div class="card-body">
-											<a
-												href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}&yardMan=${mvo.yardMan}&regCourseMan=${mvo.regCourseMan}">
 												<c:choose>
 													<c:when test="${fn:length(mvo.title) lt 25 }">
 														<h4 class="card-title"
-															style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h4>
+															style="text-align: center; height: 90px; vertical-align: middle; color: #007bff">${mvo.title }</h4>
 													</c:when>
 													<c:otherwise>
 														<h5 class="card-title"
-															style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h5>
+															style="text-align: center; height: 90px; vertical-align: middle; color: #007bff">${mvo.title }</h5>
 													</c:otherwise>
 												</c:choose>
-											</a>
 											<p class="card-text" style="text-align: center;">
 												<c:choose>
 													<c:when test="${fn:length(mvo.subTitle) lt 10 }">
@@ -218,78 +214,75 @@ option {
 									</div>
 								</div>
 							</div>
+							</a>
 						</div>
 					</c:if>
 					<c:if test="${st.index > 0 }">
 						<div class="carousel-item col-md-4">
-							<c:choose>
-								<c:when test="${fn:length(mvo.categoryNm) lt 12 }">
-									<h3
-										style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h3>
-								</c:when>
-								<c:otherwise>
-									<h4
-										style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h4>
-								</c:otherwise>
-							</c:choose>
-							<div class="panel panel-default">
-								<div class="panel-thumbnail">
-									<div class="card h-100 thumb">
-										<a
-											href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}&yardMan=${mvo.yardMan}&regCourseMan=${mvo.regCourseMan}">
-											<img class="card-img-top img-fluid mx-auto d-block"
-											src="resources/images/occupation/${mvo.category}.jpg"
-											alt="${mvo.subTitle }" width="350px" height="150px" />
-										</a>
-										<div class="card-body">
-											<a
-												href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}&yardMan=${mvo.yardMan}&regCourseMan=${mvo.regCourseMan}">
-												<c:choose>
-													<c:when test="${fn:length(mvo.title) lt 25 }">
-														<h4 class="card-title"
-															style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h4>
-													</c:when>
-													<c:otherwise>
-														<h5 class="card-title"
-															style="text-align: center; height: 90px; vertical-align: middle;">${mvo.title }</h5>
-													</c:otherwise>
-												</c:choose>
-											</a>
-											<p class="card-text" style="text-align: center;">
-												<c:choose>
-													<c:when test="${fn:length(mvo.subTitle) lt 10 }">
-														<span
-															style="font-weight: bold; font-size: 1.2em; font-size: 18px;">${mvo.subTitle }</span>
-													</c:when>
-													<c:otherwise>
-														<span
-															style="font-weight: bold; font-size: 1.2em; font-size: 15px;">${mvo.subTitle }</span>
-													</c:otherwise>
-												</c:choose>
-												<br /> <span
-													style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총
-													훈련비</span>
-												<fmt:formatNumber value="${mvo.courseMan }" pattern="#,###" />
-												원
-												<c:choose>
-													<c:when test="${mvo.regCourseMan lt mvo.yardMan }">
-														<span
-															style="border-radius: 10px; background-color: rgba(0, 150, 60, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
-													</c:when>
-													<c:otherwise>
-														<span
-															style="border-radius: 10px; background-color: rgba(150, 0, 60, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집마감</span>
-													</c:otherwise>
-												</c:choose>
-											</p>
-											<hr />
-											<p class="card-text" style="text-align: center;">
-												훈련기간<br /> ${mvo.traStartDate } ~ ${mvo.traEndDate }
-											</p>
+							<a style="color: black;" href="javascript: goView('${mvo.trprId}', '${mvo.trprDegr}', '${mvo.traStartDate}', '${mvo.traEndDate}', '${mvo.trainstCstId}', '${mvo.trainTarget}', '${mvo.superViser}', '${mvo.yardMan}', '${mvo.regCourseMan}')">
+								<c:choose>
+									<c:when test="${fn:length(mvo.categoryNm) lt 12 }">
+										<h3
+											style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h3>
+									</c:when>
+									<c:otherwise>
+										<h4
+											style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h4>
+									</c:otherwise>
+								</c:choose>
+								<div class="panel panel-default">
+									<div class="panel-thumbnail">
+										<div class="card h-100 thumb">	
+												<img class="card-img-top img-fluid mx-auto d-block"
+												src="resources/images/occupation/${mvo.category}.jpg"
+												alt="${mvo.subTitle }" width="350px" height="150px" />
+											<div class="card-body">
+													<c:choose>
+														<c:when test="${fn:length(mvo.title) lt 25 }">
+															<h4 class="card-title"
+																style="text-align: center; height: 90px; vertical-align: middle; color: #007bff">${mvo.title }</h4>
+														</c:when>
+														<c:otherwise>
+															<h5 class="card-title"
+																style="text-align: center; height: 90px; vertical-align: middle; color: #007bff">${mvo.title }</h5>
+														</c:otherwise>
+													</c:choose>
+												<p class="card-text" style="text-align: center;">
+													<c:choose>
+														<c:when test="${fn:length(mvo.subTitle) lt 10 }">
+															<span
+																style="font-weight: bold; font-size: 1.2em; font-size: 18px;">${mvo.subTitle }</span>
+														</c:when>
+														<c:otherwise>
+															<span
+																style="font-weight: bold; font-size: 1.2em; font-size: 15px;">${mvo.subTitle }</span>
+														</c:otherwise>
+													</c:choose>
+													<br /> <span
+														style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총
+														훈련비</span>
+													<fmt:formatNumber value="${mvo.courseMan }" pattern="#,###" />
+													원
+													<c:choose>
+														<c:when test="${mvo.regCourseMan lt mvo.yardMan }">
+															<span
+																style="border-radius: 10px; background-color: rgba(0, 150, 60, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집중</span>
+														</c:when>
+														<c:otherwise>
+															<span
+																style="border-radius: 10px; background-color: rgba(150, 0, 60, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;">모집마감</span>
+														</c:otherwise>
+													</c:choose>
+												</p>
+												<hr />
+												<p class="card-text" style="text-align: center;">
+													훈련기간<br /> ${mvo.traStartDate } ~ ${mvo.traEndDate }
+												</p>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
+							</a>
 						</div>
 					</c:if>
 				</c:forEach>
@@ -411,6 +404,20 @@ option {
 		<!-- 리스트! -->
 		<div class="container" id="result" style="display: none;"></div>
 	</div>
+	
+	<div>
+		<form action="view.inc" method="post" name="viewFrm">
+			<input type="hidden" name="srchTrprId"/>
+			<input type="hidden" name="srchTrprDegr"/>
+			<input type="hidden" name="traStartDate"/>
+			<input type="hidden" name="traEndDate"/>
+			<input type="hidden" name="trainstCstId"/>
+			<input type="hidden" name="trainTarget"/>
+			<input type="hidden" name="superViser"/>
+			<input type="hidden" name="yardMan"/>
+			<input type="hidden" name="regCourseMan"/>
+		</form>
+	</div>
 
 	<jsp:include page="footer.jsp" />
 	
@@ -437,15 +444,11 @@ option {
 					{
 						dateFormat : "yy년mm월dd일",
 						dayNamesMin : [ "일", "월", "화", "수", "목", "금", "토" ],
-						monthNames : [ "1월", "2월", "3월", "4월", "5월", "6월",
-								"7월", "8월", "9월", "10월", "11월", "12월" ],
+						monthNames : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
 						showMonthAfterYear : true,
-
 					});
 
-			$("#myCarousel").on(
-					"slide.bs.carousel",
-					function(e) {
+			$("#myCarousel").on("slide.bs.carousel", function(e) {
 						var $e = $(e.relatedTarget);
 						var idx = $e.index();
 						var itemsPerSlide = 3;
@@ -456,11 +459,9 @@ option {
 							for (var i = 0; i < it; i++) {
 								// append slides to end
 								if (e.direction == "left") {
-									$(".carousel-item").eq(i).appendTo(
-											".carousel-inner");
-								} else {
-									$(".carousel-item").eq(0).appendTo(
-											$(this).find(".carousel-inner"));
+									$(".carousel-item").eq(i).appendTo(".carousel-inner");
+								} else { 
+									$(".carousel-item").eq(0).appendTo($(this).find(".carousel-inner"));
 								}
 							}
 						}
@@ -479,161 +480,111 @@ option {
 				});
 			});
 
-			$("#search_btn")
-					.click(
-							function() {
+			$("#search_btn").click(function() {
+				var srchTraOrganNm = $("#srchTraOrganNm").val(); // 훈련기관
+				var srchTraProcessNm = $("#srchTraProcessNm").val(); // 훈련과정
+				var crseTracseSe = $("#crseTracseSe").val(); // 훈련유형
+				var srchKeco1 = $("#srchKeco1").val(); // 훈련분야
+				var date = $("#srchTraStDt").val(); // 훈련시작일
+				var srchTraArea1 = $("#srchTraArea1").val(); // 훈련지역
 
-								var srchTraOrganNm = $("#srchTraOrganNm").val(); // 훈련기관
-								var srchTraProcessNm = $("#srchTraProcessNm")
-										.val(); // 훈련과정
-								var crseTracseSe = $("#crseTracseSe").val(); // 훈련유형
-								var srchKeco1 = $("#srchKeco1").val(); // 훈련분야
-								var date = $("#srchTraStDt").val(); // 훈련시작일
-								var srchTraArea1 = $("#srchTraArea1").val(); // 훈련지역
+				var year = date.substring(0, 4);
+				var month = date.substring(5, 7);
+				var day = date.substring(8, 10);
 
-								var year = date.substring(0, 4);
-								var month = date.substring(5, 7);
-								var day = date.substring(8, 10);
+				var srchTraStDt = year + month + day;
 
-								var srchTraStDt = year + month + day;
+				var param = "";
 
-								var param = "";
+				if (srchTraOrganNm.trim().length > 0) {
+					param += "&srchTraOrganNm="+ srchTraOrganNm;
+				}
 
-								if (srchTraOrganNm.trim().length > 0) {
-									param += "&srchTraOrganNm="
-											+ srchTraOrganNm;
-								}
+				if (srchTraProcessNm.trim().length > 0) {
+					param += "&srchTraProcessNm="+ srchTraProcessNm;
+				}
 
-								if (srchTraProcessNm.trim().length > 0) {
-									param += "&srchTraProcessNm="
-											+ srchTraProcessNm;
-								}
+				if (crseTracseSe != "none") {
+					param += "&crseTracseSe=" + crseTracseSe;
+				}
 
-								if (crseTracseSe != "none") {
-									param += "&crseTracseSe=" + crseTracseSe;
-								}
+				if (srchKeco1 != "none") {
+					param += "&srchKeco1=" + srchKeco1;
+				}
 
-								if (srchKeco1 != "none") {
-									param += "&srchKeco1=" + srchKeco1;
-								}
+				if (date.trim().length > 0) {
+					param += "&srchTraStDt=" + srchTraStDt;
+				}
 
-								if (date.trim().length > 0) {
-									param += "&srchTraStDt=" + srchTraStDt;
-								}
+				if (srchTraArea1 != "none") {
+					param += "&srchTraArea1=" + srchTraArea1;
+				}
 
-								if (srchTraArea1 != "none") {
-									param += "&srchTraArea1=" + srchTraArea1;
-								}
+				var data = "";
 
-								var data = "";
+				if (param.startsWith("&")) {
+					data = param.substring(1, param.length);
+				}
 
-								if (param.startsWith("&")) {
-									data = param.substring(1, param.length);
-								}
+				$.ajax({
+					url : "search.inc",
+					type : "post",
+					data : data,
+					dataType : "json"
+				}).done(function(res) {
+					$("#result").css("display", "block");
+					// console.log(res.ar[0].trprId);
 
-								$
-										.ajax({
-											url : "search.inc",
-											type : "post",
-											data : data,
-											dataType : "json"
-										})
-										.done(
-												function(res) {
-													$("#result").css("display",
-															"block");
-													// console.log(res.ar[0].trprId);
+					var str = "<h1 class='my-5' style='font-weight: bold;'>검색 결과 (총 "+ res.rowTotal+ "건)</h1>";
+					str += "<hr/>";
+					str += "<div class='row'>";
 
-													var str = "<h1 class='my-5' style='font-weight: bold;'>검색 결과 (총 "
-															+ res.rowTotal
-															+ "건)</h1>";
-													str += "<hr/>";
-													str += "<div class='row'>";
+					for (var i = 0; i < res.ar.length; i++) {
+						str += "<div class='col-lg-4 col-md-6 col-sm-12 p-3'>";
+						str += "<a style='color: black;' href='javascript: goView(\""+res.ar[i].trprId+"\", \""+res.ar[i].trprDegr+"\", \""+res.ar[i].traStartDate+"\", \""+res.ar[i].traEndDate
+						+"\", \""+res.ar[i].trainstCstId+"\", \""+res.ar[i].trainTarget+"\", \""+res.ar[i].superViser+"\", \""+res.ar[i].yardMan+"\", \""+res.ar[i].regCourseMan+"\")'>";
+						str += "<div class='card h-100'>";
+						str += "<h5 class='card-title' style='text-align: center; color: white; background-color: rgba(0, 0, 255, 0.5); border-radius: 10px; width: 100%; margin: 10px auto;'>"
+								+ res.ar[i].subTitle
+								+ "</h5>";
+						str += "<div class='card-body'>";
+						str += "<h4 class='card-title' style='text-align: center; height: 90px; vertical-align: middle; color: #007bff'>"
+								+ res.ar[i].title
+								+ "</h4>";
+						str += "<p class='card-text' style='text-align: center;'>";
+						str += "<span style='font-weight: bold; color: rgba(250, 0, 0, 0.7);'>총 훈련비</span>&nbsp;";
+						str += numberWithCommas(res.ar[i].courseMan)+"원&nbsp;";
 
-													for (var i = 0; i < res.ar.length; i++) {
-														str += "<div class='col-lg-4 col-md-6 col-sm-12 p-3'>";
-														str += "<div class='card h-100'>";
-														str += "<a href='view.inc?srchTrprId="
-																+ res.ar[i].trprId
-																+ "&srchTrprDegr="
-																+ res.ar[i].trprDegr
-																+ "&traStartDate="
-																+ res.ar[i].traStartDate
-																+ "&traEndDate="
-																+ res.ar[i].traEndDate
-																+ "&trainstCstId="
-																+ res.ar[i].trainstCstId
-																+ "&trainTarget="
-																+ res.ar[i].trainTarget
-																+ "&superViser="
-																+ res.ar[i].superViser
-																+ "&yardMan="
-																+ res.ar[i].yardMan
-																+ "&regCourseMan="
-																+ res.ar[i].regCourseMan
-																+ "'>";
-														str += "<h5 class='card-title' style='text-align: center; color: white; background-color: rgba(0, 0, 255, 0.5); border-radius: 10px; width: 100%; margin: 10px auto;'>"
-																+ res.ar[i].subTitle
-																+ "</h5>";
-														str += "</a>";
-														str += "<div class='card-body'>";
-														str += "<a href='view.inc?srchTrprId="
-																+ res.ar[i].trprId
-																+ "&srchTrprDegr="
-																+ res.ar[i].trprDegr
-																+ "&traStartDate="
-																+ res.ar[i].traStartDate
-																+ "&traEndDate="
-																+ res.ar[i].traEndDate
-																+ "&trainstCstId="
-																+ res.ar[i].trainstCstId
-																+ "&trainTarget="
-																+ res.ar[i].trainTarget
-																+ "&superViser="
-																+ res.ar[i].superViser
-																+ "&yardMan="
-																+ res.ar[i].yardMan
-																+ "&regCourseMan="
-																+ res.ar[i].regCourseMan
-																+ "'>";
-														str += "<h4 class='card-title' style='text-align: center; height: 90px; vertical-align: middle;'>"
-																+ res.ar[i].title
-																+ "</h4>";
-														str += "</a>";
-														str += "<p class='card-text' style='text-align: center;'>";
-														str += "<span style='font-weight: bold; color: rgba(250, 0, 0, 0.7);'>총 훈련비</span>&nbsp;";
-														str += numberWithCommas(res.ar[i].courseMan)
-																+ "원&nbsp;";
+						if (res.ar[i].regCourseMan < res.ar[i].yardMan) {
+							str += "<span style='border-radius: 10px; background-color: rgba(0, 150, 60, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;'>모집중</span>";
+						} else {
+							str += "<span style='border-radius: 10px; background-color: rgba(150, 0, 60, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;'>모집마감</span>";
+						}
 
-														if (res.ar[i].regCourseMan < res.ar[i].yardMan) {
-															str += "<span style='border-radius: 10px; background-color: rgba(0, 150, 60, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;'>모집중</span>";
-														} else {
-															str += "<span style='border-radius: 10px; background-color: rgba(150, 0, 60, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;'>모집마감</span>";
-														}
+						str += "</p>";
+						str += "<hr/>";
+						str += "<p class='card-text' style='text-align: center;'>훈련기간<br/>"
+								+ res.ar[i].traStartDate
+								+ "&nbsp;~&nbsp;"
+								+ res.ar[i].traEndDate
+								+ "</p>";
+						str += "</div>";
+						str += "</div>";
+						str += "</a>";
+						str += "</div>";
+					}
+					str += "</div>";
+					str += "<div class='pagination-wrap'>";
+					str += res.pageCode;
+					str += "</div>";
+					// console.log(str);
+					$("#result").html(str);
+					$( 'html, body' ).stop().animate( { scrollTop : '+=1000' } )
+				}).fail(function(err) {
+					console.log(err);
+				});
 
-														str += "</p>";
-														str += "<hr/>";
-														str += "<p class='card-text' style='text-align: center;'>훈련기간<br/>"
-																+ res.ar[i].traStartDate
-																+ "~"
-																+ res.ar[i].traEndDate
-																+ "</p>";
-														str += "</div>";
-														str += "</div>";
-														str += "</div>";
-													}
-													str += "</div>";
-													str += "<div class='pagination-wrap'>";
-													str += res.pageCode;
-													str += "</div>";
-													// console.log(str);
-													$("#result").html(str);
-													$( 'html, body' ).stop().animate( { scrollTop : '+=1000' } )
-												}).fail(function(err) {
-											console.log(err);
-										});
-
-							});
+			});
 
 		});
 
@@ -685,102 +636,80 @@ option {
 
 			data += "&nowPage=" + nowPage;
 
-			$
-					.ajax({
-						url : "search.inc",
-						type : "post",
-						data : data,
-						dataType : "json"
-					})
-					.done(
-							function(res) {
-								$("#result").css("display", "block");
-								// console.log(res.ar[0].trprId);
+			$.ajax({
+				url : "search.inc",
+				type : "post",
+				data : data,
+				dataType : "json"
+			}).done(function(res) {
+				$("#result").css("display", "block");
+				// console.log(res.ar[0].trprId);
 
-								var str = "<h1 class='my-5' style='font-weight: bold;'>검색 결과 (총 "
-										+ res.rowTotal + "건)</h1>";
-								str += "<hr/>";
-								str += "<div class='row'>";
+				var str = "<h1 class='my-5' style='font-weight: bold;'>검색 결과 (총 "
+						+ res.rowTotal + "건)</h1>";
+				str += "<hr/>";
+				str += "<div class='row'>";
 
-								for (var i = 0; i < res.ar.length; i++) {
-									str += "<div class='col-lg-4 col-md-6 col-sm-12 p-3'>";
-									str += "<div class='card h-100'>";
-									str += "<a href='view.inc?srchTrprId="
-											+ res.ar[i].trprId
-											+ "&srchTrprDegr="
-											+ res.ar[i].trprDegr
-											+ "&traStartDate="
-											+ res.ar[i].traStartDate
-											+ "&traEndDate="
-											+ res.ar[i].traEndDate
-											+ "&trainstCstId="
-											+ res.ar[i].trainstCstId
-											+ "&trainTarget="
-											+ res.ar[i].trainTarget
-											+ "&superViser="
-											+ res.ar[i].superViser
-											+ "&yardMan=" + res.ar[i].yardMan
-											+ "&regCourseMan="
-											+ res.ar[i].regCourseMan + "'>";
-									str += "<h5 class='card-title' style='text-align: center; color: white; background-color: rgba(0, 0, 255, 0.5); border-radius: 10px; width: 100%; margin: 10px auto;'>"
-											+ res.ar[i].subTitle + "</h5>";
-									str += "</a>";
-									str += "<div class='card-body'>";
-									str += "<a href='view.inc?srchTrprId="
-											+ res.ar[i].trprId
-											+ "&srchTrprDegr="
-											+ res.ar[i].trprDegr
-											+ "&traStartDate="
-											+ res.ar[i].traStartDate
-											+ "&traEndDate="
-											+ res.ar[i].traEndDate
-											+ "&trainstCstId="
-											+ res.ar[i].trainstCstId
-											+ "&trainTarget="
-											+ res.ar[i].trainTarget
-											+ "&superViser="
-											+ res.ar[i].superViser
-											+ "&yardMan=" + res.ar[i].yardMan
-											+ "&regCourseMan="
-											+ res.ar[i].regCourseMan + "'>";
-									str += "<h4 class='card-title' style='text-align: center; height: 90px; vertical-align: middle;'>"
-											+ res.ar[i].title + "</h4>";
-									str += "</a>";
-									str += "<p class='card-text' style='text-align: center;'>";
-									str += "<span style='font-weight: bold; color: rgba(250, 0, 0, 0.7);'>총 훈련비</span>&nbsp;";
-									str += numberWithCommas(res.ar[i].courseMan)
-											+ "원&nbsp;";
+				for (var i = 0; i < res.ar.length; i++) {
+					str += "<div class='col-lg-4 col-md-6 col-sm-12 p-3'>";
+					str += "<a style='color: black;' href='javascript: goView(\""+res.ar[i].trprId+"\", \""+res.ar[i].trprDegr+"\", \""+res.ar[i].traStartDate+"\", \""+res.ar[i].traEndDate
+							+"\", \""+res.ar[i].trainstCstId+"\", \""+res.ar[i].trainTarget+"\", \""+res.ar[i].superViser+"\", \""+res.ar[i].yardMan+"\", \""+res.ar[i].regCourseMan+"\")'>";
+					str += "<div class='card h-100'>";
+					str += "<h5 class='card-title' style='text-align: center; color: white; background-color: rgba(0, 0, 255, 0.5); border-radius: 10px; width: 100%; margin: 10px auto;'>"
+							+ res.ar[i].subTitle + "</h5>";
+					str += "<div class='card-body'>";
+					str += "<h4 class='card-title' style='text-align: center; height: 90px; vertical-align: middle; color: #007bff'>"
+							+ res.ar[i].title + "</h4>";
+					str += "<p class='card-text' style='text-align: center;'>";
+					str += "<span style='font-weight: bold; color: rgba(250, 0, 0, 0.7);'>총 훈련비</span>&nbsp;";
+					str += numberWithCommas(res.ar[i].courseMan)
+							+ "원&nbsp;";
 
-									if (res.ar[i].regCourseMan < res.ar[i].yardMan) {
-										str += "<span style='border-radius: 10px; background-color: rgba(0, 150, 60, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;'>모집중</span>";
-									} else {
-										str += "<span style='border-radius: 10px; background-color: rgba(150, 0, 60, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;'>모집마감</span>";
-									}
+					if (res.ar[i].regCourseMan < res.ar[i].yardMan) {
+						str += "<span style='border-radius: 10px; background-color: rgba(0, 150, 60, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;'>모집중</span>";
+					} else {
+						str += "<span style='border-radius: 10px; background-color: rgba(150, 0, 60, 0.7); display: inline-block; width: 50px; color: white; font-size: 0.7em;'>모집마감</span>";
+					}
 
-									str += "</p>";
-									str += "<hr/>";
-									str += "<p class='card-text' style='text-align: center;'>훈련기간<br/>"
-											+ res.ar[i].traStartDate
-											+ "~"
-											+ res.ar[i].traEndDate + "</p>";
-									str += "</div>";
-									str += "</div>";
-									str += "</div>";
-								}
-								str += "</div>";
-								str += "<div class='pagination-wrap'>";
-								str += res.pageCode;
-								str += "</div>";
-								//console.log(str);
-								$("#result").html(str);
+					str += "</p>";
+					str += "<hr/>";
+					str += "<p class='card-text' style='text-align: center;'>훈련기간<br/>"
+							+ res.ar[i].traStartDate
+							+ "&nbsp;~&nbsp;"
+							+ res.ar[i].traEndDate + "</p>";
+					str += "</div>";
+					str += "</div>";
+					str += "</a>";
+					str += "</div>";
+				}
+				str += "</div>";
+				str += "<div class='pagination-wrap'>";
+				str += res.pageCode;
+				str += "</div>";
+				//console.log(str);
+				$("#result").html(str);
 
-							}).fail(function(err) {
-						console.log(err);
-					});
+			}).fail(function(err) {
+				console.log(err);
+			});
 		}
 
 		function numberWithCommas(x) {
 			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+		
+		function goView(trprId, trprDegr, traStartDate, traEndDate, trainstCstId, trainTarget, superViser, yardMan, regCourseMan) {
+			document.viewFrm.srchTrprId.value = trprId;
+			document.viewFrm.srchTrprDegr.value = trprDegr;
+			document.viewFrm.traStartDate.value = traStartDate;
+			document.viewFrm.traEndDate.value = traEndDate;
+			document.viewFrm.trainstCstId.value = trainstCstId;
+			document.viewFrm.trainTarget.value = trainTarget;
+			document.viewFrm.superViser.value = superViser;
+			document.viewFrm.yardMan.value = yardMan;
+			document.viewFrm.regCourseMan.value = regCourseMan;
+			
+			document.viewFrm.submit();
 		}
 	</script>
 

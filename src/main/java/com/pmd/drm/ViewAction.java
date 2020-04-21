@@ -11,6 +11,7 @@ import org.jdom2.input.SAXBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pmd.vo.ViewVO;
@@ -21,7 +22,7 @@ public class ViewAction {
 	@Autowired
 	private HttpSession session;
 	
-	@RequestMapping("/view.inc")
+	@RequestMapping(value = "/view.inc", method = RequestMethod.POST)
 	public ModelAndView view(String srchTrprId, String srchTrprDegr, String traStartDate, String traEndDate, 
 			String trainstCstId, String superViser, String trainTarget, String regCourseMan, String yardMan) throws Exception{
 		
