@@ -164,13 +164,13 @@ table#t2 tfoot td ul.pagination-v4{
 											test="${vo.uvo.u_idx eq sessionScope.userInfo.u_idx }">
 											<input type="button" class="btn btn-primary" value="수정"
 												style="font-size: 15px; cursor: pointer;"
-												onclick="javascript: location.href='updateBoard.inc?b_idx=${vo.b_idx}&b_category=${b_category }&nowPage=${nowPage }'" />
+												onclick="javascript: location.href='updateBoard.inc?b_idx=${vo.b_idx}&b_category=${b_category }&nowPage=${nowPage }&active=${active}'" />
 											<input type="button" class="btn btn-danger" value="삭제"
 												style="font-size: 15px; cursor: pointer;"
-												onclick="delPost('${vo.b_idx}', '${nowPage }', '${b_category }')" />
+												onclick="delPost('${vo.b_idx}', '${nowPage }', '${b_category }', '${active }')" />
 										</c:if> <input type="button" class="btn btn-primary" value="목록"
 										style="font-size: 15px; cursor: pointer;"
-										onclick="javascript: location.href='list.inc?nowPage=${nowPage}&b_category=${b_category }'" />
+										onclick="javascript: location.href='list.inc?nowPage=${nowPage}&b_category=${b_category }&active=${active}'" />
 									</td>
 								</tr>
 							</thead>
@@ -340,7 +340,7 @@ table#t2 tfoot td ul.pagination-v4{
 	    	$("#comment_btn").click(function(){
 	    		var comment = $("#comment").val();
 	    		var c_url = "comment.inc";
-	    		var param = "c_content="+comment+"&b_idx=${vo.b_idx}&u_idx=${sessionScope.userInfo.u_idx}";
+	    		var param = "c_content="+encodeURIComponent(comment)+"&b_idx=${vo.b_idx}&u_idx=${sessionScope.userInfo.u_idx}";
 	    		
 	    		if(comment.trim().length < 1){
 	    			alert("댓글 내용을 입력하세요!");
@@ -368,7 +368,7 @@ table#t2 tfoot td ul.pagination-v4{
 	    
 	    function delComment(c_idx, nowPage) {
 			var c_url = "delComment.inc";
-			var param = "c_idx="+c_idx+"&b_idx=${vo.b_idx}&nowPage="+nowPage;
+			var param = "c_idx="+encodeURIComponent(c_idx)+"&b_idx=${vo.b_idx}&nowPage="+encodeURIComponent(nowPage);
 			
 			var chk = confirm("삭제 하시겠습니까?");
 			
@@ -380,7 +380,7 @@ table#t2 tfoot td ul.pagination-v4{
 	    function c_save(cnt, c_idx, nowPage) {
 			var ta = $("#revision"+cnt).val();
 			var c_url = "updateComment.inc";
-			var param = "c_content="+ta+"&b_idx=${vo.b_idx}&c_idx="+c_idx+"&nowPage="+nowPage;
+			var param = "c_content="+encodeURIComponent(ta)+"&b_idx=${vo.b_idx}&c_idx="+encodeURIComponent(c_idx)+"&nowPage="+encodeURIComponent(nowPage);
 			
 			if(ta.trim().length < 1){
     			alert("댓글 내용을 입력하세요!");
@@ -393,7 +393,7 @@ table#t2 tfoot td ul.pagination-v4{
 	    
 	    function c_cancel(nowPage) {
 			var c_url = "viewComment.inc";
-			var param = "b_idx=${vo.b_idx}&nowPage="+nowPage;
+			var param = "b_idx=${vo.b_idx}&nowPage="+encodeURIComponent(nowPage);
 			
 			ajax_m(c_url, param);
 		}
@@ -435,7 +435,7 @@ table#t2 tfoot td ul.pagination-v4{
     		});
 		}
 	    
-	    function delPost(b_idx, nowPage, b_category) {
+	    function delPost(b_idx, nowPage, b_category, active) {
 	    	
 	    	var chk = confirm("정말 삭제 하시겠습니까?");
 	    	var param = "b_idx="+encodeURIComponent(b_idx);
@@ -448,7 +448,7 @@ table#t2 tfoot td ul.pagination-v4{
 					dataType: "json"
 				}).done(function(data){
 					if(data.chk){
-						location.href = "list.inc?nowPage="+nowPage+"&b_category="+b_category;
+						location.href = "list.inc?nowPage="+nowPage+"&b_category="+b_category+"&active="+active;
 					}else{
 						alert("삭제를 실패하였습니다!");
 					}

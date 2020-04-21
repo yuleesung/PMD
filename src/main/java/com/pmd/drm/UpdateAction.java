@@ -32,7 +32,7 @@ public class UpdateAction {
 
 	
 	@RequestMapping("/updateBoard.inc")
-	public ModelAndView updateBoard(String b_idx, String b_category, String nowPage) { // 수정페이지로 이동
+	public ModelAndView updateBoard(String b_idx, String b_category, String nowPage, String active) { // 수정페이지로 이동
 			
 		BulletinVO vo = b_dao.viewPost(b_idx);
 		vo.setNowPage(nowPage);
@@ -40,6 +40,7 @@ public class UpdateAction {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("vo", vo);
+		mv.addObject("active", active);
 		mv.setViewName("updateBoard");
 		 
 		return mv;
@@ -68,7 +69,7 @@ public class UpdateAction {
 		
 		boolean chk = b_dao.editPost(vo);
 		
-		mv.setViewName("redirect:/viewBoard.inc?b_idx="+vo.getB_idx()+"&nowPage=1&b_category="+vo.getB_category());
+		mv.setViewName("redirect:/viewBoard.inc?b_idx="+vo.getB_idx()+"&nowPage=1&b_category="+vo.getB_category()+"&active="+vo.getActive());
 		
 		return mv;
 	}

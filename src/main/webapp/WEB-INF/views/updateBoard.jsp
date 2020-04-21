@@ -113,6 +113,7 @@ input[type=text]{
 			<input type="hidden" name="b_idx" id="b_idx" value="${vo.b_idx }"/>
 			<input type="hidden" name="u_idx" value="${userInfo.u_idx }"/>
 			<input type="hidden" name="b_content" id="str"/>
+			<input type="hidden" name="active" value="${active }"/>
 		</form>
 
 		<table>
@@ -128,7 +129,7 @@ input[type=text]{
 					<label style="font-size: 16px; color: black; font-weight: bold;">작성자 : ${userInfo.nickname }</label><br/>
 					<input id="submit_btn" type="button" value="Submit" class="btn btn-primary" style="cursor: pointer;">&nbsp;&nbsp;
 						<input id="cancel_btn" type="button" value="Cancel" class="btn btn-primary" style="cursor: pointer;"
-						onclick="location.href='viewBoard.inc?b_idx=${vo.b_idx}&nowPage=${vo.nowPage }&b_category=${vo.b_category }'"> 
+						onclick="location.href='viewBoard.inc?b_idx=${vo.b_idx}&nowPage=${vo.nowPage }&b_category=${vo.b_category }&active=${active }'"> 
 						<!-- 해당게시물로 돌아가기 -->
 					</div>
 					</td>

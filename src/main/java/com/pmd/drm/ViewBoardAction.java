@@ -33,7 +33,7 @@ public class ViewBoardAction {
 	private BulletinDAO b_dao;
 	
 	@RequestMapping("/viewBoard.inc")
-	public ModelAndView viewBoard(String b_idx, String nowPage, String b_category) {
+	public ModelAndView viewBoard(String b_idx, String nowPage, String b_category, String active) {
 		ModelAndView mv = new ModelAndView();
 		
 		session.setAttribute("path", "viewBoard");
@@ -90,6 +90,7 @@ public class ViewBoardAction {
 		mv.addObject("b_category", b_category);
 		mv.addObject("c_length", b_dao.commCount(b_idx));
 		mv.addObject("pageCode", pageCode);
+		mv.addObject("active", active);
 		mv.setViewName("viewBoard");
 		
 		

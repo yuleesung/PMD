@@ -174,7 +174,7 @@
 											<c:if test='${vo.secret_content eq 1 && b_category eq "adv"}'>
 												<c:set value="${sessionScope.userInfo }" var="uvo" />
 												<c:if test="${vo.u_idx eq uvo.u_idx  || uvo.status eq '9'}">
-													<a href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}">
+													<a href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}&active=${active}">
 														${vo.subject } 
 													</a>													
 												</c:if>
@@ -191,7 +191,7 @@
 											</c:if> 
 											
 											<c:if test="${'광고문의' ne board_name || vo.secret_content ne 1}">
-												<a href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}">
+												<a href="viewBoard.inc?b_idx=${vo.b_idx }&nowPage=${nowPage}&b_category=${b_category}&active=${active}">
 													${vo.subject }
 												</a>
 												<c:if test="${fn:length(vo.c_list) > 0 }">
@@ -221,7 +221,7 @@
 									<td>
 										<c:if test="${userInfo ne null }">
 											<input type="button" class="btn btn-primary" value="글쓰기" style="font-size: 15px; cursor: pointer;"
-												onclick="javascript: location.href='write.inc?nowPage=${nowPage}&b_category=${b_category }'" />
+												onclick="javascript: location.href='write.inc?nowPage=${nowPage}&b_category=${b_category }&active=${active }'" />
 										</c:if>
 									</td>
 								</tr>

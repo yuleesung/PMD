@@ -117,6 +117,7 @@ input[type=text] {
 							<input type="hidden" name="u_idx" value="${userInfo.u_idx }" />
 							<input type="hidden" name="b_content" id="str" /> <input
 								type="hidden" id="ran_val" value="${ran_val }">
+							<input type="hidden" name="active" value="${active }"/>
 						</form>
 
 						<table style="width: 90%;">
@@ -141,7 +142,7 @@ input[type=text] {
 												style="cursor: pointer;">&nbsp;&nbsp; <input
 												id="cancel_btn" type="button" style="cursor: pointer;"
 												value="이전으로" class="btn btn-primary"
-												onclick="location.href='list.inc?b_category=${b_category}&nowPage=${nowPage }'">
+												onclick="location.href='list.inc?b_category=${b_category}&nowPage=${nowPage }&active=${active }'">
 										</div></td>
 								</tr>
 							</tbody>

@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class BulletinVO implements Serializable{
 	
-	private String b_idx, subject, b_content, file_name, write_date, ip, hit, status, b_category, u_idx, nowPage, secret_content;
+	private String b_idx, subject, b_content, file_name, write_date, ip, hit, status, b_category, u_idx, nowPage, secret_content, active;
 	
 	private List<Bulletin_C_VO> c_list;
 
@@ -137,6 +137,12 @@ public class BulletinVO implements Serializable{
 	public void setUvo(UserVO uvo) {
 		this.uvo = uvo;
 	}
-	
-	
+
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
 }

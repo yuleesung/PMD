@@ -35,7 +35,7 @@ public class WriteAction {
 	
 	 
 	@RequestMapping("/write.inc")
-	public ModelAndView writeForm(String nowPage, String b_category) {
+	public ModelAndView writeForm(String nowPage, String b_category, String active) {
 		ModelAndView mv = new ModelAndView();
 		
 		int ran1 = (int) ((Math.random()*9)+1);
@@ -48,7 +48,7 @@ public class WriteAction {
 		
 		mv.addObject("b_category", b_category);
 		mv.addObject("nowPage", nowPage);
-		
+		mv.addObject("active", active);
 		
 		mv.setViewName("writeBoard");
 		
@@ -80,7 +80,7 @@ public class WriteAction {
 		b_dao.writePost(vo);
 
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("redirect:/list.inc?b_category="+vo.getB_category()); // 최근 게시물 리스트로 돌아가야 함
+		mv.setViewName("redirect:/list.inc?b_category="+vo.getB_category()+"&active="+vo.getActive()); // 최근 게시물 리스트로 돌아가야 함
 					
 		return mv;
 	}
