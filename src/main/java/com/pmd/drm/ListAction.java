@@ -39,7 +39,7 @@ public class ListAction {
 	
 	// 카테고리 별 게시판 보여주기
 	@RequestMapping("/list.inc")
-	public ModelAndView list(String nowPage, String b_category) {
+	public ModelAndView list(String nowPage, String b_category, String active) {
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -97,8 +97,8 @@ public class ListAction {
 		mv.addObject("board_name", board_name);
 		mv.addObject("b_category", b_category);
 		mv.addObject("comm_ar", comm_ar);
-		mv.setViewName("list");
-		
+		mv.addObject("active", active);
+		mv.setViewName("list");		
 		
 		return mv;
 	}

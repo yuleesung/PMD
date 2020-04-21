@@ -14,11 +14,13 @@ public class ViewChartAction {
 	private HttpSession session;
 	
 	@RequestMapping("/chart.inc")
-	public ModelAndView viewChart() {
+	public ModelAndView viewChart(String active) {
 		
 		ModelAndView mv = new ModelAndView();
 		
+		mv.addObject("active", active);
 		mv.setViewName("viewChart");
+		
 		session.setAttribute("path", "viewChart");
 		
 		return mv;

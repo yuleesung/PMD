@@ -21,20 +21,39 @@
 	display: none;
 }
 
+#menu a{
+	font-size: 15px;
+}
 
 #buttonMenu ul li a{
 	color: white;
 }
 
 #menu li a:hover{
-	font-size: 16px;
+	font-size: 1.2em;
 	font-weight: bold;
 	color: black;	
 }
+
+#menu>ul>li>a.menu_active {
+	font-size: 1.2em;
+	font-weight: bold;
+	color: black;
+}
+
 #sign a:hover{
 	font-size: 14px;
 	font-weight: bold;
 	text-decoration: none; 
+}
+#menu {
+    width: 630px;
+  }
+#menu>ul{
+	width: 100%;
+}
+#menu>ul>li{
+	height: 34px;
 }
 /* @media (min-width: 767px) {
   #menu {
@@ -84,13 +103,40 @@
 			</div>
 			<div id="menu">
 				<ul>
-					<li><a href="chart.inc">지역별 과정현황</a></li>
-					<li><span style="line-height: 35px; padding: 0;">/</span></li>
-					<li><a href="list.inc?b_category=free">자유게시판</a></li>
-					<li><span style="line-height: 35px; padding: 0;">/</span></li>
-					<li><a href="list.inc?b_category=qa">Q&A</a></li>
-					<li><span style="line-height: 35px; padding: 0;">/</span></li>
-					<li><a href="list.inc?b_category=adv">광고문의</a></li>
+					<c:if test="${active eq 'chart' }">
+						<li><a href="chart.inc?active=chart" style="font-size: 19px;" class="menu_active">지역별 과정현황</a></li>
+					</c:if>
+					<c:if test="${active ne 'chart' }">
+						<li><a href="chart.inc?active=chart" style="font-size: 19px;">지역별 과정현황</a></li>
+					</c:if>
+
+					<li><span style="line-height: 34px; padding: 0;">/</span></li>
+					
+					<c:if test="${active eq 'free' }">
+						<li><a href="list.inc?b_category=free&active=free" style="font-size: 19px;" class="menu_active">자유게시판</a></li>
+					</c:if>
+					<c:if test="${active ne 'free' }">
+						<li><a href="list.inc?b_category=free&active=free" style="font-size: 19px;">자유게시판</a></li>
+					</c:if>
+					
+					<li><span style="line-height: 34px; padding: 0;">/</span></li>
+					
+					<c:if test="${active eq 'qa' }">
+						<li><a href="list.inc?b_category=qa&active=qa" style="font-size: 19px;" class="menu_active">Q&A</a></li>
+					</c:if>
+					<c:if test="${active ne 'qa' }">
+						<li><a href="list.inc?b_category=qa&active=qa" style="font-size: 19px;">Q&A</a></li>
+					</c:if>
+					
+					<li><span style="line-height: 34px; padding: 0;">/</span></li>
+					
+					<c:if test="${active eq 'adv' }">
+						<li><a href="list.inc?b_category=adv&active=adv" style="font-size: 19px;" class="menu_active">광고문의</a></li>
+					</c:if>
+					<c:if test="${active ne 'adv' }">
+						<li><a href="list.inc?b_category=adv&active=adv" style="font-size: 19px;">광고문의</a></li>
+					</c:if>
+					
 				</ul>
 			</div>
 			
@@ -144,6 +190,7 @@
 				$(this).next().slideDown();
 			}
 		});
+		
 	});
 	
 	
