@@ -25,6 +25,7 @@ public class ViewAction {
 	public ModelAndView view(String srchTrprId, String srchTrprDegr, String traStartDate, String traEndDate, 
 			String trainstCstId, String superViser, String trainTarget, String regCourseMan, String yardMan) throws Exception{
 		
+		session.removeAttribute("active");
 
 		// 훈련과정ID(srchTrprId. main에서는 trprId)
 		// 과정회차(srchTrprDegr. main에서는 trprDegr)

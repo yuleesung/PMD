@@ -82,14 +82,14 @@
 					<a href="mypage.inc" title="내정보" style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">
 						내정보
 					</a>&nbsp;&nbsp;
-					<a href="javascript: logout('${sessionScope.userInfo.sns_type }')"title="로그아웃"
+					<a href="javascript: logout('${sessionScope.userInfo.sns_type }', '${active }')"title="로그아웃"
 						style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">로그아웃</a>
 				</c:when>
 				<c:otherwise>
-					<a href="login.inc" title="로그인" style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">
+					<a href="login.inc?active=${active }" title="로그인" style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">
 						로그인
 					</a>&nbsp;&nbsp;
-					<a href="join.inc" title="회원가입" style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">
+					<a href="join.inc?actvie=${active }" title="회원가입" style="color: rgba(255, 255, 255, 0.80); font-size: 13px;">
 						회원가입
 					</a>
 				</c:otherwise>
@@ -200,16 +200,16 @@
 		  gapi.auth2.init();
 	  });
 	}
-	function logout(sns_type) {
+	function logout(sns_type, active) {
 		// 카카오 인증키 등록
 	    Kakao.init('5899acc3cddfce334c3dd49beff92a37');
 		
 		if(sns_type == "kakao"){ // 카카오 로그인을 했을 때
-			kakaoLogout();
+			kakaoLogout(active);
 		}else if(sns_type == "google"){
-			signOut();
+			signOut(active);
 		}else{ //
-			location.href = "logout.inc";
+			location.href = "logout.inc?active="+active;
 		}
 		
 	}
@@ -220,14 +220,14 @@
 	      return
 	    }
 	    Kakao.Auth.logout(function() {
-	      location.href = "logout.inc";
+	      location.href = "logout.inc?active="+active;
 	    })
 	  }
 	
 	function signOut() {
 	    var auth2 = gapi.auth2.getAuthInstance();
 	    auth2.signOut().then(function () {
-	    	location.href = "logout.inc";
+	    	location.href = "logout.inc?active="+active;
 	    });
 	    
 	    auth2.disconnect();

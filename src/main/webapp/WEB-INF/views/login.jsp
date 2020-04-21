@@ -76,7 +76,7 @@
 				<div class="card-footer"
 					style="text-align: center; border-top: 2px dotted gray;">
 					<input type="button" value="회원가입" class="btn float-left login_btn"
-						onclick="location.href='join.inc'" style="margin-left: 40px;">
+						onclick="location.href='join.inc?active=${active}'" style="margin-left: 40px;">
 					<input type="button" value="메인으로" class="btn float-right login_btn"
 						onclick="location.href='main.inc'" style="margin-right: 30px;">
 				</div>

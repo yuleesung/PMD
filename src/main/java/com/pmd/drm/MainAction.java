@@ -36,6 +36,8 @@ public class MainAction {
 	@RequestMapping("/main.inc")
 	public ModelAndView main() throws Exception {
 
+		session.removeAttribute("active");
+		
 		// 카테고리별 목록 10개씩 받아 옴
 		MainVO[] ar1 = makeURL("01");
 		MainVO[] ar2 = makeURL("02");

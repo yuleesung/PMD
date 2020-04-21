@@ -17,11 +17,11 @@ public class LogOutAction {
 	private HttpSession session;
 	
 	@RequestMapping("/logout.inc")
-	public ModelAndView logout() {
+	public ModelAndView logout(String active) {
 		ModelAndView mv = new ModelAndView();
 		
 		session.removeAttribute("userInfo"); // 로그인정보 삭제
-		
+		session.setAttribute("active", active);
 		MakePath mp = new MakePath();
 		mv.setViewName(mp.decidePath(session));
 		
