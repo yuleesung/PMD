@@ -17,16 +17,11 @@
 
 <!--stylesheets-->
 <link rel="stylesheet" href="resources/css/style.css">
-<link href="//fonts.googleapis.com/css?family=Cuprum:400,700"
-	rel="stylesheet">
-<link href="//fonts.googleapis.com/css?family=Didact+Gothic"
-	rel="stylesheet">
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
+<link href="//fonts.googleapis.com/css?family=Cuprum:400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="resources/css/text.css" rel="stylesheet" />
-<link href="resources/css/main_style.css" rel="stylesheet"
-	type="text/css" media="all">
+<link href="resources/css/main_style.css" rel="stylesheet" type="text/css" media="all">
 <!-- 캐러셀 -->
 <link rel="stylesheet" type="text/css" href="resources/css/carousel.css">
 
@@ -109,8 +104,9 @@ option {
 </style>
 </head>
 <body>
-
+	
 	<jsp:include page="menubar2.jsp" />
+	
 
 	<div class="container">
 
@@ -157,22 +153,22 @@ option {
 						<div class="carousel-item col-md-4 active">
 							<c:choose>
 								<c:when test="${fn:length(mvo.categoryNm) lt 12 }">
-									<h3
-										style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h3>
+									<h3 style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">
+										${mvo.categoryNm }
+									</h3>
 								</c:when>
 								<c:otherwise>
-									<h4
-										style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">${mvo.categoryNm }</h4>
+									<h4 style="width: 100%; border: 3px solid rgba(0, 20, 230, 0.8); border-radius: 10px; text-align: center; padding: 5px;">
+										${mvo.categoryNm }
+									</h4>
 								</c:otherwise>
 							</c:choose>
 							<div class="panel panel-default">
 								<div class="panel-thumbnail">
 									<div class="card h-100 thumb">
-										<a
-											href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}&yardMan=${mvo.yardMan}&regCourseMan=${mvo.regCourseMan}">
-											<img class="card-img-top img-fluid mx-auto d-block"
-											src="resources/images/occupation/${mvo.category}.jpg"
-											alt="${mvo.subTitle }" width="350px" height="150px" />
+										<a href="view.inc?srchTrprId=${mvo.trprId}&srchTrprDegr=${mvo.trprDegr}&traStartDate=${mvo.traStartDate}&traEndDate=${mvo.traEndDate}&trainstCstId=${mvo.trainstCstId}&trainTarget=${mvo.trainTarget}&superViser=${mvo.superViser}&yardMan=${mvo.yardMan}&regCourseMan=${mvo.regCourseMan}">
+											<img class="card-img-top img-fluid mx-auto d-block" src="resources/images/occupation/${mvo.category}.jpg"
+												alt="${mvo.subTitle }" width="350px" height="150px" />
 										</a>
 										<div class="card-body">
 											<a
@@ -199,9 +195,8 @@ option {
 															style="font-weight: bold; font-size: 1.2em; font-size: 15px;">${mvo.subTitle }</span>
 													</c:otherwise>
 												</c:choose>
-												<br /> <span
-													style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총
-													훈련비</span>
+												<br /> 
+												<span style="font-weight: bold; color: rgba(250, 0, 0, 0.7);">총 훈련비</span>
 												<fmt:formatNumber value="${mvo.courseMan }" pattern="#,###" />
 												원
 												<c:choose>
@@ -298,14 +293,15 @@ option {
 						</div>
 					</c:if>
 				</c:forEach>
-				<a class="carousel-control-prev" href="#myCarousel" role="button"
-					data-slide="prev"
-					style="display: block; width: 10%; text-align: left; padding-top: 33%;">
-					<img alt="left" src="resources/images/left.png">
-				</a> <a class="carousel-control-next" href="#myCarousel" role="button"
-					data-slide="next"
-					style="display: block; width: 10%; text-align: right; padding-top: 33%;">
-					<img alt="left" src="resources/images/right.png">
+				
+				<!-- 화살표 prev, next -->
+				<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"
+				   style="display: block; width: 5%; text-align: left; padding-top: 22%; ">
+					<img alt="left" src="resources/images/back.png">
+				</a> 
+				<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"
+					style="display: block; width: 5%; text-align: right; padding-top: 22%;">
+					<img alt="left" src="resources/images/forward.png">
 				</a>
 			</div>
 		</div>
@@ -426,6 +422,7 @@ option {
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script src="resources/js/jquery-ui.min.js"></script>
 	<script src="resources/js/carousel.js"></script>
+	
 
 	<script>
 		addEventListener("load", function() {
