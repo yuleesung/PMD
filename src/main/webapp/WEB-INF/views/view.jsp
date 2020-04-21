@@ -51,20 +51,22 @@
     </header> -->
     <!-- END header -->
     
-    <section class="home-slider owl-carousel">
-      
-      <div class="slider-item" style="background-image: url('resources/images/mario.gif'); background-size: 30%;">
-        <div class="container">
-          <div class="row slider-text align-items-center justify-content-center">
-            <div class="col-md-8 text-center col-sm-12 element-animate">
-              <h1 style="font-family: inherit;">과정 검색 결과</h1>
-              <p class="mb-5"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </section>
+    <div class="container" style="padding: 0;">
+	    <section class="home-slider owl-carousel">
+	      
+	      <div class="slider-item" style="background-image: url('resources/images/mario.gif'); background-size: 30%;">
+	        <div class="container">
+	          <div class="row slider-text align-items-center justify-content-center">
+	            <div class="col-md-8 text-center col-sm-12 element-animate">
+	              <h1 style="font-family: inherit;">과정 검색 결과</h1>
+	              <p class="mb-5"></p>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	
+	    </section>
+    </div>
     <!-- END slider -->
     
     <!-- END section -->
