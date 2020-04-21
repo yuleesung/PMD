@@ -340,7 +340,7 @@ table#t2 tfoot td ul.pagination-v4{
 	    	$("#comment_btn").click(function(){
 	    		var comment = $("#comment").val();
 	    		var c_url = "comment.inc";
-	    		var param = "c_content="+encodeURIComponent(comment)+"&b_idx=${vo.b_idx}&u_idx=${sessionScope.userInfo.u_idx}";
+	    		var param = "c_content="+encodeURIComponent(comment)+"&b_idx="+encodeURIComponent("${vo.b_idx}")+"&u_idx="+encodeURIComponent("${sessionScope.userInfo.u_idx}");
 	    		
 	    		if(comment.trim().length < 1){
 	    			alert("댓글 내용을 입력하세요!");
@@ -380,7 +380,7 @@ table#t2 tfoot td ul.pagination-v4{
 	    function c_save(cnt, c_idx, nowPage) {
 			var ta = $("#revision"+cnt).val();
 			var c_url = "updateComment.inc";
-			var param = "c_content="+encodeURIComponent(ta)+"&b_idx=${vo.b_idx}&c_idx="+encodeURIComponent(c_idx)+"&nowPage="+encodeURIComponent(nowPage);
+			var param = "c_content="+encodeURIComponent(ta)+"&b_idx="+encodeURIComponent("${vo.b_idx}")+"&c_idx="+encodeURIComponent(c_idx)+"&nowPage="+encodeURIComponent(nowPage);
 			
 			if(ta.trim().length < 1){
     			alert("댓글 내용을 입력하세요!");
@@ -393,7 +393,7 @@ table#t2 tfoot td ul.pagination-v4{
 	    
 	    function c_cancel(nowPage) {
 			var c_url = "viewComment.inc";
-			var param = "b_idx=${vo.b_idx}&nowPage="+encodeURIComponent(nowPage);
+			var param = "b_idx="+encodeURIComponent("${vo.b_idx}")+"&nowPage="+encodeURIComponent(nowPage);
 			
 			ajax_m(c_url, param);
 		}

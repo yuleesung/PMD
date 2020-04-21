@@ -284,7 +284,7 @@
 	    	var txt = $("#search_txt").val(); // 텍스트
 
 	    	var url = "searchBulletin.inc";
-	    	var param = "searchType="+encodeURIComponent(sel)+"&searchValue="+encodeURIComponent(txt)+"&b_category="+category;
+	    	var param = "searchType="+encodeURIComponent(sel)+"&searchValue="+encodeURIComponent(txt)+"&b_category="+encodeURIComponent(category);
 	    		
 	    	ajax_a(url, param);
 	    }
@@ -292,7 +292,7 @@
 	    function searchPage(nowPage, b_category, searchType, searchValue){
 	    	// 검색결과 페이징
 	    	var url = "searchBulletin.inc";
-    		var param = "searchType="+encodeURIComponent(searchType)+"&searchValue="+encodeURIComponent(searchValue)+"&b_category="+b_category+"&nowPage="+nowPage;
+    		var param = "searchType="+encodeURIComponent(searchType)+"&searchValue="+encodeURIComponent(searchValue)+"&b_category="+encodeURIComponent(b_category)+"&nowPage="+encodeURIComponent(nowPage);
     		
     		ajax_a(url, param);
 	    }
