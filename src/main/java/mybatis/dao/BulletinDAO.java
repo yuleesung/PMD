@@ -17,36 +17,6 @@ public class BulletinDAO {
 	@Autowired
 	private SqlSessionTemplate ss;
 
-	// 회원 아이디만 빼오기
-	public String getID(String u_idx) {
-
-		String id = ss.selectOne("bulletin.getID", u_idx);
-
-		return id;
-	}
-
-	// 회원 로그인
-	public UserVO login(String u_id, String u_pw) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("u_id", u_id);
-		map.put("u_pw", u_pw);
-
-		UserVO vo = ss.selectOne("bulletin.login", map);
-
-		return vo;
-	}
-
-	// 회원 가입
-	public boolean join(UserVO vo) {
-		boolean chk = false;
-
-		int cnt = ss.insert("bulletin.join", vo);
-		if (cnt > 0) {
-			chk = true;
-		}
-
-		return chk;
-	}
 
 	// 게시물 쓰기
 	public boolean writePost(BulletinVO vo) {
@@ -60,19 +30,7 @@ public class BulletinDAO {
 		return chk;
 	}
 
-	// 댓글 쓰기
-	public boolean writeComment(Bulletin_C_VO vo) {
-		boolean chk = false;
-
-		int cnt = ss.insert("bulletin.writeComment", vo);
-		if (cnt > 0) {
-			chk = true;
-		}
-
-		return chk;
-	}
-
-	// 뉴스 게시물 수
+	// 게시물 수
 	public int getCount(String b_category) {
 
 		int total = ss.selectOne("bulletin.getCount", b_category);
@@ -118,44 +76,6 @@ public class BulletinDAO {
 		return chk;
 	}
 
-	// 회원가입시 아이디 일치 검사
-	public boolean matchMember(String u_id) {
-		boolean chk = false;
-		String vo_id = ss.selectOne("bulletin.matchMember", u_id);
-		if(vo_id != null)
-			chk = true;
-
-		return chk;
-	}
-
-	// 회원 정보 수정
-	public boolean updateMember(UserVO vo) {
-		boolean chk = false;
-
-		int cnt = ss.update("bulletin.updateMember", vo);
-		if (cnt > 0) {
-			chk = true;
-		}
-
-		return chk;
-	}
-
-	// 회원 탈퇴
-	public boolean delMember(String u_idx, String u_pw) {
-		boolean chk = false;
-
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("u_idx", u_idx);
-		map.put("u_pw", u_pw);
-
-		int cnt = ss.update("bulletin.delMember", map);
-		if (cnt > 0) {
-			chk = true;
-		}
-
-		return chk;
-	}
-
 	// 게시물 삭제
 	public boolean delPost(String b_idx) {
 		boolean chk = false;
@@ -167,31 +87,7 @@ public class BulletinDAO {
 
 		return chk;
 	}
-
-	// 댓글 삭제
-	public boolean delComment(String c_idx) {
-		boolean chk = false;
-
-		int cnt = ss.update("bulletin.delComment", c_idx);
-		if (cnt > 0) {
-			chk = true;
-		}
-
-		return chk;
-	}
-
-	// 댓글 수정
-	public boolean updateComment(Bulletin_C_VO vo) {
-		boolean chk = false;
-
-		int cnt = ss.update("bulletin.updateComment", vo);
-		if (cnt > 0) {
-			chk = true;
-		}
-
-		return chk;
-	}
-
+	
 	// 조회 수 올리는 기능 - 인자로 받은 b_idx의 게시물 hit를 증가하는 기능
 	public boolean hit(String b_idx) {
 		boolean chk = false;
@@ -201,86 +97,6 @@ public class BulletinDAO {
 			chk = true;
 		}
 
-		return chk;
-	}
-	
-	// 소셜 아이디로 회원가입
-	public boolean socialReg(Map<String, String> map) {
-		boolean chk = false;
-		int cnt = ss.insert("bulletin.socialReg", map);
-		if(cnt > 0)
-			chk = true;
-		
-		return chk;
-	}
-	
-	// 소셜 아이디로 로그인
-	public UserVO socialLogin(Map<String, String> map) {
-		UserVO vo = ss.selectOne("bulletin.socialLogin", map);
-		return vo;
-	}
-	
-	// 소셜 회원탈퇴를 했을 때, DB에 저장된 ID값이 있는지 확인
-	public UserVO socialCheck(Map<String, String> map) {
-		UserVO vo = ss.selectOne("bulletin.socialCheck", map);
-		return vo;
-	}
-	
-	// 소셜 회원탈퇴 후 재가입을 할 경우
-	public boolean socialReReg(Map<String, String> map) {
-		boolean chk = false;
-		
-		int cnt = ss.update("bulletin.socialReReg", map);
-		if(cnt > 0)
-			chk = true;
-		
-		return chk;
-	}
-	
-	// 소셜 연동 해제(탈퇴)
-	public boolean socialLeave(Map<String, String> map) {
-		boolean chk = false;
-		
-		int cnt = ss.update("bulletin.socialLeave", map);
-		if(cnt > 0)
-			chk = true;
-		
-		return chk;
-	}
-	
-	// 이메일 중복검사
-	public boolean checkEmail(String email) {
-		boolean chk = false;
-		String str = ss.selectOne("bulletin.checkEmail", email);
-		if(str != null)
-			chk = true;
-		
-		return chk;
-	}
-	
-	// 전화번호 중복검사
-	public boolean checkPhone(String u_phone) {
-		boolean chk = false;
-		
-		String str = ss.selectOne("bulletin.checkPhone", u_phone);
-		if(str != null)
-			chk = true;
-		
-		return chk;
-	}
-	
-	// 회원 정지 또는 해제
-	public boolean blockOrRelUser(String u_idx, String status) {
-		boolean chk = false;
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("u_idx", u_idx);
-		map.put("status", status);
-		
-		int cnt = ss.update("bulletin.blockOrRelUser", map);
-		if(cnt > 0)
-			chk = true;
-		
 		return chk;
 	}
 	
@@ -297,89 +113,6 @@ public class BulletinDAO {
 			chk = true;
 		
 		return chk;
-	}
-	
-	// 광고 넣기
-	public boolean addAdv(AdvVO vo) {
-		boolean chk = false;
-		
-		int cnt = ss.insert("bulletin.addAdv", vo);
-		if(cnt > 0)
-			chk = true;
-		
-		return chk;
-	}
-	
-	// 광고목록 보기
-	public AdvVO[] listAdv(String begin, String end, String adv_group) {
-		AdvVO[] ar = null;
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("begin", begin);
-		map.put("end", end);
-		map.put("adv_group", adv_group);
-		
-		List<AdvVO> list = ss.selectList("bulletin.listAdv", map);
-		if(list != null && !list.isEmpty()) {
-			ar = new AdvVO[list.size()];
-			list.toArray(ar);
-		}
-		
-		return ar;
-	}
-	
-	// 광고 수정
-	public boolean updateAdv(AdvVO vo) {
-		boolean chk = false;
-		
-		int cnt = ss.update("bulletin.updateAdv", vo);
-		if(cnt > 0)
-			chk = true;
-		
-		return chk;
-	}
-	
-	// 광고 삭제 또는 복구 
-	public boolean delOrRestoreAdv(String a_idx, String status) {
-		boolean chk = false;
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("a_idx", a_idx);
-		map.put("status", status);
-		
-		int cnt = ss.update("bulletin.delOrRestoreAdv", map);
-		if(cnt > 0)
-			chk = true;
-		
-		return chk;
-	}
-	
-	// 관리자 로그인
-	public UserVO adminLogin(String u_id, String u_pw) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("u_id", u_id);
-		map.put("u_pw", u_pw);
-		
-		UserVO vo = ss.selectOne("bulletin.adminLogin", map);
-		
-		return vo;
-	}
-	
-	// 유저 목록
-	public UserVO[] listUser(String begin, String end) {
-		UserVO[] ar = null;
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("begin", begin);
-		map.put("end", end);
-		
-		List<UserVO> list = ss.selectList("bulletin.listUser", map);
-		if(list != null && !list.isEmpty()) {
-			ar = new UserVO[list.size()];
-			list.toArray(ar);
-		}
-		
-		return ar;
 	}
 	
 	// 관리자용 게시물 전체보기
@@ -403,45 +136,6 @@ public class BulletinDAO {
 	// 관리자용 게시물 수
 	public int getCountForAdmin(String b_category) {
 		return ss.selectOne("bulletin.getCountForAdmin", b_category);
-	}
-	
-	// 유저 수
-	public int getCountUser() {
-		return ss.selectOne("bulletin.getCountUser");
-	}
-	
-	// 광고 게시물 수
-	public int getCountAdv(String adv_group) {
-		return ss.selectOne("bulletin.getCountAdv", adv_group);
-	}
-	
-	// 광고 하나 넣기
-	public AdvVO viewAdv(String a_idx) {
-		return ss.selectOne("bulletin.viewAdv", a_idx);
-	}
-	
-	// 광고 상태를 모두 0으로 바꾸기
-	public boolean setAdvZero(String adv_group) {
-		boolean chk = false;
-		
-		int cnt = ss.update("bulletin.setAdvZero", adv_group);
-		if(cnt > 0)
-			chk = true;
-		
-		return chk;
-	}
-	
-	// 게시될 광고 가져오기
-	public AdvVO[] showAdvOnMain() {
-		AdvVO[] ar = null;
-		
-		List<AdvVO> list = ss.selectList("bulletin.showAdvOnMain");
-		if(list != null && !list.isEmpty()) {
-			ar = new AdvVO[list.size()];
-			list.toArray(ar);
-		}
-		
-		return ar;
 	}
 	
 	// 전체, 제목, 이름, 내용 검색한 후 총 게시물 수
@@ -508,189 +202,6 @@ public class BulletinDAO {
 		}
 
 		return ar;
-	}
-	
-	// 회원 검색 후 총 회원 수
-	public int searchUserCountForAdmin(String u_id, String nickname, String u_name, String email, String sns_id, String reg_date, String total, String active, String stop, String leave, String choice) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("u_id", u_id);
-		map.put("nickname", nickname);
-		map.put("u_name", u_name);
-		map.put("email", email);
-		map.put("sns_id", sns_id);
-		map.put("reg_date", reg_date);
-		map.put("total", total);
-		map.put("active", active);
-		map.put("stop", stop);
-		map.put("leave", leave);
-		map.put("choice", choice);
-		
-		return ss.selectOne("bulletin.searchUserCountForAdmin", map);
-	}
-	
-	// 회원 검색 기능
-	public UserVO[] searchUserForAdmin(String u_id, String nickname, String u_name, String email, String sns_id, String reg_date, String total, String active, String stop, String leave, String choice, String begin, String end) {
-		UserVO[] ar = null;
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("u_id", u_id);
-		map.put("nickname", nickname);
-		map.put("u_name", u_name);
-		map.put("email", email);
-		map.put("sns_id", sns_id);
-		map.put("reg_date", reg_date);
-		map.put("total", total);
-		map.put("active", active);
-		map.put("stop", stop);
-		map.put("leave", leave);
-		map.put("choice", choice);
-		map.put("begin", begin);
-		map.put("end", end);
-		
-		List<UserVO> list = ss.selectList("bulletin.searchUserForAdmin", map);
-		if(list != null && !list.isEmpty()) {
-			ar = new UserVO[list.size()];
-			list.toArray(ar);
-		}
-		
-		return ar;
-	}
-	
-	// 광고 전체, 회사, 이메일 검색하고난 후 총 광고 수
-	public int searchAdvCount(String searchTypeForAdv, String searchValueForAdv, String adv_group) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchTypeForAdv", searchTypeForAdv);
-		map.put("searchValueForAdv", searchValueForAdv);
-		map.put("adv_group", adv_group);
-		
-		return ss.selectOne("bulletin.searchAdvCount", map);
-	}
-	
-	// 광고 전체, 회사, 이메일로 검색하는 기능
-	public AdvVO[] searchAdv(String searchTypeForAdv, String searchValueForAdv, String adv_group, String begin, String end) {
-		AdvVO[] ar = null;
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchTypeForAdv", searchTypeForAdv);
-		map.put("searchValueForAdv", searchValueForAdv);
-		map.put("adv_group", adv_group);
-		map.put("begin", begin);
-		map.put("end", end);
-		
-		List<AdvVO> list = ss.selectList("bulletin.searchAdv", map);
-		if(list != null && !list.isEmpty()) {
-			ar = new AdvVO[list.size()];
-			list.toArray(ar);
-		}
-		
-		return ar;
-	}
-	
-	// 게시물 하나당 전체 댓글 수
-	public int commCount(String b_idx) {
-		return ss.selectOne("bulletin.commCount", b_idx);
-	}
-	
-	// 게시물 하나당 전체 댓글 수
-	public int commCountForAdmin(String u_idx) {
-		return ss.selectOne("bulletin.commCountForAdmin", u_idx);
-	}
-	
-	// ajax용 게시물 댓글 모음
-	public Bulletin_C_VO[] commListForAjax(String b_idx, String begin, String end) {
-		Bulletin_C_VO[] ar = null;
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("b_idx", b_idx);
-		map.put("begin", begin);
-		map.put("end", end);
-		
-		List<Bulletin_C_VO> list = ss.selectList("bulletin.commListForAjax", map);
-		if(list != null && !list.isEmpty()) {
-			ar = new Bulletin_C_VO[list.size()];
-			list.toArray(ar);
-		}
-		
-		return ar;
-	}
-	
-	// ajax용 유저의 댓글 모음
-	public Bulletin_C_VO[] u_commListForAjax(String u_idx, String begin, String end) {
-		Bulletin_C_VO[] ar = null;
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("u_idx", u_idx);
-		map.put("begin", begin);
-		map.put("end", end);
-		
-		List<Bulletin_C_VO> list = ss.selectList("bulletin.u_commListForAjax", map);
-		if(list != null && !list.isEmpty()) {
-			ar = new Bulletin_C_VO[list.size()];
-			list.toArray(ar);
-		}
-		
-		return ar;
-	}
-	
-	// 날짜 비교를 위한 adv_t 날짜 검색 기능
-	public AdvVO[] searchDateOnAdv_t(String adv_group) {
-		AdvVO[] ar = null;
-		
-		List<AdvVO> list = ss.selectList("bulletin.searchDateOnAdv_t", adv_group);
-		if(list != null && !list.isEmpty()) {
-			ar = new AdvVO[list.size()];
-			list.toArray(ar);
-		}
-		
-		return ar;
-	}
-	
-	// 수정시 날짜 비교를 위한 adv_t 날짜 검색 기능
-	public AdvVO[] searchDateOnAdv_tForUpdate(String a_idx, String adv_group) {
-		AdvVO[] ar = null;
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("a_idx", a_idx);
-		map.put("adv_group", adv_group);
-		
-		List<AdvVO> list = ss.selectList("bulletin.searchDateOnAdv_tForUpdate", map);
-		if(list != null && !list.isEmpty()) {
-			ar = new AdvVO[list.size()];
-			list.toArray(ar);
-		}
-		
-		return ar;
-	}
-	
-	// 댓글 복구
-	public boolean restoreComm(String c_idx) {
-		boolean chk = false;
-		
-		int cnt = ss.update("bulletin.restoreComm", c_idx);
-		if(cnt > 0)
-			chk = true;
-		
-		return chk;
-	}
-	
-	// 이전 비밀번호 확인
-	public boolean checkPrePw(String u_idx, String u_pw) {
-		boolean chk = false;
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("u_idx", u_idx);
-		map.put("u_pw", u_pw);
-		
-		UserVO vo = ss.selectOne("bulletin.checkPrePw", map);
-		if(vo != null)
-			chk = true;
-		
-		return chk;
-	}
-	
-	// 회원 정보 수정 후 로그인 정보 갱신 후 세션 저장용
-	public UserVO afterUpdateUserInfo(String u_idx) {
-		return ss.selectOne("bulletin.afterUpdateUserInfo", u_idx);
 	}
 	
 }

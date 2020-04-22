@@ -21,16 +21,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pmd.vo.AdvVO;
 import com.pmd.vo.MainVO;
 
-import mybatis.dao.BulletinDAO;
+import mybatis.dao.AdvDAO;
 
 @Controller
 public class MainAction {
 
 	@Autowired
-	private BulletinDAO b_dao;
+	private AdvDAO a_dao;
 	@Autowired
+	
 	private HttpSession session;
 	@Autowired
+	
 	private ServletContext application;
 
 	@RequestMapping("/main.inc")
@@ -176,7 +178,7 @@ public class MainAction {
 		}
 
 		// 광고사진 가져오기
-		AdvVO[] adv_ar = b_dao.showAdvOnMain();
+		AdvVO[] adv_ar = a_dao.showAdvOnMain();
 		String real_route = application.getContextPath() + "/resources/upload/";
 
 		String[] img_ar1 = new String[4]; // 이미지

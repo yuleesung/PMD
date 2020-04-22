@@ -15,7 +15,7 @@ import com.pmd.util.Paging_AdvGroup;
 import com.pmd.util.Paging_SearchAdvGroup;
 import com.pmd.vo.AdvVO;
 
-import mybatis.dao.BulletinDAO;
+import mybatis.dao.AdvDAO;
 
 @Controller
 public class AdminAdvAction {
@@ -29,10 +29,8 @@ public class AdminAdvAction {
 	String pageCode; // 페이징 처리된 HTML코드값
 
 	@Autowired
-	private BulletinDAO b_dao;
-
+	private AdvDAO a_dao;
 	
-
 	
 	// 광고목록 첫 이동
 	@RequestMapping("/admin_advList.inc")
@@ -48,7 +46,7 @@ public class AdminAdvAction {
 		else
 			this.nowPage = Integer.parseInt(nowPage);
 		
-		rowTotal = b_dao.getCountAdv(adv_group); // 그룹 별 게시글 총 갯수
+		rowTotal = a_dao.getCountAdv(adv_group); // 그룹 별 게시글 총 갯수
 		
 		// 페이징처리.. 광고용으로 바꿔야 함
 		Paging_AdvGroup page = new Paging_AdvGroup(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, adv_group);
@@ -58,7 +56,7 @@ public class AdminAdvAction {
 		String begin = String.valueOf(page.getBegin());
 		String end = String.valueOf(page.getEnd());
 		
-		AdvVO[] ar = b_dao.listAdv(begin, end, adv_group); // 해당그룹 글 목록 가져옴
+		AdvVO[] ar = a_dao.listAdv(begin, end, adv_group); // 해당그룹 글 목록 가져옴
 		
 		// jsp에서 표현할 문자열
 		String board_name = null; 
@@ -95,7 +93,7 @@ public class AdminAdvAction {
 		else
 			this.nowPage = Integer.parseInt(nowPage);
 		
-		rowTotal = b_dao.getCountAdv(adv_group); // 그룹 별 게시글 총 갯수
+		rowTotal = a_dao.getCountAdv(adv_group); // 그룹 별 게시글 총 갯수
 		
 		// 페이징처리.. 광고용으로 바꿔야 함
 		Paging_AdvGroup page = new Paging_AdvGroup(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, adv_group);
@@ -105,7 +103,7 @@ public class AdminAdvAction {
 		String begin = String.valueOf(page.getBegin());
 		String end = String.valueOf(page.getEnd());
 		
-		AdvVO[] ar = b_dao.listAdv(begin, end, adv_group); // 해당그룹 글 목록 가져옴
+		AdvVO[] ar = a_dao.listAdv(begin, end, adv_group); // 해당그룹 글 목록 가져옴
 		
 		// jsp에서 표현할 문자열
 		String board_name = null; 
@@ -137,15 +135,15 @@ public class AdminAdvAction {
 	public Map<String, Object> delOrRestoreAdv(String a_idx, String status, String adv_group, String nowPage){
 
 		
-		boolean chk_zero = b_dao.setAdvZero(adv_group); // 모든 광고 status를 0으로 만들고, !!!
-		boolean chk = b_dao.delOrRestoreAdv(a_idx, status); // 광고 status 값 변경
+		boolean chk_zero = a_dao.setAdvZero(adv_group); // 모든 광고 status를 0으로 만들고, !!!
+		boolean chk = a_dao.delOrRestoreAdv(a_idx, status); // 광고 status 값 변경
 		
 		if(nowPage == null) // 첫 진입 때는 Page값 1
 			this.nowPage = 1;
 		else
 			this.nowPage = Integer.parseInt(nowPage);
 		
-		rowTotal = b_dao.getCountAdv(adv_group); // 그룹 별 게시글 총 갯수
+		rowTotal = a_dao.getCountAdv(adv_group); // 그룹 별 게시글 총 갯수
 		
 		// 페이징처리.. 광고용으로 바꿔야 함
 		Paging_AdvGroup page = new Paging_AdvGroup(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, adv_group);
@@ -155,7 +153,7 @@ public class AdminAdvAction {
 		String begin = String.valueOf(page.getBegin());
 		String end = String.valueOf(page.getEnd());
 		
-		AdvVO[] ar = b_dao.listAdv(begin, end, adv_group); // 해당그룹 글 목록 가져옴
+		AdvVO[] ar = a_dao.listAdv(begin, end, adv_group); // 해당그룹 글 목록 가져옴
 		
 		// jsp에서 표현할 문자열
 		String board_name = null; 
@@ -169,7 +167,7 @@ public class AdminAdvAction {
 		else if(adv_group.equals("4"))
 			board_name = "4번 광고";
 		
-		AdvVO avo = b_dao.viewAdv(a_idx); // 해당 광고정보
+		AdvVO avo = a_dao.viewAdv(a_idx); // 해당 광고정보
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -200,7 +198,7 @@ public class AdminAdvAction {
 		else
 			this.nowPage = Integer.parseInt(nowPage);
 		
-		rowTotal = b_dao.searchAdvCount(searchTypeForAdv, searchValueForAdv, adv_group); // 검색결과 목록의 갯수
+		rowTotal = a_dao.searchAdvCount(searchTypeForAdv, searchValueForAdv, adv_group); // 검색결과 목록의 갯수
 		
 		// 페이징처리.. 검색용으로 바꿔야 함
 		Paging_SearchAdvGroup page = new Paging_SearchAdvGroup(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, 
@@ -211,7 +209,7 @@ public class AdminAdvAction {
 		String begin = String.valueOf(page.getBegin());
 		String end = String.valueOf(page.getEnd());
 		
-		AdvVO[] ar = b_dao.searchAdv(searchTypeForAdv, searchValueForAdv, adv_group, begin, end); // 검색결과 목록을 가져 옴
+		AdvVO[] ar = a_dao.searchAdv(searchTypeForAdv, searchValueForAdv, adv_group, begin, end); // 검색결과 목록을 가져 옴
 		
 		// jsp에서 표현할 문자열
 		String board_name = null; 

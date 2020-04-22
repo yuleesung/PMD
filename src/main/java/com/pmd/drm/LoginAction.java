@@ -18,17 +18,17 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pmd.util.MakePath;
 import com.pmd.vo.UserVO;
 
-import mybatis.dao.BulletinDAO;
+import mybatis.dao.UsersDAO;
 
 @Controller
 public class LoginAction {
 
 	@Autowired
-	private BulletinDAO b_dao;
+	private UsersDAO u_dao;
+	
 	@Autowired
 	private HttpSession session;
 
-	
 	
 	@RequestMapping(value = "/login.inc", method = RequestMethod.GET)
 	public ModelAndView naverLogin(String active) {
@@ -53,7 +53,7 @@ public class LoginAction {
 	public Map<String, Object> login(UserVO vo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		UserVO uvo = b_dao.login(vo.getU_id(), vo.getU_pw());
+		UserVO uvo = u_dao.login(vo.getU_id(), vo.getU_pw());
 		
 		if(uvo != null) {
 			// 로그인 성공
@@ -77,7 +77,7 @@ public class LoginAction {
 	public Map<String, Object> adminLogin(String u_id, String u_pw){
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		UserVO vo = b_dao.adminLogin(u_id, u_pw);
+		UserVO vo = u_dao.adminLogin(u_id, u_pw);
 		boolean chk = false;
 		if(vo != null) {
 			// 로그인 성공상태

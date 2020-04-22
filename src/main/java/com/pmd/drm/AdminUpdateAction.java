@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pmd.vo.AdvVO;
 
-import mybatis.dao.BulletinDAO;
+import mybatis.dao.AdvDAO;
 
 
 @Controller
@@ -26,7 +26,8 @@ public class AdminUpdateAction {
 	private ServletContext application;
 	
 	@Autowired
-	private BulletinDAO b_dao;
+	private AdvDAO a_dao;
+	
 	
 	@RequestMapping(value = "/advUpdate.inc", method = RequestMethod.GET)
 	public ModelAndView showAdv(String a_idx, String nowPage) { // admin.inc를 거쳐가야 분할 화면으로 보여줄 수 있기 때문에 쓰이는 함수
@@ -43,7 +44,7 @@ public class AdminUpdateAction {
 	public ModelAndView showAdvUpdate(String a_idx, String nowPage) {
 		ModelAndView mv = new ModelAndView();
 		
-		AdvVO vo = b_dao.viewAdv(a_idx);
+		AdvVO vo = a_dao.viewAdv(a_idx);
 		mv.addObject("vo", vo);
 		mv.addObject("nowPage", nowPage);
 		mv.setViewName("advUpdate");
@@ -67,7 +68,7 @@ public class AdminUpdateAction {
 			mf.transferTo(new File(path, file_name));
 		}
 		
-		b_dao.updateAdv(vo);
+		a_dao.updateAdv(vo);
 		
 		mv.addObject("fromUpdate", "fromUpdateAdv");
 		mv.addObject("nowPage", vo.getNowPage());

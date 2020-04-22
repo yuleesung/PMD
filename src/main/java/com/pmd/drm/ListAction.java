@@ -18,6 +18,7 @@ import com.pmd.vo.BulletinVO;
 import com.pmd.vo.UserVO;
 
 import mybatis.dao.BulletinDAO;
+import mybatis.dao.Bulletin_C_DAO;
 
 @Controller
 public class ListAction {
@@ -35,6 +36,9 @@ public class ListAction {
 
 	@Autowired
 	private BulletinDAO b_dao;
+	
+	@Autowired
+	private Bulletin_C_DAO b_c_dao;
 	
 	
 	// 카테고리 별 게시판 보여주기
@@ -71,7 +75,7 @@ public class ListAction {
 			
 			// 댓글 갯수를 가져오기 위한 for문
 			for(int i=0; i<comm_ar.length; i++) {
-				comm_ar[i] = b_dao.commCount(ar[i].getB_idx());
+				comm_ar[i] = b_c_dao.commCount(ar[i].getB_idx());
 			}
 		}
 		
@@ -137,7 +141,7 @@ public class ListAction {
 			
 			// 댓글 갯수를 가져오기 위한 for문
 			for(int i=0; i<comm_ar.length; i++) {
-				comm_ar[i] = b_dao.commCount(ar[i].getB_idx());
+				comm_ar[i] = b_c_dao.commCount(ar[i].getB_idx());
 			}
 		}
 

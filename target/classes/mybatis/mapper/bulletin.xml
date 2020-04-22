@@ -3,75 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bulletin">
-
-	<!-- 회원 아이디만 빼오기 -->
-	<select id="getID" resultType="String" parameterType="String">
-		select u_id from users_t where u_idx = #{u_idx}
-	</select>
-	
-	<!-- 회원 로그인 -->
-	<select id="login" resultType="com.pmd.vo.UserVO" parameterType="java.util.Map">
-		select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t where u_id = #{u_id} and u_pw = #{u_pw}
-	</select>
-
-	<!-- 회원 가입 -->
-	<insert id="join" parameterType="com.pmd.vo.UserVO">
-		insert into users_t(u_idx, u_id, u_pw, u_name, email, u_phone, reg_date, status, nickname)
-		values(users_t_seq.nextval, #{u_id}, #{u_pw}, #{u_name}, #{email}, #{u_phone}, sysdate, 0, #{nickname})
-	</insert>
-	
-	<!-- 게시물 쓰기 -->
-	<insert id="writePost" parameterType="com.pmd.vo.BulletinVO">
-		insert into bulletin(b_idx, subject, b_content, file_name, write_date, ip, hit, status, b_category, u_idx <if test="secret_content != null">, secret_content</if>)
-		values(bulletin_seq.nextval, #{subject}, #{b_content}, #{file_name}, sysdate, #{ip}, 0, 0, #{b_category}, #{u_idx} <if test="secret_content != null">, #{secret_content}</if>)
-	</insert>
-	
-	<!-- 댓글 쓰기  -->
-	<insert id="writeComment" parameterType="com.pmd.vo.Bulletin_C_VO">
-		insert into bulletin_c_t(c_idx, c_content, write_date, ip, status, b_idx, u_idx) 
-		values(bulletin_c_t_seq.nextval, #{c_content}, sysdate, #{ip}, 0, #{b_idx}, #{u_idx})
-	</insert>
-	
-	<!-- 게시물 수 -->
-	<select id="getCount" resultType="int" parameterType="String">
-		select count(*) from bulletin where status = 0 and b_category = #{b_category}
-	</select>
-	
-	
+		
+	<!-- BulletinVO의 멤버변수 값을 채우기 위한 resultMap -->
 	<resultMap type="com.pmd.vo.BulletinVO" id="map1">
 		<id column="b_idx" property="b_idx"/>
 		<result column="u_idx" property="u_idx"/>
-		<association property="uvo" javaType="com.pmd.vo.UserVO" select="getMember" column="u_idx"/>
-		<collection property="c_list" ofType="com.pmd.vo.Bulletin_C_VO" select="commList" column="b_idx"/>
+		<association property="uvo" javaType="com.pmd.vo.UserVO" select="users.getMember" column="u_idx"/>
+		<collection property="c_list" ofType="com.pmd.vo.Bulletin_C_VO" select="bulletin_c.commList" column="b_idx"/>
 	</resultMap>
-	
-	<resultMap type="com.pmd.vo.UserVO" id="map3">
-		<id column="u_idx" property="u_idx"/>
-		<collection property="b_list" ofType="com.pmd.vo.BulletinVO" select="boardList" column="u_idx"/>
-	</resultMap>
-	
-	<!-- 회원이 작성한 게시물들에 대한 정보 -->
-	<select id="boardList" resultType="com.pmd.vo.BulletinVO" parameterType="String">
-		select * from bulletin where u_idx = #{u_idx}
-	</select>
-	
-	<!-- 게시물을 작성한 회원정보 -->
-	<select id="getMember" resultMap="map3" parameterType="String">
-		select u_idx, u_id, u_name, email, u_phone, reg_date, nickname from users_t where u_idx = #{u_idx} 
-	</select>
-	
-	<resultMap type="com.pmd.vo.Bulletin_C_VO" id="map2">
-		<result column="u_idx" property="u_idx"/>
-		<association property="uvo" javaType="com.pmd.vo.UserVO" select="getMember" column="u_idx"/>
-	</resultMap>
-	
-	<!-- 하나의 게시물에 대한 댓글 모음 -->
-	<select id="commList" resultMap="map2" parameterType="String">
-		select * from(	
-			select rownum r_num, a.* from
-				(select * from bulletin_c_t where b_idx = #{b_idx} and status = 0 order by c_idx asc) a
-		)where r_num between 1 and 10
-	</select>
 	
 	<!-- 전체보기 -->
 	<select id="getList" resultMap="map1" parameterType="java.util.Map">
@@ -79,6 +18,22 @@
 			select rownum r_num, a.* from
 				(select * from bulletin where status = 0 and b_category = #{b_category} order by b_idx desc) a
 		)where r_num between #{begin} and #{end}
+	</select>
+	
+	<!-- 게시물 쓰기 -->
+	<insert id="writePost" parameterType="com.pmd.vo.BulletinVO">
+		insert into bulletin(b_idx, subject, b_content, file_name, write_date, ip, hit, status, b_category, u_idx <if test="secret_content != null">, secret_content</if>)
+		values(bulletin_seq.nextval, #{subject}, #{b_content}, #{file_name}, sysdate, #{ip}, 0, 0, #{b_category}, #{u_idx} <if test="secret_content != null">, #{secret_content}</if>)
+	</insert>
+	
+	<!-- 게시물 수 -->
+	<select id="getCount" resultType="int" parameterType="String">
+		select count(*) from bulletin where status = 0 and b_category = #{b_category}
+	</select>
+	
+	<!-- 회원이 작성한 게시물들에 대한 정보 -->
+	<select id="boardList" resultType="com.pmd.vo.BulletinVO" parameterType="String">
+		select * from bulletin where u_idx = #{u_idx}
 	</select>
 	
 	<!-- 게시물 보기 -->
@@ -115,56 +70,9 @@
 		where b_idx = #{b_idx}
 	</update>
 	
-	<!-- 회원 가입시 아이디 일치 -->
-	<select id="matchMember" resultType="String" parameterType="String">
-		select u_id from users_t where u_id = #{u_id}
-	</select>
-	
-	<!-- 회원 정보 수정 -->
-	<update id="updateMember" parameterType="com.pmd.vo.UserVO">
-		update users_t
-		<set>
-			<trim suffixOverrides=",">
-				<if test="u_pw != null">
-					u_pw = #{u_pw},
-				</if>
-				<if test="u_name != null">
-					u_name = #{u_name},
-				</if>
-				<if test="email != null">
-					email = #{email},
-				</if>
-				<if test="u_phone != null">
-					u_phone = #{u_phone},
-				</if>
-				<if test="nickname != null">
-					nickname = #{nickname},
-				</if>
-			</trim>
-		</set>
-		where u_idx = #{u_idx}
-	</update>
-	
-	<!-- 회원 탈퇴 -->
-	<update id="delMember" parameterType="java.util.Map">
-		update users_t set status = 1 where u_idx = #{u_idx} and u_pw = #{u_pw}
-	</update>
-	
 	<!-- 게시물 삭제 -->
 	<update id="delPost" parameterType="String">
 		update bulletin set status = 1 where b_idx = #{b_idx}
-	</update>
-	
-	<!-- 댓글 삭제 -->
-	<update id="delComment" parameterType="String">
-		update bulletin_c_t set status = 1 where c_idx = #{c_idx}
-	</update>
-	
-	<!-- 댓글 수정 -->
-	<update id="updateComment" parameterType="com.pmd.vo.Bulletin_C_VO">
-		update bulletin_c_t 
-		set c_content = #{c_content}, write_date = sysdate, ip = #{ip}
-		where c_idx = #{c_idx} 
 	</update>
 	
 	<!-- 조회수를 올려주는 기능 -->
@@ -172,131 +80,10 @@
 		update bulletin set hit = hit+1 where b_idx = #{b_idx}
 	</update>
 	
-	<!-- 소셜 회원가입 -->
-	<insert id="socialReg" parameterType="java.util.Map">
-		insert into users_t(u_idx<if test="u_name != null">, u_name</if>, nickname, email, sns_id, sns_type, reg_date, status <if test="sns_profile != null">, sns_profile</if>)
-		values(users_t_seq.nextval<if test="u_name != null">, #{u_name}</if>, #{nickname}, #{email}, #{sns_id}, #{sns_type}, sysdate, 0 <if test="sns_profile != null">, #{sns_profile}</if>)
-	</insert>
-	
-	<!-- 소셜 로그인 -->
-	<select id="socialLogin" resultType="com.pmd.vo.UserVO" parameterType="java.util.Map">
-		select * from users_t where sns_id = #{sns_id} and status = 0 and sns_type = #{sns_type}
-	</select>
-	
-	<!-- 소셜 회원탈퇴를 했을 때, DB에 저장된 ID값이 있는지 확인 -->
-	<select id="socialCheck" resultType="com.pmd.vo.UserVO" parameterType="java.util.Map">
-		select * from users_t where sns_id = #{sns_id} and sns_type = #{sns_type}
-	</select>
-	
-	<!-- 소셜 회원탈퇴 후 재가입을 할 경우 -->
-	<update id="socialReReg" parameterType="java.util.Map">
-		update users_t set status = 0, reg_date = sysdate where sns_id = #{sns_id} and sns_type = #{sns_type}
-	</update>
-	
-	<!-- 소셜 연동 해제(탈퇴) -->
-	<update id="socialLeave" parameterType="java.util.Map">
-		update users_t set status = 1 where sns_id = #{sns_id} and sns_type = #{sns_type}
-	</update>
-	
-	<!-- 이메일 중복검사 -->
-	<select id="checkEmail" parameterType="String" resultType="String">
-		select email from users_t where email = #{email}
-	</select>
-	
-	<!-- 전화번호 중복검사 -->
-	<select id="checkPhone" parameterType="String" resultType="String">
-		select u_phone from users_t where u_phone = #{u_phone}
-	</select>
-	
-	<!-- 회원 정지 또는 해제 -->
-	<update id="blockOrRelUser" parameterType="java.util.Map">
-		update users_t set status = #{status} where u_idx = #{u_idx}
-	</update>
-	
 	<!-- 게시물 삭제 또는 복구 -->
 	<update id="delOrRestoreBoard" parameterType="java.util.Map">
 		update bulletin set status = #{status} where b_idx = #{b_idx}
 	</update>
-	
-	<!-- 광고 넣기 -->
-	<insert id="addAdv" parameterType="com.pmd.vo.AdvVO">
-		insert into adv_t(a_idx, co_name, co_phone, co_email, adv_group, adv_link, file_name<if test="etc != null">, etc</if>, start_date, end_date, reg_date, status)
-		values(adv_t_seq.nextval, #{co_name}, #{co_phone}, #{co_email}, #{adv_group}, #{adv_link}, #{file_name}<if test="etc != null">, #{etc}</if>, #{start_date}, #{end_date}, sysdate, 0)
-	</insert>
-	
-	<!-- 광고목록 보기 -->
-	<select id="listAdv" parameterType="java.util.Map" resultType="com.pmd.vo.AdvVO">
-		select * from(	
-			select rownum r_num, a.* from
-				(select * from adv_t where adv_group = #{adv_group} order by a_idx desc) a
-		)where r_num between #{begin} and #{end}
-	</select>
-	
-	<!-- 광고 수정 -->
-	<update id="updateAdv" parameterType="com.pmd.vo.AdvVO">
-		update adv_t
-		<set>
-			<trim suffixOverrides=",">
-				<if test="co_name != null">
-					co_name = #{co_name},
-				</if>
-				<if test="co_phone != null">
-					co_phone = #{co_phone},
-				</if>
-				<if test="co_email != null">
-					co_email = #{co_email},
-				</if>
-				<if test="adv_group != null">
-					adv_group = #{adv_group},
-				</if>
-				<if test="adv_link != null">
-					adv_link = #{adv_link},
-				</if>
-				<if test="file_name != null">
-					file_name = #{file_name},
-				</if>
-				<if test="etc != null">
-					etc = #{etc},
-				</if>
-				<if test="start_date != null">
-					start_date = #{start_date},
-				</if>
-				<if test="end_date != null">
-					end_date = #{end_date},
-				</if>
-			</trim>
-		</set>
-		where a_idx = #{a_idx}
-	</update>
-	
-	<!-- 광고 삭제 또는 복구 -->
-	<update id="delOrRestoreAdv" parameterType="java.util.Map">
-		update adv_t set status = #{status} where a_idx = #{a_idx}
-	</update>
-	
-	<!-- 관리자 로그인 -->
-	<select id="adminLogin" parameterType="java.util.Map" resultType="com.pmd.vo.UserVO">
-		select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t where u_id = #{u_id} and u_pw = #{u_pw} and status = 9
-	</select>
-	
-	<!-- 유저 한 명이 쓴 댓글 모음 -->
-	<resultMap type="com.pmd.vo.UserVO" id="map4">
-		<id column="u_idx" property="u_idx"/>
-		<collection property="c_list" ofType="com.pmd.vo.Bulletin_C_VO" select="u_commList" column="u_idx"/>
-	</resultMap>
-	
-	<!-- 유저의 댓글 -->
-	<select id="u_commList" parameterType="String" resultType="com.pmd.vo.Bulletin_C_VO">
-		select * from bulletin_c_t where u_idx = #{u_idx} order by c_idx desc
-	</select>
-	
-	<!-- 유저 목록 -->
-	<select id="listUser" parameterType="java.util.Map" resultMap="map4">
-		select * from(	
-			select rownum r_num, a.* from
-				(select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t where status in(0, 1, 2) order by u_idx desc) a
-		)where r_num between #{begin} and #{end}
-	</select>
 	
 	<!-- 관리자용 게시물 전체보기 -->
 	<select id="getListForAdmin" resultMap="map1" parameterType="java.util.Map">
@@ -309,31 +96,6 @@
 	<!-- 관리자용 게시물 수 -->
 	<select id="getCountForAdmin" resultType="int" parameterType="String">
 		select count(*) from bulletin where b_category = #{b_category}
-	</select>
-	
-	<!-- 유저 수 -->
-	<select id="getCountUser" resultType="int">
-		select count(*) from users_t where status in(0, 1, 2)
-	</select>
-	
-	<!-- 광고 게시물 수 -->
-	<select id="getCountAdv" resultType="int" parameterType="String">
-		select count(*) from adv_t where adv_group = #{adv_group}
-	</select>
-	
-	<!-- 광고 하나 넣기 -->
-	<select id="viewAdv" parameterType="String" resultType="com.pmd.vo.AdvVO">
-		select * from adv_t where a_idx = #{a_idx}
-	</select>
-	
-	<!-- 광고 상태를 모두 0으로 바꾸기 -->
-	<update id="setAdvZero" parameterType="String">
-		update adv_t set status = 0 where adv_group = #{adv_group}
-	</update>
-	
-	<!-- 게시될 광고 가져오기 -->
-	<select id="showAdvOnMain" resultType="com.pmd.vo.AdvVO">
-		select * from adv_t where status = 1
 	</select>
 	
 	<!-- 전체, 제목, 이름, 내용 검색한 후 총 게시물 수 -->
@@ -438,215 +200,6 @@
 					</if>
 					order by b_idx desc) a
 		)where r_num between #{begin} and #{end}
-	</select>
-	
-	<!-- 회원 검색 후 총 회원 수 -->
-	<select id="searchUserCountForAdmin" parameterType="java.util.Map" resultType="int">
-		select count(*) from users_t
-		<where>
-			<if test="u_id != null">
-				lower(u_id) like lower('%'||#{u_id}||'%') and
-			</if>
-			<if test="nickname != null">
-				lower(nickname) like lower('%'||#{nickname}||'%') and
-			</if>
-			<if test="u_name != null">
-				lower(u_name) like lower('%'||#{u_name}||'%') and
-			</if>
-			<if test="email != null">
-				lower(email) like lower('%'||#{email}||'%') and
-			</if>
-			<if test="sns_id != null">
-				lower(sns_id) like lower('%'||#{sns_id}||'%') and
-			</if>
-			<if test="reg_date != null">
-				to_char(reg_date, 'YYYY-MM-DD') = #{reg_date} and
-			</if>
-			<if test="total != null">
-				status in(0, 1, 2) and
-			</if>
-			<if test="active != null and stop != null">
-				status in(0, 2) and
-			</if>
-			<if test="active != null and leave != null">
-				status in(0, 1) and
-			</if>
-			<if test="stop != null and leave != null">
-				status in(1, 2) and
-			</if>
-			<if test="active != null">
-				status = 0 and
-			</if>
-			<if test="stop != null">
-				status = 2 and
-			</if>
-			<if test="leave != null">
-				status = 1 and
-			</if>
-			<if test="choice == 'all'">
-				(u_id is not null or sns_id is not null)
-			</if>
-			<if test="choice == 'normal'">
-				u_id is not null
-			</if>
-			<if test="choice == 'social'">
-				sns_id is not null
-			</if>
-		</where>
-	</select>
-	
-	<!-- 회원 검색 기능 -->
-	<select id="searchUserForAdmin" parameterType="java.util.Map" resultMap="map4">
-		select * from(
-			select rownum r_num, a.* from
-				(select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t
-				<where>
-					<if test="u_id != null">
-						lower(u_id) like lower('%'||#{u_id}||'%') and
-					</if>
-					<if test="nickname != null">
-						lower(nickname) like lower('%'||#{nickname}||'%') and
-					</if>
-					<if test="u_name != null">
-						lower(u_name) like lower('%'||#{u_name}||'%') and
-					</if>
-					<if test="email != null">
-						lower(email) like lower('%'||#{email}||'%') and
-					</if>
-					<if test="sns_id != null">
-						lower(sns_id) like lower('%'||#{sns_id}||'%') and
-					</if>
-					<if test="reg_date != null">
-						to_char(reg_date, 'YYYY-MM-DD') = #{reg_date} and
-					</if>
-					<if test="total != null">
-						status in(0, 1, 2) and
-					</if>
-					<if test="active != null and stop != null">
-						status in(0, 2) and
-					</if>
-					<if test="active != null and leave != null">
-						status in(0, 1) and
-					</if>
-					<if test="stop != null and leave != null">
-						status in(1, 2) and
-					</if>
-					<if test="active != null">
-						status = 0 and
-					</if>
-					<if test="stop != null">
-						status = 2 and
-					</if>
-					<if test="leave != null">
-						status = 1 and
-					</if>
-					<if test="choice == 'all'">
-						(u_id is not null or sns_id is not null)
-					</if>
-					<if test="choice == 'normal'">
-						u_id is not null
-					</if>
-					<if test="choice == 'social'">
-						sns_id is not null
-					</if>
-				</where>
-			order by u_idx desc) a
-		)where r_num between #{begin} and #{end}
-	</select>
-	
-	<!-- 광고 전체, 회사, 이메일 검색하고난 후 총 광고 수 -->
-	<select id="searchAdvCount" parameterType="java.util.Map" resultType="int">
-		select count(*) from adv_t
-		<if test="searchTypeForAdv != null and searchValueForAdv != null">
-			<where>
-				<choose>
-					<when test="searchTypeForAdv == 0">
-						lower(co_name) like lower('%'||#{searchValueForAdv}||'%') and lower(co_email) like lower('%'||#{searchValueForAdv}||'%') and adv_group = #{adv_group}
-					</when>
-					<when test="searchTypeForAdv == 1">
-						lower(co_name) like lower('%'||#{searchValueForAdv}||'%') and adv_group = #{adv_group}
-					</when>
-					<when test="searchTypeForAdv == 2">
-						lower(co_email) like lower('%'||#{searchValueForAdv}||'%') and adv_group = #{adv_group}
-					</when>
-				</choose>
-			</where>
-		</if>
-	</select>
-	
-	<!-- 광고 전체, 회사, 이메일로 검색하는 기능 -->
-	<select id="searchAdv" parameterType="java.util.Map" resultType="com.pmd.vo.AdvVO">
-		select * from(
-			select rownum r_num, a.* from	
-				(select * from adv_t
-				<if test="searchTypeForAdv != null and searchValueForAdv != null">
-					<where>
-						<choose>
-							<when test="searchTypeForAdv == 0">
-								lower(co_name) like lower('%'||#{searchValueForAdv}||'%') and lower(co_email) like lower('%'||#{searchValueForAdv}||'%') and adv_group = #{adv_group}
-							</when>
-							<when test="searchTypeForAdv == 1">
-								lower(co_name) like lower('%'||#{searchValueForAdv}||'%') and adv_group = #{adv_group}
-							</when>
-							<when test="searchTypeForAdv == 2">
-								lower(co_email) like lower('%'||#{searchValueForAdv}||'%') and adv_group = #{adv_group}
-							</when>
-						</choose>
-					</where>
-				</if>
-				order by a_idx desc) a
-		)where r_num between #{begin} and #{end}
-	</select>
-	
-	<!-- 게시물 하나당 전체 댓글 수 -->
-	<select id="commCount" resultType="int" parameterType="String">
-		select count(*) from bulletin_c_t where b_idx = #{b_idx} and status = 0
-	</select>
-	
-	<!-- 유저 하나당 전체 댓글 수 -->
-	<select id="commCountForAdmin" resultType="int" parameterType="String">
-		select count(*) from bulletin_c_t where u_idx = #{u_idx}
-	</select>
-	
-	<!-- ajax용 게시물 댓글 모음 -->
-	<select id="commListForAjax" resultMap="map2" parameterType="java.util.Map">
-		select * from(	
-			select rownum r_num, a.* from
-				(select * from bulletin_c_t where b_idx = #{b_idx} and status = 0 order by c_idx asc) a
-		)where r_num between #{begin} and #{end}
-	</select>
-	
-	<!-- ajax용 유저의 댓글 모음 -->
-	<select id="u_commListForAjax" parameterType="java.util.Map" resultType="com.pmd.vo.Bulletin_C_VO">
-		select * from(	
-			select rownum r_num, a.* from
-			(select * from bulletin_c_t where u_idx = #{u_idx} order by c_idx desc) a
-		)where r_num between #{begin} and #{end}
-	</select>
-	
-	<!-- 날짜 비교를 위한 adv_t 날짜 검색 기능 -->
-	<select id="searchDateOnAdv_t" parameterType="String" resultType="com.pmd.vo.AdvVO">
-		select * from adv_t where adv_group = #{adv_group}
-	</select>
-	
-	<!-- 수정시 날짜 비교를 위한 adv_t 날짜 검색 기능 -->
-	<select id="searchDateOnAdv_tForUpdate" parameterType="java.util.Map" resultType="com.pmd.vo.AdvVO">
-		select * from adv_t where not a_idx = #{a_idx} and adv_group = #{adv_group}
-	</select>
-	
-	<!-- 댓글 복구 -->
-	<update id="restoreComm" parameterType="String">
-		update bulletin_c_t set status = 0 where c_idx = #{c_idx}
-	</update>
-	
-	<!-- 이전 비밀번호 확인 -->
-	<select id="checkPrePw" parameterType="java.util.Map" resultType="com.pmd.vo.UserVO">
-		select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t where u_idx = #{u_idx} and u_pw = #{u_pw}
-	</select>
-	
-	<!-- 회원 정보 수정 후 로그인 정보 갱신 후 세션 저장용 -->
-	<select id="afterUpdateUserInfo" parameterType="String" resultType="com.pmd.vo.UserVO">
-		select u_idx, u_id, email, u_phone, reg_date, u_name, nickname, sns_id, sns_type, sns_profile, status from users_t where u_idx = #{u_idx}
 	</select>
 	
 </mapper>

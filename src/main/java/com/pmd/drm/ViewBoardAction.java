@@ -14,6 +14,7 @@ import com.pmd.util.Paging_ViewBoard_Comm;
 import com.pmd.vo.BulletinVO;
 
 import mybatis.dao.BulletinDAO;
+import mybatis.dao.Bulletin_C_DAO;
 
 @Controller
 public class ViewBoardAction {
@@ -31,6 +32,10 @@ public class ViewBoardAction {
 	
 	@Autowired
 	private BulletinDAO b_dao;
+	
+	@Autowired
+	private Bulletin_C_DAO b_c_dao;
+	
 	
 	@RequestMapping("/viewBoard.inc")
 	public ModelAndView viewBoard(String b_idx, String nowPage, String b_category, String active) {
@@ -80,7 +85,7 @@ public class ViewBoardAction {
 		
 		// 댓글 페이징을 위한 값 설정
 		this.nowPage = 1;
-		rowTotal = b_dao.commCount(b_idx);
+		rowTotal = b_c_dao.commCount(b_idx);
 		Paging_ViewBoard_Comm page = new Paging_ViewBoard_Comm(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, b_idx);
 		pageCode = page.getSb().toString();
 		
@@ -88,7 +93,7 @@ public class ViewBoardAction {
 		mv.addObject("vo", vo);
 		mv.addObject("nowPage", nowPage);
 		mv.addObject("b_category", b_category);
-		mv.addObject("c_length", b_dao.commCount(b_idx));
+		mv.addObject("c_length", b_c_dao.commCount(b_idx));
 		mv.addObject("pageCode", pageCode);
 		mv.addObject("active", active);
 		mv.setViewName("viewBoard");

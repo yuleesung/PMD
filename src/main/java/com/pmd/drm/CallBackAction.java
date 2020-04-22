@@ -25,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pmd.util.MakePath;
 import com.pmd.vo.UserVO;
 
-import mybatis.dao.BulletinDAO;
+import mybatis.dao.UsersDAO;
 
 @Controller
 public class CallBackAction {
@@ -36,10 +36,11 @@ public class CallBackAction {
 	private String refresh_token;
 	
 	@Autowired
-	private BulletinDAO b_dao;
+	private UsersDAO u_dao;
 	
 	@Autowired
 	private HttpSession session;
+	
 
 	@RequestMapping("/callback.inc")
 	public ModelAndView callBack(String code, String state) throws Exception {
@@ -124,18 +125,18 @@ public class CallBackAction {
 				social.put("sns_id", sns_id);
 				social.put("sns_type", "naver");
 				
-				UserVO vo = b_dao.socialLogin(social);
+				UserVO vo = u_dao.socialLogin(social);
 				
 				if(vo == null) { // 네이버 연동을 한 적이 없거나, 연동해제를 한 경우
-					UserVO check = b_dao.socialCheck(social);
+					UserVO check = u_dao.socialCheck(social);
 					
 					if(check == null) { // 네이버 연동을 한 적이 없는 경우
-						boolean chk = b_dao.socialReg(map); // 회원가입하기
-						vo = b_dao.socialLogin(social);
+						boolean chk = u_dao.socialReg(map); // 회원가입하기
+						vo = u_dao.socialLogin(social);
 						session.setAttribute("userInfo", vo);
 					}else { // 네이버 연동해제를 한 경우
-						boolean chk = b_dao.socialReReg(social); // 탈퇴되었던 회원정보 되살리기
-						vo = b_dao.socialLogin(social);
+						boolean chk = u_dao.socialReReg(social); // 탈퇴되었던 회원정보 되살리기
+						vo = u_dao.socialLogin(social);
 						session.setAttribute("userInfo", vo);
 					}
 				}else { // 네이버 연동이 되어 있는 경우
@@ -214,14 +215,14 @@ public class CallBackAction {
 		kakaoLogin.put("sns_id", sns_id);
 		kakaoLogin.put("sns_type", "kakao");
 		
-		UserVO vo = b_dao.socialLogin(kakaoLogin);
+		UserVO vo = u_dao.socialLogin(kakaoLogin);
 		
 		if(vo == null) { // 카카오 연동이 안 되어있거나, 연동해제되어 있을 경우
-			UserVO check = b_dao.socialCheck(kakaoLogin);
+			UserVO check = u_dao.socialCheck(kakaoLogin);
 			
 			if(check != null) { // DB에 정보가 남아있는 경우
-				b_dao.socialReReg(kakaoLogin);
-				vo = b_dao.socialLogin(kakaoLogin);
+				u_dao.socialReReg(kakaoLogin);
+				vo = u_dao.socialLogin(kakaoLogin);
 				session.setAttribute("userInfo", vo);
 			}else { // 카카오 연동이 되어있지 않은 경우
 				Map<String, String> kakaoReg = new HashMap<String, String>();
@@ -230,9 +231,9 @@ public class CallBackAction {
 				kakaoReg.put("email", email);
 				kakaoReg.put("sns_type", "kakao");
 				
-				b_dao.socialReg(kakaoReg);
+				u_dao.socialReg(kakaoReg);
 				
-				vo = b_dao.socialLogin(kakaoLogin);
+				vo = u_dao.socialLogin(kakaoLogin);
 				session.setAttribute("userInfo", vo);
 			}
 		}else { // 카카오 연동이 되어 있는경우
@@ -254,7 +255,7 @@ public class CallBackAction {
 		discon.put("sns_id", sns_id);
 		discon.put("sns_type", "kakao");
 		
-		boolean chk = b_dao.socialLeave(discon);
+		boolean chk = u_dao.socialLeave(discon);
 		session.removeAttribute("userInfo");
 		
 		map.put("chk", chk);
@@ -270,14 +271,14 @@ public class CallBackAction {
 		googleLogin.put("sns_id", sns_id);
 		googleLogin.put("sns_type", "google");
 		
-		UserVO vo = b_dao.socialLogin(googleLogin);
+		UserVO vo = u_dao.socialLogin(googleLogin);
 		
 		if(vo == null) { // 구글 연동이 안 되어있거나, 연동해제되어 있을 경우
-			UserVO check = b_dao.socialCheck(googleLogin);
+			UserVO check = u_dao.socialCheck(googleLogin);
 			
 			if(check != null) { // DB에 정보가 남아있는 경우
-				b_dao.socialReReg(googleLogin);
-				vo = b_dao.socialLogin(googleLogin);
+				u_dao.socialReReg(googleLogin);
+				vo = u_dao.socialLogin(googleLogin);
 				session.setAttribute("userInfo", vo);
 			}else { // 구글 연동이 되어있지 않은 경우
 				Map<String, String> googleReg = new HashMap<String, String>();
@@ -286,9 +287,9 @@ public class CallBackAction {
 				googleReg.put("email", email);
 				googleReg.put("sns_type", "google");
 				
-				b_dao.socialReg(googleReg);
+				u_dao.socialReg(googleReg);
 				
-				vo = b_dao.socialLogin(googleLogin);
+				vo = u_dao.socialLogin(googleLogin);
 				session.setAttribute("userInfo", vo);
 			}
 		}else { // 구글 연동이 되어 있는경우
@@ -333,7 +334,7 @@ public class CallBackAction {
 				map.put("sns_id", sns_id);
 				map.put("sns_type", "naver");
 				
-				boolean chk = b_dao.socialLeave(map); // DB에서 탈퇴로 변경
+				boolean chk = u_dao.socialLeave(map); // DB에서 탈퇴로 변경
 				session.removeAttribute("userInfo"); // 세션에서 로그아웃 처리
 				returnPage = "redirect:/main.inc";
 			}else {

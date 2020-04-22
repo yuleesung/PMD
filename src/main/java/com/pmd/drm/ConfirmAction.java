@@ -9,14 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import mybatis.dao.BulletinDAO;
+import mybatis.dao.UsersDAO;
 
 @Controller
 public class ConfirmAction {
 
 	@Autowired
-	private BulletinDAO b_dao;
-	
+	private UsersDAO u_dao;
 	
 	
 	@RequestMapping(value = "/idchk.inc", method = RequestMethod.POST)
@@ -24,7 +23,7 @@ public class ConfirmAction {
 	public Map<String, Boolean> idchk(String u_id) {
 		
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
-		boolean value = b_dao.matchMember(u_id);
+		boolean value = u_dao.matchMember(u_id);
 		map.put("value", value);
 		 
 		return map;
@@ -38,7 +37,7 @@ public class ConfirmAction {
 		
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		
-		boolean value = b_dao.checkEmail(email);
+		boolean value = u_dao.checkEmail(email);
 		map.put("value", value);
 		
 		return map;
@@ -52,7 +51,7 @@ public class ConfirmAction {
 		
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		
-		boolean value = b_dao.checkPhone(u_phone);
+		boolean value = u_dao.checkPhone(u_phone);
 		map.put("value", value);
 		
 		return map;

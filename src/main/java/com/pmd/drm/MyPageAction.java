@@ -14,15 +14,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pmd.vo.UserVO;
 
-import mybatis.dao.BulletinDAO;
+import mybatis.dao.UsersDAO;
 
 @Controller
 public class MyPageAction {
 
 	@Autowired
 	private HttpSession session;
+	
 	@Autowired
-	private BulletinDAO b_dao;
+	private UsersDAO u_dao;
 	
 	
 	@RequestMapping("/mypage.inc")
@@ -57,9 +58,9 @@ public class MyPageAction {
 		
 		vo.setU_idx(uvo.getU_idx());
 		
-		boolean chk = b_dao.updateMember(vo);
+		boolean chk = u_dao.updateMember(vo);
 		
-		session.setAttribute("userInfo", b_dao.afterUpdateUserInfo(uvo.getU_idx()));
+		session.setAttribute("userInfo", u_dao.afterUpdateUserInfo(uvo.getU_idx()));
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -75,7 +76,7 @@ public class MyPageAction {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		boolean chk = b_dao.delMember(u_idx, u_pw); // 회원정보 탈퇴
+		boolean chk = u_dao.delMember(u_idx, u_pw); // 회원정보 탈퇴
 		
 		if(chk)  // 탈퇴성공 시, session을 지움
 			session.removeAttribute("userInfo");
@@ -92,7 +93,7 @@ public class MyPageAction {
 		
 		UserVO uvo = (UserVO) session.getAttribute("userInfo");
 		
-		boolean chk = b_dao.checkPrePw(uvo.getU_idx(), pre_pw);
+		boolean chk = u_dao.checkPrePw(uvo.getU_idx(), pre_pw);
 		
 		map.put("chk", chk);
 		

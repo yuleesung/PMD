@@ -16,7 +16,8 @@ import com.pmd.util.Paging_UsersList;
 import com.pmd.vo.Bulletin_C_VO;
 import com.pmd.vo.UserVO;
 
-import mybatis.dao.BulletinDAO;
+import mybatis.dao.Bulletin_C_DAO;
+import mybatis.dao.UsersDAO;
 
 @Controller
 public class MemSetAction {
@@ -28,10 +29,13 @@ public class MemSetAction {
 	int nowPage; 	// 현재 페이지 값
 	int rowTotal; 	// 전체 회원 수
 	String pageCode;// 페이징처리된 HTML코드값
-	
 
 	@Autowired
-	private BulletinDAO b_dao;
+	private Bulletin_C_DAO b_c_dao;
+	
+	@Autowired
+	private UsersDAO u_dao;
+	
 	
 	@RequestMapping("/memSet.inc")
 	public ModelAndView memSetting(String nowPage) {
@@ -44,7 +48,7 @@ public class MemSetAction {
 			this.nowPage = Integer.parseInt(nowPage);
 		
 		// 유저 수
-		rowTotal = b_dao.getCountUser();
+		rowTotal = u_dao.getCountUser();
 		
 		/**** 페이징 ****/
 		// 메서드 호출
@@ -57,7 +61,7 @@ public class MemSetAction {
 		int begin = page.getBegin(); 
 		int end = page.getEnd();
 
-		UserVO[] ar = b_dao.listUser(String.valueOf(begin), String.valueOf(end));
+		UserVO[] ar = u_dao.listUser(String.valueOf(begin), String.valueOf(end));
 		
 		
 		ModelAndView mv = new ModelAndView();
@@ -81,7 +85,7 @@ public class MemSetAction {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		if(u_idx != null && status != null) {
-			Boolean chk = b_dao.blockOrRelUser(u_idx, status);
+			Boolean chk = u_dao.blockOrRelUser(u_idx, status);
 		}
 		
 		// 현재페이지 값 받기
@@ -90,7 +94,7 @@ public class MemSetAction {
 		else
 			this.nowPage = Integer.parseInt(nowPage);
 		
-		rowTotal = b_dao.getCountUser();
+		rowTotal = u_dao.getCountUser();
 		
 		/**** 페이징 ****/
 		// 메서드 호출
@@ -103,7 +107,7 @@ public class MemSetAction {
 		int begin = page.getBegin(); 
 		int end = page.getEnd();
 		
-		UserVO[] ar = b_dao.listUser(String.valueOf(begin), String.valueOf(end));
+		UserVO[] ar = u_dao.listUser(String.valueOf(begin), String.valueOf(end));
 		
 		map.put("ar", ar);
 		map.put("pageCode", pageCode);
@@ -121,7 +125,7 @@ public class MemSetAction {
 
 		this.nowPage = 1;
 		
-		rowTotal = b_dao.searchUserCountForAdmin(u_id, nickname, u_name, email, sns_id, reg_date, total, active, stop, leave, choice);
+		rowTotal = u_dao.searchUserCountForAdmin(u_id, nickname, u_name, email, sns_id, reg_date, total, active, stop, leave, choice);
 		
 		/**** 페이징 ****/
 		// 메서드 호출
@@ -134,7 +138,7 @@ public class MemSetAction {
 		int begin = page.getBegin(); 
 		int end = page.getEnd();
 		
-		UserVO[] ar = b_dao.searchUserForAdmin(u_id, nickname, u_name, email, sns_id, reg_date, total, active, stop, leave, choice, String.valueOf(begin), String.valueOf(end));
+		UserVO[] ar = u_dao.searchUserForAdmin(u_id, nickname, u_name, email, sns_id, reg_date, total, active, stop, leave, choice, String.valueOf(begin), String.valueOf(end));
 		
 		map.put("ar", ar);
 		map.put("pageCode", pageCode);
@@ -157,7 +161,7 @@ public class MemSetAction {
 		else
 			this.nowPage = Integer.parseInt(nowPage);
 		
-		rowTotal = b_dao.commCountForAdmin(u_idx);
+		rowTotal = b_c_dao.commCountForAdmin(u_idx);
 		
 		/**** 페이징 ****/
 		// 메서드 호출
@@ -170,7 +174,7 @@ public class MemSetAction {
 		int begin = page.getBegin();
 		int end = page.getEnd();
 		
-		Bulletin_C_VO[] ar = b_dao.u_commListForAjax(u_idx, String.valueOf(begin), String.valueOf(end));
+		Bulletin_C_VO[] ar = b_c_dao.u_commListForAjax(u_idx, String.valueOf(begin), String.valueOf(end));
 		
 		map.put("ar", ar);
 		map.put("pageCode", pageCode);
@@ -178,7 +182,7 @@ public class MemSetAction {
 		map.put("rowTotal", rowTotal);	// 총 회원 수
 		map.put("blockList", BLOCK_LIST);	// 한 페이지당 보여질  회원들 수
 		map.put("nickname", nickname);
-		map.put("count", b_dao.commCountForAdmin(u_idx));
+		map.put("count", b_c_dao.commCountForAdmin(u_idx));
 		
 		
 		return map;
@@ -189,9 +193,9 @@ public class MemSetAction {
 	public Map<String, Object> admin_statusComm(String c_idx, String u_idx, String nowPage, String nickname, String check){
 		
 		if(check.equals("del")) {
-			b_dao.delComment(c_idx);
+			b_c_dao.delComment(c_idx);
 		}else if(check.equals("restore")) {
-			b_dao.restoreComm(c_idx);
+			b_c_dao.restoreComm(c_idx);
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -201,7 +205,7 @@ public class MemSetAction {
 		else
 			this.nowPage = Integer.parseInt(nowPage);
 		
-		rowTotal = b_dao.commCountForAdmin(u_idx);
+		rowTotal = b_c_dao.commCountForAdmin(u_idx);
 		
 		/**** 페이징 ****/
 		// 메서드 호출
@@ -214,7 +218,7 @@ public class MemSetAction {
 		int begin = page.getBegin();
 		int end = page.getEnd();
 		
-		Bulletin_C_VO[] ar = b_dao.u_commListForAjax(u_idx, String.valueOf(begin), String.valueOf(end));
+		Bulletin_C_VO[] ar = b_c_dao.u_commListForAjax(u_idx, String.valueOf(begin), String.valueOf(end));
 		
 		map.put("ar", ar);
 		map.put("pageCode", pageCode);
@@ -222,7 +226,7 @@ public class MemSetAction {
 		map.put("rowTotal", rowTotal);	// 총 회원 수
 		map.put("blockList", BLOCK_LIST);	// 한 페이지당 보여질  회원들 수
 		map.put("nickname", nickname);
-		map.put("count", b_dao.commCountForAdmin(u_idx));
+		map.put("count", b_c_dao.commCountForAdmin(u_idx));
 		
 		
 		return map;

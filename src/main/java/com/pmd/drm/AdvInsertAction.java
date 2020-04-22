@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pmd.vo.AdvVO;
 
-import mybatis.dao.BulletinDAO;
+import mybatis.dao.AdvDAO;
 
 @Controller
 public class AdvInsertAction {
@@ -25,7 +25,8 @@ public class AdvInsertAction {
 	private ServletContext application;
 	
 	@Autowired
-	private BulletinDAO b_dao;
+	private AdvDAO a_dao;
+	
 
 	@RequestMapping(value = "/advInsert.inc", method = RequestMethod.GET)
 	public String goAdvInsert() {
@@ -48,7 +49,7 @@ public class AdvInsertAction {
 			mf.transferTo(new File(path, file_name));
 		}
 		
-		b_dao.addAdv(vo);
+		a_dao.addAdv(vo);
 		
 		mv.addObject("hometown", "fromInsertAdv");
 		mv.setViewName("redirect:/admin.inc");

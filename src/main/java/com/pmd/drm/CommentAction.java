@@ -16,7 +16,7 @@ import com.pmd.util.Paging_ViewBoard_Comm;
 import com.pmd.vo.BulletinVO;
 import com.pmd.vo.Bulletin_C_VO;
 
-import mybatis.dao.BulletinDAO;
+import mybatis.dao.Bulletin_C_DAO;
 
 @Controller
 public class CommentAction {
@@ -30,7 +30,7 @@ public class CommentAction {
 	String pageCode; // 페이징 처리된 HTML코드값
 
 	@Autowired
-	private BulletinDAO b_dao;
+	private Bulletin_C_DAO b_c_dao;
 	
 	@Autowired
 	private HttpServletRequest request;
@@ -42,10 +42,10 @@ public class CommentAction {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		cvo.setIp(request.getRemoteAddr());
-		b_dao.writeComment(cvo);
+		b_c_dao.writeComment(cvo);
 		
 		// 페이징처리 - 댓글은 오름차순으로 보여주기 때문에 가장 마지막 페이지가 최신글이다.
-		rowTotal = b_dao.commCount(cvo.getB_idx());
+		rowTotal = b_c_dao.commCount(cvo.getB_idx());
 		this.nowPage = (int)Math.ceil((double)rowTotal/BLOCK_LIST);
 		Paging_ViewBoard_Comm page = new Paging_ViewBoard_Comm(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, cvo.getB_idx());
 		
@@ -54,12 +54,12 @@ public class CommentAction {
 		String begin = String.valueOf(page.getBegin());
 		String end = String.valueOf(page.getEnd());
 		
-		Bulletin_C_VO[] c_ar = b_dao.commListForAjax(cvo.getB_idx(), begin, end);
+		Bulletin_C_VO[] c_ar = b_c_dao.commListForAjax(cvo.getB_idx(), begin, end);
 		
 		map.put("c_ar", c_ar);
 		map.put("nowPage", page.getNowPage());
 		map.put("pageCode", pageCode);
-		map.put("c_length", b_dao.commCount(cvo.getB_idx())); // 댓글 갯수 보여주기 용
+		map.put("c_length", b_c_dao.commCount(cvo.getB_idx())); // 댓글 갯수 보여주기 용
 		
 		return map;
 	}
@@ -70,11 +70,11 @@ public class CommentAction {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		cvo.setIp(request.getRemoteAddr());
-		b_dao.updateComment(cvo);
+		b_c_dao.updateComment(cvo);
 		
 		// 페이징처리
 		this.nowPage = Integer.parseInt(cvo.getNowPage());
-		rowTotal = b_dao.commCount(cvo.getB_idx()); 
+		rowTotal = b_c_dao.commCount(cvo.getB_idx()); 
 		Paging_ViewBoard_Comm page = new Paging_ViewBoard_Comm(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, cvo.getB_idx());
 		
 		pageCode = page.getSb().toString();
@@ -82,12 +82,12 @@ public class CommentAction {
 		String begin = String.valueOf(page.getBegin());
 		String end = String.valueOf(page.getEnd());
 		
-		Bulletin_C_VO[] c_ar = b_dao.commListForAjax(cvo.getB_idx(), begin, end);
+		Bulletin_C_VO[] c_ar = b_c_dao.commListForAjax(cvo.getB_idx(), begin, end);
 		
 		map.put("c_ar", c_ar);
 		map.put("nowPage", page.getNowPage());
 		map.put("pageCode", pageCode);
-		map.put("c_length", b_dao.commCount(cvo.getB_idx()));
+		map.put("c_length", b_c_dao.commCount(cvo.getB_idx()));
 		
 		return map;
 	}
@@ -98,11 +98,11 @@ public class CommentAction {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		cvo.setIp(request.getRemoteAddr());
-		b_dao.delComment(cvo.getC_idx());
+		b_c_dao.delComment(cvo.getC_idx());
 		
 		// 페이징처리
 		this.nowPage = Integer.parseInt(cvo.getNowPage());
-		rowTotal = b_dao.commCount(cvo.getB_idx()); 
+		rowTotal = b_c_dao.commCount(cvo.getB_idx()); 
 		Paging_ViewBoard_Comm page = new Paging_ViewBoard_Comm(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, cvo.getB_idx());
 		
 		pageCode = page.getSb().toString();
@@ -110,12 +110,12 @@ public class CommentAction {
 		String begin = String.valueOf(page.getBegin());
 		String end = String.valueOf(page.getEnd());
 		
-		Bulletin_C_VO[] c_ar = b_dao.commListForAjax(cvo.getB_idx(), begin, end);
+		Bulletin_C_VO[] c_ar = b_c_dao.commListForAjax(cvo.getB_idx(), begin, end);
 		
 		map.put("c_ar", c_ar);
 		map.put("nowPage", page.getNowPage());
 		map.put("pageCode", pageCode);
-		map.put("c_length", b_dao.commCount(cvo.getB_idx()));
+		map.put("c_length", b_c_dao.commCount(cvo.getB_idx()));
 		
 		return map;
 	}
@@ -127,7 +127,7 @@ public class CommentAction {
 		
 		// 페이징처리
 		this.nowPage = Integer.parseInt(nowPage);
-		rowTotal = b_dao.commCount(b_idx); 
+		rowTotal = b_c_dao.commCount(b_idx); 
 		Paging_ViewBoard_Comm page = new Paging_ViewBoard_Comm(this.nowPage, rowTotal, BLOCK_LIST, BLOCK_PAGE, b_idx);
 		
 		pageCode = page.getSb().toString();
@@ -135,12 +135,12 @@ public class CommentAction {
 		String begin = String.valueOf(page.getBegin());
 		String end = String.valueOf(page.getEnd());
 		
-		Bulletin_C_VO[] c_ar = b_dao.commListForAjax(b_idx, begin, end);
+		Bulletin_C_VO[] c_ar = b_c_dao.commListForAjax(b_idx, begin, end);
 		
 		map.put("c_ar", c_ar);
 		map.put("nowPage", page.getNowPage());
 		map.put("pageCode", pageCode);
-		map.put("c_length", b_dao.commCount(b_idx));
+		map.put("c_length", b_c_dao.commCount(b_idx));
 		
 		return map;
 	}

@@ -405,31 +405,38 @@ table#t2 tfoot td ul.pagination-v4{
     			data: param,
     			dataType: "json"
     		}).done(function(data){
-    			// console.log(data.c_ar);
-    			var str = "<tr><td colspan='4' style='padding-top: 20px; font-weight: bold;'>댓글 "+data.c_length+"</td></tr>";
     			
-    			for(var i=0; i<data.c_ar.length; i++){
-    				str += "<tr>";
-    				str += "<td>"+data.c_ar[i].uvo.nickname+"</td>";
-      				str += "<td>"+data.c_ar[i].c_content+"</td>";
-      				str += "<td>"+data.c_ar[i].write_date.substring(0, 10)+"</td>";
-      				
-      				if(data.c_ar[i].uvo.u_idx == "${sessionScope.userInfo.u_idx}"){
-          				str += "<td>";
-	          			str += "<input type='button' value='수정' style='cursor: pointer;' onclick='updateComment(\""+(i+1)+"\", \""+(data.c_ar.length+1)+"\", \""+data.c_ar[i].c_idx+"\", \""+data.nowPage+"\")'/>&nbsp;";
-	          			str += "<input type='button' value='삭제' style='cursor: pointer;' onclick='delComment(\""+data.c_ar[i].c_idx+"\", \""+data.nowPage+"\")'/>";
-          				str += "</td>";
-      				}else{
-      					str += "<td>";
-      					str += "</td>";
-      				}
-      				
-      				str += "</tr>";
+    			if(data.c_ar != null){
+		   			// console.log(data.c_ar);
+		   			var str = "<tr><td colspan='4' style='padding-top: 20px; font-weight: bold;'>댓글 "+data.c_length+"</td></tr>";
+		   			
+		   			for(var i=0; i<data.c_ar.length; i++){
+		   				str += "<tr>";
+		   				str += "<td>"+data.c_ar[i].uvo.nickname+"</td>";
+		     				str += "<td>"+data.c_ar[i].c_content+"</td>";
+		     				str += "<td>"+data.c_ar[i].write_date.substring(0, 10)+"</td>";
+		     				
+		     				if(data.c_ar[i].uvo.u_idx == "${sessionScope.userInfo.u_idx}"){
+		         				str += "<td>";
+		          			str += "<input type='button' value='수정' style='cursor: pointer;' onclick='updateComment(\""+(i+1)+"\", \""+(data.c_ar.length+1)+"\", \""+data.c_ar[i].c_idx+"\", \""+data.nowPage+"\")'/>&nbsp;";
+		          			str += "<input type='button' value='삭제' style='cursor: pointer;' onclick='delComment(\""+data.c_ar[i].c_idx+"\", \""+data.nowPage+"\")'/>";
+		         				str += "</td>";
+		     				}else{
+		     					str += "<td>";
+		     					str += "</td>";
+		     				}
+		     				
+		     				str += "</tr>";
+		   			}
+		   			
+		   			$("#t2 tbody").html(str);
+		   			$("#t2 tfoot tr td").html(data.pageCode);
+		   			$("#comment_div1").html('<textarea id="comment" placeholder="여기서 댓글 작성하세요!!"></textarea>');
+    			}else{
+    				var str = "<tr><td colspan='4' style='padding-top: 20px; font-weight: bold;'>댓글&nbsp;0</td></tr>";
+    				$("#t2 tbody").html(str);
+    				$("#t2 tfoot tr td").html("");
     			}
-    			
-    			$("#t2 tbody").html(str);
-    			$("#t2 tfoot tr td").html(data.pageCode);
-    			$("#comment_div1").html('<textarea id="comment" placeholder="여기서 댓글 작성하세요!!"></textarea>');
     		}).fail(function(err){
     			console.log(err);
     		});

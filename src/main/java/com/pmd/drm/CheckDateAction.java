@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pmd.vo.AdvVO;
 
-import mybatis.dao.BulletinDAO;
+import mybatis.dao.AdvDAO;
 
 @Controller
 public class CheckDateAction {
 
 	@Autowired
-	private BulletinDAO b_dao;
+	private AdvDAO a_dao;
 	
 	
 	@RequestMapping(value = "/checkDate.inc", method = RequestMethod.POST)
@@ -31,7 +31,7 @@ public class CheckDateAction {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		boolean chk = false;
-		AdvVO[] ar = b_dao.searchDateOnAdv_t(adv_group);
+		AdvVO[] ar = a_dao.searchDateOnAdv_t(adv_group);
 		for(int i=0; i<ar.length; i++) {
 			if(checkDate(inputDate, ar[i].getStart_date(), ar[i].getEnd_date())){
 				chk = true;
@@ -50,7 +50,7 @@ public class CheckDateAction {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		boolean chk = false;
-		AdvVO[] ar = b_dao.searchDateOnAdv_tForUpdate(a_idx, adv_group);
+		AdvVO[] ar = a_dao.searchDateOnAdv_tForUpdate(a_idx, adv_group);
 		for(int i=0; i<ar.length; i++) {
 			if(checkDate(inputDate, ar[i].getStart_date(), ar[i].getEnd_date())){
 				chk = true;
@@ -70,7 +70,7 @@ public class CheckDateAction {
 		
 		boolean start_chk = false;
 		boolean end_chk = false;
-		AdvVO[] ar = b_dao.searchDateOnAdv_tForUpdate(a_idx, adv_group);
+		AdvVO[] ar = a_dao.searchDateOnAdv_tForUpdate(a_idx, adv_group);
 		
 		if(ar != null) {
 			for(int i=0; i<ar.length; i++) {

@@ -14,13 +14,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pmd.vo.UserVO;
 
-import mybatis.dao.BulletinDAO;
+import mybatis.dao.UsersDAO;
 
 @Controller
 public class JoinAction {
 
 	@Autowired
-	private BulletinDAO b_dao;
+	private UsersDAO u_dao;
+	
 
 	@RequestMapping("/join.inc")
 	public ModelAndView join() {
@@ -43,7 +44,7 @@ public class JoinAction {
 	public Map<String, Object> join(UserVO vo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		Boolean res = b_dao.join(vo);
+		Boolean res = u_dao.join(vo);
 		
 		map.put("res", res);
 		

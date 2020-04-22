@@ -46,6 +46,9 @@
 		<constructor-arg ref="factory" index="0"/>
 	</bean>
 	
-	<bean id="bulletinDao" class="mybatis.dao.BulletinDAO"/><!-- 이름이 같으면 byName, 자료형이 같으면 byType이다. -->
+	<bean id="b_dao" class="mybatis.dao.BulletinDAO"/><!-- 이름이 같으면 byName, 자료형이 같으면 byType이다. -->
+	<bean id="b_c_dao" class="mybatis.dao.Bulletin_C_DAO"/>
+	<bean id="a_dao" class="mybatis.dao.AdvDAO"/>
+	<bean id="u_dao" class="mybatis.dao.UsersDAO"/>
 		
 </beans>
