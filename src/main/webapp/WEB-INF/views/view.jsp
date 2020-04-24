@@ -79,7 +79,7 @@
 			    	<h2 class="title" style="padding-bottom: 0px;">${vo.trprNm }</h2>
 			    </div>
 			    <div class="col-md-4">
-			    	<button type="button" class="btn btn-danger ribbon" style="margin-bottom: 0; padding: 0;">
+			    	<button type="button" class="btn btn-danger ribbon" style="margin-bottom: 0; padding: 0; width: 100%;">
 			    		<div id="getting-started" style="font-size:15px; color: white;"></div>
 			    	</button>	
 			    	<button type="button" class="btn btn-primary btn-block" style="margin-top: 0; border-radius: 0 0 10px 10px;" onclick="javascript: location.href='${vo.hpAddr}'">
