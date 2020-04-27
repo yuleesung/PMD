@@ -516,10 +516,11 @@
 			// Set up heat legend
 			let heatLegend = chart.createChild(am4maps.HeatLegend);
 			heatLegend.series = polygonSeries;
-			heatLegend.align = "center";
+			heatLegend.align = "left";
 			heatLegend.valign = "bottom";
 			heatLegend.width = am4core.percent(15);
-			heatLegend.marginRight = am4core.percent(4);
+			heatLegend.marginLeft = am4core.percent(2);
+			heatLegend.marginBottom = am4core.percent(5);
 			heatLegend.minValue = 0;
 			heatLegend.maxValue = 4000;
 
@@ -558,6 +559,8 @@
 			chart.legend.labels.template.text = "[bold {color}]{name} : {value}[/]";
 			chart.legend.position = "right";
 			chart.legend.align = "right";
+			
+			chart.legend.markers.template.disabled = true;
 
 			chart.legend.itemContainers.template.paddingTop = 1;
 			chart.legend.itemContainers.template.paddingBottom = 1;
