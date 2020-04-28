@@ -165,7 +165,7 @@
 
 	$(function(){
 		
-		if($(window).width()< 767){
+		if($(window).width()< 991){
 			$("#menu").css('display','none');
 			$("#menu_btn").css('display','block');			
 		}else{
@@ -174,7 +174,7 @@
 		}
 		
 		$(window).resize(function(){
-			if($(window).width() < 767){
+			if($(window).width() < 991){
 				$("#menu").css('display','none');
 				$("#menu_btn").css('display','block');
 			}else{
