@@ -24,7 +24,7 @@ public class JoinAction {
 	
 
 	@RequestMapping("/join.inc")
-	public ModelAndView join() {
+	public ModelAndView join(String active) {
 		ModelAndView mv = new ModelAndView();
 
 		// state값의 랜덤 생성을 위한 문장
@@ -34,6 +34,9 @@ public class JoinAction {
 		String url = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=YeX1APr9UJODbfW6etcy&state="+ state + "&redirect_uri=http://localhost:9090/drm/callback.inc";
 
 		mv.addObject("url", url);
+		if(active != null)
+			mv.addObject("active", active);
+		
 		mv.setViewName("join");
 
 		return mv; 
