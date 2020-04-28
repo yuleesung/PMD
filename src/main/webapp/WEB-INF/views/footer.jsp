@@ -61,7 +61,7 @@
 <body>
 
     <div id="footer">
-			<div class="footer_area" >
+			<div class="footer_area container" >
 				<div style="margin-bottom: 14px;">
 					<ul class="foot_guide">
 						<li><a href="">개인정보취급방침</a></li>

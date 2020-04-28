@@ -285,20 +285,19 @@ option {
 							</a>
 						</div>
 					</c:if>
-				</c:forEach>
-				
-				<!-- 화살표 prev, next -->
-				<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"
-				   style="display: block; width: 5%; text-align: left; padding-top: 22%; ">
-					<img alt="left" src="resources/images/back.png">
-				</a> 
-				<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"
-					style="display: block; width: 5%; text-align: right; padding-top: 22%;">
-					<img alt="left" src="resources/images/forward.png">
-				</a>
-			</div>
+				</c:forEach>				
+			</div>	
 		</div>
 
+<!-- 화살표 prev, next -->
+				<a id="left" class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"
+				  	style="width: 50px; display: block; top: 600px;">
+					<img alt="left" src="resources/images/back.png">
+				</a> 
+				<a id="right" class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"
+					style="width: 50px; display: block; top: 600px;">
+					<img alt="left" src="resources/images/forward.png">
+				</a>
 
 
 		<section class="search-sec" style="margin-top: 170px; width: 100%;">
@@ -429,6 +428,8 @@ option {
 	<script src="resources/js/jquery-3.4.1.min.js"></script>
 	<script src="resources/js/jquery-ui.min.js"></script>
 	<script src="resources/js/carousel.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	
 
 	<script>
@@ -440,6 +441,35 @@ option {
 		}
 
 		$(function() {
+			
+			if($(window).width()< 1300){ 
+				$("#right").css('right', '0');
+				$("#left").css('left', '0');
+			}else if($(window).width()< 1500){
+				$("#right").css('right', '10%');
+				$("#left").css('left', '10%');
+			} else {
+				$("#right").css('right', '15%');
+				$("#left").css('left', '15%');
+			}
+			
+			$(window).resize(function(){
+				if($(window).width()< 1300){
+					$("#right").css('right', '0');
+					$("#left").css('left', '0');
+				}else if($(window).width()< 1500){
+					$("#right").css('right', '10%');
+					$("#left").css('left', '10%');
+				} else {
+					$("#right").css('right', '15%');
+					$("#left").css('left', '15%');
+				}
+			});
+			
+			$('#myCarousel').carousel({
+			    interval: 1500
+			});
+			
 			$("#srchTraStDt").datepicker(
 					{
 						dateFormat : "yy년mm월dd일",
@@ -448,6 +478,7 @@ option {
 						showMonthAfterYear : true,
 					});
 
+		
 			$("#myCarousel").on("slide.bs.carousel", function(e) {
 						var $e = $(e.relatedTarget);
 						var idx = $e.index();
